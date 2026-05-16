@@ -215,7 +215,7 @@
                 <form id="loginForm" onsubmit="handleLogin(event)">
                     <div class="mb-4">
                         <label class="block text-sm font-medium text-slate-300 mb-2">Email Address</label>
-                        <input type="email" id="loginEmail" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="admin@example.com" required>
+                        <input type="email" id="loginEmail" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="Enter admin email" required>
                     </div>
                     <div class="mb-6">
                         <label class="block text-sm font-medium text-slate-300 mb-2">Password</label>
@@ -253,7 +253,7 @@
                 <form id="forgotForm" onsubmit="handleForgotPassword(event)">
                     <div class="mb-6">
                         <label class="block text-sm font-medium text-slate-300 mb-2">Registered Email</label>
-                        <input type="email" id="forgotEmail" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="hi705426@gmail.com" required>
+                        <input type="email" id="forgotEmail" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="Enter registered email" required>
                     </div>
                     <button type="submit" id="forgotBtn" class="btn-primary w-full rounded-xl py-3 font-semibold text-sm flex items-center justify-center gap-2">
                         <span id="forgotBtnText">Send Reset Link</span>
@@ -541,13 +541,13 @@
         // ==========================================
         // IMPORTANT: Replace with your Firebase project config
         // Get this from: Firebase Console → Project Settings → General → Your Apps → SDK Setup
-             const firebaseConfig = {
-            apiKey: "AIzaSyCVMpsG1ePU6SSsAxWSnj85ylYfndJby-g",
-            authDomain: "apply-bro.firebaseapp.com",
-            projectId: "apply-bro",
-            storageBucket: "apply-bro.firebasestorage.app",
-            messagingSenderId: "220342045448",
-            appId: "1:220342045448:web:1b0845de0003d8a802fabd"
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY_HERE",
+            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT_ID.appspot.com",
+            messagingSenderId: "YOUR_SENDER_ID",
+            appId: "YOUR_APP_ID"
         };
 
         // Initialize Firebase
@@ -573,7 +573,7 @@
                 currentUser = user;
                 showDashboard();
                 loadPosts();
-                document.getElementById('adminEmail').textContent = user.email;
+                document.getElementById('adminEmail').textContent = maskEmail(user.email);
             } else {
                 if (user) {
                     // Not admin, sign out
@@ -977,6 +977,15 @@
             const div = document.createElement('div');
             div.textContent = text;
             return div.innerHTML;
+        }
+
+        function maskEmail(email) {
+            if (!email || !email.includes('@')) return email;
+            const [local, domain] = email.split('@');
+            if (local.length <= 2) return email;
+            const first = local.substring(0, 2);
+            const last = local.substring(local.length - 2);
+            return first + '****' + last + '@' + domain;
         }
 
         function toggleMobileMenu() {
