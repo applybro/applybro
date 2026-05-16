@@ -321,6 +321,9 @@
         <!-- Main Content -->
         <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
+            <!-- Posts Section -->
+            <section id="postsSection">
+
             <!-- Stats Cards -->
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
                 <div class="glass-card rounded-xl p-5">
@@ -549,14 +552,15 @@
         // ==========================================
         // IMPORTANT: Replace with your Firebase project config
         // Get this from: Firebase Console → Project Settings → General → Your Apps → SDK Setup
-       const firebaseConfig = {
+      
+        const firebaseConfig = {
     apiKey: "AIzaSyCVMpsG1ePU6SSsAxWSnj85ylYfndJby-g",
     authDomain: "apply-bro.firebaseapp.com",
     projectId: "apply-bro",
     storageBucket: "apply-bro.firebasestorage.app",
     messagingSenderId: "220342045448",
     appId: "1:220342045448:web:1b0845de0003d8a802fabd"
-    };
+};
 
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
@@ -1015,17 +1019,16 @@
         let parsedBulkPosts = [];
 
         function showSection(section) {
-            // Hide all sections
-            document.getElementById('postsTableBody').closest('section').classList.remove('hidden');
+            // Hide all sections first
+            document.getElementById('postsSection').classList.add('hidden');
             document.getElementById('bulkImportSection').classList.add('hidden');
+            document.getElementById('mobileMenu').classList.add('hidden');
 
             if (section === 'bulk') {
-                document.getElementById('postsTableBody').closest('section').classList.add('hidden');
                 document.getElementById('bulkImportSection').classList.remove('hidden');
-                document.getElementById('mobileMenu').classList.add('hidden');
-            } else if (section === 'posts') {
-                // Default view, already set
-                document.getElementById('mobileMenu').classList.add('hidden');
+            } else {
+                // Default: show posts section
+                document.getElementById('postsSection').classList.remove('hidden');
             }
         }
 
