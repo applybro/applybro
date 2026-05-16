@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply Bro - Admin Panel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Firebase SDK (Compat mode - beginner friendly) -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', 'Inter', sans-serif; }
+
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+            min-height: 100vh;
+            color: #e2e8f0;
+        }
+
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(139, 92, 246, 0.15);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(139, 92, 246, 0.3);
+            box-shadow: 0 8px 32px rgba(124, 58, 237, 0.15);
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+            border: none;
+            color: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
+        }
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #6d28d9 0%, #5b21b6 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(124, 58, 237, 0.4);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+        .btn-success:hover {
+            background: linear-gradient(135deg, #047857 0%, #059669 100%);
+            transform: translateY(-2px);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+        }
+        .btn-danger:hover {
+            background: linear-gradient(135deg, #b91c1c 0%, #dc2626 100%);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: rgba(148, 163, 184, 0.1);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            color: #94a3b8;
+        }
+        .btn-secondary:hover {
+            background: rgba(148, 163, 184, 0.2);
+            color: #e2e8f0;
+        }
+
+        /* Form Inputs */
+        .form-input {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            color: #e2e8f0;
+            transition: all 0.3s ease;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #8b5cf6;
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+            background: rgba(15, 23, 42, 0.8);
+        }
+        .form-input::placeholder {
+            color: #64748b;
+        }
+
+        /* Table */
+        .data-table {
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+        .data-table th {
+            background: rgba(124, 58, 237, 0.15);
+            color: #c4b5fd;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+        }
+        .data-table td {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+            color: #cbd5e1;
+            font-size: 0.875rem;
+        }
+        .data-table tr:hover td {
+            background: rgba(124, 58, 237, 0.05);
+        }
+
+        /* Modal */
+        .modal-overlay {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(124, 58, 237, 0.2); }
+            50% { box-shadow: 0 0 30px rgba(124, 58, 237, 0.4); }
+        }
+        .pulse-glow {
+            animation: pulse-glow 3s infinite;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #4c1d95; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #6d28d9; }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 1rem 1.5rem;
+            border-radius: 1rem;
+            color: white;
+            font-weight: 500;
+            z-index: 9999;
+            transform: translateX(150%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+        .toast.show { transform: translateX(0); }
+        .toast.success { background: linear-gradient(135deg, #059669, #10b981); }
+        .toast.error { background: linear-gradient(135deg, #dc2626, #ef4444); }
+        .toast.info { background: linear-gradient(135deg, #7c3aed, #8b5cf6); }
+
+        /* Category Badge */
+        .badge-live { background: rgba(239, 68, 68, 0.2); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.3); }
+        .badge-jobs { background: rgba(139, 92, 246, 0.2); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.3); }
+        .badge-yojana { background: rgba(16, 185, 129, 0.2); color: #6ee7b7; border: 1px solid rgba(16, 185, 129, 0.3); }
+        .badge-admit { background: rgba(245, 158, 11, 0.2); color: #fcd34d; border: 1px solid rgba(245, 158, 11, 0.3); }
+        .badge-results { background: rgba(59, 130, 246, 0.2); color: #93c5fd; border: 1px solid rgba(59, 130, 246, 0.3); }
+
+        /* Loading Spinner */
+        .spinner {
+            border: 3px solid rgba(139, 92, 246, 0.2);
+            border-top-color: #8b5cf6;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Mobile Menu */
+        @media (max-width: 1024px) {
+            .sidebar { transform: translateX(-100%); transition: transform 0.3s ease; }
+            .sidebar.open { transform: translateX(0); }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- ==================== LOGIN VIEW ==================== -->
+    <div id="loginView" class="min-h-screen flex items-center justify-center p-4">
+        <div class="w-full max-w-md">
+            <!-- Logo -->
+            <div class="text-center mb-8">
+                <div class="w-16 h-16 bg-gradient-to-br from-violet-500 to-purple-700 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-purple-500/30 pulse-glow">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                    </svg>
+                </div>
+                <h1 class="text-2xl font-bold text-white">Apply<span class="text-violet-400">Bro</span></h1>
+                <p class="text-slate-400 text-sm mt-1">Admin Dashboard</p>
+            </div>
+
+            <!-- Login Card -->
+            <div class="glass-card rounded-2xl p-8">
+                <h2 class="text-xl font-semibold text-white mb-6 text-center">Welcome Back</h2>
+
+                <form id="loginForm" onsubmit="handleLogin(event)">
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-slate-300 mb-2">Email Address</label>
+                        <input type="email" id="loginEmail" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="admin@example.com" required>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-slate-300 mb-2">Password</label>
+                        <input type="password" id="loginPassword" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="••••••••" required>
+                    </div>
+                    <button type="submit" id="loginBtn" class="btn-primary w-full rounded-xl py-3 font-semibold text-sm flex items-center justify-center gap-2">
+                        <span id="loginBtnText">Sign In</span>
+                        <div id="loginSpinner" class="spinner w-5 h-5 border-2 hidden"></div>
+                    </button>
+                </form>
+
+                <div class="mt-6 text-center">
+                    <button onclick="showForgotPassword()" class="text-sm text-violet-400 hover:text-violet-300 transition-colors">Forgot Password?</button>
+                </div>
+            </div>
+
+            <p class="text-center text-slate-500 text-xs mt-6">© 2026 Apply Bro Admin. Secure Access Only.</p>
+        </div>
+    </div>
+
+    <!-- ==================== FORGOT PASSWORD VIEW ==================== -->
+    <div id="forgotView" class="hidden min-h-screen flex items-center justify-center p-4">
+        <div class="w-full max-w-md">
+            <div class="text-center mb-8">
+                <div class="w-16 h-16 bg-gradient-to-br from-violet-500 to-purple-700 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-purple-500/30">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/>
+                    </svg>
+                </div>
+                <h1 class="text-2xl font-bold text-white">Reset Password</h1>
+                <p class="text-slate-400 text-sm mt-1">We'll send a reset link to your email</p>
+            </div>
+
+            <div class="glass-card rounded-2xl p-8">
+                <form id="forgotForm" onsubmit="handleForgotPassword(event)">
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-slate-300 mb-2">Registered Email</label>
+                        <input type="email" id="forgotEmail" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="hi705426@gmail.com" required>
+                    </div>
+                    <button type="submit" id="forgotBtn" class="btn-primary w-full rounded-xl py-3 font-semibold text-sm flex items-center justify-center gap-2">
+                        <span id="forgotBtnText">Send Reset Link</span>
+                        <div id="forgotSpinner" class="spinner w-5 h-5 border-2 hidden"></div>
+                    </button>
+                </form>
+
+                <div class="mt-6 text-center">
+                    <button onclick="showLogin()" class="text-sm text-violet-400 hover:text-violet-300 transition-colors flex items-center justify-center gap-1">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                        Back to Login
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== DASHBOARD VIEW ==================== -->
+    <div id="dashboardView" class="hidden min-h-screen">
+        <!-- Top Navigation -->
+        <nav class="glass-card border-b border-violet-500/20 sticky top-0 z-40 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex justify-between items-center h-16">
+                    <div class="flex items-center gap-3">
+                        <button onclick="toggleMobileMenu()" class="lg:hidden p-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/10">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                        </button>
+                        <div class="flex items-center gap-2.5">
+                            <div class="w-8 h-8 bg-gradient-to-br from-violet-500 to-purple-700 rounded-lg flex items-center justify-center">
+                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                            </div>
+                            <span class="text-lg font-bold text-white">Apply<span class="text-violet-400">Bro</span> <span class="text-slate-400 font-normal text-sm">Admin</span></span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20">
+                            <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+                            <span class="text-xs text-emerald-400 font-medium">Online</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="text-right hidden sm:block">
+                                <p id="adminEmail" class="text-sm font-medium text-white">Admin</p>
+                                <p class="text-xs text-slate-400">Super Admin</p>
+                            </div>
+                            <button onclick="handleLogout()" class="p-2 rounded-xl text-slate-400 hover:text-red-400 hover:bg-red-500/10 transition-all" title="Logout">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden lg:hidden glass-card border-t border-violet-500/10">
+            <div class="px-4 py-3 space-y-1">
+                <button onclick="showSection('posts')" class="w-full text-left px-3 py-2.5 rounded-lg text-sm text-white/90 hover:bg-white/10">All Posts</button>
+                <button onclick="showSection('stats')" class="w-full text-left px-3 py-2.5 rounded-lg text-sm text-white/90 hover:bg-white/10">Statistics</button>
+                <button onclick="openModal()" class="w-full text-left px-3 py-2.5 rounded-lg text-sm text-emerald-400 hover:bg-emerald-500/10">+ Add New Post</button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+            <!-- Stats Cards -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                <div class="glass-card rounded-xl p-5">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs font-medium text-slate-400 uppercase tracking-wider">Total Posts</span>
+                        <div class="w-8 h-8 rounded-lg bg-violet-500/20 flex items-center justify-center">
+                            <svg class="w-4 h-4 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+                        </div>
+                    </div>
+                    <p id="statTotal" class="text-2xl font-bold text-white">0</p>
+                </div>
+                <div class="glass-card rounded-xl p-5">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs font-medium text-slate-400 uppercase tracking-wider">Live Updates</span>
+                        <div class="w-8 h-8 rounded-lg bg-red-500/20 flex items-center justify-center">
+                            <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                        </div>
+                    </div>
+                    <p id="statLive" class="text-2xl font-bold text-white">0</p>
+                </div>
+                <div class="glass-card rounded-xl p-5">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs font-medium text-slate-400 uppercase tracking-wider">Jobs</span>
+                        <div class="w-8 h-8 rounded-lg bg-emerald-500/20 flex items-center justify-center">
+                            <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0124 12c0-3.866-3.582-7-8-7a8 8 0 00-8 8c0 1.892.402 3.013 1.172 4.065A4.001 4.001 0 0115 18a4 4 0 01-4 4h-1.528a4 4 0 01-3.117-1.5c-.293-.367-.5-.788-.5-1.255V14a2 2 0 012-2h1.382a2 2 0 001.789-1.106l.447-.894A2 2 0 0014.618 8h1.264a2 2 0 001.789-1.106l.447-.894A2 2 0 0018.382 4H19a2 2 0 012 2v7.255z"/></svg>
+                        </div>
+                    </div>
+                    <p id="statJobs" class="text-2xl font-bold text-white">0</p>
+                </div>
+                <div class="glass-card rounded-xl p-5">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs font-medium text-slate-400 uppercase tracking-wider">This Month</span>
+                        <div class="w-8 h-8 rounded-lg bg-amber-500/20 flex items-center justify-center">
+                            <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                        </div>
+                    </div>
+                    <p id="statMonth" class="text-2xl font-bold text-white">0</p>
+                </div>
+            </div>
+
+            <!-- Action Bar -->
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+                <div>
+                    <h2 class="text-xl font-bold text-white">All Posts</h2>
+                    <p class="text-sm text-slate-400 mt-1">Manage your website content from here</p>
+                </div>
+                <button onclick="openModal()" class="btn-success px-6 py-2.5 rounded-xl font-semibold text-sm flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                    Add New Post
+                </button>
+            </div>
+
+            <!-- Filters -->
+            <div class="glass-card rounded-xl p-4 mb-6 flex flex-col sm:flex-row gap-4">
+                <div class="flex-1">
+                    <div class="relative">
+                        <svg class="w-5 h-5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                        <input type="text" id="searchPosts" oninput="filterPosts()" class="form-input w-full rounded-xl pl-10 pr-4 py-2.5 text-sm" placeholder="Search posts by title...">
+                    </div>
+                </div>
+                <select id="filterCategory" onchange="filterPosts()" class="form-input rounded-xl px-4 py-2.5 text-sm sm:w-48">
+                    <option value="">All Categories</option>
+                    <option value="Live Update">Live Update</option>
+                    <option value="Latest Jobs">Latest Jobs</option>
+                    <option value="Sarkari Yojana">Sarkari Yojana</option>
+                    <option value="Admit Cards">Admit Cards</option>
+                    <option value="Results">Results</option>
+                </select>
+            </div>
+
+            <!-- Posts Table -->
+            <div class="glass-card rounded-2xl overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="data-table w-full">
+                        <thead>
+                            <tr>
+                                <th class="rounded-tl-lg">Post Details</th>
+                                <th>Category</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th class="rounded-tr-lg text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="postsTableBody">
+                            <!-- Dynamic Content -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="emptyState" class="hidden py-16 text-center">
+                    <div class="w-16 h-16 bg-violet-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+                    </div>
+                    <p class="text-slate-300 font-medium">No posts found</p>
+                    <p class="text-slate-500 text-sm mt-1">Create your first post to get started</p>
+                </div>
+                <div id="loadingState" class="py-16 text-center">
+                    <div class="spinner mx-auto mb-4"></div>
+                    <p class="text-slate-400 text-sm">Loading posts...</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- ==================== ADD/EDIT MODAL ==================== -->
+    <div id="postModal" class="hidden fixed inset-0 z-50">
+        <div class="modal-overlay absolute inset-0" onclick="closeModal()"></div>
+        <div class="absolute inset-0 flex items-center justify-center p-4 pointer-events-none">
+            <div class="glass-card rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto pointer-events-auto animate-fade-in">
+                <div class="sticky top-0 bg-slate-900/90 backdrop-blur-xl border-b border-violet-500/20 px-6 py-4 flex justify-between items-center z-10">
+                    <h3 id="modalTitle" class="text-lg font-bold text-white">Add New Post</h3>
+                    <button onclick="closeModal()" class="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition-all">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                    </button>
+                </div>
+
+                <form id="postForm" onsubmit="handleSavePost(event)" class="p-6 space-y-5">
+                    <input type="hidden" id="postId">
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-slate-300 mb-2">Post Title <span class="text-red-400">*</span></label>
+                            <input type="text" id="postTitle" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="e.g. SSC CGL 2026 Notification" required>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-2">Category <span class="text-red-400">*</span></label>
+                            <select id="postCategory" class="form-input w-full rounded-xl px-4 py-3 text-sm" required onchange="updateFormHints()">
+                                <option value="">Select Category</option>
+                                <option value="Live Update">Live Update</option>
+                                <option value="Latest Jobs">Latest Jobs</option>
+                                <option value="Sarkari Yojana">Sarkari Yojana</option>
+                                <option value="Admit Cards">Admit Cards</option>
+                                <option value="Results">Results</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-2">Publish Date <span class="text-red-400">*</span></label>
+                            <input type="date" id="postDate" class="form-input w-full rounded-xl px-4 py-3 text-sm" required>
+                        </div>
+
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-slate-300 mb-2">Short Description <span class="text-red-400">*</span></label>
+                            <input type="text" id="postDescription" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="e.g. 7,500+ Vacancies • Last Date: 15 June" required>
+                            <p id="descHint" class="text-xs text-slate-500 mt-1">This appears as subtitle on the homepage</p>
+                        </div>
+
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-slate-300 mb-2">Apply / View Link <span class="text-red-400">*</span></label>
+                            <input type="url" id="postLink" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="https://..." required>
+                        </div>
+
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-slate-300 mb-2">Thumbnail / Image URL <span class="text-slate-500">(Optional)</span></label>
+                            <input type="url" id="postImage" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="https://example.com/image.jpg">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-2">Badge Text <span class="text-slate-500">(Optional)</span></label>
+                            <input type="text" id="postBadge" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="e.g. New, Updated, Urgent">
+                            <p class="text-xs text-slate-500 mt-1">Shows on Latest Jobs (red badge)</p>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-2">Status / Dot Color</label>
+                            <select id="postStatus" class="form-input w-full rounded-xl px-4 py-3 text-sm">
+                                <option value="normal">Normal (Grey Dot)</option>
+                                <option value="active">Active (Colored Dot)</option>
+                            </select>
+                            <p class="text-xs text-slate-500 mt-1">For Live Update & Yojana sections</p>
+                        </div>
+
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-slate-300 mb-2">Extra Info <span class="text-slate-500">(Optional)</span></label>
+                            <input type="text" id="postExtra" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="e.g. Exam: 12-20 June 2026 or Declared: 10 May 2026">
+                            <p id="extraHint" class="text-xs text-slate-500 mt-1">Category-specific info (exam dates, declared dates, etc.)</p>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end gap-3 pt-4 border-t border-slate-700/50">
+                        <button type="button" onclick="closeModal()" class="btn-secondary px-6 py-2.5 rounded-xl font-medium text-sm">Cancel</button>
+                        <button type="submit" id="saveBtn" class="btn-primary px-6 py-2.5 rounded-xl font-semibold text-sm flex items-center gap-2">
+                            <span id="saveBtnText">Save Post</span>
+                            <div id="saveSpinner" class="spinner w-4 h-4 border-2 hidden"></div>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== DELETE CONFIRMATION MODAL ==================== -->
+    <div id="deleteModal" class="hidden fixed inset-0 z-50">
+        <div class="modal-overlay absolute inset-0" onclick="closeDeleteModal()"></div>
+        <div class="absolute inset-0 flex items-center justify-center p-4 pointer-events-none">
+            <div class="glass-card rounded-2xl w-full max-w-md pointer-events-auto animate-fade-in p-6 text-center">
+                <div class="w-14 h-14 bg-red-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-7 h-7 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-2">Delete Post?</h3>
+                <p class="text-sm text-slate-400 mb-6">This action cannot be undone. The post will be permanently removed from your website.</p>
+                <div class="flex justify-center gap-3">
+                    <button onclick="closeDeleteModal()" class="btn-secondary px-5 py-2.5 rounded-xl font-medium text-sm">Cancel</button>
+                    <button onclick="confirmDelete()" id="deleteBtn" class="btn-danger px-5 py-2.5 rounded-xl font-semibold text-sm flex items-center gap-2">
+                        <span id="deleteBtnText">Delete</span>
+                        <div id="deleteSpinner" class="spinner w-4 h-4 border-2 hidden"></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast" class="toast"></div>
+
+    <!-- ==================== JAVASCRIPT ==================== -->
+    <script>
+        // ==========================================
+        // FIREBASE CONFIGURATION
+        // ==========================================
+        // IMPORTANT: Replace with your Firebase project config
+        // Get this from: Firebase Console → Project Settings → General → Your Apps → SDK Setup
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY_HERE",
+            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT_ID.appspot.com",
+            messagingSenderId: "YOUR_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        // Admin email (only this email can access)
+        const ADMIN_EMAIL = "hi705426@gmail.com";
+
+        // Global state
+        let allPosts = [];
+        let deletePostId = null;
+        let currentUser = null;
+
+        // ==========================================
+        // AUTHENTICATION
+        // ==========================================
+
+        // Check auth state on load
+        auth.onAuthStateChanged(user => {
+            if (user && user.email === ADMIN_EMAIL) {
+                currentUser = user;
+                showDashboard();
+                loadPosts();
+                document.getElementById('adminEmail').textContent = user.email;
+            } else {
+                if (user) {
+                    // Not admin, sign out
+                    auth.signOut();
+                    showToast('Access denied. Admin only.', 'error');
+                }
+                showLogin();
+            }
+        });
+
+        function showLogin() {
+            document.getElementById('loginView').classList.remove('hidden');
+            document.getElementById('forgotView').classList.add('hidden');
+            document.getElementById('dashboardView').classList.add('hidden');
+        }
+
+        function showForgotPassword() {
+            document.getElementById('loginView').classList.add('hidden');
+            document.getElementById('forgotView').classList.remove('hidden');
+            document.getElementById('dashboardView').classList.add('hidden');
+        }
+
+        function showDashboard() {
+            document.getElementById('loginView').classList.add('hidden');
+            document.getElementById('forgotView').classList.add('hidden');
+            document.getElementById('dashboardView').classList.remove('hidden');
+        }
+
+        // Handle Login
+        async function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+
+            if (email !== ADMIN_EMAIL) {
+                showToast('Unauthorized email address', 'error');
+                return;
+            }
+
+            setLoading('loginBtn', 'loginBtnText', 'loginSpinner', true);
+
+            try {
+                await auth.signInWithEmailAndPassword(email, password);
+                showToast('Welcome back, Admin!', 'success');
+            } catch (error) {
+                let message = 'Login failed';
+                if (error.code === 'auth/user-not-found') message = 'Admin account not found';
+                else if (error.code === 'auth/wrong-password') message = 'Incorrect password';
+                else if (error.code === 'auth/invalid-email') message = 'Invalid email format';
+                else if (error.code === 'auth/too-many-requests') message = 'Too many attempts. Try again later.';
+                showToast(message, 'error');
+            } finally {
+                setLoading('loginBtn', 'loginBtnText', 'loginSpinner', false);
+            }
+        }
+
+        // Handle Forgot Password
+        async function handleForgotPassword(e) {
+            e.preventDefault();
+            const email = document.getElementById('forgotEmail').value.trim();
+
+            if (email !== ADMIN_EMAIL) {
+                showToast('Only registered admin email is allowed', 'error');
+                return;
+            }
+
+            setLoading('forgotBtn', 'forgotBtnText', 'forgotSpinner', true);
+
+            try {
+                await auth.sendPasswordResetEmail(email);
+                showToast('Password reset link sent! Check your email.', 'success');
+                setTimeout(showLogin, 3000);
+            } catch (error) {
+                let message = 'Failed to send reset link';
+                if (error.code === 'auth/user-not-found') message = 'Email not registered';
+                showToast(message, 'error');
+            } finally {
+                setLoading('forgotBtn', 'forgotBtnText', 'forgotSpinner', false);
+            }
+        }
+
+        // Handle Logout
+        async function handleLogout() {
+            try {
+                await auth.signOut();
+                showToast('Logged out successfully', 'info');
+            } catch (error) {
+                showToast('Error logging out', 'error');
+            }
+        }
+
+        // ==========================================
+        // POSTS CRUD OPERATIONS
+        // ==========================================
+
+        // Load all posts from Firestore
+        async function loadPosts() {
+            const tbody = document.getElementById('postsTableBody');
+            const loadingState = document.getElementById('loadingState');
+            const emptyState = document.getElementById('emptyState');
+
+            tbody.innerHTML = '';
+            loadingState.classList.remove('hidden');
+            emptyState.classList.add('hidden');
+
+            try {
+                const snapshot = await db.collection('posts').orderBy('createdAt', 'desc').get();
+                allPosts = [];
+                snapshot.forEach(doc => {
+                    allPosts.push({ id: doc.id, ...doc.data() });
+                });
+
+                updateStats();
+                renderPosts(allPosts);
+            } catch (error) {
+                console.error('Error loading posts:', error);
+                showToast('Error loading posts', 'error');
+            } finally {
+                loadingState.classList.add('hidden');
+            }
+        }
+
+        // Render posts table
+        function renderPosts(posts) {
+            const tbody = document.getElementById('postsTableBody');
+            const emptyState = document.getElementById('emptyState');
+
+            tbody.innerHTML = '';
+
+            if (posts.length === 0) {
+                emptyState.classList.remove('hidden');
+                return;
+            }
+            emptyState.classList.add('hidden');
+
+            posts.forEach(post => {
+                const date = post.publishDate ? formatDate(post.publishDate) : 'N/A';
+                const categoryClass = getCategoryBadgeClass(post.category);
+                const statusDot = post.status === 'active' 
+                    ? '<span class="w-2 h-2 bg-emerald-500 rounded-full inline-block mr-1.5"></span>Active'
+                    : '<span class="w-2 h-2 bg-slate-500 rounded-full inline-block mr-1.5"></span>Normal';
+
+                const row = document.createElement('tr');
+                row.className = 'group';
+                row.innerHTML = `
+                    <td>
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-violet-500/20 to-purple-600/20 flex items-center justify-center flex-shrink-0">
+                                <svg class="w-5 h-5 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                            </div>
+                            <div>
+                                <p class="font-medium text-white text-sm">${escapeHtml(post.title)}</p>
+                                <p class="text-xs text-slate-400 mt-0.5 line-clamp-1">${escapeHtml(post.description || '')}</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="px-2.5 py-1 rounded-lg text-xs font-medium ${categoryClass}">${post.category || 'Uncategorized'}</span>
+                    </td>
+                    <td>
+                        <span class="text-sm text-slate-300">${date}</span>
+                    </td>
+                    <td>
+                        <span class="text-xs text-slate-400 flex items-center">${statusDot}</span>
+                    </td>
+                    <td class="text-right">
+                        <div class="flex items-center justify-end gap-2">
+                            <button onclick="editPost('${post.id}')" class="p-2 rounded-lg text-slate-400 hover:text-violet-400 hover:bg-violet-500/10 transition-all" title="Edit">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.433-4.433L18.5 5.5m-1.433 4.433L21 7.5m-4 0V3m0 4.5H12.5"/></svg>
+                            </button>
+                            <button onclick="promptDelete('${post.id}')" class="p-2 rounded-lg text-slate-400 hover:text-red-400 hover:bg-red-500/10 transition-all" title="Delete">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                            </button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // Update statistics
+        function updateStats() {
+            document.getElementById('statTotal').textContent = allPosts.length;
+            document.getElementById('statLive').textContent = allPosts.filter(p => p.category === 'Live Update').length;
+            document.getElementById('statJobs').textContent = allPosts.filter(p => p.category === 'Latest Jobs').length;
+
+            const now = new Date();
+            const thisMonth = allPosts.filter(p => {
+                if (!p.createdAt) return false;
+                const d = p.createdAt.toDate ? p.createdAt.toDate() : new Date(p.createdAt);
+                return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
+            }).length;
+            document.getElementById('statMonth').textContent = thisMonth;
+        }
+
+        // Filter posts
+        function filterPosts() {
+            const query = document.getElementById('searchPosts').value.toLowerCase();
+            const category = document.getElementById('filterCategory').value;
+
+            const filtered = allPosts.filter(post => {
+                const matchesSearch = !query || post.title.toLowerCase().includes(query) || (post.description && post.description.toLowerCase().includes(query));
+                const matchesCategory = !category || post.category === category;
+                return matchesSearch && matchesCategory;
+            });
+
+            renderPosts(filtered);
+        }
+
+        // ==========================================
+        // MODAL OPERATIONS
+        // ==========================================
+
+        function openModal(postId = null) {
+            const modal = document.getElementById('postModal');
+            const form = document.getElementById('postForm');
+            const title = document.getElementById('modalTitle');
+
+            form.reset();
+            document.getElementById('postId').value = '';
+
+            // Set default date to today
+            document.getElementById('postDate').valueAsDate = new Date();
+
+            if (postId) {
+                const post = allPosts.find(p => p.id === postId);
+                if (post) {
+                    title.textContent = 'Edit Post';
+                    document.getElementById('postId').value = post.id;
+                    document.getElementById('postTitle').value = post.title || '';
+                    document.getElementById('postCategory').value = post.category || '';
+                    document.getElementById('postDate').value = post.publishDate || '';
+                    document.getElementById('postDescription').value = post.description || '';
+                    document.getElementById('postLink').value = post.link || '';
+                    document.getElementById('postImage').value = post.image || '';
+                    document.getElementById('postBadge').value = post.badge || '';
+                    document.getElementById('postStatus').value = post.status || 'normal';
+                    document.getElementById('postExtra').value = post.extraInfo || '';
+                }
+            } else {
+                title.textContent = 'Add New Post';
+            }
+
+            updateFormHints();
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('postModal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        function updateFormHints() {
+            const category = document.getElementById('postCategory').value;
+            const descHint = document.getElementById('descHint');
+            const extraHint = document.getElementById('extraHint');
+
+            if (category === 'Admit Cards') {
+                descHint.textContent = 'e.g. Download Available Now';
+                extraHint.textContent = 'e.g. Exam: 12-20 June 2026 (shown below title)';
+            } else if (category === 'Results') {
+                descHint.textContent = 'e.g. Final Result Declared';
+                extraHint.textContent = 'e.g. Declared: 10 May 2026 (shown below title)';
+            } else if (category === 'Latest Jobs') {
+                descHint.textContent = 'e.g. 7,500+ Vacancies • Last Date: 15 June';
+                extraHint.textContent = 'Use Badge field to show "New" tag';
+            } else {
+                descHint.textContent = 'This appears as subtitle on the homepage';
+                extraHint.textContent = 'Category-specific info (exam dates, declared dates, etc.)';
+            }
+        }
+
+        // Save Post (Add or Edit)
+        async function handleSavePost(e) {
+            e.preventDefault();
+
+            const postId = document.getElementById('postId').value;
+            const postData = {
+                title: document.getElementById('postTitle').value.trim(),
+                category: document.getElementById('postCategory').value,
+                publishDate: document.getElementById('postDate').value,
+                description: document.getElementById('postDescription').value.trim(),
+                link: document.getElementById('postLink').value.trim(),
+                image: document.getElementById('postImage').value.trim(),
+                badge: document.getElementById('postBadge').value.trim(),
+                status: document.getElementById('postStatus').value,
+                extraInfo: document.getElementById('postExtra').value.trim(),
+                updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+            };
+
+            setLoading('saveBtn', 'saveBtnText', 'saveSpinner', true);
+
+            try {
+                if (postId) {
+                    // Update existing
+                    await db.collection('posts').doc(postId).update(postData);
+                    showToast('Post updated successfully!', 'success');
+                } else {
+                    // Add new
+                    postData.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+                    await db.collection('posts').add(postData);
+                    showToast('New post added successfully!', 'success');
+                }
+
+                closeModal();
+                loadPosts();
+            } catch (error) {
+                console.error('Error saving post:', error);
+                showToast('Error saving post: ' + error.message, 'error');
+            } finally {
+                setLoading('saveBtn', 'saveBtnText', 'saveSpinner', false);
+            }
+        }
+
+        // Edit Post
+        function editPost(postId) {
+            openModal(postId);
+        }
+
+        // Prompt Delete
+        function promptDelete(postId) {
+            deletePostId = postId;
+            document.getElementById('deleteModal').classList.remove('hidden');
+        }
+
+        function closeDeleteModal() {
+            deletePostId = null;
+            document.getElementById('deleteModal').classList.add('hidden');
+        }
+
+        // Confirm Delete
+        async function confirmDelete() {
+            if (!deletePostId) return;
+
+            setLoading('deleteBtn', 'deleteBtnText', 'deleteSpinner', true);
+
+            try {
+                await db.collection('posts').doc(deletePostId).delete();
+                showToast('Post deleted successfully', 'info');
+                closeDeleteModal();
+                loadPosts();
+            } catch (error) {
+                console.error('Error deleting post:', error);
+                showToast('Error deleting post', 'error');
+            } finally {
+                setLoading('deleteBtn', 'deleteBtnText', 'deleteSpinner', false);
+            }
+        }
+
+        // ==========================================
+        // UTILITY FUNCTIONS
+        // ==========================================
+
+        function setLoading(btnId, textId, spinnerId, isLoading) {
+            const btn = document.getElementById(btnId);
+            const text = document.getElementById(textId);
+            const spinner = document.getElementById(spinnerId);
+
+            if (isLoading) {
+                btn.disabled = true;
+                text.classList.add('hidden');
+                spinner.classList.remove('hidden');
+            } else {
+                btn.disabled = false;
+                text.classList.remove('hidden');
+                spinner.classList.add('hidden');
+            }
+        }
+
+        function showToast(message, type = 'info') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = `toast ${type}`;
+            toast.classList.add('show');
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 4000);
+        }
+
+        function formatDate(dateString) {
+            if (!dateString) return 'N/A';
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+        }
+
+        function getCategoryBadgeClass(category) {
+            switch(category) {
+                case 'Live Update': return 'badge-live';
+                case 'Latest Jobs': return 'badge-jobs';
+                case 'Sarkari Yojana': return 'badge-yojana';
+                case 'Admit Cards': return 'badge-admit';
+                case 'Results': return 'badge-results';
+                default: return 'badge-jobs';
+            }
+        }
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        }
+
+        // Close modals on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+                closeDeleteModal();
+            }
+        });
+    </script>
+</body>
+</html>
