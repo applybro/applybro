@@ -431,366 +431,295 @@
                     <p class="text-slate-400 text-sm">Loading posts...</p>
                 </div>
             </div>
-            <!-- ==================== NEW SIMPLE ARTICLE CREATOR ==================== -->
-<section id="articleCreatorSection" class="hidden py-4">
-    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+            </section>
 
-        <!-- Header -->
-        <div class="mb-6 text-center">
-            <div class="w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl flex items-center justify-center mx-auto mb-3 shadow-lg shadow-emerald-500/30">
-                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.433-4.433L18.5 5.5m-1.433 4.433L21 7.5m-4 0V3m0 4.5H12.5"/></svg>
-            </div>
-            <h2 class="text-xl font-bold text-white">📝 Article Banayein</h2>
-            <p class="text-slate-400 text-sm mt-1">5 easy steps mein CTET-style article taiyaar</p>
-        </div>
+    <!-- ==================== ARTICLE CREATOR SECTION ==================== -->
+    <section id="articleCreatorSection" class="hidden py-6">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6">
 
-        <!-- Progress Bar -->
-        <div class="flex items-center justify-between mb-6 px-2">
-            <div class="flex-1 flex items-center">
-                <div id="step1Indicator" class="w-8 h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center text-sm font-bold">1</div>
-                <div class="flex-1 h-1 bg-slate-700 mx-2 rounded"><div id="progress1" class="h-full bg-emerald-500 rounded transition-all duration-300" style="width:0%"></div></div>
-                <div id="step2Indicator" class="w-8 h-8 rounded-full bg-slate-700 text-slate-400 flex items-center justify-center text-sm font-bold transition-all">2</div>
-                <div class="flex-1 h-1 bg-slate-700 mx-2 rounded"><div id="progress2" class="h-full bg-emerald-500 rounded transition-all duration-300" style="width:0%"></div></div>
-                <div id="step3Indicator" class="w-8 h-8 rounded-full bg-slate-700 text-slate-400 flex items-center justify-center text-sm font-bold transition-all">3</div>
-                <div class="flex-1 h-1 bg-slate-700 mx-2 rounded"><div id="progress3" class="h-full bg-emerald-500 rounded transition-all duration-300" style="width:0%"></div></div>
-                <div id="step4Indicator" class="w-8 h-8 rounded-full bg-slate-700 text-slate-400 flex items-center justify-center text-sm font-bold transition-all">4</div>
-                <div class="flex-1 h-1 bg-slate-700 mx-2 rounded"><div id="progress4" class="h-full bg-emerald-500 rounded transition-all duration-300" style="width:0%"></div></div>
-                <div id="step5Indicator" class="w-8 h-8 rounded-full bg-slate-700 text-slate-400 flex items-center justify-center text-sm font-bold transition-all">5</div>
-            </div>
-        </div>
-
-        <form id="articleCreatorForm" onsubmit="handleGenerateArticle(event)" class="space-y-4">
-
-            <!-- ════════════════════════════════════════
-                 STEP 1: BASIC INFO (Jaruri Details)
-                 ════════════════════════════════════════ -->
-            <div id="step1" class="glass-card rounded-2xl p-5 border-l-4 border-emerald-500">
-                <div class="flex items-center gap-2 mb-4">
-                    <span class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-sm font-bold">1</span>
-                    <h3 class="text-lg font-bold text-white">Basic Details <span class="text-xs font-normal text-slate-400">— Jaruri Jankari</span></h3>
+            <!-- Header -->
+            <div class="mb-6 flex items-center justify-between">
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-1">📝 Article Creator</h2>
+                    <p class="text-slate-400 text-sm">CTET-style detailed article banayein. Sab fields optional hain.</p>
                 </div>
-
-                <div class="space-y-4">
-                    <!-- Article Name -->
-                    <div>
-                        <label class="block text-sm font-medium text-emerald-300 mb-2">
-                            📌 Article ka Naam <span class="text-red-400">*</span>
-                            <span class="block text-xs text-slate-500 font-normal mt-0.5">Jaise: CTET 2026 Online Form</span>
-                        </label>
-                        <input type="text" id="acTitle" class="form-input w-full rounded-xl px-4 py-3.5 text-sm" placeholder="Yahan article ka title likhein..." required>
-                    </div>
-
-                    <!-- Category -->
-                    <div>
-                        <label class="block text-sm font-medium text-emerald-300 mb-2">
-                            🏷️ Konsi Category?
-                            <span class="block text-xs text-slate-500 font-normal mt-0.5">Job hai ya Exam?</span>
-                        </label>
-                        <select id="acCategory" class="form-input w-full rounded-xl px-4 py-3.5 text-sm">
-                            <option value="">-- Select karein --</option>
-                            <option value="Teaching Exam">🎓 Teaching Exam (CTET, TET)</option>
-                            <option value="Latest Jobs">💼 Latest Jobs (SSC, Railway, Bank)</option>
-                            <option value="Admit Cards">🎫 Admit Card</option>
-                            <option value="Results">📊 Result</option>
-                            <option value="Sarkari Yojana">🏛️ Sarkari Yojana</option>
-                            <option value="Live Update">🔴 Live Update</option>
-                        </select>
-                    </div>
-
-                    <!-- Date & Badge -->
-                    <div class="grid grid-cols-2 gap-3">
-                        <div>
-                            <label class="block text-sm font-medium text-emerald-300 mb-2">📅 Publish Date</label>
-                            <input type="date" id="acDate" class="form-input w-full rounded-xl px-4 py-3.5 text-sm">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-emerald-300 mb-2">🏷️ Badge (Optional)</label>
-                            <input type="text" id="acBadge" class="form-input w-full rounded-xl px-4 py-3.5 text-sm" placeholder="NEW, LAST DATE">
-                        </div>
-                    </div>
-
-                    <!-- Hero Image -->
-                    <div>
-                        <label class="block text-sm font-medium text-emerald-300 mb-2">
-                            🖼️ Upar wali Photo ka Link
-                            <span class="block text-xs text-slate-500 font-normal mt-0.5">Article ke top pe dikhne wali image (optional)</span>
-                        </label>
-                        <input type="url" id="acHeroImage" class="form-input w-full rounded-xl px-4 py-3.5 text-sm" placeholder="https://...">
-                    </div>
-                </div>
-
-                <button type="button" onclick="goToStep(2)" class="btn-success w-full mt-5 py-3.5 rounded-xl font-semibold text-sm flex items-center justify-center gap-2">
-                    Aage Badhein →
+                <button onclick="showSection('posts')" class="btn-secondary px-4 py-2 rounded-xl text-sm flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                    Back
                 </button>
             </div>
 
-            <!-- ════════════════════════════════════════
-                 STEP 2: SHORT INFO (Jaldi wali Jankari)
-                 ════════════════════════════════════════ -->
-            <div id="step2" class="glass-card rounded-2xl p-5 border-l-4 border-blue-500 hidden">
-                <div class="flex items-center gap-2 mb-4">
-                    <span class="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center text-sm font-bold">2</span>
-                    <h3 class="text-lg font-bold text-white">Quick Info <span class="text-xs font-normal text-slate-400">— Jaldi wali Jankari</span></h3>
-                </div>
+            <form id="articleCreatorForm" onsubmit="handleGenerateArticle(event)" class="space-y-6">
 
-                <!-- Short Intro -->
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-blue-300 mb-2">
-                        📝 Chhota Sa Intro
-                        <span class="block text-xs text-slate-500 font-normal mt-0.5">2-3 line mein batayein ki article kis bare mein hai</span>
-                    </label>
-                    <textarea id="acShortIntro" rows="3" class="form-input w-full rounded-xl px-4 py-3.5 text-sm" placeholder="CBSE ne CTET September 2026 ka notification jari kar diya hai..."></textarea>
-                </div>
-
-                <!-- Quick Overview Table -->
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-blue-300 mb-2">
-                        📋 Quick Details Table
-                        <span class="block text-xs text-slate-500 font-normal mt-0.5">Jaldi se dekhne ke liye important points</span>
-                    </label>
-                    <div id="overviewTable" class="space-y-2">
-                        <!-- Default rows -->
+                <!-- 1. BASIC INFO -->
+                <div class="glass-card rounded-2xl p-5">
+                    <h3 class="text-lg font-semibold text-violet-300 mb-4 flex items-center gap-2">
+                        <span class="w-6 h-6 rounded bg-violet-500/20 flex items-center justify-center text-xs">1</span>
+                        Basic Information
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-slate-300 mb-2">Article Title</label>
+                            <input type="text" id="acTitle" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="e.g. CTET 2026 Online Form">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-2">Category</label>
+                            <select id="acCategory" class="form-input w-full rounded-xl px-4 py-3 text-sm">
+                                <option value="">Select</option>
+                                <option value="Teaching Exam">Teaching Exam</option>
+                                <option value="Latest Jobs">Latest Jobs</option>
+                                <option value="Admit Cards">Admit Cards</option>
+                                <option value="Results">Results</option>
+                                <option value="Sarkari Yojana">Sarkari Yojana</option>
+                                <option value="Live Update">Live Update</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-2">Publish Date</label>
+                            <input type="date" id="acDate" class="form-input w-full rounded-xl px-4 py-3 text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-2">Badge (Optional)</label>
+                            <input type="text" id="acBadge" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="e.g. NEW">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-2">Page URL Slug</label>
+                            <input type="text" id="acSlug" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="e.g. ctet-september-2026">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-slate-300 mb-2">Hero Image URL</label>
+                            <input type="url" id="acHeroImage" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="https://...">
+                        </div>
                     </div>
-                    <button type="button" onclick="addRow('overviewTable')" class="mt-2 w-full py-2.5 border border-dashed border-blue-500/30 text-blue-400 rounded-xl text-sm hover:bg-blue-500/10 transition flex items-center justify-center gap-2">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-                        Ek Line Aur Add Karein
-                    </button>
                 </div>
 
-                <div class="flex gap-3 mt-5">
-                    <button type="button" onclick="goToStep(1)" class="btn-secondary flex-1 py-3 rounded-xl font-medium text-sm">← Peeche</button>
-                    <button type="button" onclick="goToStep(3)" class="btn-success flex-1 py-3 rounded-xl font-semibold text-sm">Aage Badhein →</button>
-                </div>
-            </div>
-
-            <!-- ════════════════════════════════════════
-                 STEP 3: DETAILS (Poori Jankari)
-                 ════════════════════════════════════════ -->
-            <div id="step3" class="glass-card rounded-2xl p-5 border-l-4 border-violet-500 hidden">
-                <div class="flex items-center gap-2 mb-4">
-                    <span class="w-8 h-8 rounded-lg bg-violet-500/20 text-violet-400 flex items-center justify-center text-sm font-bold">3</span>
-                    <h3 class="text-lg font-bold text-white">Full Details <span class="text-xs font-normal text-slate-400">— Poori Jankari</span></h3>
+                <!-- 2. SHORT INTRO -->
+                <div class="glass-card rounded-2xl p-5">
+                    <h3 class="text-lg font-semibold text-violet-300 mb-4 flex items-center gap-2">
+                        <span class="w-6 h-6 rounded bg-violet-500/20 flex items-center justify-center text-xs">2</span>
+                        Short Intro (Homepage pe dikhne wala)
+                    </h3>
+                    <textarea id="acShortIntro" rows="3" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="CBSE ने CTET September 2026 का नोटिफिकेशन जारी कर दिया है..."></textarea>
                 </div>
 
-                <!-- About Article -->
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-violet-300 mb-2">
-                        📖 Article ke Bare Mein (Detail)
-                        <span class="block text-xs text-slate-500 font-normal mt-0.5">Poora detail yahan likhein — jitna chahiye utna</span>
-                    </label>
-                    <textarea id="acAbout" rows="5" class="form-input w-full rounded-xl px-4 py-3.5 text-sm" placeholder="Yahan article ka poora detail likhein...
-
-Jaise:
-CTET September 2026 Exam ka official notification CBSE dwara jari kar diya gaya hai.
-
-Ye pariksha un ummedwaron ke liye bahut mahatvapoorn maani jaati hai jo bhavishya mein sarkari ya niji schoolon mein shikshak banna chahte hain.
-
-**Do Paper** aayojit kiye jate hain..."></textarea>
-                    <p class="text-xs text-slate-500 mt-1">💡 **text** se bold hoga, Enter se naya paragraph</p>
+                <!-- 3. QUICK OVERVIEW TABLE -->
+                <div class="glass-card rounded-2xl p-5">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-violet-300 flex items-center gap-2">
+                            <span class="w-6 h-6 rounded bg-violet-500/20 flex items-center justify-center text-xs">3</span>
+                            Quick Overview Table
+                        </h3>
+                        <button type="button" onclick="addRow('overviewTable')" class="px-3 py-1.5 bg-violet-500/20 text-violet-300 rounded-lg text-xs font-medium hover:bg-violet-500/30 transition">+ Add Row</button>
+                    </div>
+                    <div id="overviewTable" class="space-y-2">
+                        <!-- Dynamic rows -->
+                    </div>
+                    <p class="text-xs text-slate-500 mt-2">Left column = Label (e.g. 'आर्टिकल का नाम'), Right = Value</p>
                 </div>
 
-                <!-- Eligibility -->
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-violet-300 mb-2">
-                        ✅ Yogyata (Eligibility)
-                        <span class="block text-xs text-slate-500 font-normal mt-0.5">Kon-kin log apply kar sakte hain</span>
-                    </label>
-                    <textarea id="acEligibility" rows="4" class="form-input w-full rounded-xl px-4 py-3.5 text-sm" placeholder="Har line ek point:
-- Ummidwar Bharat ka nagrik hona chahiye
-- **Paper I:** 12vi kam se kam 50% marks ke saath
-- **Koi aayu seema nahi**"></textarea>
+                <!-- 4. ABOUT ARTICLE -->
+                <div class="glass-card rounded-2xl p-5">
+                    <h3 class="text-lg font-semibold text-violet-300 mb-4 flex items-center gap-2">
+                        <span class="w-6 h-6 rounded bg-violet-500/20 flex items-center justify-center text-xs">4</span>
+                        About This Article (Detail mein)
+                    </h3>
+                    <textarea id="acAbout" rows="6" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="Yahan article ke baare mein detail likhein. Multiple paragraphs support karta hai..."></textarea>
                 </div>
 
-                <div class="flex gap-3 mt-5">
-                    <button type="button" onclick="goToStep(2)" class="btn-secondary flex-1 py-3 rounded-xl font-medium text-sm">← Peeche</button>
-                    <button type="button" onclick="goToStep(4)" class="btn-success flex-1 py-3 rounded-xl font-semibold text-sm">Aage Badhein →</button>
-                </div>
-            </div>
-
-            <!-- ════════════════════════════════════════
-                 STEP 4: TABLES (Sab kuch Table mein)
-                 ════════════════════════════════════════ -->
-            <div id="step4" class="glass-card rounded-2xl p-5 border-l-4 border-amber-500 hidden">
-                <div class="flex items-center gap-2 mb-4">
-                    <span class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center text-sm font-bold">4</span>
-                    <h3 class="text-lg font-bold text-white">Important Tables <span class="text-xs font-normal text-slate-400">— Sab kuch List mein</span></h3>
+                <!-- 5. ELIGIBILITY (Bullet Points) -->
+                <div class="glass-card rounded-2xl p-5">
+                    <h3 class="text-lg font-semibold text-violet-300 mb-4 flex items-center gap-2">
+                        <span class="w-6 h-6 rounded bg-violet-500/20 flex items-center justify-center text-xs">5</span>
+                        Eligibility Details (Bullet List)
+                    </h3>
+                    <textarea id="acEligibility" rows="5" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="Har line ek bullet point hogi:
+- उम्मीदवार भारत का नागरिक होना चाहिए।
+- **Paper I:** 12वीं कम से कम 50% अंकों के साथ..."></textarea>
+                    <p class="text-xs text-slate-500 mt-1">Har new line ek nayi bullet ban jayegi. **text** se bold hoga.</p>
                 </div>
 
-                <!-- Educational Qualification -->
-                <div class="mb-5">
-                    <div class="flex items-center justify-between mb-2">
-                        <label class="text-sm font-medium text-amber-300">🎓 Padhai ki Yogyata</label>
-                        <span class="text-xs text-slate-500">Kitni padhai chahiye</span>
+                <!-- 6. EDUCATIONAL QUALIFICATION TABLE -->
+                <div class="glass-card rounded-2xl p-5">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-violet-300 flex items-center gap-2">
+                            <span class="w-6 h-6 rounded bg-violet-500/20 flex items-center justify-center text-xs">6</span>
+                            Educational Qualification Table
+                        </h3>
+                        <button type="button" onclick="addRow('eduTable')" class="px-3 py-1.5 bg-violet-500/20 text-violet-300 rounded-lg text-xs font-medium hover:bg-violet-500/30 transition">+ Add Row</button>
                     </div>
                     <div id="eduTable" class="space-y-2"></div>
-                    <button type="button" onclick="addRow('eduTable')" class="mt-2 w-full py-2 border border-dashed border-amber-500/30 text-amber-400 rounded-lg text-xs hover:bg-amber-500/10 transition">
-                        + Add More
-                    </button>
                 </div>
 
-                <!-- Age Limit -->
-                <div class="mb-5">
-                    <div class="flex items-center justify-between mb-2">
-                        <label class="text-sm font-medium text-amber-300">🎂 Umar (Age Limit)</label>
-                        <span class="text-xs text-slate-500">Kitni umar honi chahiye</span>
+                <!-- 7. AGE LIMIT TABLE -->
+                <div class="glass-card rounded-2xl p-5">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-violet-300 flex items-center gap-2">
+                            <span class="w-6 h-6 rounded bg-violet-500/20 flex items-center justify-center text-xs">7</span>
+                            Age Limit Table
+                        </h3>
+                        <button type="button" onclick="addRow('ageTable')" class="px-3 py-1.5 bg-violet-500/20 text-violet-300 rounded-lg text-xs font-medium hover:bg-violet-500/30 transition">+ Add Row</button>
                     </div>
                     <div id="ageTable" class="space-y-2"></div>
-                    <button type="button" onclick="addRow('ageTable')" class="mt-2 w-full py-2 border border-dashed border-amber-500/30 text-amber-400 rounded-lg text-xs hover:bg-amber-500/10 transition">
-                        + Add More
-                    </button>
                 </div>
 
-                <!-- Application Fee -->
-                <div class="mb-5">
-                    <div class="flex items-center justify-between mb-2">
-                        <label class="text-sm font-medium text-amber-300">💰 Form ki Fees</label>
-                        <span class="text-xs text-slate-500">Kitni fees deni hai</span>
+                <!-- 8. APPLICATION FEE TABLE -->
+                <div class="glass-card rounded-2xl p-5">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-violet-300 flex items-center gap-2">
+                            <span class="w-6 h-6 rounded bg-violet-500/20 flex items-center justify-center text-xs">8</span>
+                            Application Fee Table
+                        </h3>
+                        <button type="button" onclick="addRow('feeTable')" class="px-3 py-1.5 bg-violet-500/20 text-violet-300 rounded-lg text-xs font-medium hover:bg-violet-500/30 transition">+ Add Row</button>
                     </div>
                     <div id="feeTable" class="space-y-2"></div>
-                    <button type="button" onclick="addRow('feeTable')" class="mt-2 w-full py-2 border border-dashed border-amber-500/30 text-amber-400 rounded-lg text-xs hover:bg-amber-500/10 transition">
-                        + Add More
-                    </button>
                 </div>
 
-                <!-- Important Dates -->
-                <div class="mb-5">
-                    <div class="flex items-center justify-between mb-2">
-                        <label class="text-sm font-medium text-amber-300">📅 Important Dates</label>
-                        <span class="text-xs text-slate-500">Kon si date kya hai</span>
+                <!-- 9. IMPORTANT DATES TABLE -->
+                <div class="glass-card rounded-2xl p-5">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-violet-300 flex items-center gap-2">
+                            <span class="w-6 h-6 rounded bg-violet-500/20 flex items-center justify-center text-xs">9</span>
+                            Important Dates Table
+                        </h3>
+                        <button type="button" onclick="addRow('datesTable')" class="px-3 py-1.5 bg-violet-500/20 text-violet-300 rounded-lg text-xs font-medium hover:bg-violet-500/30 transition">+ Add Row</button>
                     </div>
                     <div id="datesTable" class="space-y-2"></div>
-                    <button type="button" onclick="addRow('datesTable')" class="mt-2 w-full py-2 border border-dashed border-amber-500/30 text-amber-400 rounded-lg text-xs hover:bg-amber-500/10 transition">
-                        + Add More
-                    </button>
                 </div>
 
-                <!-- Documents -->
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-amber-300 mb-2">
-                        📄 Kaunse Documents Chahiye?
-                        <span class="block text-xs text-slate-500 font-normal mt-0.5">Har line ek document</span>
-                    </label>
-                    <textarea id="acDocuments" rows="4" class="form-input w-full rounded-xl px-4 py-3.5 text-sm" placeholder="🪪 Aadhaar Card
-📷 Passport Size Photo
-✍️ Signature Scan
-📱 Mobile Number
-📧 Email ID
-🎓 Educational Certificate"></textarea>
+                <!-- 10. REQUIRED DOCUMENTS -->
+                <div class="glass-card rounded-2xl p-5">
+                    <h3 class="text-lg font-semibold text-violet-300 mb-4 flex items-center gap-2">
+                        <span class="w-6 h-6 rounded bg-violet-500/20 flex items-center justify-center text-xs">10</span>
+                        Required Documents (Emoji List)
+                    </h3>
+                    <textarea id="acDocuments" rows="5" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="🪪 आधार कार्ड
+📷 पासपोर्ट साइज फोटो
+✍️ हस्ताक्षर स्कैन
+📱 मोबाइल नंबर"></textarea>
+                    <p class="text-xs text-slate-500 mt-1">Har line ek document. Emoji automatically bade honge.</p>
                 </div>
 
-                <div class="flex gap-3 mt-5">
-                    <button type="button" onclick="goToStep(3)" class="btn-secondary flex-1 py-3 rounded-xl font-medium text-sm">← Peeche</button>
-                    <button type="button" onclick="goToStep(5)" class="btn-success flex-1 py-3 rounded-xl font-semibold text-sm">Aage Badhein →</button>
-                </div>
-            </div>
-
-            <!-- ════════════════════════════════════════
-                 STEP 5: FINAL (Steps, Links, Author)
-                 ════════════════════════════════════════ -->
-            <div id="step5" class="glass-card rounded-2xl p-5 border-l-4 border-rose-500 hidden">
-                <div class="flex items-center gap-2 mb-4">
-                    <span class="w-8 h-8 rounded-lg bg-rose-500/20 text-rose-400 flex items-center justify-center text-sm font-bold">5</span>
-                    <h3 class="text-lg font-bold text-white">Final Step <span class="text-xs font-normal text-slate-400">— Last kaam</span></h3>
-                </div>
-
-                <!-- Selection Process -->
-                <div class="mb-5">
-                    <div class="flex items-center justify-between mb-2">
-                        <label class="text-sm font-medium text-rose-300">🎯 Selection Process</label>
-                        <span class="text-xs text-slate-500">Kon-kon se steps hain</span>
+                <!-- 11. SELECTION PROCESS STEPS -->
+                <div class="glass-card rounded-2xl p-5">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-violet-300 flex items-center gap-2">
+                            <span class="w-6 h-6 rounded bg-violet-500/20 flex items-center justify-center text-xs">11</span>
+                            Selection Process (Steps)
+                        </h3>
+                        <button type="button" onclick="addStep('selectionSteps')" class="px-3 py-1.5 bg-violet-500/20 text-violet-300 rounded-lg text-xs font-medium hover:bg-violet-500/30 transition">+ Add Step</button>
                     </div>
                     <div id="selectionSteps" class="space-y-3"></div>
-                    <button type="button" onclick="addStep('selectionSteps')" class="mt-2 w-full py-2.5 border border-dashed border-rose-500/30 text-rose-400 rounded-xl text-sm hover:bg-rose-500/10 transition flex items-center justify-center gap-2">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-                        Step Add Karein
-                    </button>
                 </div>
 
-                <!-- How To Apply -->
-                <div class="mb-5">
-                    <div class="flex items-center justify-between mb-2">
-                        <label class="text-sm font-medium text-rose-300">📝 Apply Kaise Karen?</label>
-                        <span class="text-xs text-slate-500">Step-by-step guide</span>
+                <!-- 12. HOW TO APPLY STEPS -->
+                <div class="glass-card rounded-2xl p-5">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-violet-300 flex items-center gap-2">
+                            <span class="w-6 h-6 rounded bg-violet-500/20 flex items-center justify-center text-xs">12</span>
+                            How To Apply Online (Steps)
+                        </h3>
+                        <button type="button" onclick="addStep('applySteps')" class="px-3 py-1.5 bg-violet-500/20 text-violet-300 rounded-lg text-xs font-medium hover:bg-violet-500/30 transition">+ Add Step</button>
                     </div>
                     <div id="applySteps" class="space-y-3"></div>
-                    <button type="button" onclick="addStep('applySteps')" class="mt-2 w-full py-2.5 border border-dashed border-rose-500/30 text-rose-400 rounded-xl text-sm hover:bg-rose-500/10 transition flex items-center justify-center gap-2">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-                        Step Add Karein
+                </div>
+
+                <!-- 13. IMPORTANT INSTRUCTIONS -->
+                <div class="glass-card rounded-2xl p-5">
+                    <h3 class="text-lg font-semibold text-violet-300 mb-4 flex items-center gap-2">
+                        <span class="w-6 h-6 rounded bg-violet-500/20 flex items-center justify-center text-xs">13</span>
+                        Important Instructions / Warnings
+                    </h3>
+                    <textarea id="acInstructions" rows="5" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="Har line ek warning/instruction:
+- ⚠️ आधिकारिक नोटिफिकेशन को ध्यानपूर्वक पढ़ें...
+- ⚠️ आवेदन करते समय सक्रिय मोबाइल नंबर..."></textarea>
+                </div>
+
+                <!-- 14. IMPORTANT LINKS -->
+                <div class="glass-card rounded-2xl p-5">
+                    <h3 class="text-lg font-semibold text-violet-300 mb-4 flex items-center gap-2">
+                        <span class="w-6 h-6 rounded bg-violet-500/20 flex items-center justify-center text-xs">14</span>
+                        Important Links
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Apply Online Link</label>
+                            <input type="url" id="acApplyLink" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="https://...">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Official Website</label>
+                            <input type="url" id="acOfficialLink" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="https://...">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Notification PDF</label>
+                            <input type="url" id="acNotificationLink" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="https://...">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Syllabus / Other</label>
+                            <input type="url" id="acOtherLink" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="https://...">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 15. AUTHOR INFO -->
+                <div class="glass-card rounded-2xl p-5">
+                    <h3 class="text-lg font-semibold text-violet-300 mb-4 flex items-center gap-2">
+                        <span class="w-6 h-6 rounded bg-violet-500/20 flex items-center justify-center text-xs">15</span>
+                        About The Author
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Author Name</label>
+                            <input type="text" id="acAuthorName" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="e.g. विकास कुमार">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Author Title</label>
+                            <input type="text" id="acAuthorTitle" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="e.g. Founder & Editor — Apply Bro">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Author Image URL</label>
+                            <input type="url" id="acAuthorImage" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="https://...">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">YouTube Link</label>
+                            <input type="url" id="acYoutube" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="https://youtube.com/...">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Author Bio</label>
+                            <textarea id="acAuthorBio" rows="3" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="Author ka short bio..."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 16. DISCLAIMER -->
+                <div class="glass-card rounded-2xl p-5">
+                    <h3 class="text-lg font-semibold text-violet-300 mb-4 flex items-center gap-2">
+                        <span class="w-6 h-6 rounded bg-violet-500/20 flex items-center justify-center text-xs">16</span>
+                        Disclaimer
+                    </h3>
+                    <textarea id="acDisclaimer" rows="3" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="Yeh article sirf educational purpose ke liye hai..."></textarea>
+                </div>
+
+                <!-- ACTION BUTTONS -->
+                <div class="flex flex-col sm:flex-row gap-3 sticky bottom-4 bg-slate-900/90 backdrop-blur-xl p-4 rounded-2xl border border-violet-500/20 shadow-2xl">
+                    <button type="button" onclick="previewArticleCreator()" class="btn-secondary flex-1 px-6 py-3.5 rounded-xl font-medium text-sm flex items-center justify-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                        Preview
+                    </button>
+                    <button type="button" onclick="copyArticleHTML()" class="btn-primary flex-1 px-6 py-3.5 rounded-xl font-semibold text-sm flex items-center justify-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
+                        Copy HTML Code
+                    </button>
+                    <button type="submit" id="acSaveBtn" class="btn-success flex-1 px-6 py-3.5 rounded-xl font-semibold text-sm flex items-center justify-center gap-2">
+                        <span id="acSaveText">Save to Database</span>
+                        <div id="acSaveSpinner" class="spinner w-4 h-4 border-2 hidden"></div>
                     </button>
                 </div>
 
-                <!-- Important Instructions -->
-                <div class="mb-5">
-                    <label class="block text-sm font-medium text-rose-300 mb-2">
-                        ⚠️ Important Warnings
-                        <span class="block text-xs text-slate-500 font-normal mt-0.5">Jo log dhyan nahi dete unke liye</span>
-                    </label>
-                    <textarea id="acInstructions" rows="4" class="form-input w-full rounded-xl px-4 py-3.5 text-sm" placeholder="⚠️ Official notification dhyanpurvak padhein
-⚠️ Sahi paper (Paper I ya Paper II) ke liye apply karein
-⚠️ Active mobile number aur email ID use karein
-⚠️ Photo aur signature sahi format mein honi chahiye"></textarea>
-                </div>
+            </form>
+        </div>
+    </section>
 
-                <!-- Important Links -->
-                <div class="mb-5">
-                    <label class="block text-sm font-medium text-rose-300 mb-2">🔗 Important Links</label>
-                    <div class="grid grid-cols-1 gap-3">
-                        <div class="flex items-center gap-3">
-                            <span class="text-lg">📝</span>
-                            <input type="url" id="acApplyLink" class="form-input flex-1 rounded-xl px-4 py-3 text-sm" placeholder="Apply Online ka Link">
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <span class="text-lg">🌐</span>
-                            <input type="url" id="acOfficialLink" class="form-input flex-1 rounded-xl px-4 py-3 text-sm" placeholder="Official Website ka Link">
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <span class="text-lg">📄</span>
-                            <input type="url" id="acNotificationLink" class="form-input flex-1 rounded-xl px-4 py-3 text-sm" placeholder="Notification PDF ka Link">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Author Info -->
-                <div class="mb-5">
-                    <label class="block text-sm font-medium text-rose-300 mb-2">👤 Author ka Naam (Optional)</label>
-                    <div class="grid grid-cols-1 gap-3">
-                        <input type="text" id="acAuthorName" class="form-input rounded-xl px-4 py-3 text-sm" placeholder="Aapka naam">
-                        <input type="text" id="acAuthorTitle" class="form-input rounded-xl px-4 py-3 text-sm" placeholder="Aapka title (jaise: Founder & Editor)">
-                        <input type="url" id="acAuthorImage" class="form-input rounded-xl px-4 py-3 text-sm" placeholder="Aapki photo ka link (optional)">
-                    </div>
-                </div>
-
-                <!-- Disclaimer -->
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-rose-300 mb-2">⚠️ Disclaimer</label>
-                    <textarea id="acDisclaimer" rows="2" class="form-input w-full rounded-xl px-4 py-3.5 text-sm" placeholder="Yeh article sirf educational purpose ke liye hai..."></textarea>
-                </div>
-
-                <!-- Final Action Buttons -->
-                <div class="flex flex-col gap-3 mt-6 sticky bottom-4">
-                    <div class="flex gap-3">
-                        <button type="button" onclick="goToStep(4)" class="btn-secondary flex-1 py-3 rounded-xl font-medium text-sm">← Peeche</button>
-                        <button type="button" onclick="previewArticleCreator()" class="btn-primary flex-1 py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-2">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
-                            Dekh Lein (Preview)
-                        </button>
-                    </div>
-                    <div class="flex gap-3">
-                        <button type="button" onclick="copyArticleHTML()" class="btn-primary flex-1 py-3.5 rounded-xl font-semibold text-sm flex items-center justify-center gap-2">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
-                            HTML Copy Karein
-                        </button>
-                        <button type="submit" id="acSaveBtn" class="btn-success flex-1 py-3.5 rounded-xl font-semibold text-sm flex items-center justify-center gap-2">
-                            <span id="acSaveText">💾 Save Kar Lein</span>
-                            <div id="acSaveSpinner" class="spinner w-4 h-4 border-2 hidden"></div>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-        </form>
-    </div>
-</section>
+    </main>
 
     <!-- ==================== ADD/EDIT MODAL ==================== -->
     <div id="postModal" class="hidden fixed inset-0 z-50">
@@ -1398,347 +1327,7 @@ Ye pariksha un ummedwaron ke liye bahut mahatvapoorn maani jaati hai jo bhavishy
 
             if (section === 'article') {
                 document.getElementById('articleCreatorSection').classList.remove('hidden');
-                goToStep(1);
             } else {
-                document.getElementById('postsSection').classList.remove('hidden');
-            }
-        }
-
-        // Step Navigation
-        let currentStep = 1;
-        function goToStep(step) {
-            // Hide all steps
-            for (let i = 1; i <= 5; i++) {
-                document.getElementById('step' + i).classList.add('hidden');
-            }
-
-            // Show current step
-            document.getElementById('step' + step).classList.remove('hidden');
-            currentStep = step;
-
-            // Update progress indicators
-            for (let i = 1; i <= 5; i++) {
-                const indicator = document.getElementById('step' + i + 'Indicator');
-                const progress = document.getElementById('progress' + i);
-
-                if (i <= step) {
-                    indicator.classList.remove('bg-slate-700', 'text-slate-400');
-                    indicator.classList.add('bg-emerald-500', 'text-white');
-                    if (progress) progress.style.width = '100%';
-                } else {
-                    indicator.classList.add('bg-slate-700', 'text-slate-400');
-                    indicator.classList.remove('bg-emerald-500', 'text-white');
-                    if (progress) progress.style.width = '0%';
-                }
-            }
-
-            // Scroll to top
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // Add Table Row
-        function addRow(tableId, col1Val, col2Val) {
-            const container = document.getElementById(tableId);
-            const div = document.createElement('div');
-            div.className = 'flex gap-2 items-center';
-            div.innerHTML = `
-                <input type="text" placeholder="Kya hai? (Label)" value="${col1Val || ''}" class="form-input flex-1 rounded-lg px-3 py-2.5 text-sm table-col1">
-                <input type="text" placeholder="Detail bataein" value="${col2Val || ''}" class="form-input flex-1 rounded-lg px-3 py-2.5 text-sm table-col2">
-                <button type="button" onclick="this.parentElement.remove()" class="p-2 text-slate-500 hover:text-red-400 transition text-lg" title="Hata dein">🗑️</button>
-            `;
-            container.appendChild(div);
-        }
-
-        // Add Step
-        function addStep(containerId, titleVal, descVal) {
-            const container = document.getElementById(containerId);
-            const div = document.createElement('div');
-            div.className = 'glass-card rounded-xl p-4 border border-slate-700/50';
-            div.innerHTML = `
-                <div class="flex gap-2 items-start">
-                    <div class="flex-1 space-y-2">
-                        <input type="text" placeholder="Step ka naam (jaise: Online Application)" value="${titleVal || ''}" class="form-input w-full rounded-lg px-3 py-2.5 text-sm font-medium step-title">
-                        <input type="text" placeholder="Is step mein kya karna hai?" value="${descVal || ''}" class="form-input w-full rounded-lg px-3 py-2.5 text-sm step-desc">
-                    </div>
-                    <button type="button" onclick="this.parentElement.parentElement.remove()" class="p-2 text-slate-500 hover:text-red-400 transition mt-1 text-lg">🗑️</button>
-                </div>
-            `;
-            container.appendChild(div);
-        }
-
-        // Generate Article HTML
-        function generateArticleHTML() {
-            const title = document.getElementById('acTitle').value || 'Untitled';
-            const category = document.getElementById('acCategory').value || '';
-            const date = document.getElementById('acDate').value || new Date().toISOString().split('T')[0];
-            const badge = document.getElementById('acBadge').value;
-            const heroImage = document.getElementById('acHeroImage').value;
-            const shortIntro = document.getElementById('acShortIntro').value;
-            const about = document.getElementById('acAbout').value;
-            const eligibility = document.getElementById('acEligibility').value;
-            const documents = document.getElementById('acDocuments').value;
-            const instructions = document.getElementById('acInstructions').value;
-            const applyLink = document.getElementById('acApplyLink').value;
-            const officialLink = document.getElementById('acOfficialLink').value;
-            const notificationLink = document.getElementById('acNotificationLink').value;
-            const authorName = document.getElementById('acAuthorName').value;
-            const authorTitle = document.getElementById('acAuthorTitle').value;
-            const authorImage = document.getElementById('acAuthorImage').value;
-            const disclaimer = document.getElementById('acDisclaimer').value;
-
-            const buildTable = (containerId) => {
-                const rows = [];
-                document.querySelectorAll(`#${containerId} > div`).forEach(div => {
-                    const c1 = div.querySelector('.table-col1')?.value;
-                    const c2 = div.querySelector('.table-col2')?.value;
-                    if (c1 || c2) rows.push(`<tr><td class="border border-slate-600 px-4 py-3 font-medium text-slate-200">${c1}</td><td class="border border-slate-600 px-4 py-3 text-slate-300">${c2}</td></tr>`);
-                });
-                return rows.length ? `<table class="w-full border-collapse border border-slate-600 my-4 text-sm"><tbody>${rows.join('')}</tbody></table>` : '';
-            };
-
-            const buildSteps = (containerId) => {
-                const steps = [];
-                let i = 1;
-                document.querySelectorAll(`#${containerId} > div`).forEach(div => {
-                    const t = div.querySelector('.step-title')?.value;
-                    const d = div.querySelector('.step-desc')?.value;
-                    if (t || d) {
-                        steps.push(`
-                            <div class="flex gap-4 mb-5">
-                                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-violet-500/30">${i}</div>
-                                <div class="pt-1">
-                                    <h4 class="font-bold text-white text-lg mb-1">${t}</h4>
-                                    <p class="text-slate-400 text-sm leading-relaxed">${d}</p>
-                                </div>
-                            </div>
-                        `);
-                        i++;
-                    }
-                });
-                return steps.length ? `<div class="my-8">${steps.join('')}</div>` : '';
-            };
-
-            const buildList = (text, emoji = false) => {
-                if (!text.trim()) return '';
-                const items = text.split('\n').filter(l => l.trim());
-                if (emoji) {
-                    return `<div class="space-y-3 my-6">${items.map(item => `<div class="flex items-center gap-3 text-sm text-slate-300 bg-slate-800/50 rounded-xl px-4 py-3">${item.trim()}</div>`).join('')}</div>`;
-                }
-                return `<ul class="list-disc list-inside space-y-2 my-6 text-sm text-slate-300">${items.map(item => `<li>${item.replace(/\*\*(.*?)\*\*/g, '<strong class="text-white">$1</strong>').trim()}</li>`).join('')}</ul>`;
-            };
-
-            const buildInstructions = (text) => {
-                if (!text.trim()) return '';
-                const items = text.split('\n').filter(l => l.trim());
-                return `<div class="space-y-3 my-6">${items.map(item => `
-                    <div class="flex gap-3 bg-amber-500/10 border border-amber-500/20 rounded-xl p-4">
-                        <span class="text-amber-400 text-xl flex-shrink-0">⚠️</span>
-                        <p class="text-sm text-slate-300 leading-relaxed">${item.replace(/^[-•]\s*/, '').trim()}</p>
-                    </div>
-                `).join('')}</div>`;
-            };
-
-            let linksHTML = '';
-            if (applyLink || officialLink || notificationLink) {
-                linksHTML = `<div class="flex flex-wrap gap-3 my-8">`;
-                if (applyLink) linksHTML += `<a href="${applyLink}" target="_blank" class="px-6 py-3 bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 rounded-xl text-sm font-semibold hover:bg-emerald-500/30 transition flex items-center gap-2">📝 Apply Online</a>`;
-                if (officialLink) linksHTML += `<a href="${officialLink}" target="_blank" class="px-6 py-3 bg-blue-500/20 border border-blue-500/30 text-blue-300 rounded-xl text-sm font-semibold hover:bg-blue-500/30 transition flex items-center gap-2">🌐 Official Website</a>`;
-                if (notificationLink) linksHTML += `<a href="${notificationLink}" target="_blank" class="px-6 py-3 bg-red-500/20 border border-red-500/30 text-red-300 rounded-xl text-sm font-semibold hover:bg-red-500/30 transition flex items-center gap-2">📄 Notification PDF</a>`;
-                linksHTML += `</div>`;
-            }
-
-            let authorHTML = '';
-            if (authorName) {
-                authorHTML = `
-                    <div class="mt-10 pt-8 border-t border-slate-700/50">
-                        <h3 class="text-xl font-bold text-white mb-5">✍️ Author ke Bare Mein</h3>
-                        <div class="flex items-start gap-4">
-                            ${authorImage ? `<img src="${authorImage}" class="w-16 h-16 rounded-full object-cover border-2 border-violet-500/30 shadow-lg">` : '<div class="w-16 h-16 rounded-full bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center text-white text-2xl font-bold">👤</div>'}
-                            <div>
-                                <h4 class="font-bold text-white text-lg">${authorName}</h4>
-                                ${authorTitle ? `<p class="text-sm text-violet-400 mb-2">${authorTitle}</p>` : ''}
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }
-
-            let disclaimerHTML = '';
-            if (disclaimer) {
-                disclaimerHTML = `
-                    <div class="mt-8 bg-amber-500/10 border border-amber-500/20 rounded-xl p-5">
-                        <h4 class="font-bold text-amber-400 mb-2 flex items-center gap-2 text-lg">⚠️ Disclaimer</h4>
-                        <p class="text-sm text-slate-400 leading-relaxed">${disclaimer}</p>
-                    </div>
-                `;
-            }
-
-            return `<!DOCTYPE html>
-<html lang="hi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${title} — Apply Bro</title>
-    <script src="https://cdn.tailwindcss.com"><\/script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; background: #0f172a; color: #e2e8f0; }
-        .glass-card { background: rgba(30,41,59,0.7); backdrop-filter: blur(16px); border: 1px solid rgba(139,92,246,0.15); border-radius: 1rem; }
-        .prose h2 { color: #c4b5fd; font-size: 1.25rem; font-weight: 700; margin: 1.5rem 0 0.75rem; }
-        .prose p { color: #cbd5e1; line-height: 1.7; margin-bottom: 0.75rem; }
-        .prose strong { color: #e2e8f0; }
-        table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.875rem; }
-        th, td { border: 1px solid #334155; padding: 0.75rem 1rem; text-align: left; }
-        th { background: rgba(124,58,237,0.15); color: #c4b5fd; font-weight: 600; }
-        td { color: #cbd5e1; }
-        tr:hover td { background: rgba(124,58,237,0.05); }
-    <\/style>
-<\/head>
-<body class="antialiased min-h-screen">
-    <div class="max-w-3xl mx-auto px-4 py-6">
-
-        ${category ? `<span class="inline-block px-3 py-1 bg-violet-500/20 text-violet-300 rounded-lg text-xs font-bold mb-3">${category}</span>` : ''}
-        ${badge ? `<span class="inline-block px-3 py-1 bg-red-500/20 text-red-300 rounded-lg text-xs font-bold mb-3 ml-2">${badge}</span>` : ''}
-
-        <h1 class="text-2xl sm:text-3xl font-bold text-white mb-4 leading-tight">${title}</h1>
-
-        ${heroImage ? `<img src="${heroImage}" class="w-full h-48 sm:h-64 object-cover rounded-2xl mb-6 border border-slate-700/50 shadow-xl">` : ''}
-
-        ${shortIntro ? `<div class="prose mb-6 text-base leading-relaxed">${shortIntro.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</div>` : ''}
-
-        <div class="glass-card p-5 mb-6">
-            <h2 class="text-lg font-bold text-violet-300 mb-3 flex items-center gap-2">📋 Quick Overview</h2>
-            ${buildTable('overviewTable')}
-        </div>
-
-        ${about ? `<div class="prose mb-6 text-base leading-relaxed">${about.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</div>` : ''}
-
-        ${eligibility ? `<div class="glass-card p-5 mb-6"><h2 class="text-lg font-bold text-violet-300 mb-3">✅ Yogyata (Eligibility)</h2>${buildList(eligibility)}</div>` : ''}
-
-        ${buildTable('eduTable') ? `<div class="glass-card p-5 mb-6"><h2 class="text-lg font-bold text-violet-300 mb-3">🎓 Padhai ki Yogyata</h2>${buildTable('eduTable')}</div>` : ''}
-
-        ${buildTable('ageTable') ? `<div class="glass-card p-5 mb-6"><h2 class="text-lg font-bold text-violet-300 mb-3">🎂 Umar ki Seema (Age Limit)</h2>${buildTable('ageTable')}</div>` : ''}
-
-        ${buildTable('feeTable') ? `<div class="glass-card p-5 mb-6"><h2 class="text-lg font-bold text-violet-300 mb-3">💰 Form ki Fees</h2>${buildTable('feeTable')}</div>` : ''}
-
-        ${buildTable('datesTable') ? `<div class="glass-card p-5 mb-6"><h2 class="text-lg font-bold text-violet-300 mb-3">📅 Important Dates</h2>${buildTable('datesTable')}</div>` : ''}
-
-        ${documents ? `<div class="glass-card p-5 mb-6"><h2 class="text-lg font-bold text-violet-300 mb-3">📄 Jaruri Documents</h2>${buildList(documents, true)}</div>` : ''}
-
-        ${buildSteps('selectionSteps') ? `<div class="glass-card p-5 mb-6"><h2 class="text-lg font-bold text-violet-300 mb-4">🎯 Selection Process</h2>${buildSteps('selectionSteps')}</div>` : ''}
-
-        ${buildSteps('applySteps') ? `<div class="glass-card p-5 mb-6"><h2 class="text-lg font-bold text-violet-300 mb-4">📝 Apply Kaise Karen?</h2>${buildSteps('applySteps')}</div>` : ''}
-
-        ${instructions ? `<div class="glass-card p-5 mb-6"><h2 class="text-lg font-bold text-violet-300 mb-3">⚠️ Important Warnings</h2>${buildInstructions(instructions)}</div>` : ''}
-
-        ${linksHTML}
-
-        ${authorHTML}
-
-        ${disclaimerHTML}
-
-        <div class="mt-10 pt-6 border-t border-slate-700/50 text-center">
-            <p class="text-xs text-slate-500">📅 Published on ${date} • 🌐 Apply Bro</p>
-        </div>
-    </div>
-<\/body>
-<\/html>`;
-        }
-
-        // Preview
-        function previewArticleCreator() {
-            const html = generateArticleHTML();
-            const bodyMatch = html.match(/<body[^>]*>([\s\S]*)<\/body>/);
-            const bodyContent = bodyMatch ? bodyMatch[1] : html;
-            document.getElementById('articleCreatorPreviewContent').innerHTML = bodyContent;
-            document.getElementById('articleCreatorPreviewModal').classList.remove('hidden');
-        }
-
-        function closeArticleCreatorPreview() {
-            document.getElementById('articleCreatorPreviewModal').classList.add('hidden');
-        }
-
-        // Copy HTML
-        function copyArticleHTML() {
-            const html = generateArticleHTML();
-            navigator.clipboard.writeText(html).then(() => {
-                const toast = document.getElementById('copyToast');
-                toast.classList.remove('translate-y-20');
-                setTimeout(() => toast.classList.add('translate-y-20'), 2500);
-                showToast('HTML copied! Ab paste kar dein.', 'success');
-            });
-        }
-
-        // Save to Firebase
-        async function handleGenerateArticle(e) {
-            e.preventDefault();
-            const title = document.getElementById('acTitle').value.trim();
-            if (!title) {
-                showToast('Article ka naam toh daal dein!', 'error');
-                goToStep(1);
-                return;
-            }
-
-            setLoading('acSaveBtn', 'acSaveText', 'acSaveSpinner', true);
-
-            try {
-                const slug = document.getElementById('acSlug')?.value?.trim() || title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-                const htmlContent = generateArticleHTML();
-
-                const articleData = {
-                    title: title,
-                    category: document.getElementById('acCategory').value || 'Latest Jobs',
-                    publishDate: document.getElementById('acDate').value || new Date().toISOString().split('T')[0],
-                    description: document.getElementById('acShortIntro').value.substring(0, 150) || title,
-                    badge: document.getElementById('acBadge').value,
-                    slug: slug,
-                    type: 'article',
-                    htmlContent: htmlContent,
-                    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-                    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-                };
-
-                await db.collection('posts').add(articleData);
-
-                showToast('Article saved successfully!', 'success');
-                document.getElementById('articleCreatorForm').reset();
-
-                // Reset dynamic rows
-                ['overviewTable','eduTable','ageTable','feeTable','datesTable'].forEach(id => document.getElementById(id).innerHTML = '');
-                ['selectionSteps','applySteps'].forEach(id => document.getElementById(id).innerHTML = '');
-
-                // Add default rows back
-                addRow('overviewTable');
-                addRow('eduTable');
-                addRow('ageTable');
-                addRow('feeTable');
-                addRow('datesTable');
-                addStep('selectionSteps');
-                addStep('applySteps');
-
-                showSection('posts');
-                loadPosts();
-            } catch (error) {
-                console.error(error);
-                showToast('Error: ' + error.message, 'error');
-            } finally {
-                setLoading('acSaveBtn', 'acSaveText', 'acSaveSpinner', false);
-            }
-        }
-
-        // Initialize default rows on page load
-        document.addEventListener('DOMContentLoaded', () => {
-            addRow('overviewTable', 'Article ka Naam', 'CTET September 2026');
-            addRow('overviewTable', 'Sangathan', 'CBSE');
-            addRow('eduTable', 'Paper I (Primary)', '12vi Pass + D.El.Ed');
-            addRow('ageTable', 'Sabhi Vargon ke liye', 'Koi aayu seema nahi');
-            addRow('feeTable', 'General / OBC — Ek Paper', '₹1,000');
-            addRow('datesTable', 'Aavedan Shuru', '11 May 2026');
-            addStep('selectionSteps', 'Online Application', 'Form bharne aur fees jama karne ki last date tak');
-            addStep('applySteps', 'Official Website Visit Karein', 'ctet.nic.in par jayein aur Apply Online par click karein');
-        });
-
-        else {
                 document.getElementById('postsSection').classList.remove('hidden');
             }
         }
