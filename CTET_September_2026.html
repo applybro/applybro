@@ -10,41 +10,92 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
 <style>
-  body{font-family:'Inter',sans-serif;background:#f8f9fa;color:#212529}
+  :root {
+    --bg-body: #f8f9fa;
+    --bg-card: #ffffff;
+    --text-main: #212529;
+    --text-muted: #6c757d;
+    --border-color: #e9ecef;
+    --input-bg: #ffffff;
+    --input-border: #dee2e6;
+    --table-even: rgba(10,88,202,.02);
+    --badge-bg: rgba(10,88,202,.08);
+    --badge-text: #0A58CA;
+    --step-hover-border: rgba(10,88,202,.2);
+    --nav-bg: rgba(255,255,255,.92);
+    --footer-bg: #ffffff;
+    --comment-bg: #f8f9fa;
+    --amber-bg: #fffbeb;
+    --amber-border: #fcd34d;
+    --amber-text: #92400e;
+    --red-bg: #fef2f2;
+    --shadow: rgba(0,0,0,.06);
+    --shadow-hover: rgba(10,88,202,.12);
+  }
+
+  [data-theme="dark"] {
+    --bg-body: #0f172a;
+    --bg-card: #1e293b;
+    --text-main: #f1f5f9;
+    --text-muted: #94a3b8;
+    --border-color: #334155;
+    --input-bg: #0f172a;
+    --input-border: #475569;
+    --table-even: rgba(56,189,248,.05);
+    --badge-bg: rgba(56,189,248,.15);
+    --badge-text: #38bdf8;
+    --step-hover-border: rgba(56,189,248,.3);
+    --nav-bg: rgba(15,23,42,.92);
+    --footer-bg: #1e293b;
+    --comment-bg: #1e293b;
+    --amber-bg: #451a03;
+    --amber-border: #78350f;
+    --amber-text: #fcd34d;
+    --red-bg: #450a0a;
+    --shadow: rgba(0,0,0,.3);
+    --shadow-hover: rgba(56,189,248,.15);
+  }
+
+  body{font-family:'Inter',sans-serif;background:var(--bg-body);color:var(--text-main);transition:background .3s,color .3s}
   h1,h2,h3{font-family:'Poppins',sans-serif}
   .btn-main{background:linear-gradient(135deg,#0A58CA,#3f8fff);color:#fff;padding:12px 24px;border-radius:12px;font-weight:600;display:inline-flex;align-items:center;gap:8px;text-decoration:none;transition:all .3s;box-shadow:0 4px 14px rgba(10,88,202,.3)}
   .btn-main:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(10,88,202,.4)}
   .btn-green{background:linear-gradient(135deg,#198754,#20c997)}
   .btn-gray{background:linear-gradient(135deg,#6c757d,#495057)}
   .btn-tg{background:linear-gradient(135deg,#0088cc,#00a8e8)}
-  .btn-outline{background:transparent;border:2px solid #dee2e6;color:#212529;box-shadow:none}
+  .btn-outline{background:transparent;border:2px solid var(--input-border);color:var(--text-main);box-shadow:none}
   .btn-outline:hover{border-color:#0A58CA;color:#0A58CA;background:rgba(10,88,202,.04)}
-  .card{background:#fff;border:1px solid #e9ecef;border-radius:16px;padding:24px;box-shadow:0 4px 20px rgba(0,0,0,.06);transition:all .3s}
-  .card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(10,88,202,.12)}
+  .card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:16px;padding:24px;box-shadow:0 4px 20px var(--shadow);transition:all .3s}
+  .card:hover{transform:translateY(-4px);box-shadow:0 12px 40px var(--shadow-hover)}
   table{width:100%;border-collapse:collapse;font-size:.875rem}
   th{background:linear-gradient(135deg,#0A58CA,#0847a3);color:#fff;padding:14px 16px;text-align:left;font-family:'Poppins',sans-serif}
-  td{padding:12px 16px;border-bottom:1px solid #e9ecef}
-  tr:nth-child(even){background:rgba(10,88,202,.02)}
-  .badge{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:rgba(10,88,202,.08);color:#0A58CA;font-family:'Poppins',sans-serif;font-weight:600;font-size:.75rem;border-radius:999px;text-transform:uppercase;margin-bottom:12px}
-  .step{display:flex;align-items:flex-start;gap:16px;padding:16px;background:#fff;border:1px solid #e9ecef;border-radius:12px;margin-bottom:12px;transition:all .3s}
-  .step:hover{border-color:rgba(10,88,202,.2);transform:translateX(4px)}
+  td{padding:12px 16px;border-bottom:1px solid var(--border-color);color:var(--text-main)}
+  tr:nth-child(even){background:var(--table-even)}
+  .badge{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:var(--badge-bg);color:var(--badge-text);font-family:'Poppins',sans-serif;font-weight:600;font-size:.75rem;border-radius:999px;text-transform:uppercase;margin-bottom:12px}
+  .step{display:flex;align-items:flex-start;gap:16px;padding:16px;background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;margin-bottom:12px;transition:all .3s}
+  .step:hover{border-color:var(--step-hover-border);transform:translateX(4px)}
   .step-num{width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0A58CA,#3f8fff);color:#fff;font-family:'Poppins',sans-serif;font-weight:700;border-radius:10px;flex-shrink:0}
-  .comment-box{display:flex;gap:12px;padding:16px;border-bottom:1px solid #e9ecef}
+  .comment-box{display:flex;gap:12px;padding:16px;border-bottom:1px solid var(--border-color)}
   .avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#0A58CA,#3f8fff);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0}
-  input,textarea{width:100%;padding:12px 16px;border:1px solid #dee2e6;border-radius:12px;font-size:.875rem;outline:none;transition:all .2s}
+  input,textarea{width:100%;padding:12px 16px;border:1px solid var(--input-border);border-radius:12px;font-size:.875rem;outline:none;transition:all .2s;background:var(--input-bg);color:var(--text-main)}
   input:focus,textarea:focus{border-color:#0A58CA;box-shadow:0 0 0 3px rgba(10,88,202,.1)}
-  .nav-glass{background:rgba(255,255,255,.92);backdrop-filter:blur(16px);border-bottom:1px solid #e9ecef;position:sticky;top:0;z-index:50}
-  .loader{position:fixed;inset:0;background:#f8f9fa;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;transition:opacity .5s}
+  .nav-glass{background:var(--nav-bg);backdrop-filter:blur(16px);border-bottom:1px solid var(--border-color);position:sticky;top:0;z-index:50;transition:background .3s,border-color .3s}
+  .loader{position:fixed;inset:0;background:var(--bg-body);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;transition:opacity .5s}
   .loader.hide{opacity:0;pointer-events:none}
   .pulse{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,#0A58CA,#3f8fff);animation:pulse 1.5s infinite}
   @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1);opacity:.7}}
   .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);background:#212529;color:#fff;padding:12px 24px;border-radius:12px;font-size:.875rem;opacity:0;transition:all .4s;z-index:100}
   .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
-  .back-top{position:fixed;bottom:20px;left:20px;width:44px;height:44px;border-radius:50%;background:#fff;border:1px solid #e9ecef;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;transition:all .3s;z-index:50}
+  .back-top{position:fixed;bottom:20px;left:20px;width:44px;height:44px;border-radius:50%;background:var(--bg-card);border:1px solid var(--border-color);display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;transition:all .3s;z-index:50;color:var(--text-main)}
   .back-top.visible{opacity:1}
   .back-top:hover{background:#0A58CA;color:#fff;border-color:#0A58CA}
+
+  /* Dark mode toggle button */
+  .theme-toggle{width:40px;height:40px;border-radius:10px;background:var(--bg-card);border:1px solid var(--border-color);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s;color:var(--text-main)}
+  .theme-toggle:hover{border-color:#0A58CA;color:#0A58CA}
+
+
 </style>
-<base target="_blank">
 <base target="_blank">
 </head>
 
@@ -53,7 +104,7 @@
 <!-- 🚫 LOADING SCREEN — ISKO MAT CHHEDO -->
 <div id="loader" class="loader">
   <div class="pulse mb-3"></div>
-  <p class="text-sm text-slate-500 font-medium">Loading...</p>
+  <p class="text-sm font-medium" style="color:var(--text-muted)">Loading...</p>
 </div>
 
 <!-- 🚫 TOAST — ISKO MAT CHHEDO -->
@@ -70,7 +121,20 @@
       </div>
       <span class="text-xl font-bold">Apply<span class="text-blue-600">Bro</span></span>
     </a>
-    <span class="text-xs text-slate-500">Updated: 15 May 2026</span>
+    <div class="flex items-center gap-3">
+      <span class="text-xs hidden sm:inline" style="color:var(--text-muted)">Updated: 15 May 2026</span>
+      <!-- Dark Mode Toggle -->
+      <button id="themeToggle" class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle Dark Mode">
+        <!-- Sun Icon -->
+        <svg id="sunIcon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display:none">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+        </svg>
+        <!-- Moon Icon -->
+        <svg id="moonIcon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+        </svg>
+      </button>
+    </div>
   </div>
 </nav>
 
@@ -78,8 +142,8 @@
 <!--  ✏️ BREADCRUMB — SIRF LAST ITEM BADLO                          -->
 <!--  Example: CTET 2026 ki jagah "SSC CHSL 2026"                   -->
 <!-- ═══════════════════════════════════════════════════════════════ -->
-<div class="max-w-5xl mx-auto px-4 pt-6 pb-2 text-sm text-slate-500">
-  Home &rsaquo; Latest Jobs &rsaquo; <span class="text-slate-900 font-medium">CTET 2026</span>
+<div class="max-w-5xl mx-auto px-4 pt-6 pb-2 text-sm" style="color:var(--text-muted)">
+  Home &rsaquo; Latest Jobs &rsaquo; <span class="font-medium" style="color:var(--text-main)">CTET 2026</span>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════════ -->
@@ -105,12 +169,12 @@
 <header class="mb-8">
   <div class="flex items-center gap-3 mb-4">
     <span class="px-3 py-1 bg-blue-600 text-white text-xs font-bold rounded-full">NEW</span>
-    <span class="text-sm text-slate-500">Category: Teaching Exam</span>
+    <span class="text-sm" style="color:var(--text-muted)">Category: Teaching Exam</span>
   </div>
   <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-4">
     CTET 2026 Online Form
   </h1>
- <p class="text-lg text-slate-600 leading-relaxed max-w-3xl">
+ <p class="text-lg leading-relaxed max-w-3xl" style="color:var(--text-muted)">
     CBSE ने CTET September 2026 का नोटिफिकेशन जारी कर दिया है। 
     <strong class="text-blue-600">Paper I और Paper II</strong> दोनों के लिए ऑनलाइन आवेदन शुरू हो चुका है। 
     योग्यता, महत्वपूर्ण तिथियाँ, सिलेबस और डायरेक्ट लिंक यहाँ देखें।
@@ -133,7 +197,7 @@
     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
     Quick Overview
 </span>
-<div class="overflow-x-auto rounded-xl border border-slate-200 bg-white">
+<div class="overflow-x-auto rounded-xl border border-slate-200 bg-white" style="background:var(--bg-card);border-color:var(--border-color)">
   <table>
     <tbody>
       <!-- ✏️ HAR ROW KA DATA YAHAN BADLO -->
@@ -164,27 +228,27 @@
 <section class="mb-8">
   <span class="badge">
     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-    
-    
-    
-    
-    
+
+
+
+
+
     About This Article
   </span>
 
-  
+
 <div class="card">
-  <p class="text-slate-600 leading-relaxed mb-3">
+  <p class="leading-relaxed mb-3" style="color:var(--text-muted)">
     <strong class="text-blue-600">CTET September 2026 Exam</strong> का आधिकारिक नोटिफिकेशन CBSE द्वारा जारी कर दिया गया है। 
     यह परीक्षा उन उम्मीदवारों के लिए काफी महत्वपूर्ण मानी जाती है जो भविष्य में सरकारी या निजी स्कूलों में शिक्षक बनना चाहते हैं।
   </p>
 
-  <p class="text-slate-600 leading-relaxed mb-3">
+  <p class="leading-relaxed mb-3" style="color:var(--text-muted)">
     CTET परीक्षा में <strong>दो पेपर</strong> आयोजित किए जाते हैं — Paper I उन अभ्यर्थियों के लिए होता है 
     जो कक्षा 1 से 5 तक पढ़ाना चाहते हैं, जबकि Paper II कक्षा 6 से 8 तक शिक्षक बनने वाले उम्मीदवारों के लिए होता है।
   </p>
 
-  <p class="text-slate-600 leading-relaxed">
+  <p class="leading-relaxed" style="color:var(--text-muted)">
     परीक्षा पूरे भारत में विभिन्न केंद्रों पर आयोजित की जाएगी। आवेदन करने से पहले उम्मीदवार 
     अपनी योग्यता, जरूरी दस्तावेज और आधिकारिक नोटिफिकेशन को ध्यानपूर्वक जरूर पढ़ लें ताकि बाद में किसी प्रकार की समस्या न हो।
   </p>
@@ -196,7 +260,7 @@
 <!--  Har bullet point ka text change karein                          -->
 <!-- ═══════════════════════════════════════════════════════════════ -->
 
-  
+
 <section class="mb-8">
   <span class="badge">
     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
@@ -208,26 +272,26 @@
 
       <li class="flex items-start gap-3">
         <svg class="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-        <span class="text-slate-700">उम्मीदवार भारत का नागरिक होना चाहिए।</span>
+        <span style="color:var(--text-main)">उम्मीदवार भारत का नागरिक होना चाहिए।</span>
       </li>
 
       <li class="flex items-start gap-3">
         <svg class="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-        <span class="text-slate-700">
+        <span style="color:var(--text-main)">
           <strong>Paper I:</strong> 12वीं कम से कम 50% अंकों के साथ पास तथा D.El.Ed / B.El.Ed होना आवश्यक है।
         </span>
       </li>
 
       <li class="flex items-start gap-3">
         <svg class="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-        <span class="text-slate-700">
+        <span style="color:var(--text-main)">
           <strong>Paper II:</strong> Graduation पास तथा B.Ed / B.El.Ed / D.El.Ed संबंधित योग्यता के साथ होना चाहिए।
         </span>
       </li>
 
       <li class="flex items-start gap-3">
         <svg class="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-        <span class="text-slate-700">
+        <span style="color:var(--text-main)">
           <strong>कोई आयु सीमा नहीं</strong> — किसी भी उम्र के उम्मीदवार आवेदन कर सकते हैं।
         </span>
       </li>
@@ -245,7 +309,7 @@
     शैक्षणिक योग्यता
   </span>
 
-  <div class="overflow-x-auto rounded-xl border border-slate-200 bg-white">
+  <div class="overflow-x-auto rounded-xl border border-slate-200 bg-white" style="background:var(--bg-card);border-color:var(--border-color)">
     <table>
       <thead>
         <tr>
@@ -283,7 +347,7 @@
 <!--  ✏️ AGE LIMIT TABLE — SIRF <td> VALUES BADLO                    -->
 <!-- ═══════════════════════════════════════════════════════════════ -->
 
-  
+
 
 <section class="mb-8">
   <span class="badge">
@@ -291,7 +355,7 @@
     आयु सीमा
   </span>
 
-  <div class="overflow-x-auto rounded-xl border border-slate-200 bg-white">
+  <div class="overflow-x-auto rounded-xl border border-slate-200 bg-white" style="background:var(--bg-card);border-color:var(--border-color)">
     <table>
       <thead>
         <tr>
@@ -318,8 +382,7 @@
 
 
 
-
-  
+n
 
 <!-- ═══════════════════════════════════════════════════════════════ -->
 <!--  ✏️ APPLICATION FEE TABLE — SIRF <td> VALUES BADLO              -->
@@ -330,7 +393,7 @@
     आवेदन शुल्क
   </span>
 
-  <div class="overflow-x-auto rounded-xl border border-slate-200 bg-white">
+  <div class="overflow-x-auto rounded-xl border border-slate-200 bg-white" style="background:var(--bg-card);border-color:var(--border-color)">
     <table>
       <thead>
         <tr>
@@ -364,7 +427,7 @@
   </div>
 </section>
 
-  
+
 <!-- ═══════════════════════════════════════════════════════════════ -->
 <!--  ✏️ IMPORTANT DATES TABLE — SIRF <td> VALUES BADLO              -->
 <!-- ═══════════════════════════════════════════════════════════════ -->
@@ -376,7 +439,7 @@
     महत्वपूर्ण तिथियाँ
   </span>
 
-  <div class="overflow-x-auto rounded-xl border border-slate-200 bg-white">
+  <div class="overflow-x-auto rounded-xl border border-slate-200 bg-white" style="background:var(--bg-card);border-color:var(--border-color)">
     <table>
       <thead>
         <tr>
@@ -440,44 +503,44 @@
 
       <!-- ✏️ HAR ITEM KA NAAM BADLO -->
 
-      <div class="flex items-center gap-3 p-3 rounded-lg bg-slate-50">
+      <div class="flex items-center gap-3 p-3 rounded-lg" style="background:var(--comment-bg)">
         <span class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600 text-sm">🪪</span>
-        <span class="text-sm font-medium text-slate-700">आधार कार्ड</span>
+        <span class="text-sm font-medium" style="color:var(--text-main)">आधार कार्ड</span>
       </div>
 
-      <div class="flex items-center gap-3 p-3 rounded-lg bg-slate-50">
+      <div class="flex items-center gap-3 p-3 rounded-lg" style="background:var(--comment-bg)">
         <span class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600 text-sm">📷</span>
-        <span class="text-sm font-medium text-slate-700">पासपोर्ट साइज फोटो</span>
+        <span class="text-sm font-medium" style="color:var(--text-main)">पासपोर्ट साइज फोटो</span>
       </div>
 
-      <div class="flex items-center gap-3 p-3 rounded-lg bg-slate-50">
+      <div class="flex items-center gap-3 p-3 rounded-lg" style="background:var(--comment-bg)">
         <span class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600 text-sm">✍️</span>
-        <span class="text-sm font-medium text-slate-700">हस्ताक्षर स्कैन</span>
+        <span class="text-sm font-medium" style="color:var(--text-main)">हस्ताक्षर स्कैन</span>
       </div>
 
-      <div class="flex items-center gap-3 p-3 rounded-lg bg-slate-50">
+      <div class="flex items-center gap-3 p-3 rounded-lg" style="background:var(--comment-bg)">
         <span class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600 text-sm">📱</span>
-        <span class="text-sm font-medium text-slate-700">मोबाइल नंबर</span>
+        <span class="text-sm font-medium" style="color:var(--text-main)">मोबाइल नंबर</span>
       </div>
 
-      <div class="flex items-center gap-3 p-3 rounded-lg bg-slate-50">
+      <div class="flex items-center gap-3 p-3 rounded-lg" style="background:var(--comment-bg)">
         <span class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600 text-sm">📧</span>
-        <span class="text-sm font-medium text-slate-700">ईमेल आईडी</span>
+        <span class="text-sm font-medium" style="color:var(--text-main)">ईमेल आईडी</span>
       </div>
 
-      <div class="flex items-center gap-3 p-3 rounded-lg bg-slate-50">
+      <div class="flex items-center gap-3 p-3 rounded-lg" style="background:var(--comment-bg)">
         <span class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600 text-sm">🎓</span>
-        <span class="text-sm font-medium text-slate-700">शैक्षणिक प्रमाण पत्र</span>
+        <span class="text-sm font-medium" style="color:var(--text-main)">शैक्षणिक प्रमाण पत्र</span>
       </div>
 
-      <div class="flex items-center gap-3 p-3 rounded-lg bg-slate-50">
+      <div class="flex items-center gap-3 p-3 rounded-lg" style="background:var(--comment-bg)">
         <span class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600 text-sm">📋</span>
-        <span class="text-sm font-medium text-slate-700">जाति प्रमाण पत्र (यदि आवश्यक हो)</span>
+        <span class="text-sm font-medium" style="color:var(--text-main)">जाति प्रमाण पत्र (यदि आवश्यक हो)</span>
       </div>
 
-      <div class="flex items-center gap-3 p-3 rounded-lg bg-slate-50">
+      <div class="flex items-center gap-3 p-3 rounded-lg" style="background:var(--comment-bg)">
         <span class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600 text-sm">🏠</span>
-        <span class="text-sm font-medium text-slate-700">निवास प्रमाण पत्र</span>
+        <span class="text-sm font-medium" style="color:var(--text-main)">निवास प्रमाण पत्र</span>
       </div>
 
     </div>
@@ -495,29 +558,29 @@
     <div class="step">
       <div class="step-num">1</div>
       <div>
-        <h4 class="font-semibold text-slate-900 mb-1">Online Application</h4>
-        <p class="text-sm text-slate-500">Form bharne aur fee payment karne ki last date tak.</p>
+        <h4 class="font-semibold mb-1" style="color:var(--text-main)">Online Application</h4>
+        <p class="text-sm" style="color:var(--text-muted)">Form bharne aur fee payment karne ki last date tak.</p>
       </div>
     </div>
     <div class="step">
       <div class="step-num">2</div>
       <div>
-        <h4 class="font-semibold text-slate-900 mb-1">Admit Card Download</h4>
-        <p class="text-sm text-slate-500">Exam se 10-15 din pehle official website se download karein.</p>
+        <h4 class="font-semibold mb-1" style="color:var(--text-main)">Admit Card Download</h4>
+        <p class="text-sm" style="color:var(--text-muted)">Exam se 10-15 din pehle official website se download karein.</p>
       </div>
     </div>
     <div class="step">
       <div class="step-num">3</div>
       <div>
-        <h4 class="font-semibold text-slate-900 mb-1">Computer Based Test (CBT)</h4>
-        <p class="text-sm text-slate-500">MCQ based exam — Paper I: 150 marks, Paper II: 150 marks.</p>
+        <h4 class="font-semibold mb-1" style="color:var(--text-main)">Computer Based Test (CBT)</h4>
+        <p class="text-sm" style="color:var(--text-muted)">MCQ based exam — Paper I: 150 marks, Paper II: 150 marks.</p>
       </div>
     </div>
     <div class="step">
       <div class="step-num">4</div>
       <div>
-        <h4 class="font-semibold text-slate-900 mb-1">Result & Certificate</h4>
-        <p class="text-sm text-slate-500">Scorecard <strong>lifetime valid</strong> hai. Qualifying candidates ko certificate milega.</p>
+        <h4 class="font-semibold mb-1" style="color:var(--text-main)">Result & Certificate</h4>
+        <p class="text-sm" style="color:var(--text-muted)">Scorecard <strong>lifetime valid</strong> hai. Qualifying candidates ko certificate milega.</p>
       </div>
     </div>
   </div>
@@ -535,50 +598,50 @@
     <div class="step">
       <div class="step-num">1</div>
       <div>
-        <h4 class="font-semibold text-slate-900 mb-1">Official Website Visit Karein</h4>
-        <p class="text-sm text-slate-500"><a href="https://ctet.nic.in/" class="text-blue-600 hover:underline">ctet.nic.in</a> par jayein aur "Apply Online" par click karein.</p>
+        <h4 class="font-semibold mb-1" style="color:var(--text-main)">Official Website Visit Karein</h4>
+        <p class="text-sm" style="color:var(--text-muted)"><a href="https://ctet.nic.in/" class="text-blue-600 hover:underline">ctet.nic.in</a> par jayein aur "Apply Online" par click karein.</p>
       </div>
     </div>
     <div class="step">
       <div class="step-num">2</div>
       <div>
-        <h4 class="font-semibold text-slate-900 mb-1">New Registration</h4>
-        <p class="text-sm text-slate-500">Basic details fill karke Registration Number aur Password hasil karein.</p>
+        <h4 class="font-semibold mb-1" style="color:var(--text-main)">New Registration</h4>
+        <p class="text-sm" style="color:var(--text-muted)">Basic details fill karke Registration Number aur Password hasil karein.</p>
       </div>
     </div>
     <div class="step">
       <div class="step-num">3</div>
       <div>
-        <h4 class="font-semibold text-slate-900 mb-1">Application Form Fill Karein</h4>
-        <p class="text-sm text-slate-500">Personal, educational, aur exam city preference details bharein.</p>
+        <h4 class="font-semibold mb-1" style="color:var(--text-main)">Application Form Fill Karein</h4>
+        <p class="text-sm" style="color:var(--text-muted)">Personal, educational, aur exam city preference details bharein.</p>
       </div>
     </div>
     <div class="step">
       <div class="step-num">4</div>
       <div>
-        <h4 class="font-semibold text-slate-900 mb-1">Documents Upload</h4>
-        <p class="text-sm text-slate-500">Photo, signature, aur prescribed format mein certificates upload karein.</p>
+        <h4 class="font-semibold mb-1" style="color:var(--text-main)">Documents Upload</h4>
+        <p class="text-sm" style="color:var(--text-muted)">Photo, signature, aur prescribed format mein certificates upload karein.</p>
       </div>
     </div>
     <div class="step">
       <div class="step-num">5</div>
       <div>
-        <h4 class="font-semibold text-slate-900 mb-1">Fee Payment</h4>
-        <p class="text-sm text-slate-500">Online payment karein — Debit Card, Credit Card, UPI, ya Net Banking se.</p>
+        <h4 class="font-semibold mb-1" style="color:var(--text-main)">Fee Payment</h4>
+        <p class="text-sm" style="color:var(--text-muted)">Online payment karein — Debit Card, Credit Card, UPI, ya Net Banking se.</p>
       </div>
     </div>
     <div class="step">
       <div class="step-num">6</div>
       <div>
-        <h4 class="font-semibold text-slate-900 mb-1">Form Submit</h4>
-        <p class="text-sm text-slate-500">Saari details check karke "Submit" karein. Screenshot lein.</p>
+        <h4 class="font-semibold mb-1" style="color:var(--text-main)">Form Submit</h4>
+        <p class="text-sm" style="color:var(--text-muted)">Saari details check karke "Submit" karein. Screenshot lein.</p>
       </div>
     </div>
     <div class="step">
       <div class="step-num">7</div>
       <div>
-        <h4 class="font-semibold text-slate-900 mb-1">Print Confirmation Page</h4>
-        <p class="text-sm text-slate-500">Final submitted form download karke print karein future ke liye.</p>
+        <h4 class="font-semibold mb-1" style="color:var(--text-main)">Print Confirmation Page</h4>
+        <p class="text-sm" style="color:var(--text-muted)">Final submitted form download karke print karein future ke liye.</p>
       </div>
     </div>
   </div>
@@ -586,7 +649,7 @@
 
 
 
-       
+
 
 <!-- ═══════════════════════════════════════════════════════════════ -->
 <!--  ✏️ IMPORTANT INSTRUCTIONS — SIRF <li> TEXT BADLO               -->
@@ -602,35 +665,35 @@
 
       <li class="flex items-start gap-3">
         <span class="mt-0.5 w-5 h-5 rounded-full bg-red-50 flex items-center justify-center flex-shrink-0 text-red-500 text-xs">⚠️</span>
-        <span class="text-slate-700">
+        <span style="color:var(--text-main)">
           आधिकारिक नोटिफिकेशन को ध्यानपूर्वक पढ़ें और सही पेपर (Paper I या Paper II) के लिए आवेदन करें।
         </span>
       </li>
 
       <li class="flex items-start gap-3">
         <span class="mt-0.5 w-5 h-5 rounded-full bg-red-50 flex items-center justify-center flex-shrink-0 text-red-500 text-xs">⚠️</span>
-        <span class="text-slate-700">
+        <span style="color:var(--text-main)">
           आवेदन करते समय सक्रिय मोबाइल नंबर और ईमेल आईडी का उपयोग करें, क्योंकि सभी महत्वपूर्ण जानकारी वहीं भेजी जाएगी।
         </span>
       </li>
 
       <li class="flex items-start gap-3">
         <span class="mt-0.5 w-5 h-5 rounded-full bg-red-50 flex items-center justify-center flex-shrink-0 text-red-500 text-xs">⚠️</span>
-        <span class="text-slate-700">
+        <span style="color:var(--text-main)">
           फोटो और हस्ताक्षर निर्धारित फॉर्मेट में होने चाहिए (JPG, 10-100 KB)।
         </span>
       </li>
 
       <li class="flex items-start gap-3">
         <span class="mt-0.5 w-5 h-5 rounded-full bg-red-50 flex items-center justify-center flex-shrink-0 text-red-500 text-xs">⚠️</span>
-        <span class="text-slate-700">
+        <span style="color:var(--text-main)">
           सुधार विंडो केवल सीमित दिनों के लिए खुलेगी, इसलिए पहली बार में ही सही जानकारी भरें।
         </span>
       </li>
 
       <li class="flex items-start gap-3">
         <span class="mt-0.5 w-5 h-5 rounded-full bg-red-50 flex items-center justify-center flex-shrink-0 text-red-500 text-xs">⚠️</span>
-        <span class="text-slate-700">
+        <span style="color:var(--text-main)">
           CTET प्रमाणपत्र <strong>आजीवन मान्य</strong> रहेगा, इसे दोबारा देने की आवश्यकता नहीं होती।
         </span>
       </li>
@@ -639,7 +702,7 @@
   </div>
 </section>
 
-  
+
 <!-- ═══════════════════════════════════════════════════════════════ -->
 <!--  ✏️ ABOUT AUTHOR — SIRF PHOTO URL, NAME, AUR BIO TEXT BADLO      -->
 <!-- ═══════════════════════════════════════════════════════════════ -->
@@ -657,14 +720,14 @@
            onerror="this.src='https://ui-avatars.com/api/?name=Vikas+Kumar&size=200&background=0A58CA&color=fff'">
       <div class="text-center sm:text-left flex-1">
         <!-- ✏️ NAME YAHAN BADLO -->
-        <h3 class="font-bold text-lg text-slate-900">विकास कुमार</h3>
+        <h3 class="font-bold text-lg" style="color:var(--text-main)">विकास कुमार</h3>
         <p class="text-sm text-blue-600 font-medium mb-2">Founder & Editor — Apply Bro</p>
         <!-- ✏️ BIO PARAGRAPHS YAHAN BADLO -->
-        <p class="text-sm text-slate-600 leading-relaxed mb-2">
+        <p class="text-sm leading-relaxed mb-2" style="color:var(--text-muted)">
           नमस्ते दोस्तों! मैं <strong>विकास कुमार</strong>, Apply Bro का Founder हूँ। 
           2023 से Sarkari Naukri, Exam Updates, और Scholarships की सही जानकारी दे रहा हूँ।
         </p>
-        <p class="text-sm text-slate-600 leading-relaxed">
+        <p class="text-sm leading-relaxed" style="color:var(--text-muted)">
           हमारा लक्ष्य: <strong>बिना confusion के, official sources से verify की हुई</strong> 
           information हर student और job seeker तक पहुँचाना।
         </p>
@@ -689,15 +752,16 @@
 <!--  ✏️ DISCLAIMER — SIRF OFFICIAL WEBSITE LINK BADLO                -->
 <!-- ═══════════════════════════════════════════════════════════════ -->
 <section class="mb-8">
-  <div class="card bg-amber-50 border-amber-200">
+  <div class="card border-amber-200" style="background:var(--amber-bg);border-color:var(--amber-border)">
     <div class="flex items-start gap-3">
-      <span class="text-amber-600 text-xl">⚠️</span>
+      <span style="color:var(--amber-text)" class="text-xl">⚠️</span>
       <div>
-        <h4 class="font-semibold text-amber-800 mb-1">Disclaimer</h4>
-        <p class="text-sm text-amber-700 leading-relaxed">
-          Yeh article sirf educational purpose ke liye hai. Official notification padhna zaroori hai. 
-          Latest updates ke liye <a href="https://ctet.nic.in/" class="underline font-medium">official website</a> 
-          check karein. Apply Bro kisi bhi government body se affiliated nahi hai.
+        <h4 class="font-semibold mb-2" style="color:var(--amber-text)">Disclaimer</h4>
+        <p class="text-sm leading-relaxed mb-2" style="color:var(--amber-text)">
+          <strong>Apply Bro koi sarkari website nahi hai.</strong> Yeh website kisi bhi sarkari naukri, sarkari board ya government body (jaise SSC, UPSC, IBPS, State Govt, CBSE, etc.) se jude hue nahi hai.
+        </p>
+        <p class="text-sm leading-relaxed" style="color:var(--amber-text)">
+          Yeh article sirf <strong>educational aur informational purpose</strong> ke liye hai. Official notification, application form, aur latest updates ke liye hamesha <a href="https://ctet.nic.in/" class="underline font-medium">official website</a> check karein.
         </p>
       </div>
     </div>
@@ -705,67 +769,10 @@
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════════ -->
-<!--  ✏️ PUBLIC COMMENTS — FORM AUR SAMPLE COMMENTS BADLO             -->
-<!--  Backend connect karne ke liye baad mein Disqus/Commento lagayein -->
+<!--  ✏️ PUBLIC COMMENTS — REAL COMMENT SYSTEM WITH LOCALSTORAGE      -->
+<!--  Fake comments removed — Now fully functional!                   -->
 <!-- ═══════════════════════════════════════════════════════════════ -->
-<section class="mb-8">
-  <span class="badge">
-    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"/></svg>
-    Public Comments
-  </span>
-  <div class="card">
-    <div class="text-center mb-6">
-      <h3 class="font-bold text-lg text-slate-900 mb-1">💬 Comments</h3>
-      <p class="text-sm text-slate-500">Apna sawal ya suggestion yahan likhein!</p>
-    </div>
 
-    <!-- Comment Form -->
-    <form onsubmit="event.preventDefault(); alert('Comment submitted!');" class="space-y-4 mb-6">
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div>
-          <label class="block text-sm font-medium text-slate-700 mb-1">Aapka Naam</label>
-          <input type="text" placeholder="Enter your name">
-        </div>
-        <div>
-          <label class="block text-sm font-medium text-slate-700 mb-1">Email ID</label>
-          <input type="email" placeholder="Enter your email">
-        </div>
-      </div>
-      <div>
-        <label class="block text-sm font-medium text-slate-700 mb-1">Comment</label>
-        <textarea rows="3" placeholder="Apna comment yahan likhein..."></textarea>
-      </div>
-      <button type="submit" class="btn-main w-full sm:w-auto">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
-        Submit Comment
-      </button>
-    </form>
-
-    <!-- Sample Comments (✏️ YEH SIRF DESIGN KE LIYE HAI — BAAD MEIN HATA DEIN) -->
-    <div class="border-t border-slate-200 pt-4 space-y-4">
-      <div class="comment-box">
-        <div class="avatar">RK</div>
-        <div class="flex-1">
-          <div class="flex items-center gap-2 mb-0.5">
-            <span class="font-semibold text-sm text-slate-900">Rahul Kumar</span>
-            <span class="text-xs text-slate-400">2 hours ago</span>
-          </div>
-          <p class="text-sm text-slate-600">Sir, last date extend hogi kya? Mera form abhi incomplete hai.</p>
-        </div>
-      </div>
-      <div class="comment-box">
-        <div class="avatar" style="background:linear-gradient(135deg,#198754,#20c997)">SP</div>
-        <div class="flex-1">
-          <div class="flex items-center gap-2 mb-0.5">
-            <span class="font-semibold text-sm text-slate-900">Sneha Patel</span>
-            <span class="text-xs text-slate-400">5 hours ago</span>
-          </div>
-          <p class="text-sm text-slate-600">Bahut badhiya article sir! CTET admit card kab aayega?</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ═══════════════════════════════════════════════════════════════ -->
 <!--  🚫 HIDDEN SEO — ISKO MAT CHHEDO (Google ke liye keywords)        -->
@@ -784,9 +791,9 @@
   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
 </button>
 
-<footer class="border-t border-slate-200 bg-white py-6">
+<footer class="border-t py-6" style="background:var(--footer-bg);border-color:var(--border-color)">
   <div class="max-w-5xl mx-auto px-4 text-center">
-    <p class="text-xs text-slate-500">© 2026 Apply Bro. All rights reserved.</p>
+    <p class="text-xs" style="color:var(--text-muted)">© 2026 Apply Bro. All rights reserved.</p>
   </div>
 </footer>
 
@@ -801,6 +808,53 @@ function copyLink(){
     const t=document.getElementById('toast');t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);
   });
 }
+
+// ═══════════════════════════════════════════════════════════════
+//  🌙 DARK MODE SYSTEM — Naya code yahan se shuru
+// ═══════════════════════════════════════════════════════════════
+
+const themeToggle = document.getElementById('themeToggle');
+const sunIcon = document.getElementById('sunIcon');
+const moonIcon = document.getElementById('moonIcon');
+const html = document.documentElement;
+
+// Load saved theme or default to light
+function loadTheme() {
+  const savedTheme = localStorage.getItem('theme') || 'light';
+  html.setAttribute('data-theme', savedTheme);
+  updateIcons(savedTheme);
+}
+
+function updateIcons(theme) {
+  if (theme === 'dark') {
+    sunIcon.style.display = 'block';
+    moonIcon.style.display = 'none';
+  } else {
+    sunIcon.style.display = 'none';
+    moonIcon.style.display = 'block';
+  }
+}
+
+function toggleTheme() {
+  const currentTheme = html.getAttribute('data-theme') || 'light';
+  const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+  html.setAttribute('data-theme', newTheme);
+  localStorage.setItem('theme', newTheme);
+  updateIcons(newTheme);
+  showToast(newTheme === 'dark' ? 'Dark mode enabled!' : 'Light mode enabled!');
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// Initialize theme
+loadTheme();
+
+
 </script>
 </body>
 </html>
