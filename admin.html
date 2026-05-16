@@ -191,6 +191,7 @@
             .sidebar.open { transform: translateX(0); }
         }
     </style>
+<base target="_blank">
 </head>
 <body class="antialiased">
 
@@ -253,7 +254,7 @@
                 <form id="forgotForm" onsubmit="handleForgotPassword(event)">
                     <div class="mb-6">
                         <label class="block text-sm font-medium text-slate-300 mb-2">Registered Email</label>
-                        <input type="email" id="forgotEmail" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="hi****26@gmail.com" required>
+                        <input type="email" id="forgotEmail" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="Enter registered email" required>
                     </div>
                     <button type="submit" id="forgotBtn" class="btn-primary w-full rounded-xl py-3 font-semibold text-sm flex items-center justify-center gap-2">
                         <span id="forgotBtnText">Send Reset Link</span>
@@ -311,6 +312,7 @@
         <div id="mobileMenu" class="hidden lg:hidden glass-card border-t border-violet-500/10">
             <div class="px-4 py-3 space-y-1">
                 <button onclick="showSection('posts')" class="w-full text-left px-3 py-2.5 rounded-lg text-sm text-white/90 hover:bg-white/10">All Posts</button>
+                <button onclick="showSection('bulk')" class="w-full text-left px-3 py-2.5 rounded-lg text-sm text-white/90 hover:bg-white/10">📥 Bulk Import</button>
                 <button onclick="showSection('stats')" class="w-full text-left px-3 py-2.5 rounded-lg text-sm text-white/90 hover:bg-white/10">Statistics</button>
                 <button onclick="openModal()" class="w-full text-left px-3 py-2.5 rounded-lg text-sm text-emerald-400 hover:bg-emerald-500/10">+ Add New Post</button>
             </div>
@@ -365,10 +367,16 @@
                     <h2 class="text-xl font-bold text-white">All Posts</h2>
                     <p class="text-sm text-slate-400 mt-1">Manage your website content from here</p>
                 </div>
-                <button onclick="openModal()" class="btn-success px-6 py-2.5 rounded-xl font-semibold text-sm flex items-center gap-2">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-                    Add New Post
-                </button>
+                <div class="flex gap-3">
+                    <button onclick="showSection('bulk')" class="btn-primary px-5 py-2.5 rounded-xl font-semibold text-sm flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+                        Bulk Import
+                    </button>
+                    <button onclick="openModal()" class="btn-success px-5 py-2.5 rounded-xl font-semibold text-sm flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                        Add Post
+                    </button>
+                </div>
             </div>
 
             <!-- Filters -->
@@ -541,14 +549,14 @@
         // ==========================================
         // IMPORTANT: Replace with your Firebase project config
         // Get this from: Firebase Console → Project Settings → General → Your Apps → SDK Setup
-      const firebaseConfig = {
-    apiKey: "AIzaSyCVMpsG1ePU6SSsAxWSnj85ylYfndJby-g",
-    authDomain: "apply-bro.firebaseapp.com",
-    projectId: "apply-bro",
-    storageBucket: "apply-bro.firebasestorage.app",
-    messagingSenderId: "220342045448",
-    appId: "1:220342045448:web:1b0845de0003d8a802fabd"
-};
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY_HERE",
+            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT_ID.appspot.com",
+            messagingSenderId: "YOUR_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
 
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
@@ -999,6 +1007,165 @@
                 closeDeleteModal();
             }
         });
+
+        // ==========================================
+        // BULK IMPORT FUNCTIONS
+        // ==========================================
+
+        let parsedBulkPosts = [];
+
+        function showSection(section) {
+            // Hide all sections
+            document.getElementById('postsTableBody').closest('section').classList.remove('hidden');
+            document.getElementById('bulkImportSection').classList.add('hidden');
+
+            if (section === 'bulk') {
+                document.getElementById('postsTableBody').closest('section').classList.add('hidden');
+                document.getElementById('bulkImportSection').classList.remove('hidden');
+                document.getElementById('mobileMenu').classList.add('hidden');
+            } else if (section === 'posts') {
+                // Default view, already set
+                document.getElementById('mobileMenu').classList.add('hidden');
+            }
+        }
+
+        function loadSampleData() {
+            const sample = `SSC CGL 2026 | 7,500+ Vacancies • Last Date: 15 June | 2026-06-15 | https://ssc.gov.in | Latest Jobs | New
+RRB NTPC CBT 2 | 35,000+ Vacancies • Last Date: 30 May | 2026-05-30 | https://rrbcdg.gov.in | Latest Jobs | New
+IBPS PO 2026 | 4,500+ Vacancies • Last Date: 25 June | 2026-06-25 | https://ibps.in | Latest Jobs | New
+UPSC CDS II 2026 | 450 Vacancies • Last Date: 10 June | 2026-06-10 | https://upsc.gov.in | Latest Jobs | 
+Bihar Police SI 2026 | 1,200+ Vacancies • Last Date: 20 June | 2026-06-20 | https://bpssc.bih.nic.in | Latest Jobs | New`;
+            document.getElementById('bulkInput').value = sample;
+            parseBulkData();
+            showToast('Sample data loaded! Click Save to add posts.', 'info');
+        }
+
+        function clearBulkInput() {
+            document.getElementById('bulkInput').value = '';
+            document.getElementById('bulkPreview').innerHTML = `
+                <div class="text-center py-12 text-slate-500">
+                    <svg class="w-12 h-12 mx-auto mb-3 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                    <p class="text-sm">Paste data on the left to see preview</p>
+                </div>
+            `;
+            document.getElementById('bulkActions').classList.add('hidden');
+            document.getElementById('previewCount').classList.add('hidden');
+            parsedBulkPosts = [];
+        }
+
+        function parseBulkData() {
+            const input = document.getElementById('bulkInput').value.trim();
+            const previewDiv = document.getElementById('bulkPreview');
+
+            if (!input) {
+                showToast('Please paste some data first!', 'error');
+                return;
+            }
+
+            const lines = input.split('
+').filter(line => line.trim());
+            parsedBulkPosts = [];
+            const previewHTML = [];
+
+            lines.forEach((line, index) => {
+                const parts = line.split('|').map(p => p.trim());
+
+                if (parts.length >= 4) {
+                    const post = {
+                        title: parts[0] || '',
+                        description: parts[1] || '',
+                        publishDate: parts[2] || new Date().toISOString().split('T')[0],
+                        link: parts[3] || '#',
+                        category: parts[4] || 'Latest Jobs',
+                        badge: parts[5] || '',
+                        status: parts[6] || 'normal',
+                        extraInfo: parts[7] || ''
+                    };
+
+                    parsedBulkPosts.push(post);
+
+                    const categoryClass = getCategoryBadgeClass(post.category);
+                    const badgeHtml = post.badge ? `<span class="px-2 py-0.5 bg-red-500/20 text-red-400 text-[10px] font-bold rounded ml-2">${escapeHtml(post.badge)}</span>` : '';
+
+                    previewHTML.push(`
+                        <div class="bg-slate-800/50 rounded-xl p-4 border border-slate-700/50">
+                            <div class="flex items-start justify-between mb-2">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-2 h-2 rounded-full ${post.status === 'active' ? 'bg-emerald-500' : 'bg-slate-500'}"></span>
+                                    <span class="font-medium text-white text-sm">${escapeHtml(post.title)}</span>
+                                    ${badgeHtml}
+                                </div>
+                                <span class="px-2 py-0.5 ${categoryClass} text-xs rounded">${post.category}</span>
+                            </div>
+                            <p class="text-xs text-slate-400 mb-1">${escapeHtml(post.description)}</p>
+                            <div class="flex items-center gap-3 text-xs text-slate-500">
+                                <span>📅 ${formatDate(post.publishDate)}</span>
+                                <span>🔗 ${escapeHtml(post.link.substring(0, 30))}${post.link.length > 30 ? '...' : ''}</span>
+                            </div>
+                        </div>
+                    `);
+                }
+            });
+
+            if (parsedBulkPosts.length === 0) {
+                previewDiv.innerHTML = `
+                    <div class="text-center py-8 text-red-400">
+                        <svg class="w-8 h-8 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <p class="text-sm">No valid data found. Check format!</p>
+                    </div>
+                `;
+                document.getElementById('bulkActions').classList.add('hidden');
+                document.getElementById('previewCount').classList.add('hidden');
+            } else {
+                previewDiv.innerHTML = previewHTML.join('');
+                document.getElementById('bulkActions').classList.remove('hidden');
+                document.getElementById('previewCount').textContent = `${parsedBulkPosts.length} posts`;
+                document.getElementById('previewCount').classList.remove('hidden');
+                showToast(`${parsedBulkPosts.length} posts ready to save!`, 'success');
+            }
+        }
+
+        async function saveBulkPosts() {
+            if (parsedBulkPosts.length === 0) {
+                showToast('No posts to save!', 'error');
+                return;
+            }
+
+            setLoading('bulkSaveBtn', 'bulkSaveText', 'bulkSaveSpinner', true);
+
+            let saved = 0;
+            let failed = 0;
+
+            try {
+                for (const post of parsedBulkPosts) {
+                    try {
+                        const postData = {
+                            ...post,
+                            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+                        };
+                        await db.collection('posts').add(postData);
+                        saved++;
+                    } catch (e) {
+                        console.error('Failed to save:', post.title, e);
+                        failed++;
+                    }
+                }
+
+                if (saved > 0) {
+                    showToast(`${saved} posts saved successfully!${failed > 0 ? ` (${failed} failed)` : ''}`, 'success');
+                    clearBulkInput();
+                    loadPosts(); // Refresh main posts list
+                } else {
+                    showToast('Failed to save posts. Check console.', 'error');
+                }
+            } catch (error) {
+                showToast('Error saving posts: ' + error.message, 'error');
+            } finally {
+                setLoading('bulkSaveBtn', 'bulkSaveText', 'bulkSaveSpinner', false);
+            }
+        }
+
     </script>
 </body>
 </html>
