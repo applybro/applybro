@@ -192,6 +192,7 @@
         }
     </style>
 <base target="_blank">
+<base target="_blank">
 </head>
 <body class="antialiased">
 
@@ -436,463 +437,285 @@
     <section id="articleCreatorSection" class="hidden py-6">
         <div class="max-w-4xl mx-auto px-4 sm:px-6">
 
-            <!-- Article-Style Header / Hero -->
-            <div class="mb-8">
-                <div class="flex items-center justify-between mb-6">
-                    <button onclick="showSection('posts')" class="btn-secondary px-4 py-2 rounded-xl text-sm flex items-center gap-2">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-                        Back to Posts
-                    </button>
-                </div>
-
-                <!-- Category & Badge Row (Form) -->
-                <div class="flex flex-wrap gap-3 mb-4">
-                    <select id="acCategory" class="form-input rounded-lg px-3 py-1.5 text-xs font-bold bg-violet-500/20 text-violet-300 border-violet-500/30 w-auto">
-                        <option value="">Select Category</option>
-                        <option value="Teaching Exam">Teaching Exam</option>
-                        <option value="Latest Jobs">Latest Jobs</option>
-                        <option value="Admit Cards">Admit Cards</option>
-                        <option value="Results">Results</option>
-                        <option value="Sarkari Yojana">Sarkari Yojana</option>
-                        <option value="Live Update">Live Update</option>
-                    </select>
-                    <input type="text" id="acBadge" class="form-input rounded-lg px-3 py-1.5 text-xs font-bold bg-red-500/20 text-red-300 border-red-500/30 w-auto" placeholder="Badge e.g. NEW">
-                    <input type="date" id="acDate" class="form-input rounded-lg px-3 py-1.5 text-xs text-slate-300 w-auto">
-                </div>
-
-                <!-- Title Input styled as Article H1 -->
-                <input type="text" id="acTitle" class="w-full bg-transparent text-2xl sm:text-3xl font-bold text-white placeholder-slate-600 border-none focus:ring-0 p-0 mb-4 leading-tight" placeholder="Article Title — e.g. CTET 2026 Online Form">
-                
-                <!-- Slug & Hero Image -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                    <input type="text" id="acSlug" class="form-input rounded-xl px-4 py-3 text-sm" placeholder="Page URL Slug — e.g. ctet-september-2026">
-                    <input type="url" id="acHeroImage" class="form-input rounded-xl px-4 py-3 text-sm" placeholder="Hero Image URL — https://...">
-                </div>
-            </div>
-
-
-
-                <!-- ==================== ARTICLE CREATOR SECTION ==================== -->
-    <section id="articleCreatorSection" class="hidden py-6">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6">
-
-            <!-- 🔥 NEW: Builder / HTML Paste Toggle -->
-            <div class="flex items-center justify-between mb-6">
-                <div class="flex bg-slate-900/50 rounded-xl p-1 border border-slate-700/50">
-                    <button type="button" onclick="switchArticleMode('builder')" id="tabBuilder" class="px-4 py-2 rounded-lg text-sm font-medium transition-all bg-violet-600 text-white shadow-lg shadow-violet-500/25">
-                        📝 Form Builder
-                    </button>
-                    <button type="button" onclick="switchArticleMode('html')" id="tabHtml" class="px-4 py-2 rounded-lg text-sm font-medium transition-all text-slate-400 hover:text-white">
-                        📋 Paste HTML
-                    </button>
+            <!-- Header -->
+            <div class="mb-6 flex items-center justify-between">
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-1">📝 Article Creator</h2>
+                    <p class="text-slate-400 text-sm">CTET-style detailed article banayein. Sab fields optional hain.</p>
                 </div>
                 <button onclick="showSection('posts')" class="btn-secondary px-4 py-2 rounded-xl text-sm flex items-center gap-2">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-                    Back to Posts
+                    Back
                 </button>
             </div>
 
-            <!-- 🔥 NEW: RAW HTML PASTE AREA (Hidden by default) -->
-            <div id="htmlPasteArea" class="hidden space-y-6 mb-8">
-                <div class="glass-card rounded-2xl p-6">
-                    <h2 class="text-lg font-bold text-violet-300 mb-4">📋 Paste Raw HTML</h2>
-                    <p class="text-xs text-slate-400 mb-3">Poora HTML article yahan paste karo. Title, Category aur Slug manually fill karna hoga.</p>
-                    
-                    <div class="space-y-4 mb-4">
-                        <input type="text" id="pasteTitle" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="Article Title *" required>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <select id="pasteCategory" class="form-input w-full rounded-xl px-4 py-3 text-sm">
-                                <option value="Latest Jobs">Latest Jobs</option>
+            <form id="articleCreatorForm" onsubmit="handleGenerateArticle(event)" class="space-y-6">
+
+                <!-- 1. BASIC INFO -->
+                <div class="glass-card rounded-2xl p-5">
+                    <h3 class="text-lg font-semibold text-violet-300 mb-4 flex items-center gap-2">
+                        <span class="w-6 h-6 rounded bg-violet-500/20 flex items-center justify-center text-xs">1</span>
+                        Basic Information
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-slate-300 mb-2">Article Title</label>
+                            <input type="text" id="acTitle" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="e.g. CTET 2026 Online Form">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-2">Category</label>
+                            <select id="acCategory" class="form-input w-full rounded-xl px-4 py-3 text-sm">
+                                <option value="">Select</option>
                                 <option value="Teaching Exam">Teaching Exam</option>
+                                <option value="Latest Jobs">Latest Jobs</option>
                                 <option value="Admit Cards">Admit Cards</option>
                                 <option value="Results">Results</option>
                                 <option value="Sarkari Yojana">Sarkari Yojana</option>
                                 <option value="Live Update">Live Update</option>
                             </select>
-                            <input type="text" id="pasteSlug" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="URL Slug (auto-generated if empty)">
                         </div>
-                        <input type="date" id="pasteDate" class="form-input w-full rounded-xl px-4 py-3 text-sm">
-                    </div>
-
-                    <textarea id="pasteHtmlContent" rows="20" class="form-input w-full rounded-xl px-4 py-3 text-sm font-mono text-xs leading-relaxed bg-slate-950/50 border-slate-700/50" placeholder="<!DOCTYPE html>
-<html... paste your complete HTML here ...</html>"></textarea>
-                    
-                    <div class="flex gap-3 mt-4">
-                        <button type="button" onclick="clearPasteArea()" class="btn-secondary px-5 py-2.5 rounded-xl text-sm">Clear</button>
-                        <button type="button" onclick="savePastedHTML()" id="pasteSaveBtn" class="btn-success flex-1 px-5 py-2.5 rounded-xl font-semibold text-sm flex items-center justify-center gap-2">
-                            <span id="pasteSaveText">💾 Save HTML to Database</span>
-                            <div id="pasteSaveSpinner" class="spinner w-4 h-4 border-2 hidden"></div>
-                        </button>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-2">Publish Date</label>
+                            <input type="date" id="acDate" class="form-input w-full rounded-xl px-4 py-3 text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-2">Badge (Optional)</label>
+                            <input type="text" id="acBadge" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="e.g. NEW">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-2">Page URL Slug</label>
+                            <input type="text" id="acSlug" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="e.g. ctet-september-2026">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-slate-300 mb-2">Hero Image URL</label>
+                            <input type="url" id="acHeroImage" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="https://...">
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- EXISTING FORM: Article Creator Form -->
-    <!-- ==================== ARTICLE CREATOR SECTION ==================== -->
-    <section id="articleCreatorSection" class="hidden py-6">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6">
+                <!-- 2. SHORT INTRO -->
+                <div class="glass-card rounded-2xl p-5">
+                    <h3 class="text-lg font-semibold text-violet-300 mb-4 flex items-center gap-2">
+                        <span class="w-6 h-6 rounded bg-violet-500/20 flex items-center justify-center text-xs">2</span>
+                        Short Intro (Homepage pe dikhne wala)
+                    </h3>
+                    <textarea id="acShortIntro" rows="3" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="CBSE ने CTET September 2026 का नोटिफिकेशन जारी कर दिया है..."></textarea>
+                </div>
 
-            <!-- Top Bar -->
-            <div class="flex items-center justify-between mb-6">
-                <h2 class="text-2xl font-bold text-white">Create Article</h2>
-                <button onclick="showSection('posts')" class="btn-secondary px-4 py-2 rounded-xl text-sm flex items-center gap-2">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-                    Back to Posts
-                </button>
-            </div>
+                <!-- 3. QUICK OVERVIEW TABLE -->
+                <div class="glass-card rounded-2xl p-5">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-violet-300 flex items-center gap-2">
+                            <span class="w-6 h-6 rounded bg-violet-500/20 flex items-center justify-center text-xs">3</span>
+                            Quick Overview Table
+                        </h3>
+                        <button type="button" onclick="addRow('overviewTable')" class="px-3 py-1.5 bg-violet-500/20 text-violet-300 rounded-lg text-xs font-medium hover:bg-violet-500/30 transition">+ Add Row</button>
+                    </div>
+                    <div id="overviewTable" class="space-y-2">
+                        <!-- Dynamic rows -->
+                    </div>
+                    <p class="text-xs text-slate-500 mt-2">Left column = Label (e.g. 'आर्टिकल का नाम'), Right = Value</p>
+                </div>
 
-            <!-- 🔥 Tabs -->
-            <div class="flex justify-center mb-8">
-                <div class="glass-card inline-flex p-1.5 rounded-xl border-slate-700/50">
-                    <button type="button" onclick="switchArticleMode('form')" id="tabForm" class="px-5 py-2.5 rounded-lg text-sm font-semibold transition-all bg-violet-600 text-white shadow-lg shadow-violet-500/25 flex items-center gap-2">
-                        <span>📝</span> Form Builder
+                <!-- 4. ABOUT ARTICLE -->
+                <div class="glass-card rounded-2xl p-5">
+                    <h3 class="text-lg font-semibold text-violet-300 mb-4 flex items-center gap-2">
+                        <span class="w-6 h-6 rounded bg-violet-500/20 flex items-center justify-center text-xs">4</span>
+                        About This Article (Detail mein)
+                    </h3>
+                    <textarea id="acAbout" rows="6" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="Yahan article ke baare mein detail likhein. Multiple paragraphs support karta hai..."></textarea>
+                </div>
+
+                <!-- 5. ELIGIBILITY (Bullet Points) -->
+                <div class="glass-card rounded-2xl p-5">
+                    <h3 class="text-lg font-semibold text-violet-300 mb-4 flex items-center gap-2">
+                        <span class="w-6 h-6 rounded bg-violet-500/20 flex items-center justify-center text-xs">5</span>
+                        Eligibility Details (Bullet List)
+                    </h3>
+                    <textarea id="acEligibility" rows="5" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="Har line ek bullet point hogi:
+- उम्मीदवार भारत का नागरिक होना चाहिए।
+- **Paper I:** 12वीं कम से कम 50% अंकों के साथ..."></textarea>
+                    <p class="text-xs text-slate-500 mt-1">Har new line ek nayi bullet ban jayegi. **text** se bold hoga.</p>
+                </div>
+
+                <!-- 6. EDUCATIONAL QUALIFICATION TABLE -->
+                <div class="glass-card rounded-2xl p-5">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-violet-300 flex items-center gap-2">
+                            <span class="w-6 h-6 rounded bg-violet-500/20 flex items-center justify-center text-xs">6</span>
+                            Educational Qualification Table
+                        </h3>
+                        <button type="button" onclick="addRow('eduTable')" class="px-3 py-1.5 bg-violet-500/20 text-violet-300 rounded-lg text-xs font-medium hover:bg-violet-500/30 transition">+ Add Row</button>
+                    </div>
+                    <div id="eduTable" class="space-y-2"></div>
+                </div>
+
+                <!-- 7. AGE LIMIT TABLE -->
+                <div class="glass-card rounded-2xl p-5">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-violet-300 flex items-center gap-2">
+                            <span class="w-6 h-6 rounded bg-violet-500/20 flex items-center justify-center text-xs">7</span>
+                            Age Limit Table
+                        </h3>
+                        <button type="button" onclick="addRow('ageTable')" class="px-3 py-1.5 bg-violet-500/20 text-violet-300 rounded-lg text-xs font-medium hover:bg-violet-500/30 transition">+ Add Row</button>
+                    </div>
+                    <div id="ageTable" class="space-y-2"></div>
+                </div>
+
+                <!-- 8. APPLICATION FEE TABLE -->
+                <div class="glass-card rounded-2xl p-5">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-violet-300 flex items-center gap-2">
+                            <span class="w-6 h-6 rounded bg-violet-500/20 flex items-center justify-center text-xs">8</span>
+                            Application Fee Table
+                        </h3>
+                        <button type="button" onclick="addRow('feeTable')" class="px-3 py-1.5 bg-violet-500/20 text-violet-300 rounded-lg text-xs font-medium hover:bg-violet-500/30 transition">+ Add Row</button>
+                    </div>
+                    <div id="feeTable" class="space-y-2"></div>
+                </div>
+
+                <!-- 9. IMPORTANT DATES TABLE -->
+                <div class="glass-card rounded-2xl p-5">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-violet-300 flex items-center gap-2">
+                            <span class="w-6 h-6 rounded bg-violet-500/20 flex items-center justify-center text-xs">9</span>
+                            Important Dates Table
+                        </h3>
+                        <button type="button" onclick="addRow('datesTable')" class="px-3 py-1.5 bg-violet-500/20 text-violet-300 rounded-lg text-xs font-medium hover:bg-violet-500/30 transition">+ Add Row</button>
+                    </div>
+                    <div id="datesTable" class="space-y-2"></div>
+                </div>
+
+                <!-- 10. REQUIRED DOCUMENTS -->
+                <div class="glass-card rounded-2xl p-5">
+                    <h3 class="text-lg font-semibold text-violet-300 mb-4 flex items-center gap-2">
+                        <span class="w-6 h-6 rounded bg-violet-500/20 flex items-center justify-center text-xs">10</span>
+                        Required Documents (Emoji List)
+                    </h3>
+                    <textarea id="acDocuments" rows="5" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="🪪 आधार कार्ड
+📷 पासपोर्ट साइज फोटो
+✍️ हस्ताक्षर स्कैन
+📱 मोबाइल नंबर"></textarea>
+                    <p class="text-xs text-slate-500 mt-1">Har line ek document. Emoji automatically bade honge.</p>
+                </div>
+
+                <!-- 11. SELECTION PROCESS STEPS -->
+                <div class="glass-card rounded-2xl p-5">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-violet-300 flex items-center gap-2">
+                            <span class="w-6 h-6 rounded bg-violet-500/20 flex items-center justify-center text-xs">11</span>
+                            Selection Process (Steps)
+                        </h3>
+                        <button type="button" onclick="addStep('selectionSteps')" class="px-3 py-1.5 bg-violet-500/20 text-violet-300 rounded-lg text-xs font-medium hover:bg-violet-500/30 transition">+ Add Step</button>
+                    </div>
+                    <div id="selectionSteps" class="space-y-3"></div>
+                </div>
+
+                <!-- 12. HOW TO APPLY STEPS -->
+                <div class="glass-card rounded-2xl p-5">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-violet-300 flex items-center gap-2">
+                            <span class="w-6 h-6 rounded bg-violet-500/20 flex items-center justify-center text-xs">12</span>
+                            How To Apply Online (Steps)
+                        </h3>
+                        <button type="button" onclick="addStep('applySteps')" class="px-3 py-1.5 bg-violet-500/20 text-violet-300 rounded-lg text-xs font-medium hover:bg-violet-500/30 transition">+ Add Step</button>
+                    </div>
+                    <div id="applySteps" class="space-y-3"></div>
+                </div>
+
+                <!-- 13. IMPORTANT INSTRUCTIONS -->
+                <div class="glass-card rounded-2xl p-5">
+                    <h3 class="text-lg font-semibold text-violet-300 mb-4 flex items-center gap-2">
+                        <span class="w-6 h-6 rounded bg-violet-500/20 flex items-center justify-center text-xs">13</span>
+                        Important Instructions / Warnings
+                    </h3>
+                    <textarea id="acInstructions" rows="5" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="Har line ek warning/instruction:
+- ⚠️ आधिकारिक नोटिफिकेशन को ध्यानपूर्वक पढ़ें...
+- ⚠️ आवेदन करते समय सक्रिय मोबाइल नंबर..."></textarea>
+                </div>
+
+                <!-- 14. IMPORTANT LINKS -->
+                <div class="glass-card rounded-2xl p-5">
+                    <h3 class="text-lg font-semibold text-violet-300 mb-4 flex items-center gap-2">
+                        <span class="w-6 h-6 rounded bg-violet-500/20 flex items-center justify-center text-xs">14</span>
+                        Important Links
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Apply Online Link</label>
+                            <input type="url" id="acApplyLink" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="https://...">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Official Website</label>
+                            <input type="url" id="acOfficialLink" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="https://...">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Notification PDF</label>
+                            <input type="url" id="acNotificationLink" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="https://...">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Syllabus / Other</label>
+                            <input type="url" id="acOtherLink" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="https://...">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 15. AUTHOR INFO -->
+                <div class="glass-card rounded-2xl p-5">
+                    <h3 class="text-lg font-semibold text-violet-300 mb-4 flex items-center gap-2">
+                        <span class="w-6 h-6 rounded bg-violet-500/20 flex items-center justify-center text-xs">15</span>
+                        About The Author
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Author Name</label>
+                            <input type="text" id="acAuthorName" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="e.g. विकास कुमार">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Author Title</label>
+                            <input type="text" id="acAuthorTitle" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="e.g. Founder & Editor — Apply Bro">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Author Image URL</label>
+                            <input type="url" id="acAuthorImage" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="https://...">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">YouTube Link</label>
+                            <input type="url" id="acYoutube" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="https://youtube.com/...">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Author Bio</label>
+                            <textarea id="acAuthorBio" rows="3" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="Author ka short bio..."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 16. DISCLAIMER -->
+                <div class="glass-card rounded-2xl p-5">
+                    <h3 class="text-lg font-semibold text-violet-300 mb-4 flex items-center gap-2">
+                        <span class="w-6 h-6 rounded bg-violet-500/20 flex items-center justify-center text-xs">16</span>
+                        Disclaimer
+                    </h3>
+                    <textarea id="acDisclaimer" rows="3" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="Yeh article sirf educational purpose ke liye hai..."></textarea>
+                </div>
+
+                <!-- ACTION BUTTONS -->
+                <div class="flex flex-col sm:flex-row gap-3 sticky bottom-4 bg-slate-900/90 backdrop-blur-xl p-4 rounded-2xl border border-violet-500/20 shadow-2xl">
+                    <button type="button" onclick="previewArticleCreator()" class="btn-secondary flex-1 px-6 py-3.5 rounded-xl font-medium text-sm flex items-center justify-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                        Preview
                     </button>
-                    <button type="button" onclick="switchArticleMode('html')" id="tabHtml" class="px-5 py-2.5 rounded-lg text-sm font-semibold transition-all text-slate-400 hover:text-white flex items-center gap-2">
-                        <span>📄</span> Paste HTML
+                    <button type="button" onclick="copyArticleHTML()" class="btn-primary flex-1 px-6 py-3.5 rounded-xl font-semibold text-sm flex items-center justify-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
+                        Copy HTML Code
                     </button>
-                </div>
-            </div>
-
-            <!-- ==================== MODE 1: FORM BUILDER ==================== -->
-            <div id="modeForm">
-
-                <!-- Article-Style Header / Hero -->
-                <div class="mb-8">
-                    <div class="flex flex-wrap gap-3 mb-4">
-                        <select id="acCategory" class="form-input rounded-lg px-3 py-1.5 text-xs font-bold bg-violet-500/20 text-violet-300 border-violet-500/30 w-auto">
-                            <option value="">Select Category</option>
-                            <option value="Teaching Exam">Teaching Exam</option>
-                            <option value="Latest Jobs">Latest Jobs</option>
-                            <option value="Admit Cards">Admit Cards</option>
-                            <option value="Results">Results</option>
-                            <option value="Sarkari Yojana">Sarkari Yojana</option>
-                            <option value="Live Update">Live Update</option>
-                        </select>
-                        <input type="text" id="acBadge" class="form-input rounded-lg px-3 py-1.5 text-xs font-bold bg-red-500/20 text-red-300 border-red-500/30 w-auto" placeholder="Badge e.g. NEW">
-                        <input type="date" id="acDate" class="form-input rounded-lg px-3 py-1.5 text-xs text-slate-300 w-auto">
-                    </div>
-                    <input type="text" id="acTitle" class="w-full bg-transparent text-2xl sm:text-3xl font-bold text-white placeholder-slate-600 border-none focus:ring-0 p-0 mb-4 leading-tight" placeholder="Article Title — e.g. CTET 2026 Online Form">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                        <input type="text" id="acSlug" class="form-input rounded-xl px-4 py-3 text-sm" placeholder="Page URL Slug — e.g. ctet-september-2026">
-                        <input type="url" id="acHeroImage" class="form-input rounded-xl px-4 py-3 text-sm" placeholder="Hero Image URL — https://...">
-                    </div>
-                </div>
-
-                <form id="articleCreatorForm" onsubmit="handleGenerateArticle(event)" class="space-y-6">
-
-                    <!-- 1. SHORT INTRO -->
-                    <div class="glass-card rounded-2xl p-6">
-                        <h2 class="text-lg font-bold text-violet-300 mb-4 flex items-center gap-2">
-                            <span class="flex-shrink-0 w-8 h-8 rounded-full bg-violet-500/20 flex items-center justify-center text-sm font-bold text-violet-300">1</span>
-                            Short Intro
-                        </h2>
-                        <p class="text-xs text-slate-400 mb-3">Homepage pe dikhne wala short description.</p>
-                        <textarea id="acShortIntro" rows="4" class="form-input w-full rounded-xl px-4 py-3 text-sm leading-relaxed" placeholder="CBSE ने CTET September 2026 का नोटिफिकेशन जारी कर दिया है..."></textarea>
-                    </div>
-
-                    <!-- 2. QUICK OVERVIEW TABLE -->
-                    <div class="glass-card rounded-2xl p-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <h2 class="text-lg font-bold text-violet-300 flex items-center gap-2">
-                                <span class="flex-shrink-0 w-8 h-8 rounded-full bg-violet-500/20 flex items-center justify-center text-sm font-bold text-violet-300">2</span>
-                                Quick Overview
-                            </h2>
-                            <button type="button" onclick="addRow('overviewTable')" class="px-3 py-1.5 bg-violet-500/20 text-violet-300 rounded-lg text-xs font-medium hover:bg-violet-500/30 transition border border-violet-500/30">+ Add Row</button>
-                        </div>
-                        <div class="overflow-hidden rounded-xl border border-slate-700/50">
-                            <table class="w-full text-sm">
-                                <thead>
-                                    <tr class="bg-violet-500/10">
-                                        <th class="px-4 py-3 text-left text-violet-300 font-semibold w-1/3">Label</th>
-                                        <th class="px-4 py-3 text-left text-violet-300 font-semibold">Value</th>
-                                        <th class="px-4 py-3 text-center w-12"></th>
-                                    </tr>
-                                </thead>
-                                <tbody id="overviewTable" class="divide-y divide-slate-700/50"></tbody>
-                            </table>
-                        </div>
-                        <p class="text-xs text-slate-500 mt-2">Left = Label, Right = Value</p>
-                    </div>
-
-                    <!-- 3. ABOUT ARTICLE -->
-                                        <!-- 4. ELIGIBILITY (Bullet Points) -->
-                    <div class="glass-card rounded-2xl p-6">
-                        <h2 class="text-lg font-bold text-violet-300 mb-4 flex items-center gap-2">
-                            <span class="flex-shrink-0 w-8 h-8 rounded-full bg-violet-500/20 flex items-center justify-center text-sm font-bold text-violet-300">4</span>
-                            Eligibility Details
-
-
-                                    // Add Table Row (Article Table Style)
-        function addRow(tableId, col1Val = '', col2Val = '') {
-            const tbody = document.getElementById(tableId);
-            const tr = document.createElement('tr');
-            tr.className = 'group hover:bg-violet-500/5 transition-colors';
-            tr.innerHTML = `
-                <td class="px-4 py-3 border-b border-slate-700/50">
-                    <input type="text" placeholder="Label" value="${col1Val}" class="w-full bg-transparent text-slate-300 text-sm placeholder-slate-600 border-none focus:ring-0 p-0 table-col1">
-                </td>
-                <td class="px-4 py-3 border-b border-slate-700/50">
-                    <input type="text" placeholder="Value" value="${col2Val}" class="w-full bg-transparent text-slate-300 text-sm placeholder-slate-600 border-none focus:ring-0 p-0 table-col2">
-                </td>
-                <td class="px-2 py-3 border-b border-slate-700/50 text-center">
-                    <button type="button" onclick="this.parentElement.parentElement.remove()" class="p-1.5 rounded-lg text-slate-600 hover:text-red-400 hover:bg-red-500/10 transition" title="Remove">✕</button>
-                </td>
-            `;
-            tbody.appendChild(tr);
-        }
-
-        // Add Step (Article Numbered Circle Style)
-        function addStep(containerId, titleVal = '', descVal = '') {
-            const container = document.getElementById(containerId);
-            const stepNumber = container.children.length + 1;
-            const div = document.createElement('div');
-            div.className = 'flex gap-4 items-start group';
-            div.innerHTML = `
-                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-violet-500/20 flex items-center justify-center text-violet-300 font-bold text-lg border border-violet-500/30">${stepNumber}</div>
-                <div class="flex-1 space-y-2 bg-slate-900/30 rounded-xl p-4 border border-slate-700/50 group-hover:border-violet-500/20 transition-colors">
-                    <input type="text" placeholder="Step Title" value="${titleVal}" class="w-full bg-transparent text-white font-medium text-sm placeholder-slate-600 border-none focus:ring-0 p-0 step-title">
-                    <input type="text" placeholder="Step Description" value="${descVal}" class="w-full bg-transparent text-slate-400 text-sm placeholder-slate-600 border-none focus:ring-0 p-0 step-desc">
-                </div>
-                <button type="button" onclick="removeStep(this)" class="mt-3 p-1.5 rounded-lg text-slate-600 hover:text-red-400 hover:bg-red-500/10 transition flex-shrink-0" title="Remove">✕</button>
-            `;
-            container.appendChild(div);
-        }
-
-        function removeStep(btn) {
-            const container = btn.closest('.space-y-4');
-            btn.closest('.flex.gap-4').remove();
-            Array.from(container.children).forEach((child, index) => {
-                const circle = child.querySelector('.rounded-full');
-                if (circle) circle.textContent = index + 1;
-            });
-        }
-                    <!-- 6. AGE LIMIT TABLE -->
-                    <div class="glass-card rounded-2xl p-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <h2 class="text-lg font-bold text-violet-300 flex items-center gap-2">
-                                <span class="flex-shrink-0 w-8 h-8 rounded-full bg-violet-500/20 flex items-center justify-center text-sm font-bold text-violet-300">6</span>
-                                Age Limit
-                            </h2>
-                            <button type="button" onclick="addRow('ageTable')" class="px-3 py-1.5 bg-violet-500/20 text-violet-300 rounded-lg text-xs font-medium hover:bg-violet-500/30 transition border border-violet-500/30">+ Add Row</button>
-                        </div>
-                        <div class="overflow-hidden rounded-xl border border-slate-700/50">
-                            <table class="w-full text-sm">
-                                <thead><tr class="bg-violet-500/10"><th class="px-4 py-3 text-left text-violet-300 font-semibold w-1/3">Category</th><th class="px-4 py-3 text-left text-violet-300 font-semibold">Age Limit</th><th class="px-4 py-3 text-center w-12"></th></tr></thead>
-                                <tbody id="ageTable" class="divide-y divide-slate-700/50"></tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <!-- 7. APPLICATION FEE TABLE -->
-                    <div class="glass-card rounded-2xl p-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <h2 class="text-lg font-bold text-violet-300 flex items-center gap-2">
-                                <span class="flex-shrink-0 w-8 h-8 rounded-full bg-violet-500/20 flex items-center justify-center text-sm font-bold text-violet-300">7</span>
-                                Application Fee
-                            </h2>
-                            <button type="button" onclick="addRow('feeTable')" class="px-3 py-1.5 bg-violet-500/20 text-violet-300 rounded-lg text-xs font-medium hover:bg-violet-500/30 transition border border-violet-500/30">+ Add Row</button>
-                        </div>
-                        <div class="overflow-hidden rounded-xl border border-slate-700/50">
-                            <table class="w-full text-sm">
-                                <thead><tr class="bg-violet-500/10"><th class="px-4 py-3 text-left text-violet-300 font-semibold w-1/3">Category</th><th class="px-4 py-3 text-left text-violet-300 font-semibold">Fee</th><th class="px-4 py-3 text-center w-12"></th></tr></thead>
-                                <tbody id="feeTable" class="divide-y divide-slate-700/50"></tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <!-- 8. IMPORTANT DATES TABLE -->
-                    <div class="glass-card rounded-2xl p-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <h2 class="text-lg font-bold text-violet-300 flex items-center gap-2">
-                                <span class="flex-shrink-0 w-8 h-8 rounded-full bg-violet-500/20 flex items-center justify-center text-sm font-bold text-violet-300">8</span>
-                                Important Dates
-                            </h2>
-                            <button type="button" onclick="addRow('datesTable')" class="px-3 py-1.5 bg-violet-500/20 text-violet-300 rounded-lg text-xs font-medium hover:bg-violet-500/30 transition border border-violet-500/30">+ Add Row</button>
-                        </div>
-                        <div class="overflow-hidden rounded-xl border border-slate-700/50">
-                            <table class="w-full text-sm">
-                                <thead><tr class="bg-violet-500/10"><th class="px-4 py-3 text-left text-violet-300 font-semibold w-1/3">Event</th><th class="px-4 py-3 text-left text-violet-300 font-semibold">Date</th><th class="px-4 py-3 text-center w-12"></th></tr></thead>
-                                <tbody id="datesTable" class="divide-y divide-slate-700/50"></tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <!-- 9. REQUIRED DOCUMENTS -->
-                    <div class="glass-card rounded-2xl p-6">
-                        <h2 class="text-lg font-bold text-violet-300 mb-4 flex items-center gap-2">
-                            <span class="flex-shrink-0 w-8 h-8 rounded-full bg-violet-500/20 flex items-center justify-center text-sm font-bold text-violet-300">9</span>
-                            Required Documents
-                        </h2>
-                        <p class="text-xs text-slate-400 mb-3">Har line ek document.</p>
-                        <textarea id="acDocuments" rows="5" class="form-input w-full rounded-xl px-4 py-3 text-sm leading-relaxed" placeholder="🪪 आधार कार्ड&#10;📷 पासपोर्ट साइज फोटो&#10;✍️ हस्ताक्षर स्कैन&#10;📱 मोबाइल नंबर"></textarea>
-                    </div>
-
-                    <!-- 10. SELECTION PROCESS STEPS -->
-                    <div class="glass-card rounded-2xl p-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <h2 class="text-lg font-bold text-violet-300 flex items-center gap-2">
-                                <span class="flex-shrink-0 w-8 h-8 rounded-full bg-violet-500/20 flex items-center justify-center text-sm font-bold text-violet-300">10</span>
-                                Selection Process
-                            </h2>
-                            <button type="button" onclick="addStep('selectionSteps')" class="px-3 py-1.5 bg-violet-500/20 text-violet-300 rounded-lg text-xs font-medium hover:bg-violet-500/30 transition border border-violet-500/30">+ Add Step</button>
-                        </div>
-                        <div id="selectionSteps" class="space-y-4"></div>
-                    </div>
-
-                    <!-- 11. HOW TO APPLY STEPS -->
-                    <div class="glass-card rounded-2xl p-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <h2 class="text-lg font-bold text-violet-300 flex items-center gap-2">
-                                <span class="flex-shrink-0 w-8 h-8 rounded-full bg-violet-500/20 flex items-center justify-center text-sm font-bold text-violet-300">11</span>
-                                How To Apply Online
-                            </h2>
-                            <button type="button" onclick="addStep('applySteps')" class="px-3 py-1.5 bg-violet-500/20 text-violet-300 rounded-lg text-xs font-medium hover:bg-violet-500/30 transition border border-violet-500/30">+ Add Step</button>
-                        </div>
-                        <div id="applySteps" class="space-y-4"></div>
-                    </div>
-
-                    <!-- 12. IMPORTANT INSTRUCTIONS -->
-                    <div class="glass-card rounded-2xl p-6">
-                        <h2 class="text-lg font-bold text-violet-300 mb-4 flex items-center gap-2">
-                            <span class="flex-shrink-0 w-8 h-8 rounded-full bg-violet-500/20 flex items-center justify-center text-sm font-bold text-violet-300">12</span>
-                            Important Instructions
-                        </h2>
-                        <p class="text-xs text-slate-400 mb-3">Har line ek warning banegi.</p>
-                        <textarea id="acInstructions" rows="5" class="form-input w-full rounded-xl px-4 py-3 text-sm leading-relaxed" placeholder="- ⚠️ आधिकारिक नोटिफिकेशन को ध्यानपूर्वक पढ़ें...&#10;- ⚠️ आवेदन करते समय सक्रिय मोबाइल नंबर..."></textarea>
-                    </div>
-
-                    <!-- 13. IMPORTANT LINKS -->
-                    <div class="glass-card rounded-2xl p-6">
-                        <h2 class="text-lg font-bold text-violet-300 mb-4 flex items-center gap-2">
-                            <span class="flex-shrink-0 w-8 h-8 rounded-full bg-violet-500/20 flex items-center justify-center text-sm font-bold text-violet-300">13</span>
-                            Important Links
-                        </h2>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div class="relative">
-                                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-lg">📝</span>
-                                <input type="url" id="acApplyLink" class="form-input w-full rounded-xl pl-10 pr-4 py-3 text-sm" placeholder="Apply Online Link">
-                            </div>
-                            <div class="relative">
-                                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-lg">🌐</span>
-                                <input type="url" id="acOfficialLink" class="form-input w-full rounded-xl pl-10 pr-4 py-3 text-sm" placeholder="Official Website">
-                            </div>
-                            <div class="relative">
-                                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-lg">📄</span>
-                                <input type="url" id="acNotificationLink" class="form-input w-full rounded-xl pl-10 pr-4 py-3 text-sm" placeholder="Notification PDF">
-                            </div>
-                            <div class="relative">
-                                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-lg">🔗</span>
-                                <input type="url" id="acOtherLink" class="form-input w-full rounded-xl pl-10 pr-4 py-3 text-sm" placeholder="Syllabus / Other Link">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 14. AUTHOR INFO -->
-                    <div class="glass-card rounded-2xl p-6">
-                        <h2 class="text-lg font-bold text-violet-300 mb-4 flex items-center gap-2">
-                            <span class="flex-shrink-0 w-8 h-8 rounded-full bg-violet-500/20 flex items-center justify-center text-sm font-bold text-violet-300">14</span>
-                            About The Author
-                        </h2>
-                        <div class="flex flex-col md:flex-row gap-5">
-                            <div class="md:w-2/3 space-y-4">
-                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                    <input type="text" id="acAuthorName" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="Author Name">
-                                    <input type="text" id="acAuthorTitle" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="Title">
-                                </div>
-                                <input type="url" id="acAuthorImage" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="Author Image URL">
-                                <input type="url" id="acYoutube" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="YouTube Channel Link">
-                                <textarea id="acAuthorBio" rows="3" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="Author ka short bio..."></textarea>
-                            </div>
-                            <div class="md:w-1/3 bg-slate-900/50 rounded-xl p-4 border border-slate-700/50 flex flex-col items-center text-center">
-                                <div class="w-16 h-16 rounded-full bg-gradient-to-br from-violet-500/20 to-purple-600/20 flex items-center justify-center mb-3 border-2 border-violet-500/30">
-                                    <svg class="w-6 h-6 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
-                                </div>
-                                <p class="text-xs text-slate-500">Author card preview</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 15. DISCLAIMER -->
-                    <div class="rounded-2xl p-6 bg-amber-500/10 border border-amber-500/20">
-                        <h2 class="text-lg font-bold text-amber-400 mb-4 flex items-center gap-2">
-                            <span class="text-xl">⚠️</span>
-                            Disclaimer
-                        </h2>
-                        <textarea id="acDisclaimer" rows="3" class="form-input w-full rounded-xl px-4 py-3 text-sm bg-amber-500/5 border-amber-500/20 focus:border-amber-500/50 focus:ring-amber-500/10" placeholder="Yeh article sirf educational purpose ke liye hai..."></textarea>
-                    </div>
-
-                    <!-- ACTION BUTTONS -->
-                    <div class="flex flex-col sm:flex-row gap-3 sticky bottom-4 bg-slate-900/90 backdrop-blur-xl p-4 rounded-2xl border border-violet-500/20 shadow-2xl z-30">
-                        <button type="button" onclick="previewArticleCreator()" class="btn-secondary flex-1 px-6 py-3.5 rounded-xl font-medium text-sm flex items-center justify-center gap-2">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
-                            Preview
-                        </button>
-                        <button type="button" onclick="copyArticleHTML()" class="btn-primary flex-1 px-6 py-3.5 rounded-xl font-semibold text-sm flex items-center justify-center gap-2">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
-                            Copy HTML Code
-                        </button>
-                        <button type="submit" id="acSaveBtn" class="btn-success flex-1 px-6 py-3.5 rounded-xl font-semibold text-sm flex items-center justify-center gap-2">
-                            <span id="acSaveText">Save to Database</span>
-                            <div id="acSaveSpinner" class="spinner w-4 h-4 border-2 hidden"></div>
-                        </button>
-                    </div>
-
-                </form>
-            </div>
-
-            <!-- ==================== MODE 2: PASTE HTML ==================== -->
-            <div id="modeHtml" class="hidden space-y-6">
-
-                <!-- Meta Fields -->
-                <div class="glass-card rounded-2xl p-6 space-y-4">
-                    <h2 class="text-lg font-bold text-violet-300 mb-2 flex items-center gap-2">
-                        <span>📋</span> Article Details
-                    </h2>
-                    <input type="text" id="pasteTitle" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="Article Title *">
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                        <select id="pasteCategory" class="form-input w-full rounded-xl px-4 py-3 text-sm">
-                            <option value="Latest Jobs">Latest Jobs</option>
-                            <option value="Teaching Exam">Teaching Exam</option>
-                            <option value="Admit Cards">Admit Cards</option>
-                            <option value="Results">Results</option>
-                            <option value="Sarkari Yojana">Sarkari Yojana</option>
-                            <option value="Live Update">Live Update</option>
-                        </select>
-                        <input type="date" id="pasteDate" class="form-input w-full rounded-xl px-4 py-3 text-sm">
-                        <input type="text" id="pasteSlug" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="URL Slug (auto)">
-                    </div>
-                </div>
-
-                <!-- A4 / Code Editor Box -->
-                <div class="glass-card rounded-2xl overflow-hidden border-slate-700/50">
-                    <!-- Editor Header (Mac-style) -->
-                    <div class="bg-slate-900/80 border-b border-slate-700/50 px-4 py-3 flex items-center gap-2">
-                        <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
-                        <div class="w-3 h-3 rounded-full bg-amber-500/80"></div>
-                        <div class="w-3 h-3 rounded-full bg-emerald-500/80"></div>
-                        <span class="ml-2 text-xs text-slate-500 font-mono">raw-html-editor</span>
-                    </div>
-                    <textarea id="pasteHtmlContent" class="w-full bg-slate-950/80 text-slate-300 px-4 py-4 text-xs font-mono leading-relaxed border-none focus:ring-0 resize-y" rows="28" placeholder="<!DOCTYPE html>
-<html lang='hi'>
-<head>...</head>
-<body>...</body>
-</html>"></textarea>
-                </div>
-
-                <!-- Paste Actions -->
-                <div class="flex flex-col sm:flex-row gap-3">
-                    <button type="button" onclick="clearPasteArea()" class="btn-secondary px-6 py-3 rounded-xl font-medium text-sm flex items-center justify-center gap-2">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
-                        Clear
-                    </button>
-                    <button type="button" onclick="savePastedHTML()" id="pasteSaveBtn" class="btn-success flex-1 px-6 py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-2">
-                        <span id="pasteSaveText">💾 Save HTML to Database</span>
-                        <div id="pasteSaveSpinner" class="spinner w-4 h-4 border-2 hidden"></div>
+                    <button type="submit" id="acSaveBtn" class="btn-success flex-1 px-6 py-3.5 rounded-xl font-semibold text-sm flex items-center justify-center gap-2">
+                        <span id="acSaveText">Save to Database</span>
+                        <div id="acSaveSpinner" class="spinner w-4 h-4 border-2 hidden"></div>
                     </button>
                 </div>
 
-            </div>
-
+            </form>
         </div>
     </section>
 
@@ -1525,51 +1348,34 @@
             addStep('applySteps', 'Official Website Visit Karein', 'ctet.nic.in par jayein...');
         });
 
-        // Add Table Row (Article Table Style)
+        // Add Table Row
         function addRow(tableId, col1Val = '', col2Val = '') {
-            const tbody = document.getElementById(tableId);
-            const tr = document.createElement('tr');
-            tr.className = 'group hover:bg-violet-500/5 transition-colors';
-            tr.innerHTML = `
-                <td class="px-4 py-3 border-b border-slate-700/50">
-                    <input type="text" placeholder="Label" value="${col1Val}" class="w-full bg-transparent text-slate-300 text-sm placeholder-slate-600 border-none focus:ring-0 p-0 table-col1">
-                </td>
-                <td class="px-4 py-3 border-b border-slate-700/50">
-                    <input type="text" placeholder="Value" value="${col2Val}" class="w-full bg-transparent text-slate-300 text-sm placeholder-slate-600 border-none focus:ring-0 p-0 table-col2">
-                </td>
-                <td class="px-2 py-3 border-b border-slate-700/50 text-center">
-                    <button type="button" onclick="this.parentElement.parentElement.remove()" class="p-1.5 rounded-lg text-slate-600 hover:text-red-400 hover:bg-red-500/10 transition" title="Remove">✕</button>
-                </td>
-            `;
-            tbody.appendChild(tr);
-        }
-
-        // Add Step (Article Numbered Circle Style)
-        function addStep(containerId, titleVal = '', descVal = '') {
-            const container = document.getElementById(containerId);
-            const stepNumber = container.children.length + 1;
+            const container = document.getElementById(tableId);
             const div = document.createElement('div');
-            div.className = 'flex gap-4 items-start group';
+            div.className = 'flex gap-2 items-center';
             div.innerHTML = `
-                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-violet-500/20 flex items-center justify-center text-violet-300 font-bold text-lg border border-violet-500/30">${stepNumber}</div>
-                <div class="flex-1 space-y-2 bg-slate-900/30 rounded-xl p-4 border border-slate-700/50 group-hover:border-violet-500/20 transition-colors">
-                    <input type="text" placeholder="Step Title (e.g. Online Application)" value="${titleVal}" class="w-full bg-transparent text-white font-medium text-sm placeholder-slate-600 border-none focus:ring-0 p-0 step-title">
-                    <input type="text" placeholder="Step Description..." value="${descVal}" class="w-full bg-transparent text-slate-400 text-sm placeholder-slate-600 border-none focus:ring-0 p-0 step-desc">
-                </div>
-                <button type="button" onclick="removeStep(this)" class="mt-3 p-1.5 rounded-lg text-slate-600 hover:text-red-400 hover:bg-red-500/10 transition flex-shrink-0" title="Remove">✕</button>
+                <input type="text" placeholder="Label" value="${col1Val}" class="form-input flex-1 rounded-lg px-3 py-2.5 text-sm table-col1">
+                <input type="text" placeholder="Value" value="${col2Val}" class="form-input flex-1 rounded-lg px-3 py-2.5 text-sm table-col2">
+                <button type="button" onclick="this.parentElement.remove()" class="p-2 text-slate-500 hover:text-red-400 transition" title="Remove">✕</button>
             `;
             container.appendChild(div);
         }
 
-        // Helper to renumber steps after removal
-        function removeStep(btn) {
-            const container = btn.closest('.space-y-4');
-            btn.closest('.flex.gap-4').remove();
-            // Renumber remaining steps
-            Array.from(container.children).forEach((child, index) => {
-                const circle = child.querySelector('.rounded-full');
-                if (circle) circle.textContent = index + 1;
-            });
+        // Add Step (Selection/Apply)
+        function addStep(containerId, titleVal = '', descVal = '') {
+            const container = document.getElementById(containerId);
+            const div = document.createElement('div');
+            div.className = 'glass-card rounded-xl p-4 border border-slate-700/50';
+            div.innerHTML = `
+                <div class="flex gap-2 items-start">
+                    <div class="flex-1 space-y-2">
+                        <input type="text" placeholder="Step Title (e.g. Online Application)" value="${titleVal}" class="form-input w-full rounded-lg px-3 py-2.5 text-sm font-medium step-title">
+                        <input type="text" placeholder="Step Description" value="${descVal}" class="form-input w-full rounded-lg px-3 py-2.5 text-sm step-desc">
+                    </div>
+                    <button type="button" onclick="this.parentElement.parentElement.remove()" class="p-2 text-slate-500 hover:text-red-400 transition mt-1">✕</button>
+                </div>
+            `;
+            container.appendChild(div);
         }
 
         // Generate Article HTML
@@ -1598,10 +1404,10 @@
             // Helper: Build table from inputs
             const buildTable = (containerId) => {
                 const rows = [];
-                document.querySelectorAll(`#${containerId} > tr`).forEach(tr => {
-                    const c1 = tr.querySelector('.table-col1')?.value;
-                    const c2 = tr.querySelector('.table-col2')?.value;
-                    if (c1 || c2) rows.push(`<<tr><td class="border border-slate-600 px-4 py-2 font-medium">${c1}</td><td class="border border-slate-600 px-4 py-2">${c2}</td></tr>`);
+                document.querySelectorAll(`#${containerId} > div`).forEach(div => {
+                    const c1 = div.querySelector('.table-col1')?.value;
+                    const c2 = div.querySelector('.table-col2')?.value;
+                    if (c1 || c2) rows.push(`<tr><td class="border border-slate-600 px-4 py-2 font-medium">${c1}</td><td class="border border-slate-600 px-4 py-2">${c2}</td></tr>`);
                 });
                 return rows.length ? `<table class="w-full border-collapse border border-slate-600 my-4 text-sm"><tbody>${rows.join('')}</tbody></table>` : '';
             };
@@ -1712,7 +1518,7 @@
         td { color: #cbd5e1; }
         tr:hover td { background: rgba(124,58,237,0.05); }
     <\/style>
-<<\/head>
+<\/head>
 <body class="antialiased min-h-screen">
     <div class="max-w-3xl mx-auto px-4 py-6">
 
@@ -1760,8 +1566,8 @@
             <p class="text-xs text-slate-500">Published on ${date} • Apply Bro</p>
         </div>
     </div>
-<<\/body>
-<<\/html>`;
+<\/body>
+<\/html>`;
 
             return html;
         }
@@ -1770,7 +1576,7 @@
         function previewArticleCreator() {
             const html = generateArticleHTML();
             // Extract body content for preview
-            const bodyMatch = html.match(/<<body[^>]*>([\s\S]*)<<\/body>/);
+            const bodyMatch = html.match(/<body[^>]*>([\s\S]*)<\/body>/);
             const bodyContent = bodyMatch ? bodyMatch[1] : html;
             document.getElementById('articleCreatorPreviewContent').innerHTML = bodyContent;
             document.getElementById('articleCreatorPreviewModal').classList.remove('hidden');
@@ -1843,208 +1649,6 @@
                 showToast('Error: ' + error.message, 'error');
             } finally {
                 setLoading('acSaveBtn', 'acSaveText', 'acSaveSpinner', false);
-            }
-        }
-
-
-                // ==========================================
-        // RAW HTML PASTE FUNCTIONS
-        // ==========================================
-
-        function switchArticleMode(mode) {
-            const builderTab = document.getElementById('tabBuilder');
-            const htmlTab = document.getElementById('tabHtml');
-            const form = document.getElementById('articleCreatorForm');
-            const pasteArea = document.getElementById('htmlPasteArea');
-
-            if (mode === 'html') {
-                // Show paste area, hide form
-                form.classList.add('hidden');
-                pasteArea.classList.remove('hidden');
-                
-                // Update tab styles
-                htmlTab.classList.remove('text-slate-400');
-                htmlTab.classList.add('bg-violet-600', 'text-white', 'shadow-lg', 'shadow-violet-500/25');
-                
-                builderTab.classList.remove('bg-violet-600', 'text-white', 'shadow-lg', 'shadow-violet-500/25');
-                builderTab.classList.add('text-slate-400');
-                
-                // Set default date
-                document.getElementById('pasteDate').valueAsDate = new Date();
-            } else {
-                // Show form, hide paste area
-                form.classList.remove('hidden');
-                pasteArea.classList.add('hidden');
-                
-                // Update tab styles
-                builderTab.classList.remove('text-slate-400');
-                builderTab.classList.add('bg-violet-600', 'text-white', 'shadow-lg', 'shadow-violet-500/25');
-                
-                htmlTab.classList.remove('bg-violet-600', 'text-white', 'shadow-lg', 'shadow-violet-500/25');
-                htmlTab.classList.add('text-slate-400');
-            }
-        }
-
-        function clearPasteArea() {
-            document.getElementById('pasteHtmlContent').value = '';
-            document.getElementById('pasteTitle').value = '';
-            document.getElementById('pasteSlug').value = '';
-        }
-
-        async function savePastedHTML() {
-            const title = document.getElementById('pasteTitle').value.trim();
-            const htmlContent = document.getElementById('pasteHtmlContent').value.trim();
-            const category = document.getElementById('pasteCategory').value;
-            const slug = document.getElementById('pasteSlug').value.trim() || title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-            const date = document.getElementById('pasteDate').value || new Date().toISOString().split('T')[0];
-
-            if (!title) {
-                showToast('Title dalna zaroori hai!', 'error');
-                document.getElementById('pasteTitle').focus();
-                return;
-            }
-            if (!htmlContent) {
-                showToast('HTML content paste karo!', 'error');
-                document.getElementById('pasteHtmlContent').focus();
-                return;
-            }
-
-            // Button loading state
-            const btn = document.getElementById('pasteSaveBtn');
-            const text = document.getElementById('pasteSaveText');
-            const spinner = document.getElementById('pasteSaveSpinner');
-            
-            btn.disabled = true;
-            text.classList.add('hidden');
-            spinner.classList.remove('hidden');
-
-            try {
-                const articleData = {
-                    title: title,
-                    category: category,
-                    publishDate: date,
-                    description: title.substring(0, 150),
-                    slug: slug,
-                    type: 'article',
-                    htmlContent: htmlContent,
-                    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-                    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-                };
-
-                await db.collection('posts').add(articleData);
-
-                showToast('HTML Article saved successfully!', 'success');
-                clearPasteArea();
-                switchArticleMode('builder');
-                showSection('posts');
-                loadPosts();
-            } catch (error) {
-                console.error(error);
-                showToast('Error: ' + error.message, 'error');
-            } finally {
-                btn.disabled = false;
-                text.classList.remove('hidden');
-                spinner.classList.add('hidden');
-            }
-        }
-
-
-
-
-                // ==========================================
-        // TAB SWITCHER: Form Builder vs Paste HTML
-        // ==========================================
-        function switchArticleMode(mode) {
-            const modeForm = document.getElementById('modeForm');
-            const modeHtml = document.getElementById('modeHtml');
-            const tabForm = document.getElementById('tabForm');
-            const tabHtml = document.getElementById('tabHtml');
-
-            if (mode === 'html') {
-                modeForm.classList.add('hidden');
-                modeHtml.classList.remove('hidden');
-
-                tabHtml.classList.add('bg-violet-600', 'text-white', 'shadow-lg', 'shadow-violet-500/25');
-                tabHtml.classList.remove('text-slate-400');
-
-                tabForm.classList.remove('bg-violet-600', 'text-white', 'shadow-lg', 'shadow-violet-500/25');
-                tabForm.classList.add('text-slate-400');
-
-                // Default date set karo agar empty ho
-                const pasteDate = document.getElementById('pasteDate');
-                if (!pasteDate.value) pasteDate.valueAsDate = new Date();
-            } else {
-                modeForm.classList.remove('hidden');
-                modeHtml.classList.add('hidden');
-
-                tabForm.classList.add('bg-violet-600', 'text-white', 'shadow-lg', 'shadow-violet-500/25');
-                tabForm.classList.remove('text-slate-400');
-
-                tabHtml.classList.remove('bg-violet-600', 'text-white', 'shadow-lg', 'shadow-violet-500/25');
-                tabHtml.classList.add('text-slate-400');
-            }
-        }
-
-        function clearPasteArea() {
-            document.getElementById('pasteHtmlContent').value = '';
-            document.getElementById('pasteTitle').value = '';
-            document.getElementById('pasteSlug').value = '';
-            document.getElementById('pasteDate').valueAsDate = new Date();
-        }
-
-        async function savePastedHTML() {
-            const title = document.getElementById('pasteTitle').value.trim();
-            const htmlContent = document.getElementById('pasteHtmlContent').value.trim();
-            const category = document.getElementById('pasteCategory').value;
-            const slug = document.getElementById('pasteSlug').value.trim() || title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-            const date = document.getElementById('pasteDate').value || new Date().toISOString().split('T')[0];
-
-            if (!title) {
-                showToast('Title dalna zaroori hai!', 'error');
-                document.getElementById('pasteTitle').focus();
-                return;
-            }
-            if (!htmlContent) {
-                showToast('HTML content paste karo!', 'error');
-                document.getElementById('pasteHtmlContent').focus();
-                return;
-            }
-
-            // Loading state
-            const btn = document.getElementById('pasteSaveBtn');
-            const text = document.getElementById('pasteSaveText');
-            const spinner = document.getElementById('pasteSaveSpinner');
-            btn.disabled = true;
-            text.classList.add('hidden');
-            spinner.classList.remove('hidden');
-
-            try {
-                const articleData = {
-                    title: title,
-                    category: category,
-                    publishDate: date,
-                    description: title.substring(0, 150),
-                    slug: slug,
-                    type: 'article',
-                    htmlContent: htmlContent,
-                    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-                    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-                };
-
-                await db.collection('posts').add(articleData);
-
-                showToast('HTML Article saved successfully!', 'success');
-                clearPasteArea();
-                switchArticleMode('form');
-                showSection('posts');
-                loadPosts();
-            } catch (error) {
-                console.error(error);
-                showToast('Error: ' + error.message, 'error');
-            } finally {
-                btn.disabled = false;
-                text.classList.remove('hidden');
-                spinner.classList.add('hidden');
             }
         }
     </script>
