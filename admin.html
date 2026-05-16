@@ -430,7 +430,94 @@
                     <p class="text-slate-400 text-sm">Loading posts...</p>
                 </div>
             </div>
-        </main>
+        
+    <!-- ==================== BULK IMPORT SECTION ==================== -->
+    <section id="bulkImportSection" class="hidden py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <!-- Header -->
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold text-white mb-2">📥 Bulk Import Tool</h2>
+                <p class="text-slate-400 text-sm">Paste raw data and auto-format into posts. Perfect for adding multiple jobs at once.</p>
+            </div>
+
+            <!-- Format Guide -->
+            <div class="glass-card rounded-xl p-4 mb-6">
+                <h3 class="text-sm font-semibold text-violet-400 mb-3 uppercase tracking-wider">📋 Data Format Guide</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                    <div class="bg-slate-900/50 rounded-lg p-3 border border-violet-500/20">
+                        <p class="text-slate-300 font-medium mb-2">Format (pipe | separated):</p>
+                        <code class="text-emerald-400 text-xs block bg-slate-800 p-2 rounded">
+Title | Description | Date | Link | Category | Badge
+                        </code>
+                    </div>
+                    <div class="bg-slate-900/50 rounded-lg p-3 border border-violet-500/20">
+                        <p class="text-slate-300 font-medium mb-2">Example:</p>
+                        <code class="text-emerald-400 text-xs block bg-slate-800 p-2 rounded">
+SSC CGL 2026 | 7,500+ Vacancies • Last Date: 15 June | 2026-06-15 | https://ssc.gov.in | Latest Jobs | New
+                        </code>
+                    </div>
+                </div>
+                <div class="mt-3 flex flex-wrap gap-2">
+                    <span class="px-2 py-1 bg-violet-500/10 text-violet-400 text-xs rounded border border-violet-500/20">Use | to separate fields</span>
+                    <span class="px-2 py-1 bg-violet-500/10 text-violet-400 text-xs rounded border border-violet-500/20">One job per line</span>
+                    <span class="px-2 py-1 bg-violet-500/10 text-violet-400 text-xs rounded border border-violet-500/20">Date: YYYY-MM-DD</span>
+                </div>
+            </div>
+
+            <!-- Main Tool -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+                <!-- Left: Input Area -->
+                <div class="glass-card rounded-2xl p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-semibold text-white flex items-center gap-2">
+                            <svg class="w-5 h-5 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                            Paste Raw Data
+                        </h3>
+                        <button onclick="loadSampleData()" class="text-xs text-violet-400 hover:text-violet-300 transition-colors">Load Sample</button>
+                    </div>
+
+                    <textarea id="bulkInput" class="form-input w-full rounded-xl px-4 py-3 text-sm font-mono h-80 resize-none" placeholder="Paste your data here...&#10;&#10;Example:&#10;SSC CGL 2026 | 7,500+ Vacancies • Last Date: 15 June | 2026-06-15 | https://ssc.gov.in | Latest Jobs | New&#10;RRB NTPC CBT 2 | 35,000+ Vacancies • Last Date: 30 May | 2026-05-30 | https://rrbcdg.gov.in | Latest Jobs | New"></textarea>
+
+                    <div class="flex gap-3 mt-4">
+                        <button onclick="parseBulkData()" class="btn-primary flex-1 rounded-xl py-3 font-semibold text-sm flex items-center justify-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/></svg>
+                            Preview & Format
+                        </button>
+                        <button onclick="clearBulkInput()" class="btn-secondary px-4 py-3 rounded-xl font-medium text-sm">Clear</button>
+                    </div>
+                </div>
+
+                <!-- Right: Preview Area -->
+                <div class="glass-card rounded-2xl p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-semibold text-white flex items-center gap-2">
+                            <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                            Live Preview
+                            <span id="previewCount" class="ml-2 px-2 py-0.5 bg-emerald-500/20 text-emerald-400 text-xs rounded-full hidden">0 posts</span>
+                        </h3>
+                    </div>
+
+                    <div id="bulkPreview" class="space-y-3 max-h-80 overflow-y-auto pr-2">
+                        <div class="text-center py-12 text-slate-500">
+                            <svg class="w-12 h-12 mx-auto mb-3 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                            <p class="text-sm">Paste data on the left to see preview</p>
+                        </div>
+                    </div>
+
+                    <div id="bulkActions" class="hidden mt-4 pt-4 border-t border-slate-700/50">
+                        <button onclick="saveBulkPosts()" id="bulkSaveBtn" class="btn-success w-full rounded-xl py-3 font-semibold text-sm flex items-center justify-center gap-2">
+                            <span id="bulkSaveText">Save All Posts to Database</span>
+                            <div id="bulkSaveSpinner" class="spinner w-4 h-4 border-2 hidden"></div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</main>
     </div>
 
     <!-- ==================== ADD/EDIT MODAL ==================== -->
@@ -552,8 +639,7 @@
         // ==========================================
         // IMPORTANT: Replace with your Firebase project config
         // Get this from: Firebase Console → Project Settings → General → Your Apps → SDK Setup
-
-                const firebaseConfig = {
+                   const firebaseConfig = {
     apiKey: "AIzaSyCVMpsG1ePU6SSsAxWSnj85ylYfndJby-g",
     authDomain: "apply-bro.firebaseapp.com",
     projectId: "apply-bro",
