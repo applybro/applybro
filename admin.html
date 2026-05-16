@@ -470,6 +470,69 @@
                 </div>
             </div>
 
+
+
+                <!-- ==================== ARTICLE CREATOR SECTION ==================== -->
+    <section id="articleCreatorSection" class="hidden py-6">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6">
+
+            <!-- 🔥 NEW: Builder / HTML Paste Toggle -->
+            <div class="flex items-center justify-between mb-6">
+                <div class="flex bg-slate-900/50 rounded-xl p-1 border border-slate-700/50">
+                    <button type="button" onclick="switchArticleMode('builder')" id="tabBuilder" class="px-4 py-2 rounded-lg text-sm font-medium transition-all bg-violet-600 text-white shadow-lg shadow-violet-500/25">
+                        📝 Form Builder
+                    </button>
+                    <button type="button" onclick="switchArticleMode('html')" id="tabHtml" class="px-4 py-2 rounded-lg text-sm font-medium transition-all text-slate-400 hover:text-white">
+                        📋 Paste HTML
+                    </button>
+                </div>
+                <button onclick="showSection('posts')" class="btn-secondary px-4 py-2 rounded-xl text-sm flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                    Back to Posts
+                </button>
+            </div>
+
+            <!-- 🔥 NEW: RAW HTML PASTE AREA (Hidden by default) -->
+            <div id="htmlPasteArea" class="hidden space-y-6 mb-8">
+                <div class="glass-card rounded-2xl p-6">
+                    <h2 class="text-lg font-bold text-violet-300 mb-4">📋 Paste Raw HTML</h2>
+                    <p class="text-xs text-slate-400 mb-3">Poora HTML article yahan paste karo. Title, Category aur Slug manually fill karna hoga.</p>
+                    
+                    <div class="space-y-4 mb-4">
+                        <input type="text" id="pasteTitle" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="Article Title *" required>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <select id="pasteCategory" class="form-input w-full rounded-xl px-4 py-3 text-sm">
+                                <option value="Latest Jobs">Latest Jobs</option>
+                                <option value="Teaching Exam">Teaching Exam</option>
+                                <option value="Admit Cards">Admit Cards</option>
+                                <option value="Results">Results</option>
+                                <option value="Sarkari Yojana">Sarkari Yojana</option>
+                                <option value="Live Update">Live Update</option>
+                            </select>
+                            <input type="text" id="pasteSlug" class="form-input w-full rounded-xl px-4 py-3 text-sm" placeholder="URL Slug (auto-generated if empty)">
+                        </div>
+                        <input type="date" id="pasteDate" class="form-input w-full rounded-xl px-4 py-3 text-sm">
+                    </div>
+
+                    <textarea id="pasteHtmlContent" rows="20" class="form-input w-full rounded-xl px-4 py-3 text-sm font-mono text-xs leading-relaxed bg-slate-950/50 border-slate-700/50" placeholder="<!DOCTYPE html>
+<html... paste your complete HTML here ...</html>"></textarea>
+                    
+                    <div class="flex gap-3 mt-4">
+                        <button type="button" onclick="clearPasteArea()" class="btn-secondary px-5 py-2.5 rounded-xl text-sm">Clear</button>
+                        <button type="button" onclick="savePastedHTML()" id="pasteSaveBtn" class="btn-success flex-1 px-5 py-2.5 rounded-xl font-semibold text-sm flex items-center justify-center gap-2">
+                            <span id="pasteSaveText">💾 Save HTML to Database</span>
+                            <div id="pasteSaveSpinner" class="spinner w-4 h-4 border-2 hidden"></div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EXISTING FORM: Article Creator Form -->
+            <form id="articleCreatorForm" onsubmit="handleGenerateArticle(event)" class="space-y-6">
+                <!-- ... pura form waise ka waise rahega ... -->
+
+
+            
             <form id="articleCreatorForm" onsubmit="handleGenerateArticle(event)" class="space-y-6">
 
                 <!-- 2. SHORT INTRO (Article-style lead paragraph) -->
@@ -1694,6 +1757,109 @@
                 setLoading('acSaveBtn', 'acSaveText', 'acSaveSpinner', false);
             }
         }
+
+
+                // ==========================================
+        // RAW HTML PASTE FUNCTIONS
+        // ==========================================
+
+        function switchArticleMode(mode) {
+            const builderTab = document.getElementById('tabBuilder');
+            const htmlTab = document.getElementById('tabHtml');
+            const form = document.getElementById('articleCreatorForm');
+            const pasteArea = document.getElementById('htmlPasteArea');
+
+            if (mode === 'html') {
+                // Show paste area, hide form
+                form.classList.add('hidden');
+                pasteArea.classList.remove('hidden');
+                
+                // Update tab styles
+                htmlTab.classList.remove('text-slate-400');
+                htmlTab.classList.add('bg-violet-600', 'text-white', 'shadow-lg', 'shadow-violet-500/25');
+                
+                builderTab.classList.remove('bg-violet-600', 'text-white', 'shadow-lg', 'shadow-violet-500/25');
+                builderTab.classList.add('text-slate-400');
+                
+                // Set default date
+                document.getElementById('pasteDate').valueAsDate = new Date();
+            } else {
+                // Show form, hide paste area
+                form.classList.remove('hidden');
+                pasteArea.classList.add('hidden');
+                
+                // Update tab styles
+                builderTab.classList.remove('text-slate-400');
+                builderTab.classList.add('bg-violet-600', 'text-white', 'shadow-lg', 'shadow-violet-500/25');
+                
+                htmlTab.classList.remove('bg-violet-600', 'text-white', 'shadow-lg', 'shadow-violet-500/25');
+                htmlTab.classList.add('text-slate-400');
+            }
+        }
+
+        function clearPasteArea() {
+            document.getElementById('pasteHtmlContent').value = '';
+            document.getElementById('pasteTitle').value = '';
+            document.getElementById('pasteSlug').value = '';
+        }
+
+        async function savePastedHTML() {
+            const title = document.getElementById('pasteTitle').value.trim();
+            const htmlContent = document.getElementById('pasteHtmlContent').value.trim();
+            const category = document.getElementById('pasteCategory').value;
+            const slug = document.getElementById('pasteSlug').value.trim() || title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+            const date = document.getElementById('pasteDate').value || new Date().toISOString().split('T')[0];
+
+            if (!title) {
+                showToast('Title dalna zaroori hai!', 'error');
+                document.getElementById('pasteTitle').focus();
+                return;
+            }
+            if (!htmlContent) {
+                showToast('HTML content paste karo!', 'error');
+                document.getElementById('pasteHtmlContent').focus();
+                return;
+            }
+
+            // Button loading state
+            const btn = document.getElementById('pasteSaveBtn');
+            const text = document.getElementById('pasteSaveText');
+            const spinner = document.getElementById('pasteSaveSpinner');
+            
+            btn.disabled = true;
+            text.classList.add('hidden');
+            spinner.classList.remove('hidden');
+
+            try {
+                const articleData = {
+                    title: title,
+                    category: category,
+                    publishDate: date,
+                    description: title.substring(0, 150),
+                    slug: slug,
+                    type: 'article',
+                    htmlContent: htmlContent,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+                };
+
+                await db.collection('posts').add(articleData);
+
+                showToast('HTML Article saved successfully!', 'success');
+                clearPasteArea();
+                switchArticleMode('builder');
+                showSection('posts');
+                loadPosts();
+            } catch (error) {
+                console.error(error);
+                showToast('Error: ' + error.message, 'error');
+            } finally {
+                btn.disabled = false;
+                text.classList.remove('hidden');
+                spinner.classList.add('hidden');
+            }
+        }
+        
     </script>
 </body>
 </html>
