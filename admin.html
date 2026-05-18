@@ -2389,8 +2389,7 @@
             if (!text) return '';
             let html = escapeHtml(text);
             html = html.replace(/\*\*(.*?)\*\*/g, '<strong style="color:#e2e8f0;">$1</strong>');
-            const lines = html.split('
-');
+            const lines = html.split('\n')
             let inList = false;
             let out = [];
             lines.forEach(line => {
