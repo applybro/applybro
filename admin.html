@@ -1846,7 +1846,7 @@
             return `<ul style="list-style:none;padding:0;margin:1rem 0;space-y:2;">${items.map(item => `
                 <li style="display:flex;align-items:start;gap:12px;margin-bottom:12px;">
                     <svg style="width:20px;height:20px;color:#8b5cf6;flex-shrink:0;margin-top:2px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                    <span style="font-size:.875rem;color:#cbd5e1;">${item.replace(/\*\*(.*?)\*\*/g, '<strong style="color:#e2e8f0;">$1</strong>').trim()}</span>
+                    <span style="font-size:.875rem;color:#cbd5e1;">${item.replace(new RegExp('\\*\\*(.*?)\\*\\*', 'g'), '<strong style="color:#e2e8f0;">$1</strong>').trim()}</span>
                 </li>
             `).join('')}</ul>`;
         }
@@ -1857,7 +1857,7 @@
             return `<div style="margin:1rem 0;">${items.map(item => `
                 <div style="display:flex;align-items:start;gap:12px;margin-bottom:12px;padding:14px;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);border-radius:12px;">
                     <span style="color:#fbbf24;font-size:1.125rem;flex-shrink:0;">⚠️</span>
-                    <span style="font-size:.875rem;color:#cbd5e1;">${item.replace(/^[-•]\s*/, '').trim()}</span>
+                    <span style="font-size:.875rem;color:#cbd5e1;">${item.replace(new RegExp('^[-•]\\s*'), '').trim()}</span>
                 </div>
             `).join('')}</div>`;
         }
@@ -1984,11 +1984,11 @@
       ${category ? `<span style="font-size:.875rem;color:var(--text-muted);">Category: ${category}</span>` : ''}
     <\/div>
     <h1 style="font-size:2.25rem;font-weight:700;line-height:1.2;margin-bottom:1rem;color:#fff;">${title}<\/h1>
-    ${shortIntro ? `<p style="font-size:1.125rem;line-height:1.7;max-width:3xl;color:var(--text-muted);">${shortIntro.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong style="color:#c4b5fd;">$1</strong>')}<<\/p>` : ''}
+    ${shortIntro ? `<p style="font-size:1.125rem;line-height:1.7;max-width:3xl;color:var(--text-muted);">${shortIntro.split('\n').join('<br>').replace(new RegExp('\\*\\*(.*?)\\*\\*', 'g'), '<strong style="color:#c4b5fd;">$1</strong>')}<<\/p>` : ''}
   <\/header>
   ${linksHTML}
   ${buildTable('overviewTable') ? `<section style="margin-bottom:2rem;"><span class="badge"><svg style="width:16px;height:16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/><\/svg>Quick Overview<<\/span><div class="card">${buildTable('overviewTable')}<<\/div><\/section>` : ''}
-  ${about ? `<section style="margin-bottom:2rem;"><span class="badge"><svg style="width:16px;height:16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/><\/svg>About This Article<<\/span><div class="card"><p style="line-height:1.7;color:var(--text-muted);">${about.replace(/\n/g, '</p><p style="line-height:1.7;color:var(--text-muted);">').replace(/\*\*(.*?)\*\*/g, '<strong style="color:#e2e8f0;">$1</strong>')}</p><\/div><\/section>` : ''}
+  ${about ? `<section style="margin-bottom:2rem;"><span class="badge"><svg style="width:16px;height:16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/><\/svg>About This Article<<\/span><div class="card"><p style="line-height:1.7;color:var(--text-muted);">${about.replace(new RegExp('\\n', 'g'), '</p><p style="line-height:1.7;color:var(--text-muted);">').replace(new RegExp('\\*\\*(.*?)\\*\\*', 'g'), '<strong style="color:#e2e8f0;">$1</strong>')}</p><\/div><\/section>` : ''}
   ${eligibility ? `<section style="margin-bottom:2rem;"><span class="badge"><svg style="width:16px;height:16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/><\/svg>योग्यता विवरण<<\/span><div class="card">${buildList(eligibility)}<<\/div><\/section>` : ''}
   ${buildTable('eduTable') ? `<section style="margin-bottom:2rem;"><span class="badge"><svg style="width:16px;height:16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/><\/svg>शैक्षणिक योग्यता<<\/span><div class="card">${buildTable('eduTable')}<<\/div><\/section>` : ''}
   ${buildTable('ageTable') ? `<section style="margin-bottom:2rem;"><span class="badge"><svg style="width:16px;height:16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/><\/svg>आयु सीमा<<\/span><div class="card">${buildTable('ageTable')}<<\/div><\/section>` : ''}
@@ -2016,7 +2016,7 @@
         function previewArticleCreator() {
             const html = generateArticleHTML();
             // Extract body content for preview
-            const bodyMatch = html.match(/<<main[^>]*>([\s\S]*)<<\/main>/);
+            const bodyMatch = html.match(new RegExp('<<main[^>]*>([\\s\\S]*)<<\\/m'))ain>/);
             const bodyContent = bodyMatch ? bodyMatch[1] : html;
             document.getElementById('articleCreatorPreviewContent').innerHTML = bodyContent;
             document.getElementById('articleCreatorPreviewModal').classList.remove('hidden');
@@ -2050,7 +2050,7 @@
             setLoading('acSaveBtn', 'acSaveText', 'acSaveSpinner', true);
 
             try {
-                const slug = document.getElementById('acSlug').value.trim() || title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+                const slug = document.getElementById('acSlug').value.trim() || title.toLowerCase().replace(new RegExp('[^a-z0-9]+', 'g'), '-').replace(new RegExp('^-|-$', 'g'), '');
                 const htmlContent = generateArticleHTML();
 
                 const articleData = {
@@ -2388,15 +2388,15 @@
         function saFormatText(text) {
             if (!text) return '';
             let html = escapeHtml(text);
-            html = html.replace(/\*\*(.*?)\*\*/g, '<strong style="color:#e2e8f0;">$1</strong>');
+            html = html.replace(new RegExp('\\*\\*(.*?)\\*\\*', 'g'), '<strong style="color:#e2e8f0;">$1</strong>');
             const lines = html.split('\n')
             let inList = false;
             let out = [];
             lines.forEach(line => {
                 const trimmed = line.trim();
-                if (/^[-•]\s+/.test(trimmed)) {
+                if (new RegExp('^[-•]\\s+').test(trimmed)) {
                     if (!inList) { out.push('<ul style="list-style:none;padding:0;margin:0;">'); inList = true; }
-                    out.push(`<li style="display:flex;align-items:start;gap:12px;margin-bottom:10px;"><svg style="width:18px;height:18px;color:#8b5cf6;flex-shrink:0;margin-top:2px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span style="font-size:.875rem;color:#cbd5e1;">${trimmed.replace(/^[-•]\s+/, '')}</span></li>`);
+                    out.push(`<li style="display:flex;align-items:start;gap:12px;margin-bottom:10px;"><svg style="width:18px;height:18px;color:#8b5cf6;flex-shrink:0;margin-top:2px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span style="font-size:.875rem;color:#cbd5e1;">${trimmed.replace(new RegExp('^[-•]\\s+'), '')}</span></li>`);
                 } else {
                     if (inList) { out.push('</ul>'); inList = false; }
                     if (trimmed) out.push(`<p style="margin-bottom:12px;line-height:1.7;color:#94a3b8;">${line}</p>`);
@@ -2408,7 +2408,7 @@
 
         function saGenerateHTML() {
             const title = document.getElementById('saMetaTitle').value.trim() || 'Untitled';
-            const slug = document.getElementById('saMetaSlug').value.trim() || title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+            const slug = document.getElementById('saMetaSlug').value.trim() || title.toLowerCase().replace(new RegExp('[^a-z0-9]+', 'g'), '-').replace(new RegExp('^-|-$', 'g'), '');
             const category = document.getElementById('saMetaCategory').value;
             const date = document.getElementById('saMetaDate').value || new Date().toISOString().split('T')[0];
             const badge = document.getElementById('saMetaBadge').value.trim();
@@ -2475,8 +2475,8 @@
                             let faqs = sec.data.items.filter(i => i.q || i.a).map((item, i) => `
                                 <div style="margin-bottom:16px;padding:16px;background:rgba(15,23,42,0.4);border:1px solid rgba(139,92,246,0.15);border-radius:12px;">
                                     <h4 style="font-weight:700;color:#c4b5fd;margin-bottom:8px;font-size:1rem;">Q${i+1}. ${escapeHtml(item.q)}</h4>
-                                    <p style="color:#94a3b8;font-size:.875rem;line-height:1.6;">${escapeHtml(item.a).replace(/
-/g,'<br>')}</p>
+                                    <p style="color:#94a3b8;font-size:.875rem;line-height:1.6;">${escapeHtml(item.a).split('\n').join('<br>')}</p>
+
                                 </div>`).join('');
                             bodyContent += `<section style="margin-bottom:2rem;"><span class="badge"><svg style="width:16px;height:16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>${escapeHtml(sec.title)}</span><div class="card">${faqs}</div></section>`;
                         }
@@ -2538,8 +2538,8 @@
                         break;
                     case 'disclaimer':
                         if (sec.data.text) {
-                            bodyContent += `<section style="margin-bottom:2rem;"><div style="padding:16px;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);border-radius:16px;"><div style="display:flex;align-items:start;gap:12px;"><span style="font-size:1.25rem;">⚠️</span><div><h4 style="font-weight:700;color:#fbbf24;margin-bottom:6px;">Disclaimer</h4><p style="font-size:.875rem;color:#cbd5e1;line-height:1.6;">${escapeHtml(sec.data.text).replace(/
-/g,'<br>')}</p></div></div></div></section>`;
+                            bodyContent += `<section style="margin-bottom:2rem;"><div style="padding:16px;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);border-radius:16px;"><div style="display:flex;align-items:start;gap:12px;"><span style="font-size:1.25rem;">⚠️</span><div><h4 style="font-weight:700;color:#fbbf24;margin-bottom:6px;">Disclaimer</h4><p style="font-size:.875rem;color:#cbd5e1;line-height:1.6;">${escapeHtml(sec.data.text).split('\n').join('<br>')}</p></div></div></div></section>`;
+
                         }
                         break;
                     case 'warnings':
@@ -2634,7 +2634,7 @@ ${bodyContent}
 
         function saPreviewArticle() {
             const html = saGenerateHTML();
-            const bodyMatch = html.match(/<main[^>]*>([\s\S]*)<\/main>/);
+            const bodyMatch = html.match(new RegExp('<main[^>]*>([\\s\\S]*)<\\/m'))ain>/);
             const bodyContent = bodyMatch ? bodyMatch[1] : html;
             document.getElementById('smartArticlePreviewContent').innerHTML = bodyContent;
             document.getElementById('smartArticlePreviewModal').classList.remove('hidden');
@@ -2666,7 +2666,7 @@ ${bodyContent}
             setLoading('saSaveBtn', 'saSaveText', 'saSaveSpinner', true);
 
             try {
-                const slug = document.getElementById('saMetaSlug').value.trim() || title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+                const slug = document.getElementById('saMetaSlug').value.trim() || title.toLowerCase().replace(new RegExp('[^a-z0-9]+', 'g'), '-').replace(new RegExp('^-|-$', 'g'), '');
                 const htmlContent = saGenerateHTML();
 
                 const articleData = {
