@@ -416,6 +416,7 @@
 <base target="_blank">
 <base target="_blank">
 <base target="_blank">
+<base target="_blank">
 </head>
 <body class="antialiased">
 
@@ -2016,7 +2017,7 @@
         function previewArticleCreator() {
             const html = generateArticleHTML();
             // Extract body content for preview
-            const bodyMatch = html.match(new RegExp('<<main[^>]*>([\\s\\S]*)<<\\/m'))ain>/);
+            const bodyMatch = html.match(new RegExp('<<main[^>]*>([\\s\\S]*)<<\\/main>'));
             const bodyContent = bodyMatch ? bodyMatch[1] : html;
             document.getElementById('articleCreatorPreviewContent').innerHTML = bodyContent;
             document.getElementById('articleCreatorPreviewModal').classList.remove('hidden');
@@ -2634,7 +2635,7 @@ ${bodyContent}
 
         function saPreviewArticle() {
             const html = saGenerateHTML();
-            const bodyMatch = html.match(new RegExp('<main[^>]*>([\\s\\S]*)<\\/m'))ain>/);
+            const bodyMatch = html.match(new RegExp('<main[^>]*>([\\s\\S]*)<\\/main>'));
             const bodyContent = bodyMatch ? bodyMatch[1] : html;
             document.getElementById('smartArticlePreviewContent').innerHTML = bodyContent;
             document.getElementById('smartArticlePreviewModal').classList.remove('hidden');
