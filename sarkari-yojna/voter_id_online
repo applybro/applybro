@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voter ID Online Apply 2026</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+<style>
+body{
+font-family:'Inter',sans-serif;
+background:#f8f9fa;
+color:#212529
+}
+h1,h2,h3{
+font-family:'Poppins',sans-serif
+}
+.card{
+background:#fff;
+border-radius:16px;
+padding:24px;
+box-shadow:0 4px 20px rgba(0,0,0,.06)
+}
+.badge{
+display:inline-flex;
+align-items:center;
+gap:6px;
+padding:6px 14px;
+background:rgba(10,88,202,.08);
+color:#0A58CA;
+font-weight:600;
+font-size:.75rem;
+border-radius:999px;
+margin-bottom:12px
+}
+.step{
+display:flex;
+gap:16px;
+padding:16px;
+background:#fff;
+border-radius:12px;
+margin-bottom:12px;
+border:1px solid #e5e7eb
+}
+.step-num{
+width:36px;
+height:36px;
+display:flex;
+align-items:center;
+justify-content:center;
+background:#0A58CA;
+color:#fff;
+font-weight:700;
+border-radius:10px;
+flex-shrink:0
+}
+table{
+width:100%;
+border-collapse:collapse
+}
+th{
+background:#0047ff;
+color:#fff;
+padding:14px
+}
+td{
+padding:12px;
+border-bottom:1px solid #eee
+}
+  
+  
+  .theme-toggle{
+  width:40px;
+  height:40px;
+  border-radius:10px;
+  background:#fff;
+  border:1px solid #ddd;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  }
+  
+  
+  
+  <!-- Dark Mode Toggle Button -->
+<button id="themeToggle" class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle Dark Mode">
+
+  <!-- Sun Icon -->
+  <svg id="sunIcon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+      d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+  </svg>
+
+  <!-- Moon Icon -->
+  <svg id="moonIcon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+      d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+  </svg>
+
+</button>
+  
+</style>
+</head>
+
+<body>
+
+<div class="max-w-5xl mx-auto px-4 py-8">
+
+<div class="mb-6 rounded-2xl overflow-hidden shadow-lg bg-black">
+<img 
+src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?q=80&w=1600&auto=format&fit=crop"
+alt="Voter ID"
+class="w-full object-cover">
+</div>
+
+<header class="mb-8">
+
+<div class="flex items-center gap-3 mb-4">
+<span class="px-3 py-1 bg-blue-600 text-white text-xs font-bold rounded-full">
+NEW
+</span>
+
+<span class="text-sm text-gray-500">
+Category: Voter ID
+</span>
+</div>
+
+<h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold leading-snug mb-5">
+Voter ID Online Apply 2026 – घर बैठे नया वोटर कार्ड कैसे बनाएं?
+</h1>
+
+<p class="text-base sm:text-lg leading-8 text-gray-600">
+अगर आपकी उम्र 18 साल हो चुकी है और अभी तक आपका वोटर आईडी कार्ड नहीं बना है, तो अब आप घर बैठे ऑनलाइन आवेदन कर सकते हैं। भारत निर्वाचन आयोग द्वारा Voter ID Online Apply की सुविधा शुरू कर दी गई है। इस आर्टिकल में आवेदन प्रक्रिया, जरूरी दस्तावेज, पात्रता और ऑनलाइन आवेदन से जुड़ी पूरी जानकारी दी गई है।
+</p>
+
+</header>
+
+<section class="mb-8">
+
+<span class="badge">
+Quick Overview
+</span>
+
+<div class="overflow-x-auto card">
+
+<table>
+<tbody>
+
+<tr>
+<th>विवरण</th>
+<th>जानकारी</th>
+</tr>
+
+<tr>
+<td><strong>आर्टिकल का नाम</strong></td>
+<td>Voter ID Online Apply 2026</td>
+</tr>
+
+<tr>
+<td><strong>संबंधित विभाग</strong></td>
+<td>Election Commission of India</td>
+</tr>
+
+<tr>
+<td><strong>फॉर्म का नाम</strong></td>
+<td>Form 6</td>
+</tr>
+
+<tr>
+<td><strong>आवेदन प्रक्रिया</strong></td>
+<td>Online</td>
+</tr>
+
+<tr>
+<td><strong>न्यूनतम आयु</strong></td>
+<td>18 वर्ष</td>
+</tr>
+
+<tr>
+<td><strong>आवेदन शुल्क</strong></td>
+<td>Free</td>
+</tr>
+
+<tr>
+<td><strong>कार्ड प्रकार</strong></td>
+<td>e-EPIC / Physical Voter ID</td>
+</tr>
+
+<tr>
+<td><strong>आधिकारिक वेबसाइट</strong></td>
+<td>Voters Service Portal</td>
+</tr>
+
+</tbody>
+</table>
+
+</div>
+</section>
+
+<section class="mb-8">
+
+<span class="badge">
+About This Article
+</span>
+
+<div class="card">
+
+<p class="leading-8 text-gray-600 mb-4">
+इस आर्टिकल में Voter ID Online Apply 2026 से जुड़ी पूरी जानकारी दी गई है। अगर आपकी उम्र 18 वर्ष पूरी हो चुकी है तो आप आसानी से नया वोटर कार्ड बनवा सकते हैं।
+</p>
+
+<p class="leading-8 text-gray-600 mb-4">
+Voter ID एक सरकारी पहचान पत्र होता है जिसका उपयोग चुनाव में मतदान करने के लिए किया जाता है। इसे EPIC कार्ड भी कहा जाता है।
+</p>
+
+<p class="leading-8 text-gray-600">
+ऑनलाइन आवेदन करने के बाद आपका नाम वोटर लिस्ट में जुड़ जाएगा और बाद में आपका Physical Voter ID आपके पते पर भेज दिया जाएगा।
+</p>
+
+</div>
+</section>
+
+<section class="mb-8">
+
+<span class="badge">
+कौन आवेदन कर सकता है?
+</span>
+
+<div class="card">
+
+<ul class="space-y-4">
+
+<li>✔️ आवेदक भारत का नागरिक होना चाहिए।</li>
+
+<li>✔️ उम्र 18 वर्ष या उससे अधिक होनी चाहिए।</li>
+
+<li>✔️ आवेदक का नाम पहले से वोटर लिस्ट में नहीं होना चाहिए।</li>
+
+<li>✔️ स्थायी पता होना जरूरी है।</li>
+  
+<li>✔️ आवेदक अपने क्षेत्र का निवासी होना चाहिए।</li>
+
+</ul>
+
+</div>
+</section>
+
+<section class="mb-8">
+
+<span class="badge">
+जरूरी दस्तावेज
+</span>
+
+<div class="card">
+
+<ul class="space-y-4">
+
+<li>✔️ आधार कार्ड</li>
+
+<li>✔️ मोबाइल नंबर</li>
+
+<li>✔️ पासपोर्ट साइज फोटो</li>
+
+<li>✔️ Address Proof</li>
+
+<li>✔️ Age Proof</li>
+
+<li>✔️ ईमेल आईडी</li>
+  
+<li>✔️ 02/12/2004 के बाद जन्म होने पर माता-पिता दोनों का आधार कार्ड</li>
+
+<li>✔️ 02/12/2004 से पहले जन्म होने पर किसी एक माता या पिता का आधार कार्ड</li>
+
+ <li>✔️ परिवार या गांव के किसी एक व्यक्ति का Voter ID Number</li>
+
+<li>✔️ 10वीं की मार्कशीट (अगर है तो जरूरी नहीं है)</li>
+
+</ul>
+
+</div>
+</section>
+
+<section class="mb-8">
+
+<span class="badge">
+आवेदन कैसे करें?
+</span>
+
+<div class="card">
+
+<div class="step">
+<div class="step-num">1</div>
+<div>
+सबसे पहले Official Website खोलें।
+</div>
+</div>
+
+<div class="step">
+<div class="step-num">2</div>
+<div>
+Login या Sign Up करें।
+</div>
+</div>
+
+<div class="step">
+<div class="step-num">3</div>
+<div>
+New Voter Registration / Form 6 विकल्प चुनें।
+</div>
+</div>
+
+<div class="step">
+<div class="step-num">4</div>
+<div>
+अपनी सभी जानकारी सही-सही भरें।
+</div>
+</div>
+
+<div class="step">
+<div class="step-num">5</div>
+<div>
+जरूरी दस्तावेज अपलोड करें।
+</div>
+</div>
+
+<div class="step">
+<div class="step-num">6</div>
+<div>
+Submit बटन पर क्लिक करें।
+</div>
+</div>
+
+<div class="step">
+<div class="step-num">7</div>
+<div>
+Reference Number सुरक्षित रखें।
+</div>
+</div>
+
+</div>
+</section>
+
+<section class="mb-8">
+
+<span class="badge">
+Application Status कैसे Check करें?
+</span>
+
+<div class="card">
+
+<p class="leading-8 text-gray-600 mb-4">
+Voter ID आवेदन करने के बाद आप अपने आवेदन की स्थिति ऑनलाइन चेक कर सकते हैं।
+</p>
+
+<ul class="space-y-4">
+
+<li>✔️ Official Portal खोलें</li>
+
+<li>✔️ Track Application Status विकल्प चुनें</li>
+
+<li>✔️ Reference Number दर्ज करें</li>
+
+<li>✔️ अब आपका Status स्क्रीन पर दिख जाएगा</li>
+
+</ul>
+
+</div>
+</section>
+
+<section class="mb-8">
+
+<span class="badge">
+e-EPIC Download कैसे करें?
+</span>
+
+<div class="card">
+
+<p class="leading-8 text-gray-600">
+7 दिन से लेकर 30 दिन के अंदर बन जाता (Approved) है Approval होने के बाद आप Digital Voter ID यानी e-EPIC डाउनलोड कर सकते हैं। इसके लिए Portal में Login करें और Download e-EPIC विकल्प पर क्लिक करें।
+</p>
+
+</div>
+</section>
+
+<section class="mb-8">
+
+<span class="badge">
+महत्वपूर्ण Links
+</span>
+
+<div class="overflow-x-auto card">
+
+<table>
+
+<thead>
+
+<tr>
+<th>Resource Type</th>
+<th>Availability</th>
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+<td><strong>Apply Online</strong></td>
+<td>
+<a href="https://voters.eci.gov.in/" style="color:blue">
+Click Here
+</a>
+</td>
+</tr>
+
+<tr>
+<td><strong>Track Application Status</strong></td>
+<td>
+<a href="https://voters.eci.gov.in/" style="color:blue">
+Click Here
+</a>
+</td>
+</tr>
+
+<tr>
+<td><strong>Download e-EPIC</strong></td>
+<td>
+<a href="https://voters.eci.gov.in/" style="color:blue">
+Click Here
+</a>
+</td>
+</tr>
+
+<tr>
+<td><strong>Official Website</strong></td>
+<td>
+<a href="https://voters.eci.gov.in/" style="color:blue">
+Click Here
+</a>
+</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+</section>
+
+<section class="mb-8">
+
+<span class="badge">
+महत्वपूर्ण निर्देश
+</span>
+
+<div class="card">
+
+<ul class="space-y-4">
+
+<li>⚠️ आवेदन करने से पहले सभी जानकारी सही-सही भरें।</li>
+
+<li>⚠️ केवल Official Website से ही आवेदन करें।</li>
+
+<li>⚠️ गलत जानकारी देने पर आवेदन रद्द हो सकता है।</li>
+
+<li>⚠️ आवेदन के बाद Reference Number सुरक्षित रखें।</li>
+
+<li>⚠️ Verification के लिए BLO आपके घर आ सकता है।</li>
+
+</ul>
+
+</div>
+</section>
+
+<section class="mb-8">
+
+<span class="badge">
+निष्कर्ष
+</span>
+
+<div class="card">
+
+<p class="leading-8 text-gray-600">
+अगर आपकी उम्र 18 साल पूरी हो चुकी है तो आप आसानी से घर बैठे Voter ID के लिए ऑनलाइन आवेदन कर सकते हैं। आवेदन करने के बाद आपका नाम वोटर लिस्ट में जुड़ जाएगा और आप चुनाव में मतदान कर पाएंगे।
+</p>
+
+</div>
+</section>
+  
+  
+  
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!--  ✏️ ABOUT AUTHOR — SIRF PHOTO URL, NAME, AUR BIO TEXT BADLO      -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<section class="mb-8">
+  <span class="badge">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+    About The Author
+  </span>
+  <div class="card">
+    <div class="flex flex-col sm:flex-row items-center sm:items-start gap-5">
+      <!-- ✏️ PROFILE PHOTO URL YAHAN BADLO -->
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhQ-IQ_9nOrKOParbj5vcr1Ewv4bmHC3WK2V_XB0lyQmtKCX8tEgD0as8APuEApMXZBUb4gJDFhGlqDVT64uslgwwJEoL8aZP30ouKEMvLrQqwYo4eRhQiIH39YvUh45LpkyENgPPcQDjQxMJbvJuNYWTTOC5fyx3ciGH2S4X848EkMWt3r46mFeGf-DFxS/s1600/vikas%20photo.jpg" 
+           alt="विकास कुमार" 
+           class="w-24 h-24 rounded-full object-cover ring-4 ring-blue-100"
+           onerror="this.src='https://ui-avatars.com/api/?name=Vikas+Kumar&size=200&background=0A58CA&color=fff'">
+      <div class="text-center sm:text-left flex-1">
+        <!-- ✏️ NAME YAHAN BADLO -->
+        <h3 class="font-bold text-lg" style="color:var(--text-main)">विकास कुमार</h3>
+        <p class="text-sm text-blue-600 font-medium mb-2">Founder & Editor — Apply Bro</p>
+        <!-- ✏️ BIO PARAGRAPHS YAHAN BADLO -->
+        <p class="text-sm leading-relaxed mb-2" style="color:var(--text-muted)">
+          नमस्ते दोस्तों! मैं <strong>विकास कुमार</strong>, Apply Bro का Founder हूँ। 
+          2023 से Sarkari Naukri, Exam Updates, और Scholarships की सही जानकारी दे रहा हूँ।
+        </p>
+        <p class="text-sm leading-relaxed" style="color:var(--text-muted)">
+          हमारा लक्ष्य: <strong>बिना confusion के, official sources से verify की हुई</strong> 
+          information हर student और job seeker तक पहुँचाना।
+        </p>
+        <div class="flex flex-wrap items-center justify-center sm:justify-start gap-3 mt-5">
+          <a href="https://youtube.com/@applybro" target="_blank" rel="noopener noreferrer" 
+             class="inline-flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold rounded-xl transition-all shadow-lg shadow-red-500/20">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            YouTube: Apply Bro
+          </a>
+          <a href="https://instagram.com/applybro" target="_blank" rel="noopener noreferrer"
+             class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-pink-600 to-rose-500 hover:from-pink-700 hover:to-rose-600 text-white text-sm font-semibold rounded-xl transition-all shadow-lg shadow-pink-500/20">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            Instagram
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!--  ✏️ DISCLAIMER — SIRF OFFICIAL WEBSITE LINK BADLO                -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<section class="mb-8">
+  <div class="card border-amber-200" style="background:var(--amber-bg);border-color:var(--amber-border)">
+    <div class="flex items-start gap-3">
+      <span style="color:var(--amber-text)" class="text-xl">⚠️</span>
+      <div>
+        <h4 class="font-semibold mb-2" style="color:var(--amber-text)">Disclaimer</h4>
+        <p class="text-sm leading-relaxed mb-2" style="color:var(--amber-text)">
+          <strong>Apply Bro koi sarkari website nahi hai.</strong> Yeh website kisi bhi sarkari naukri, sarkari board ya government body (jaise SSC, UPSC, IBPS, State Govt, CBSE, etc.) se jude hue nahi hai.
+        </p>
+        <p class="text-sm leading-relaxed" style="color:var(--amber-text)">
+          Yeh article sirf <strong>educational aur informational purpose</strong> ke liye hai. Official notification, application form, aur latest updates ke liye hamesha <a href="https://ctet.nic.in/" class="underline font-medium">official website</a> check karein.
+        </p>
+      </div>
+    </div>
+  </div>
+  </section>
+  
+ 
+
+</div>
+
+</body>
+</html>
