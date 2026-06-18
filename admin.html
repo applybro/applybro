@@ -470,6 +470,19 @@
             .editor-layout { flex-direction: column; }
             .preview-panel { min-height: 300px; }
         }
+
+        .setup-check {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 14px;
+            border-radius: 10px;
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+        .setup-check.ok { background: #d1fae5; color: #065f46; }
+        .setup-check.warn { background: #fef3c7; color: #92400e; }
+        .setup-check.error { background: #fee2e2; color: #991b1b; }
     </style>
 <base target="_blank">
 </head>
@@ -479,12 +492,18 @@
     <div id="login-screen" class="fixed inset-0 z-50 flex items-center justify-center" style="background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #5b21b6 100%);">
         <div class="w-full max-w-md px-6">
             <div style="background: rgba(255,255,255,0.08); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.15); border-radius: 24px; padding: 40px; box-shadow: 0 25px 50px rgba(0,0,0,0.3);">
-                <div class="text-center mb-8">
+                <div class="text-center mb-6">
                     <div style="width:64px; height:64px; background: linear-gradient(135deg, #a78bfa, #7c3aed); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; box-shadow: 0 8px 30px rgba(124,58,237,0.4);">
                         <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
                     </div>
                     <h1 class="text-2xl font-bold text-white">Apply<span style="color:#c4b5fd;">Bro</span> Admin</h1>
                     <p class="text-white/60 text-sm mt-1">CMS Dashboard</p>
+                </div>
+
+                <!-- Setup Checklist -->
+                <div id="setup-checks" class="mb-4 hidden">
+                    <div class="text-white/80 text-xs font-semibold mb-2 uppercase tracking-wider">Setup Checklist</div>
+                    <div id="setup-list"></div>
                 </div>
 
                 <div id="login-error" class="hidden mb-4 p-3 rounded-xl text-sm text-center" style="background: rgba(239,68,68,0.2); border: 1px solid rgba(239,68,68,0.3); color: #fecaca;"></div>
@@ -495,7 +514,7 @@
                         <input type="email" id="login-email" required 
                             class="w-full px-4 py-3 rounded-xl text-white placeholder-white/40 transition-all outline-none"
                             style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2);"
-                            placeholder="admin@applybro.com">
+                            placeholder="applybroofficial@gmail.com">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-white/80 mb-1.5">Password</label>
@@ -512,7 +531,14 @@
                     </button>
                 </form>
 
-                <p class="text-center text-white/40 text-xs mt-6">Protected by Firebase Authentication</p>
+                <div class="mt-4 p-3 rounded-xl" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);">
+                    <p class="text-white/50 text-xs text-center">Having trouble? Check the browser console (F12) for error details.</p>
+                    <button onclick="showSetupHelp()" class="w-full mt-2 text-xs text-royal-300 hover:text-white transition-colors bg-transparent border-none cursor-pointer">
+                        <i class="fas fa-wrench mr-1"></i> Show Setup Help
+                    </button>
+                </div>
+
+                <p class="text-center text-white/40 text-xs mt-4">Protected by Firebase Authentication</p>
             </div>
         </div>
     </div>
@@ -556,7 +582,7 @@
                     <div id="user-avatar" style="width:36px; height:36px; background: linear-gradient(135deg, #a78bfa, #7c3aed); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 14px; font-weight: bold;">A</div>
                     <div style="flex:1; min-width:0;">
                         <p class="text-sm font-medium text-slate-900 dark:text-white truncate" id="user-name">Admin</p>
-                        <p class="text-xs text-slate-500 dark:text-slate-400 truncate" id="user-email">admin@applybro.com</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 truncate" id="user-email">applybroofficial@gmail.com</p>
                     </div>
                 </div>
                 <button onclick="logout()" class="w-full flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium rounded-xl transition-all border-none cursor-pointer"
@@ -888,7 +914,7 @@
                 </div>
                 <div>
                     <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Article URL <span style="color:#ef4444;">*</span></label>
-                    <input type="text" id="pub-url" class="cms-input" placeholder="https://applybro.vercel.app/sarkari-jobs/...">
+                    <input type="text" id="pub-url" class="cms-input" placeholder="https://applybro.in/sarkari-jobs/...">
                 </div>
                 <div>
                     <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Featured Image URL</label>
@@ -1141,15 +1167,16 @@
 
     <script>
     // ==========================================
-    // FIREBASE CONFIGURATION
+    // FIREBASE CONFIGURATION - applybro1
     // ==========================================
     const firebaseConfig = {
-        apiKey: "AIzaSyCVMpsG1ePU6SSsAxWSnj85ylYfndJby-g",
-        authDomain: "apply-bro.firebaseapp.com",
-        projectId: "apply-bro",
-        storageBucket: "apply-bro.firebasestorage.app",
-        messagingSenderId: "220342045448",
-        appId: "1:220342045448:web:1b0845de0003d8a802fabd"
+        apiKey: "AIzaSyDjj7c7ew71PVLmrG6Ot1ttgLkp4xQIc_U",
+        authDomain: "applybro1.firebaseapp.com",
+        projectId: "applybro1",
+        storageBucket: "applybro1.firebasestorage.app",
+        messagingSenderId: "96808372763",
+        appId: "1:96808372763:web:f2612b262afdfc8f9b86be",
+        measurementId: "G-J5GGXK944G"
     };
 
     firebase.initializeApp(firebaseConfig);
@@ -1172,6 +1199,40 @@
         'Admit Cards',
         'Latest Results'
     ];
+
+    // ==========================================
+    // SETUP HELP & DIAGNOSTICS
+    // ==========================================
+    function showSetupHelp() {
+        const checks = document.getElementById('setup-checks');
+        const list = document.getElementById('setup-list');
+        checks.classList.remove('hidden');
+
+        list.innerHTML = '';
+
+        // Check 1: Firebase initialized
+        try {
+            firebase.app();
+            list.innerHTML += '<div class="setup-check ok"><i class="fas fa-check-circle"></i> Firebase SDK loaded</div>';
+        } catch(e) {
+            list.innerHTML += '<div class="setup-check error"><i class="fas fa-times-circle"></i> Firebase SDK NOT loaded</div>';
+        }
+
+        // Check 2: Auth enabled
+        list.innerHTML += '<div class="setup-check warn"><i class="fas fa-exclamation-triangle"></i> <strong>Step 1:</strong> Go to Firebase Console > Authentication > Sign-in method > Enable "Email/Password"</div>';
+
+        // Check 3: Domain authorized
+        list.innerHTML += '<div class="setup-check warn"><i class="fas fa-exclamation-triangle"></i> <strong>Step 2:</strong> Go to Firebase Console > Authentication > Settings > Authorized domains > Add "applybro.in"</div>';
+
+        // Check 4: Firestore rules
+        list.innerHTML += '<div class="setup-check warn"><i class="fas fa-exclamation-triangle"></i> <strong>Step 3:</strong> Go to Firebase Console > Firestore Database > Rules > Set rules to allow auth writes</div>';
+
+        // Check 5: User exists
+        list.innerHTML += '<div class="setup-check warn"><i class="fas fa-exclamation-triangle"></i> <strong>Step 4:</strong> Create a user with email: applybroofficial@gmail.com in Firebase Console > Authentication > Users</div>';
+
+        // Current domain
+        list.innerHTML += '<div class="setup-check ok"><i class="fas fa-info-circle"></i> Current domain: ' + window.location.hostname + '</div>';
+    }
 
     // ==========================================
     // AUTHENTICATION
@@ -1210,7 +1271,16 @@
         try {
             await auth.signInWithEmailAndPassword(email, password);
         } catch (err) {
-            error.textContent = err.message;
+            console.error('Login error:', err);
+            let msg = err.message;
+            if (err.code === 'auth/user-not-found') msg = 'User not found. Create the user in Firebase Console first.';
+            if (err.code === 'auth/wrong-password') msg = 'Wrong password. Check your credentials.';
+            if (err.code === 'auth/invalid-email') msg = 'Invalid email format.';
+            if (err.code === 'auth/invalid-credential') msg = 'Invalid credentials. User may not exist or password is wrong.';
+            if (err.code === 'auth/too-many-requests') msg = 'Too many failed attempts. Try again later.';
+            if (err.code === 'auth/network-request-failed') msg = 'Network error. Check your internet connection.';
+            if (err.code === 'auth/unauthorized-domain') msg = 'Domain not authorized. Add "applybro.in" to Firebase Auth settings.';
+            error.textContent = msg;
             error.classList.remove('hidden');
         } finally {
             btn.disabled = false;
@@ -1752,7 +1822,6 @@
         }
         empty.classList.add('hidden');
 
-        // Group by category for green dot logic
         const catGroups = {};
         filtered.forEach(p => {
             if (!catGroups[p.category]) catGroups[p.category] = [];
@@ -1855,7 +1924,7 @@
                 '<span class="font-semibold text-slate-900 dark:text-white">' + s.latest + '</span></div>' +
                 '</div>' +
                 '<button onclick="filterByCategory('' + cat + '')" class="w-full mt-4 py-2 text-xs font-semibold rounded-lg transition-all border-none cursor-pointer" ' +
-                'style="background:#f5f3ff; color:#7c3aed;">View Posts →</button>' +
+                'style="background:#f5f3ff; color:#7c3aed;">View Posts &rarr;</button>' +
                 '</div>';
         }).join('');
     }
@@ -1931,44 +2000,6 @@
             saveDraft();
         }
     });
-    </script
-
-        <script type="module">
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
-import {
-  getAuth,
-  onAuthStateChanged,
-  signOut
-} from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
-
-import {
-  getFirestore
-} from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
-
-// Firebase Config
-const firebaseConfig = {
-  apiKey: "AIzaSyDjj7c7ew71PVLmrG6Ot1ttgLkp4xQIc_U",
-  authDomain: "applybro1.firebaseapp.com",
-  projectId: "applybro1",
-  storageBucket: "applybro1.firebasestorage.app",
-  messagingSenderId: "96808372763",
-  appId: "1:96808372763:web:f2612b262afdfc8f9b86be",
-  measurementId: "G-J5GGXK944G"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-
-// Check Login
-onAuthStateChanged(auth, (user) => {
-  if (!user) {
-    window.location.href = "login.html";
-  }
-});
-
-</script>
+    </script>
 </body>
 </html>
