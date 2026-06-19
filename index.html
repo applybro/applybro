@@ -19,17 +19,9 @@
                     },
                     colors: {
                         royal: {
-                            50: '#f5f3ff',
-                            100: '#ede9fe',
-                            200: '#ddd6fe',
-                            300: '#c4b5fd',
-                            400: '#a78bfa',
-                            500: '#8b5cf6',
-                            600: '#7c3aed',
-                            700: '#6d28d9',
-                            800: '#5b21b6',
-                            900: '#4c1d95',
-                            950: '#2e1065',
+                            50: '#f5f3ff', 100: '#ede9fe', 200: '#ddd6fe', 300: '#c4b5fd',
+                            400: '#a78bfa', 500: '#8b5cf6', 600: '#7c3aed', 700: '#6d28d9',
+                            800: '#5b21b6', 900: '#4c1d95', 950: '#2e1065',
                         }
                     }
                 }
@@ -39,241 +31,103 @@
     <style>
         body { font-family: 'Inter', sans-serif; }
         h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', 'Inter', sans-serif; }
-
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #c4b5fd; border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: #8b5cf6; }
         .dark ::-webkit-scrollbar-thumb { background: #4c1d95; }
         .dark ::-webkit-scrollbar-thumb:hover { background: #6d28d9; }
-
-        /* Navbar glassmorphism */
-        .nav-glass {
-            background: rgba(46, 16, 101, 0.95);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-        }
-        .nav-glass.scrolled {
-            background: rgba(46, 16, 101, 0.98);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .nav-link { 
-            position: relative; 
-            transition: color 0.3s ease;
-        }
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -4px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(90deg, #a78bfa, #c4b5fd);
-            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border-radius: 2px;
-        }
+        .nav-glass { background: rgba(46, 16, 101, 0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+        .nav-glass.scrolled { background: rgba(46, 16, 101, 0.98); box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+        .nav-link { position: relative; transition: color 0.3s ease; }
+        .nav-link::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 50%; transform: translateX(-50%); background: linear-gradient(90deg, #a78bfa, #c4b5fd); transition: width 0.3s cubic-bezier(0.4,0,0.2,1); border-radius: 2px; }
         .nav-link:hover::after { width: 80%; }
         .nav-link:hover { color: #ddd6fe; }
-
-        /* Search floating animation */
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-3px); }
-        }
-        .search-float {
-            animation: float 4s ease-in-out infinite;
-        }
-
-        /* Card premium hover */
-        .card-premium {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid rgba(229, 231, 235, 0.6);
-        }
-        .card-premium:hover {
-            transform: translateY(-6px) scale(1.01);
-            box-shadow: 0 20px 40px -12px rgba(91, 33, 182, 0.15), 0 0 0 1px rgba(139, 92, 246, 0.1);
-            border-color: rgba(139, 92, 246, 0.3);
-        }
-        .dark .card-premium {
-            border-color: rgba(75, 85, 99, 0.4);
-        }
-        .dark .card-premium:hover {
-            border-color: rgba(139, 92, 246, 0.4);
-            box-shadow: 0 20px 40px -12px rgba(91, 33, 182, 0.25), 0 0 0 1px rgba(139, 92, 246, 0.15);
-        }
-
-        /* Icon gradient backgrounds */
-        .icon-gradient {
-            background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%);
-        }
-        .dark .icon-gradient {
-            background: linear-gradient(135deg, rgba(124, 58, 237, 0.2) 0%, rgba(139, 92, 246, 0.15) 100%);
-        }
-        .card-premium:hover .icon-gradient {
-            background: linear-gradient(135deg, #ddd6fe 0%, #c4b5fd 100%);
-            transform: scale(1.1) rotate(3deg);
-        }
-        .dark .card-premium:hover .icon-gradient {
-            background: linear-gradient(135deg, rgba(124, 58, 237, 0.3) 0%, rgba(139, 92, 246, 0.25) 100%);
-        }
-        .card-premium:hover .icon-gradient svg {
-            transform: scale(1.1);
-        }
-
-        /* List item hover */
-        .job-item {
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-            border-left: 3px solid transparent;
-        }
-        .job-item:hover {
-            background: linear-gradient(90deg, rgba(139, 92, 246, 0.04) 0%, transparent 100%);
-            border-left-color: #8b5cf6;
-            padding-left: 1.25rem;
-        }
-        .dark .job-item:hover {
-            background: linear-gradient(90deg, rgba(139, 92, 246, 0.08) 0%, transparent 100%);
-            border-left-color: #a78bfa;
-        }
-
-        /* Section headers */
-        .section-header {
-            background: linear-gradient(135deg, #5b21b6 0%, #7c3aed 100%);
-        }
-        .section-header-alt {
-            background: linear-gradient(135deg, #059669 0%, #10b981 100%);
-        }
-        .section-header-amber {
-            background: linear-gradient(135deg, #d97706 0%, #f59e0b 100%);
-        }
-
-        /* Button glow */
-        .btn-glow {
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        .btn-glow::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s ease;
-        }
-        .btn-glow:hover::before {
-            left: 100%;
-        }
-        .btn-glow:hover {
-            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
-            transform: translateY(-1px);
-        }
-
-        /* Fade in animation */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .fade-in-up {
-            animation: fadeInUp 0.6s ease-out forwards;
-        }
+        @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+        .search-float { animation: float 4s ease-in-out infinite; }
+        .card-premium { transition: all 0.4s cubic-bezier(0.4,0,0.2,1); border: 1px solid rgba(229,231,235,0.6); }
+        .card-premium:hover { transform: translateY(-6px) scale(1.01); box-shadow: 0 20px 40px -12px rgba(91,33,182,0.15), 0 0 0 1px rgba(139,92,246,0.1); border-color: rgba(139,92,246,0.3); }
+        .dark .card-premium { border-color: rgba(75,85,99,0.4); }
+        .dark .card-premium:hover { border-color: rgba(139,92,246,0.4); box-shadow: 0 20px 40px -12px rgba(91,33,182,0.25), 0 0 0 1px rgba(139,92,246,0.15); }
+        .icon-gradient { background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%); }
+        .dark .icon-gradient { background: linear-gradient(135deg, rgba(124,58,237,0.2) 0%, rgba(139,92,246,0.15) 100%); }
+        .card-premium:hover .icon-gradient { background: linear-gradient(135deg, #ddd6fe 0%, #c4b5fd 100%); transform: scale(1.1) rotate(3deg); }
+        .dark .card-premium:hover .icon-gradient { background: linear-gradient(135deg, rgba(124,58,237,0.3) 0%, rgba(139,92,246,0.25) 100%); }
+        .card-premium:hover .icon-gradient svg { transform: scale(1.1); }
+        .job-item { transition: all 0.25s cubic-bezier(0.4,0,0.2,1); border-left: 3px solid transparent; }
+        .job-item:hover { background: linear-gradient(90deg, rgba(139,92,246,0.04) 0%, transparent 100%); border-left-color: #8b5cf6; padding-left: 1.25rem; }
+        .dark .job-item:hover { background: linear-gradient(90deg, rgba(139,92,246,0.08) 0%, transparent 100%); border-left-color: #a78bfa; }
+        .section-header { background: linear-gradient(135deg, #5b21b6 0%, #7c3aed 100%); }
+        .section-header-alt { background: linear-gradient(135deg, #059669 0%, #10b981 100%); }
+        .section-header-amber { background: linear-gradient(135deg, #d97706 0%, #f59e0b 100%); }
+        .btn-glow { transition: all 0.3s ease; position: relative; overflow: hidden; }
+        .btn-glow::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: left 0.5s ease; }
+        .btn-glow:hover::before { left: 100%; }
+        .btn-glow:hover { box-shadow: 0 4px 15px rgba(124,58,237,0.4); transform: translateY(-1px); }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .fade-in-up { animation: fadeInUp 0.6s ease-out forwards; }
         .delay-100 { animation-delay: 0.1s; opacity: 0; }
         .delay-200 { animation-delay: 0.2s; opacity: 0; }
         .delay-300 { animation-delay: 0.3s; opacity: 0; }
-
-        /* Smooth scroll reveal */
-        .reveal {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Dark mode transitions */
-        .dark-transition {
-            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-        }
+        .reveal { opacity: 0; transform: translateY(20px); transition: all 0.6s cubic-bezier(0.4,0,0.2,1); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .dark-transition { transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; }
+        .view-more-btn { transition: all 0.3s cubic-bezier(0.4,0,0.2,1); }
+        .view-more-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px -5px rgba(124,58,237,0.3); }
+        .view-more-btn:active { transform: translateY(0); }
+        .post-hidden { display: none !important; }
     </style>
 <base target="_blank">
-    <!-- Firebase SDK for Dynamic Posts -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-    
+<base target="_blank">
 </head>
 <body class="bg-[#F8FAFC] dark:bg-[#0f172a] text-[#111827] dark:text-slate-200 antialiased dark-transition">
 
-
-
-    <!-- ये हर page के <body> के बाद डालो -->
-
-
-
-    
     <!-- Sticky Navbar -->
-<!-- Sticky Navbar -->
-<nav id="navbar" class="nav-glass sticky top-0 z-50 border-b border-white/10 transition-all duration-300">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center h-16">
-            <!-- Logo -->
-            <a href="index.html" class="flex items-center gap-2.5 group">
-                <div class="w-9 h-9 bg-gradient-to-br from-royal-400 to-royal-600 rounded-xl flex items-center justify-center shadow-lg shadow-royal-500/30 group-hover:shadow-royal-500/50 transition-shadow">
-                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+    <nav id="navbar" class="nav-glass sticky top-0 z-50 border-b border-white/10 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="index.html" class="flex items-center gap-2.5 group">
+                    <div class="w-9 h-9 bg-gradient-to-br from-royal-400 to-royal-600 rounded-xl flex items-center justify-center shadow-lg shadow-royal-500/30 group-hover:shadow-royal-500/50 transition-shadow">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                    </div>
+                    <span class="text-xl font-display font-bold text-white tracking-tight">Apply<span class="text-royal-300">Bro</span></span>
+                </a>
+                <div class="hidden lg:flex items-center gap-6">
+                    <a href="index.html" class="nav-link text-sm font-medium text-white/90">Home</a>
+                    <a href="index.html#latest-jobs" class="nav-link text-sm font-medium text-white/90">Latest Jobs</a>
+                    <a href="index.html#admit-cards" class="nav-link text-sm font-medium text-white/90">Admit Cards</a>
+                    <a href="index.html#results" class="nav-link text-sm font-medium text-white/90">Results</a>
+                    <a href="index.html#yojana" class="nav-link text-sm font-medium text-white/90">Yojana</a>
+                    <a href="about.html" class="nav-link text-sm font-medium text-white/90">About</a>
+                    <a href="contact.html" class="nav-link text-sm font-medium text-white/90">Contact</a>
                 </div>
-                <span class="text-xl font-display font-bold text-white tracking-tight">Apply<span class="text-royal-300">Bro</span></span>
-            </a>
-
-            <!-- Desktop Nav -->
-            <div class="hidden lg:flex items-center gap-6">
-                <a href="index.html" class="nav-link text-sm font-medium text-white/90">Home</a>
-                <a href="index.html#latest-jobs" class="nav-link text-sm font-medium text-white/90">Latest Jobs</a>
-                <a href="index.html#admit-cards" class="nav-link text-sm font-medium text-white/90">Admit Cards</a>
-                <a href="index.html#results" class="nav-link text-sm font-medium text-white/90">Results</a>
-                <a href="index.html#yojana" class="nav-link text-sm font-medium text-white/90">Yojana</a>
-                <a href="about.html" class="nav-link text-sm font-medium text-white/90">About</a>
-                <a href="contact.html" class="nav-link text-sm font-medium text-white/90">Contact</a>
-            </div>
-
-            <!-- Right Actions -->
-            <div class="flex items-center gap-2">
-                <button onclick="toggleDarkMode()" class="p-2 rounded-lg text-white/70 hover:text-white hover:bg-white/10 transition-all" aria-label="Toggle dark mode">
-                    <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
-                    <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
-</svg>
-                </button>
-                <button onclick="toggleMobileMenu()" class="lg:hidden p-2 rounded-lg text-white/70 hover:text-white hover:bg-white/10 transition-all" aria-label="Menu">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
-                </button>
+                <div class="flex items-center gap-2">
+                    <button onclick="toggleDarkMode()" class="p-2 rounded-lg text-white/70 hover:text-white hover:bg-white/10 transition-all" aria-label="Toggle dark mode">
+                        <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                        <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+                    </button>
+                    <button onclick="toggleMobileMenu()" class="lg:hidden p-2 rounded-lg text-white/70 hover:text-white hover:bg-white/10 transition-all" aria-label="Menu">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
-
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="hidden lg:hidden bg-royal-950/98 backdrop-blur-xl border-t border-white/10">
-        <div class="px-4 py-3 space-y-1">
-            <a href="index.html" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-white/90 hover:bg-white/10 transition-colors">Home</a>
-            <a href="index.html#latest-jobs" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-white/90 hover:bg-white/10 transition-colors">Latest Jobs</a>
-            <a href="index.html#admit-cards" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-white/90 hover:bg-white/10 transition-colors">Admit Cards</a>
-            <a href="index.html#results" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-white/90 hover:bg-white/10 transition-colors">Results</a>
-            <a href="index.html#yojana" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-white/90 hover:bg-white/10 transition-colors">Yojana</a>
-            <a href="about.html" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-white/90 hover:bg-white/10 transition-colors">About Us</a>
-            <a href="contact.html" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-white/90 hover:bg-white/10 transition-colors">Contact Us</a>
-            <a href="privacy.html" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-white/90 hover:bg-white/10 transition-colors">Privacy Policy</a>
-            <a href="disclaimer.html" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-white/90 hover:bg-white/10 transition-colors">Disclaimer</a>
+        <div id="mobile-menu" class="hidden lg:hidden bg-royal-950/98 backdrop-blur-xl border-t border-white/10">
+            <div class="px-4 py-3 space-y-1">
+                <a href="index.html" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-white/90 hover:bg-white/10 transition-colors">Home</a>
+                <a href="index.html#latest-jobs" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-white/90 hover:bg-white/10 transition-colors">Latest Jobs</a>
+                <a href="index.html#admit-cards" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-white/90 hover:bg-white/10 transition-colors">Admit Cards</a>
+                <a href="index.html#results" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-white/90 hover:bg-white/10 transition-colors">Results</a>
+                <a href="index.html#yojana" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-white/90 hover:bg-white/10 transition-colors">Yojana</a>
+                <a href="about.html" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-white/90 hover:bg-white/10 transition-colors">About Us</a>
+                <a href="contact.html" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-white/90 hover:bg-white/10 transition-colors">Contact Us</a>
+                <a href="privacy.html" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-white/90 hover:bg-white/10 transition-colors">Privacy Policy</a>
+                <a href="disclaimer.html" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-white/90 hover:bg-white/10 transition-colors">Disclaimer</a>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
+
     <!-- Search Section -->
     <section class="bg-white dark:bg-slate-900 border-b border-slate-200/80 dark:border-slate-800/80 py-8">
         <div class="max-w-2xl mx-auto px-4 sm:px-6">
@@ -298,7 +152,6 @@
                     <h3 class="font-display font-semibold text-slate-900 dark:text-white mb-1">Results</h3>
                     <p class="text-xs text-slate-500 dark:text-slate-400">Latest exam results</p>
                 </a>
-
                 <a href="#admit-cards" class="card-premium bg-white dark:bg-slate-900 rounded-2xl p-6 text-center group">
                     <div class="icon-gradient w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4 transition-all duration-300">
                         <svg class="w-7 h-7 text-royal-700 dark:text-royal-400 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"/></svg>
@@ -306,7 +159,6 @@
                     <h3 class="font-display font-semibold text-slate-900 dark:text-white mb-1">Admit Card</h3>
                     <p class="text-xs text-slate-500 dark:text-slate-400">Download hall tickets</p>
                 </a>
-
                 <a href="#" class="card-premium bg-white dark:bg-slate-900 rounded-2xl p-6 text-center group">
                     <div class="icon-gradient w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4 transition-all duration-300">
                         <svg class="w-7 h-7 text-royal-700 dark:text-royal-400 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0124 12c0-3.866-3.582-7-8-7a8 8 0 00-8 8c0 1.892.402 3.013 1.172 4.065A4.001 4.001 0 0115 18a4 4 0 01-4 4h-1.528a4 4 0 01-3.117-1.5c-.293-.367-.5-.788-.5-1.255V14a2 2 0 012-2h1.382a2 2 0 001.789-1.106l.447-.894A2 2 0 0014.618 8h1.264a2 2 0 001.789-1.106l.447-.894A2 2 0 0018.382 4H19a2 2 0 012 2v7.255z"/></svg>
@@ -314,7 +166,6 @@
                     <h3 class="font-display font-semibold text-slate-900 dark:text-white mb-1">Career</h3>
                     <p class="text-xs text-slate-500 dark:text-slate-400">Job opportunities</p>
                 </a>
-
                 <a href="#" class="card-premium bg-white dark:bg-slate-900 rounded-2xl p-6 text-center group">
                     <div class="icon-gradient w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4 transition-all duration-300">
                         <svg class="w-7 h-7 text-royal-700 dark:text-royal-400 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
@@ -331,79 +182,51 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-
-
-
-
-
-
-
-
-                
                 <!-- Column 1: Live Update -->
-
                 <div class="reveal bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 overflow-hidden shadow-sm">
                     <div class="section-header px-5 py-4 flex items-center gap-3">
                         <div class="w-2 h-2 bg-red-400 rounded-full animate-pulse shadow-lg shadow-red-500/50"></div>
                         <h2 class="font-display font-bold text-white text-sm uppercase tracking-wider">Live Sarkari Job </h2>
                     </div>
-
-
                     <div class="p-1" id="live-update-content">
                         <a href="https://applybro.vercel.app/sarkari-jobs/NEW_Category_Gov_Job_Bihar%20Ration_Dealer_Vacancy_2026.html" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
                             <div class="flex items-start gap-3">
                                 <span class="mt-1.5 w-2 h-2 bg-red-500 rounded-full flex-shrink-0 shadow-sm shadow-red-500/30"></span>
                                 <div>
-                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">Bihar Ration Dealer Vacancy 2026 – 10वीं पास के लिए राशन डीलर बहाली, ऐसे करें आवेदन</p>
+                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">Bihar Ration Dealer Vacancy 2026</p>
                                     <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">ration dealer bharty 2026</p>
                                 </div>
-                                
-                                
                                 <span class="px-2.5 py-1 bg-gradient-to-r from-red-500 to-red-600 text-white text-[10px] font-bold rounded-lg shadow-sm shadow-red-500/20 flex-shrink-0">New</span>
-
                             </div>
                         </a>
-
-
                         <a href="https://applybro.vercel.app/sarkari-jobs/RRB_Technician_Recruitment_2026.html" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
                             <div class="flex items-start gap-3">
                                 <span class="mt-1.5 w-2 h-2 bg-red-500 rounded-full flex-shrink-0 shadow-sm shadow-red-500/30"></span>
                                 <div>
-                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">RRB Technician Recruitment 2026: 6565 पदों पर भर्ती, ITI/Diploma वालों के लिए शानदार मौका</p>
+                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">RRB Technician Recruitment 2026: 6565 posts</p>
                                     <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">see Available Now</p>
-                                    </div>
-                                    <span class="px-2.5 py-1 bg-gradient-to-r from-red-500 to-red-600 text-white text-[10px] font-bold rounded-lg shadow-sm shadow-red-500/20 flex-shrink-0">New</span>
+                                </div>
+                                <span class="px-2.5 py-1 bg-gradient-to-r from-red-500 to-red-600 text-white text-[10px] font-bold rounded-lg shadow-sm shadow-red-500/20 flex-shrink-0">New</span>
                             </div>
-
-
                         </a>
-
-
-
-                     <a href="https://applybro.vercel.app/sarkari-jobs/RRB_Technician_Recruitment_2026.html" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
+                        <a href="https://applybro.vercel.app/sarkari-jobs/RRB_Technician_Recruitment_2026.html" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
                             <div class="flex items-start gap-3">
                                 <span class="mt-1.5 w-2 h-2 bg-red-500 rounded-full flex-shrink-0 shadow-sm shadow-red-500/30"></span>
                                 <div>
-                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">RRB Technician Recruitment 2026: 6565 पदों पर भर्ती, ITI/Diploma वालों के लिए शानदार मौका</p>
+                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">RRB Technician Recruitment 2026: 6565 posts</p>
                                     <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">see Available Now</p>
-                                    </div>                                                              
+                                </div>                                                              
                             </div>
-                            </a>
-
-                        
-
-                     <a href="https://applybro.vercel.app/sarkari-jobs/RRB_Technician_Recruitment_2026.html" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
+                        </a>
+                        <a href="https://applybro.vercel.app/sarkari-jobs/RRB_Technician_Recruitment_2026.html" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
                             <div class="flex items-start gap-3">
                                 <span class="mt-1.5 w-2 h-2 bg-red-500 rounded-full flex-shrink-0 shadow-sm shadow-red-500/30"></span>
                                 <div>
-                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">RRB Technician Recruitment 2026: 6565 पदों पर भर्ती, ITI/Diploma वालों के लिए शानदार मौका</p>
+                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">RRB Technician Recruitment 2026: 6565 posts</p>
                                     <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">see Available Now</p>
-                                    </div>                                                              
+                                </div>                                                              
                             </div>
-                            </a>
-
-
-
+                        </a>
                         <a href="#" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
                             <div class="flex items-start gap-3">
                                 <span class="mt-1.5 w-2 h-2 bg-slate-300 dark:bg-slate-600 rounded-full flex-shrink-0"></span>
@@ -440,101 +263,74 @@
                                 </div>
                             </div>
                         </a>
-                    </div
-                        <!-- Yaha paste karo -->
-<div id="loadMoreJobsContainer" class="hidden text-center py-3">
-    <button id="loadMoreJobs"
-        class="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm">
-        View More
-    </button>
-</div>
- </div>
+                    </div>
+                    <!-- View More Button for Live Jobs -->
+                    <div id="view-more-live-jobs-container" class="hidden text-center py-3 border-t border-slate-100 dark:border-slate-800/80">
+                        <button id="view-more-live-jobs-btn" onclick="viewMoreSystem.showAll('live-update-content', 'view-more-live-jobs-container')" 
+                            class="view-more-btn px-6 py-2.5 bg-gradient-to-r from-royal-600 to-royal-700 hover:from-royal-700 hover:to-royal-800 text-white text-sm font-semibold rounded-xl shadow-lg shadow-royal-500/20 transition-all">
+                            View More
+                        </button>
+                    </div>
+                </div>
 
-
-
-
-
-
-
-
-                
-                <!-- Column 2: Latest Jobs -->
-
+                <!-- Column 2: Latest Jobs / Scholarship -->
                 <div class="reveal bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 overflow-hidden shadow-sm">
                     <div class="section-header px-5 py-4 flex items-center gap-3">
                         <div class="w-2 h-2 bg-red-400 rounded-full animate-pulse shadow-lg shadow-red-500/50"></div>
                         <h2 class="font-display font-bold text-white text-sm uppercase tracking-wider">Live Scholarship </h2>
                     </div>
                     <div class="p-1" id="latest-jobs-content">
-
-                     <a href="https://applybro.vercel.app/sarkari-scholarship/Bihar_Labour_Card_Scholarship_2026.html" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
+                        <a href="https://applybro.vercel.app/sarkari-scholarship/Bihar_Labour_Card_Scholarship_2026.html" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
                             <div class="flex items-start gap-3">
                                 <span class="mt-1.5 w-2 h-2 bg-red-500 rounded-full flex-shrink-0 shadow-sm shadow-red-500/30"></span>
                                 <div>
-                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">Bihar Labour Card Scholarship 2026 – ₹25,000 तक की स्कॉलरशिप</p>
+                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">Bihar Labour Card Scholarship 2026</p>
                                     <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Scholarship 2026 ke bare me jarur dekhe</p>
                                 </div>
-                                
-                                
                                 <span class="px-2.5 py-1 bg-gradient-to-r from-red-500 to-red-600 text-white text-[10px] font-bold rounded-lg shadow-sm shadow-red-500/20 flex-shrink-0">New</span>
-
                             </div>
                         </a>
-
-
                         <a href="https://applybro.vercel.app/sarkari-scholarship/Scholarship_2026.html" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
                             <div class="flex items-start gap-3">
                                 <span class="mt-1.5 w-2 h-2 bg-red-500 rounded-full flex-shrink-0 shadow-sm shadow-red-500/30"></span>
                                 <div>
-                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">Bihar Board 10th Pass Scholarship 2026 – ₹10,000 Scholarship </p>
+                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">Bihar Board 10th Pass Scholarship 2026</p>
                                     <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Scholarship 2026 ke bare me jaldi dekhe</p>
-                                    </div>
-                                    <span class="px-2.5 py-1 bg-gradient-to-r from-red-500 to-red-600 text-white text-[10px] font-bold rounded-lg shadow-sm shadow-red-500/20 flex-shrink-0">New</span>
+                                </div>
+                                <span class="px-2.5 py-1 bg-gradient-to-r from-red-500 to-red-600 text-white text-[10px] font-bold rounded-lg shadow-sm shadow-red-500/20 flex-shrink-0">New</span>
                             </div>
-
-
                         </a>
-
-
-
-                     <a href="https://applybro.vercel.app/sarkari-jobs/RRB_Technician_Recruitment_2026.html" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
+                        <a href="https://applybro.vercel.app/sarkari-jobs/RRB_Technician_Recruitment_2026.html" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
                             <div class="flex items-start gap-3">
                                 <span class="mt-1.5 w-2 h-2 bg-red-500 rounded-full flex-shrink-0 shadow-sm shadow-red-500/30"></span>
                                 <div>
-                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">RRB Technician Recruitment 2026: 6565 पदों पर भर्ती, ITI/Diploma वालों के लिए शानदार मौका</p>
+                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">RRB Technician Recruitment 2026: 6565 posts</p>
                                     <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">see Available Now</p>
-                                    </div>                                                              
+                                </div>                                                              
                             </div>
-                            </a>
-
-
-                     <a href="https://applybro.vercel.app/sarkari-jobs/RRB_Technician_Recruitment_2026.html" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
+                        </a>
+                        <a href="https://applybro.vercel.app/sarkari-jobs/RRB_Technician_Recruitment_2026.html" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
                             <div class="flex items-start gap-3">
                                 <span class="mt-1.5 w-2 h-2 bg-red-500 rounded-full flex-shrink-0 shadow-sm shadow-red-500/30"></span>
                                 <div>
-                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">RRB Technician Recruitment 2026: 6565 पदों पर भर्ती, ITI/Diploma वालों के लिए शानदार मौका</p>
+                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">RRB Technician Recruitment 2026: 6565 posts</p>
                                     <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">see Available Now</p>
-                                    </div>                                                              
+                                </div>                                                              
                             </div>
-                            </a>
-
-
-
-
+                        </a>
                         <a href="#" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
                             <div class="flex items-start justify-between gap-2">
                                 <div class="flex-1 min-w-0">
                                     <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">IBPS PO 2026</p>
-                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">4,500+ Vacancies • Last Date: 25 June</p>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">4,500+ Vacancies</p>
                                 </div>
-                                
                             </div>
                         </a>
                         <a href="#" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
                             <div class="flex items-start justify-between gap-2">
                                 <div class="flex-1 min-w-0">
                                     <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">UPSC CDS II 2026</p>
-                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">450 Vacancies • Last Date: 10 June</p>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">450 Vacancies</p>
                                 </div>
                             </div>
                         </a>
@@ -542,7 +338,7 @@
                             <div class="flex items-start justify-between gap-2">
                                 <div class="flex-1 min-w-0">
                                     <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">Bihar Police SI 2026</p>
-                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">1,200+ Vacancies • Last Date: 20 June</p>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">1,200+ Vacancies</p>
                                 </div>
                             </div>
                         </a>
@@ -550,7 +346,7 @@
                             <div class="flex items-start justify-between gap-2">
                                 <div class="flex-1 min-w-0">
                                     <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">SSC CHSL 2026</p>
-                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">3,500+ Vacancies • Last Date: 12 June</p>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">3,500+ Vacancies</p>
                                 </div>
                             </div>
                         </a>
@@ -558,7 +354,31 @@
                             <div class="flex items-start justify-between gap-2">
                                 <div class="flex-1 min-w-0">
                                     <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">Indian Army Agniveer</p>
-                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">All India • Apply Online</p>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">All India</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
+                            <div class="flex items-start justify-between gap-2">
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">UPPSC PCS 2026</p>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">250 Vacancies</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
+                            <div class="flex items-start justify-between gap-2">
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">UPPSC PCS 2026</p>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">250 Vacancies</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
+                            <div class="flex items-start justify-between gap-2">
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">UPPSC PCS 2026</p>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">250 Vacancies</p>
                                 </div>
                             </div>
                         </a>
@@ -566,120 +386,56 @@
                             <div class="flex items-start justify-between gap-2">
                                 <div class="flex-1 min-w-0">
                                     <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">UPPSC PCS 2026</p>
-                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">250 Vacancies • Uttar Pradesh</p>
-                                </div>
-                            </div>
-                        </a>
-
-                            <a href="#" class="job-item block px-4 py-3.5 last:border-0">
-                            <div class="flex items-start justify-between gap-2">
-                                <div class="flex-1 min-w-0">
-                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">UPPSC PCS 2026</p>
-                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">250 Vacancies • Uttar Pradesh</p>
-                                </div>
-                            </div>
-                        </a>
-                            <a href="#" class="job-item block px-4 py-3.5 last:border-0">
-                            <div class="flex items-start justify-between gap-2">
-                                <div class="flex-1 min-w-0">
-                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">UPPSC PCS 2026</p>
-                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">250 Vacancies • Uttar Pradesh</p>
-                                </div>
-                            </div>
-                        </a>
-                            <a href="#" class="job-item block px-4 py-3.5 last:border-0">
-                            <div class="flex items-start justify-between gap-2">
-                                <div class="flex-1 min-w-0">
-                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">UPPSC PCS 2026</p>
-                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">250 Vacancies • Uttar Pradesh</p>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">250 Vacancies</p>
                                 </div>
                             </div>
                         </a>
                     </div>
-                    <!-- Yaha paste karo -->
-<div id="loadMoreScholarshipContainer" style="display:block;text-align:center;padding:12px;">
-    <button id="loadMoreScholarship"
-        style="background:#7c3aed;color:white;padding:10px 20px;border-radius:8px;">
-        View More
-    </button>
-</div>
-</div>
-
-
-
-
-
-
-
-                
+                    <!-- View More Button for Scholarship -->
+                    <div id="view-more-scholarship-container" class="hidden text-center py-3 border-t border-slate-100 dark:border-slate-800/80">
+                        <button id="view-more-scholarship-btn" onclick="viewMoreSystem.showAll('latest-jobs-content', 'view-more-scholarship-container')" 
+                            class="view-more-btn px-6 py-2.5 bg-gradient-to-r from-royal-600 to-royal-700 hover:from-royal-700 hover:to-royal-800 text-white text-sm font-semibold rounded-xl shadow-lg shadow-royal-500/20 transition-all">
+                            View More
+                        </button>
+                    </div>
+                </div>
 
                 <!-- Column 3: Sarkari Yojana -->
-
-                                <div class="reveal bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 overflow-hidden shadow-sm">
+                <div class="reveal bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 overflow-hidden shadow-sm">
                     <div class="section-header px-5 py-4 flex items-center gap-3">
                         <div class="w-2 h-2 bg-red-400 rounded-full animate-pulse shadow-lg shadow-red-500/50"></div>
                         <h2 class="font-display font-bold text-white text-sm uppercase tracking-wider">Sarkari Yojana</h2>
                     </div>
-
                     <div class="p-1" id="yojana-content">
-
-
-
                         <a href="https://applybro.vercel.app/sarkari-yojna/Mukhyamantri_Udyami_Yojana_2026.html" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
                             <div class="flex items-start gap-3">
                                 <span class="mt-1.5 w-2 h-2 bg-red-500 rounded-full flex-shrink-0 shadow-sm shadow-red-500/30"></span>
                                 <div>
-                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 
-                                        transition-colors">Mukhyamantri Udyami Yojana 2026</p>
+                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">Mukhyamantri Udyami Yojana 2026</p>
                                     <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">udyami details ek bar jarur dekhe</p>
                                 </div>
-                                
-                                
                                 <span class="px-2.5 py-1 bg-gradient-to-r from-red-500 to-red-600 text-white text-[10px] font-bold rounded-lg shadow-sm shadow-red-500/20 flex-shrink-0">New</span>
-
-                            </div>
-
-
-
-<a href="https://applybro.vercel.app/sarkari-yojna/Bihar_Smart_PDS_Portal.html" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
-                            <div class="flex items-start gap-3">
-                                <span class="mt-1.5 w-2 h-2 bg-red-500 rounded-full flex-shrink-0 shadow-sm shadow-red-500/30"></span>
-                                <div>
-                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 
-                                        transition-colors">Bihar Smart PDS Portal 2026: नया राशन कार्ड आवेदन</p>
-                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">new portal ke bare me jarur jane</p>
-                                </div>
-                                
-                                
-                                <span class="px-2.5 py-1 bg-gradient-to-r from-red-500 to-red-600 text-white text-[10px] font-bold rounded-lg shadow-sm shadow-red-500/20 flex-shrink-0">New</span>
-
-                            </div>
-</a>
-
-                        
-
-
-
-                        
-                                                <a href="http://applybro.vercel.app/sarkari-yojna/voter_id_online.html" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
-                            <div class="flex items-start gap-3">
-                                <span class="mt-1.5 w-2 h-2 bg-red-500 rounded-full flex-shrink-0 shadow-sm shadow-red-500/30"></span>
-                                <div>
-                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">How to apply voter id card - वोटर आईडी कार्ड ऑनलाइन कैसे बनाएं 2026</p>
-                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">tarika samjhe aasani se</p>
-                                </div>
-                                
-                            
-                        
                             </div>
                         </a>
-
-
-                        
-
-
-
-
+                        <a href="https://applybro.vercel.app/sarkari-yojna/Bihar_Smart_PDS_Portal.html" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
+                            <div class="flex items-start gap-3">
+                                <span class="mt-1.5 w-2 h-2 bg-red-500 rounded-full flex-shrink-0 shadow-sm shadow-red-500/30"></span>
+                                <div>
+                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">Bihar Smart PDS Portal 2026</p>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">new portal ke bare me jarur jane</p>
+                                </div>
+                                <span class="px-2.5 py-1 bg-gradient-to-r from-red-500 to-red-600 text-white text-[10px] font-bold rounded-lg shadow-sm shadow-red-500/20 flex-shrink-0">New</span>
+                            </div>
+                        </a>
+                        <a href="http://applybro.vercel.app/sarkari-yojna/voter_id_online.html" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
+                            <div class="flex items-start gap-3">
+                                <span class="mt-1.5 w-2 h-2 bg-red-500 rounded-full flex-shrink-0 shadow-sm shadow-red-500/30"></span>
+                                <div>
+                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">How to apply voter id card 2026</p>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">tarika samjhe aasani se</p>
+                                </div>
+                            </div>
+                        </a>
                         <a href="#" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
                             <div class="flex items-start gap-3">
                                 <span class="mt-1.5 w-2 h-2 bg-slate-300 dark:bg-slate-600 rounded-full flex-shrink-0"></span>
@@ -717,16 +473,15 @@
                             </div>
                         </a>
                     </div>
+                    <!-- View More Button for Yojana -->
+                    <div id="view-more-yojana-container" class="hidden text-center py-3 border-t border-slate-100 dark:border-slate-800/80">
+                        <button id="view-more-yojana-btn" onclick="viewMoreSystem.showAll('yojana-content', 'view-more-yojana-container')" 
+                            class="view-more-btn px-6 py-2.5 bg-gradient-to-r from-royal-600 to-royal-700 hover:from-royal-700 hover:to-royal-800 text-white text-sm font-semibold rounded-xl shadow-lg shadow-royal-500/20 transition-all">
+                            View More
+                        </button>
+                    </div>
                 </div>
             </div>
-            <!-- Yaha paste karo -->
-<div id="loadMoreYojanaContainer" class="hidden text-center py-3">
-    <button id="loadMoreJobs"
-        class="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm">
-        View More
-    </button>
-</div>
-
         </div>
     </section>
 
@@ -773,14 +528,14 @@
                             <span class="px-3 py-1.5 bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-700 hover:to-emerald-600 text-white text-xs font-semibold rounded-lg shadow-sm shadow-emerald-500/20 transition-all flex-shrink-0">Download</span>
                         </a>
                     </div>
-                    <!-- Yaha paste karo -->
-<div id="loadMoreAdmitCardContainer" class="hidden text-center py-3">
-    <button id="loadMoreJobs"
-        class="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm">
-        View More
-    </button>
-</div>
-</div>
+                    <!-- View More Button for Admit Cards -->
+                    <div id="view-more-admit-container" class="hidden text-center py-3 border-t border-slate-100 dark:border-slate-800/80">
+                        <button id="view-more-admit-btn" onclick="viewMoreSystem.showAll('admit-cards-content', 'view-more-admit-container')" 
+                            class="view-more-btn px-6 py-2.5 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white text-sm font-semibold rounded-xl shadow-lg shadow-emerald-500/20 transition-all">
+                            View More
+                        </button>
+                    </div>
+                </div>
 
                 <!-- Results -->
                 <div class="reveal bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 overflow-hidden shadow-sm delay-100" id="results">
@@ -820,75 +575,76 @@
                             <span class="px-3 py-1.5 bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-700 hover:to-amber-600 text-white text-xs font-semibold rounded-lg shadow-sm shadow-amber-500/20 transition-all flex-shrink-0">View</span>
                         </a>
                     </div>
+                    <!-- View More Button for Results -->
+                    <div id="view-more-results-container" class="hidden text-center py-3 border-t border-slate-100 dark:border-slate-800/80">
+                        <button id="view-more-results-btn" onclick="viewMoreSystem.showAll('results-content', 'view-more-results-container')" 
+                            class="view-more-btn px-6 py-2.5 bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white text-sm font-semibold rounded-xl shadow-lg shadow-amber-500/20 transition-all">
+                            View More
+                        </button>
+                    </div>
                 </div>
             </div>
-            <!-- Yaha paste karo -->
-<div id="loadMoreResultContainer" class="hidden text-center py-3">
-    <button id="loadMoreYojana"
-        class="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm">
-        View More
-    </button>
-</div>
         </div>
     </section>
 
     <!-- Footer -->
-<!-- Footer -->
-<footer class="bg-slate-900 dark:bg-[#020617] border-t border-slate-800/80 pt-12 pb-8">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
-            <div class="sm:col-span-2 lg:col-span-1">
-                <a href="index.html" class="flex items-center gap-2.5 mb-4">
-                    <div class="w-9 h-9 bg-gradient-to-br from-royal-500 to-royal-700 rounded-xl flex items-center justify-center shadow-lg shadow-royal-500/30">
-                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
-                    </div>
-                    <span class="text-xl font-display font-bold text-white">Apply<span class="text-royal-400">Bro</span></span>
-                </a>
-                <p class="text-sm text-slate-400 leading-relaxed">India's trusted portal for Sarkari Naukri, Results, Admit Cards, and Yojana updates.</p>
-            </div>
-            <div>
-                <h4 class="font-display font-semibold text-white text-sm mb-4">Quick Links</h4>
-                <ul class="space-y-2.5">
-                    <li><a href="index.html" class="text-sm text-slate-400 hover:text-royal-400 transition-colors">Home</a></li>
-                    <li><a href="about.html" class="text-sm text-slate-400 hover:text-royal-400 transition-colors">About Us</a></li>
-                    <li><a href="contact.html" class="text-sm text-slate-400 hover:text-royal-400 transition-colors">Contact Us</a></li>
-                    <li><a href="privacy-policy.html" class="text-sm text-slate-400 hover:text-royal-400 transition-colors">Privacy Policy</a></li>
-                    <li><a href="disclaimer.html" class="text-sm text-slate-400 hover:text-royal-400 transition-colors">Disclaimer</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="font-display font-semibold text-white text-sm mb-4">Categories</h4>
-                <ul class="space-y-2.5">
-                    <li><a href="index.html#latest-jobs" class="text-sm text-slate-400 hover:text-royal-400 transition-colors">Latest Jobs</a></li>
-                    <li><a href="index.html#admit-cards" class="text-sm text-slate-400 hover:text-royal-400 transition-colors">Admit Cards</a></li>
-                    <li><a href="index.html#results" class="text-sm text-slate-400 hover:text-royal-400 transition-colors">Results</a></li>
-                    <li><a href="index.html#yojana" class="text-sm text-slate-400 hover:text-royal-400 transition-colors">Sarkari Yojana</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="font-display font-semibold text-white text-sm mb-4">Connect With Us</h4>
-                <div class="flex flex-wrap gap-3 mb-5">
-                    <a href="https://youtube.com/@ApplyBro" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-red-600 to-red-500 hover:from-red-700 hover:to-red-600 text-white text-sm font-semibold rounded-xl transition-all shadow-lg shadow-red-500/20">
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-                        YouTube
+    <footer class="bg-slate-900 dark:bg-[#020617] border-t border-slate-800/80 pt-12 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+                <div class="sm:col-span-2 lg:col-span-1">
+                    <a href="index.html" class="flex items-center gap-2.5 mb-4">
+                        <div class="w-9 h-9 bg-gradient-to-br from-royal-500 to-royal-700 rounded-xl flex items-center justify-center shadow-lg shadow-royal-500/30">
+                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                        </div>
+                        <span class="text-xl font-display font-bold text-white">Apply<span class="text-royal-400">Bro</span></span>
                     </a>
-                    <a href="https://instagram.com/ApplyBro" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-white text-sm font-semibold rounded-xl transition-all shadow-lg shadow-pink-500/20">
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
-                        Instagram
-                    </a>
+                    <p class="text-sm text-slate-400 leading-relaxed">India's trusted portal for Sarkari Naukri, Results, Admit Cards, and Yojana updates.</p>
                 </div>
-                <p class="text-xs text-slate-500">Made with ❤️ by <span class="text-royal-400 font-semibold">Apply Bro</span></p>
+                <div>
+                    <h4 class="font-display font-semibold text-white text-sm mb-4">Quick Links</h4>
+                    <ul class="space-y-2.5">
+                        <li><a href="index.html" class="text-sm text-slate-400 hover:text-royal-400 transition-colors">Home</a></li>
+                        <li><a href="about.html" class="text-sm text-slate-400 hover:text-royal-400 transition-colors">About Us</a></li>
+                        <li><a href="contact.html" class="text-sm text-slate-400 hover:text-royal-400 transition-colors">Contact Us</a></li>
+                        <li><a href="privacy-policy.html" class="text-sm text-slate-400 hover:text-royal-400 transition-colors">Privacy Policy</a></li>
+                        <li><a href="disclaimer.html" class="text-sm text-slate-400 hover:text-royal-400 transition-colors">Disclaimer</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-display font-semibold text-white text-sm mb-4">Categories</h4>
+                    <ul class="space-y-2.5">
+                        <li><a href="index.html#latest-jobs" class="text-sm text-slate-400 hover:text-royal-400 transition-colors">Latest Jobs</a></li>
+                        <li><a href="index.html#admit-cards" class="text-sm text-slate-400 hover:text-royal-400 transition-colors">Admit Cards</a></li>
+                        <li><a href="index.html#results" class="text-sm text-slate-400 hover:text-royal-400 transition-colors">Results</a></li>
+                        <li><a href="index.html#yojana" class="text-sm text-slate-400 hover:text-royal-400 transition-colors">Sarkari Yojana</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-display font-semibold text-white text-sm mb-4">Connect With Us</h4>
+                    <div class="flex flex-wrap gap-3 mb-5">
+                        <a href="https://youtube.com/@ApplyBro" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-red-600 to-red-500 hover:from-red-700 hover:to-red-600 text-white text-sm font-semibold rounded-xl transition-all shadow-lg shadow-red-500/20">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                            YouTube
+                        </a>
+                        <a href="https://instagram.com/ApplyBro" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-white text-sm font-semibold rounded-xl transition-all shadow-lg shadow-pink-500/20">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+                            Instagram
+                        </a>
+                    </div>
+                    <p class="text-xs text-slate-500">Made with ❤️ by <span class="text-royal-400 font-semibold">Apply Bro</span></p>
+                </div>
+            </div>
+            <div class="border-t border-slate-800/80 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+                <p class="text-sm text-slate-500">© 2026 Apply Bro. All rights reserved.</p>
+                <p class="text-xs text-slate-600 text-center sm:text-right max-w-md">Disclaimer: We are not affiliated with any government body. All links redirect to official websites only.</p>
             </div>
         </div>
-        <div class="border-t border-slate-800/80 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
-            <p class="text-sm text-slate-500">© 2026 Apply Bro. All rights reserved.</p>
-            <p class="text-xs text-slate-600 text-center sm:text-right max-w-md">Disclaimer: We are not affiliated with any government body. All links redirect to official websites only.</p>
-        </div>
-    </div>
-</footer>
+    </footer>
 
     <script>
-        // Dark Mode Toggle
+        // ==========================================
+        // DARK MODE, MOBILE MENU, NAVBAR (Existing)
+        // ==========================================
         function toggleDarkMode() {
             const html = document.documentElement;
             if (html.classList.contains('dark')) {
@@ -904,12 +660,10 @@
             document.documentElement.classList.add('dark');
         }
 
-        // Mobile Menu
         function toggleMobileMenu() {
             document.getElementById('mobile-menu').classList.toggle('hidden');
         }
 
-        // Navbar scroll effect
         window.addEventListener('scroll', () => {
             const navbar = document.getElementById('navbar');
             if (window.scrollY > 20) {
@@ -919,7 +673,6 @@
             }
         });
 
-        // Search filter
         document.getElementById('search-input').addEventListener('input', function(e) {
             const query = e.target.value.toLowerCase();
             document.querySelectorAll('.job-item').forEach(item => {
@@ -927,7 +680,6 @@
             });
         });
 
-        // Scroll reveal
         const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -936,25 +688,102 @@
                 }
             });
         }, observerOptions);
-
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    </script>
 
-    <!-- ==================== FIREBASE DYNAMIC POSTS ==================== -->
-    <script>
         // ==========================================
-        // FIREBASE CONFIGURATION
+        // VIEW MORE SYSTEM (NEW - Fully Working)
         // ==========================================
-        // IMPORTANT: Replace with your Firebase project config (same as admin panel)
-    const firebaseConfig = {
-    apiKey: "AIzaSyCVMpsG1ePU6SSsAxWSnj85ylYfndJby-g",
-    authDomain: "apply-bro.firebaseapp.com",
-    projectId: "apply-bro",
-    storageBucket: "apply-bro.firebasestorage.app",
-    messagingSenderId: "220342045448",
-    appId: "1:220342045448:web:1b0845de0003d8a802fabd"
-};
-        // Initialize Firebase
+        const viewMoreSystem = {
+            // Configuration: how many posts to show initially
+            limit: 10,
+
+            // Get all post elements from a container
+            getPosts: function(containerId) {
+                const container = document.getElementById(containerId);
+                if (!container) return [];
+                // For job-item sections, use .job-item; for admit/results, use direct <a> children
+                const posts = container.querySelectorAll('.job-item');
+                if (posts.length > 0) return Array.from(posts);
+                // Fallback: direct <a> children (for admit cards & results)
+                return Array.from(container.children).filter(el => el.tagName === 'A');
+            },
+
+            // Initialize: hide posts beyond limit and show button if needed
+            init: function(containerId, buttonContainerId) {
+                const posts = this.getPosts(containerId);
+                const btnContainer = document.getElementById(buttonContainerId);
+
+                if (!posts.length || !btnContainer) return;
+
+                // Hide posts beyond the limit
+                posts.forEach((post, index) => {
+                    if (index >= this.limit) {
+                        post.classList.add('post-hidden');
+                    } else {
+                        post.classList.remove('post-hidden');
+                    }
+                });
+
+                // Show button only if there are more posts than the limit
+                if (posts.length > this.limit) {
+                    btnContainer.classList.remove('hidden');
+                } else {
+                    btnContainer.classList.add('hidden');
+                }
+            },
+
+            // Show all hidden posts and hide the button
+            showAll: function(containerId, buttonContainerId) {
+                const posts = this.getPosts(containerId);
+                const btnContainer = document.getElementById(buttonContainerId);
+
+                if (!posts.length || !btnContainer) return;
+
+                // Remove hidden class from all posts with animation
+                posts.forEach((post, index) => {
+                    if (index >= this.limit) {
+                        post.classList.remove('post-hidden');
+                        post.style.animation = 'fadeInUp 0.4s ease-out forwards';
+                        post.style.animationDelay = ((index - this.limit) * 0.05) + 's';
+                    }
+                });
+
+                // Hide the button container
+                btnContainer.classList.add('hidden');
+            },
+
+            // Re-initialize after dynamic content load (Firebase)
+            refresh: function(containerId, buttonContainerId) {
+                // Small delay to ensure DOM is updated
+                setTimeout(() => {
+                    this.init(containerId, buttonContainerId);
+                }, 100);
+            }
+        };
+
+        // ==========================================
+        // INITIALIZE VIEW MORE ON PAGE LOAD
+        // ==========================================
+        document.addEventListener('DOMContentLoaded', function() {
+            viewMoreSystem.init('live-update-content', 'view-more-live-jobs-container');
+            viewMoreSystem.init('latest-jobs-content', 'view-more-scholarship-container');
+            viewMoreSystem.init('yojana-content', 'view-more-yojana-container');
+            viewMoreSystem.init('admit-cards-content', 'view-more-admit-container');
+            viewMoreSystem.init('results-content', 'view-more-results-container');
+        });
+
+        // ==========================================
+        // FIREBASE DYNAMIC POSTS (Modified)
+        // ==========================================
+        const firebaseConfig = {
+            apiKey: "AIzaSyCVMpsG1ePU6SSsAxWSnj85ylYfndJby-g",
+            authDomain: "apply-bro.firebaseapp.com",
+            projectId: "apply-bro",
+            storageBucket: "apply-bro.firebasestorage.app",
+            messagingSenderId: "220342045448",
+            appId: "1:220342045448:web:1b0845de0003d8a802fabd"
+        };
+
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
@@ -967,19 +796,15 @@
             results: document.getElementById('results-content').innerHTML
         };
 
-        // ==========================================
-        // LOAD AND RENDER POSTS
-        // ==========================================
         async function loadDynamicPosts() {
             try {
                 const snapshot = await db.collection('posts').orderBy('createdAt', 'desc').get();
 
                 if (snapshot.empty) {
                     console.log('No posts found in database. Showing static content.');
-                    return; // Keep static fallback content
+                    return;
                 }
 
-                // Group posts by category
                 const posts = { 'Live Update': [], 'Latest Jobs': [], 'Sarkari Yojana': [], 'Admit Cards': [], 'Results': [] };
                 snapshot.forEach(doc => {
                     const post = doc.data();
@@ -988,28 +813,26 @@
                     }
                 });
 
-                // Render each section (only if posts exist for that category)
                 if (posts['Live Update'].length > 0) {
                     document.getElementById('live-update-content').innerHTML = renderLiveUpdates(posts['Live Update']);
+                    viewMoreSystem.refresh('live-update-content', 'view-more-live-jobs-container');
                 }
                 if (posts['Latest Jobs'].length > 0) {
                     document.getElementById('latest-jobs-content').innerHTML = renderLatestJobs(posts['Latest Jobs']);
+                    viewMoreSystem.refresh('latest-jobs-content', 'view-more-scholarship-container');
                 }
                 if (posts['Sarkari Yojana'].length > 0) {
                     document.getElementById('yojana-content').innerHTML = renderYojana(posts['Sarkari Yojana']);
+                    viewMoreSystem.refresh('yojana-content', 'view-more-yojana-container');
                 }
                 if (posts['Admit Cards'].length > 0) {
                     document.getElementById('admit-cards-content').innerHTML = renderAdmitCards(posts['Admit Cards']);
+                    viewMoreSystem.refresh('admit-cards-content', 'view-more-admit-container');
                 }
                 if (posts['Results'].length > 0) {
                     document.getElementById('results-content').innerHTML = renderResults(posts['Results']);
+                    viewMoreSystem.refresh('results-content', 'view-more-results-container');
                 }
-                // View More Buttons
-if (posts['Latest Jobs'].length > 10) {
-    document.getElementById('loadMoreScholarshipContainer')?.classList.remove('hidden');
-}
-
-                
 
                 console.log('Dynamic posts loaded successfully!');
 
@@ -1019,45 +842,34 @@ if (posts['Latest Jobs'].length > 10) {
             }
         }
 
-        // ==========================================
-        // RENDER FUNCTIONS (Preserve exact original HTML structure)
-        // ==========================================
-
         function renderLiveUpdates(posts) {
             return posts.map(post => {
                 const dotClass = post.status === 'active' 
                     ? 'bg-red-500 shadow-sm shadow-red-500/30' 
                     : 'bg-slate-300 dark:bg-slate-600';
-                return `
-                    <a href="${escapeHtml(post.link || '#')}" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
-                        <div class="flex items-start gap-3">
-                            <span class="mt-1.5 w-2 h-2 ${dotClass} rounded-full flex-shrink-0"></span>
-                            <div>
-                                <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">${escapeHtml(post.title)}</p>
-                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">${escapeHtml(post.description || '')}</p>
-                            </div>
-                        </div>
-                    </a>
-                `;
+                return '<a href="' + escapeHtml(post.link || '#') + '" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">' +
+                    '<div class="flex items-start gap-3">' +
+                        '<span class="mt-1.5 w-2 h-2 ' + dotClass + ' rounded-full flex-shrink-0"></span>' +
+                        '<div>' +
+                            '<p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">' + escapeHtml(post.title) + '</p>' +
+                            '<p class="text-xs text-slate-500 dark:text-slate-400 mt-1">' + escapeHtml(post.description || '') + '</p>' +
+                        '</div>' +
+                    '</div></a>';
             }).join('');
         }
 
         function renderLatestJobs(posts) {
             return posts.map(post => {
                 const badgeHtml = post.badge 
-                    ? `<span class="px-2.5 py-1 bg-gradient-to-r from-red-500 to-red-600 text-white text-[10px] font-bold rounded-lg shadow-sm shadow-red-500/20 flex-shrink-0">${escapeHtml(post.badge)}</span>` 
+                    ? '<span class="px-2.5 py-1 bg-gradient-to-r from-red-500 to-red-600 text-white text-[10px] font-bold rounded-lg shadow-sm shadow-red-500/20 flex-shrink-0">' + escapeHtml(post.badge) + '</span>' 
                     : '';
-                return `
-                    <a href="${escapeHtml(post.link || '#')}" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
-                        <div class="flex items-start justify-between gap-2">
-                            <div class="flex-1 min-w-0">
-                                <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">${escapeHtml(post.title)}</p>
-                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">${escapeHtml(post.description || '')}</p>
-                            </div>
-                            ${badgeHtml}
-                        </div>
-                    </a>
-                `;
+                return '<a href="' + escapeHtml(post.link || '#') + '" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">' +
+                    '<div class="flex items-start justify-between gap-2">' +
+                        '<div class="flex-1 min-w-0">' +
+                            '<p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">' + escapeHtml(post.title) + '</p>' +
+                            '<p class="text-xs text-slate-500 dark:text-slate-400 mt-1">' + escapeHtml(post.description || '') + '</p>' +
+                        '</div>' + badgeHtml +
+                    '</div></a>';
             }).join('');
         }
 
@@ -1066,53 +878,46 @@ if (posts['Latest Jobs'].length > 10) {
                 const dotClass = post.status === 'active'
                     ? 'bg-emerald-500 shadow-sm shadow-emerald-500/30'
                     : 'bg-slate-300 dark:bg-slate-600';
-                return `
-                    <a href="${escapeHtml(post.link || '#')}" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
-                        <div class="flex items-start gap-3">
-                            <span class="mt-1.5 w-2 h-2 ${dotClass} rounded-full flex-shrink-0"></span>
-                            <div>
-                                <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">${escapeHtml(post.title)}</p>
-                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">${escapeHtml(post.description || '')}</p>
-                            </div>
-                        </div>
-                    </a>
-                `;
+                return '<a href="' + escapeHtml(post.link || '#') + '" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">' +
+                    '<div class="flex items-start gap-3">' +
+                        '<span class="mt-1.5 w-2 h-2 ' + dotClass + ' rounded-full flex-shrink-0"></span>' +
+                        '<div>' +
+                            '<p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">' + escapeHtml(post.title) + '</p>' +
+                            '<p class="text-xs text-slate-500 dark:text-slate-400 mt-1">' + escapeHtml(post.description || '') + '</p>' +
+                        '</div>' +
+                    '</div></a>';
             }).join('');
         }
 
         function renderAdmitCards(posts) {
             return posts.map(post => {
                 const extraInfo = post.extraInfo || post.description || '';
-                return `
-                    <a href="${escapeHtml(post.link || '#')}" class="flex items-center gap-4 p-4 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-all group border border-transparent hover:border-emerald-200 dark:hover:border-emerald-800/50">
-                        <div class="w-11 h-11 bg-gradient-to-br from-emerald-100 to-emerald-50 dark:from-emerald-900/30 dark:to-emerald-800/20 rounded-xl flex items-center justify-center flex-shrink-0 shadow-sm">
-                            <svg class="w-5 h-5 text-emerald-700 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"/></svg>
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <p class="text-sm font-semibold text-slate-900 dark:text-white truncate group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors">${escapeHtml(post.title)}</p>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">${escapeHtml(extraInfo)}</p>
-                        </div>
-                        <span class="px-3 py-1.5 bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-700 hover:to-emerald-600 text-white text-xs font-semibold rounded-lg shadow-sm shadow-emerald-500/20 transition-all flex-shrink-0">Download</span>
-                    </a>
-                `;
+                return '<a href="' + escapeHtml(post.link || '#') + '" class="flex items-center gap-4 p-4 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-all group border border-transparent hover:border-emerald-200 dark:hover:border-emerald-800/50">' +
+                    '<div class="w-11 h-11 bg-gradient-to-br from-emerald-100 to-emerald-50 dark:from-emerald-900/30 dark:to-emerald-800/20 rounded-xl flex items-center justify-center flex-shrink-0 shadow-sm">' +
+                        '<svg class="w-5 h-5 text-emerald-700 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"/></svg>' +
+                    '</div>' +
+                    '<div class="flex-1 min-w-0">' +
+                        '<p class="text-sm font-semibold text-slate-900 dark:text-white truncate group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors">' + escapeHtml(post.title) + '</p>' +
+                        '<p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">' + escapeHtml(extraInfo) + '</p>' +
+                    '</div>' +
+                    '<span class="px-3 py-1.5 bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-700 hover:to-emerald-600 text-white text-xs font-semibold rounded-lg shadow-sm shadow-emerald-500/20 transition-all flex-shrink-0">Download</span>' +
+                '</a>';
             }).join('');
         }
 
         function renderResults(posts) {
             return posts.map(post => {
                 const extraInfo = post.extraInfo || post.description || '';
-                return `
-                    <a href="${escapeHtml(post.link || '#')}" class="flex items-center gap-4 p-4 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-all group border border-transparent hover:border-amber-200 dark:hover:border-amber-800/50">
-                        <div class="w-11 h-11 bg-gradient-to-br from-amber-100 to-amber-50 dark:from-amber-900/30 dark:to-amber-800/20 rounded-xl flex items-center justify-center flex-shrink-0 shadow-sm">
-                            <svg class="w-5 h-5 text-amber-700 dark:text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <p class="text-sm font-semibold text-slate-900 dark:text-white truncate group-hover:text-amber-700 dark:group-hover:text-amber-400 transition-colors">${escapeHtml(post.title)}</p>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">${escapeHtml(extraInfo)}</p>
-                        </div>
-                        <span class="px-3 py-1.5 bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-700 hover:to-amber-600 text-white text-xs font-semibold rounded-lg shadow-sm shadow-amber-500/20 transition-all flex-shrink-0">View</span>
-                    </a>
-                `;
+                return '<a href="' + escapeHtml(post.link || '#') + '" class="flex items-center gap-4 p-4 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-all group border border-transparent hover:border-amber-200 dark:hover:border-amber-800/50">' +
+                    '<div class="w-11 h-11 bg-gradient-to-br from-amber-100 to-amber-50 dark:from-amber-900/30 dark:to-amber-800/20 rounded-xl flex items-center justify-center flex-shrink-0 shadow-sm">' +
+                        '<svg class="w-5 h-5 text-amber-700 dark:text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>' +
+                    '</div>' +
+                    '<div class="flex-1 min-w-0">' +
+                        '<p class="text-sm font-semibold text-slate-900 dark:text-white truncate group-hover:text-amber-700 dark:group-hover:text-amber-400 transition-colors">' + escapeHtml(post.title) + '</p>' +
+                        '<p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">' + escapeHtml(extraInfo) + '</p>' +
+                    '</div>' +
+                    '<span class="px-3 py-1.5 bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-700 hover:to-amber-600 text-white text-xs font-semibold rounded-lg shadow-sm shadow-amber-500/20 transition-all flex-shrink-0">View</span>' +
+                '</a>';
             }).join('');
         }
 
@@ -1123,38 +928,12 @@ if (posts['Latest Jobs'].length > 10) {
             return div.innerHTML;
         }
 
-        // ===== View More Buttons Auto Show =====
-document.addEventListener('DOMContentLoaded', () => {
-
-    if(document.querySelectorAll('#live-update-content .job-item').length > 10){
-        document.getElementById('loadMoreJobsContainer')?.classList.remove('hidden');
-    }
-
-    if(document.querySelectorAll('#latest-jobs-content .job-item').length > 10){
-        document.getElementById('loadMoreScholarshipContainer')?.classList.remove('hidden');
-    }
-
-    if(document.querySelectorAll('#yojana-content .job-item').length > 10){
-        document.getElementById('loadMoreYojanaContainer')?.classList.remove('hidden');
-    }
-
-    if(document.querySelectorAll('#admit-cards-content a').length > 10){
-        document.getElementById('loadMoreAdmitCardContainer')?.classList.remove('hidden');
-    }
-
-    if(document.querySelectorAll('#results-content a').length > 10){
-        document.getElementById('loadMoreResultContainer')?.classList.remove('hidden');
-    }
-
-});
-// ===== End View More Buttons =====
-        
         // Load posts when page loads
         document.addEventListener('DOMContentLoaded', loadDynamicPosts);
     </script>
 
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 
 </body>
 </html>
