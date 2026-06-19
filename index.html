@@ -1004,6 +1004,12 @@
                 if (posts['Results'].length > 0) {
                     document.getElementById('results-content').innerHTML = renderResults(posts['Results']);
                 }
+                // View More Buttons
+if (posts['Latest Jobs'].length > 10) {
+    document.getElementById('loadMoreScholarshipContainer')?.classList.remove('hidden');
+}
+
+                
 
                 console.log('Dynamic posts loaded successfully!');
 
