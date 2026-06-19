@@ -1944,8 +1944,11 @@ const db = firebase.firestore(app);
                 '<div class="flex justify-between text-xs"><span class="text-slate-500">Latest Update</span>' +
                 '<span class="font-semibold text-slate-900 dark:text-white">' + s.latest + '</span></div>' +
                 '</div>' +
-                '<button onclick="filterByCategory('' + cat + '')" class="w-full mt-4 py-2 text-xs font-semibold rounded-lg transition-all border-none cursor-pointer" ' +
+                
+                // 👇 YAHAN CHANGE KARO - YE LINE DHUNDHO
+                '<button onclick="filterByCategory(\'' + cat.replace(/'/g, "\\'") + '\')" class="w-full mt-4 py-2 text-xs font-semibold rounded-lg transition-all border-none cursor-pointer" ' +
                 'style="background:#f5f3ff; color:#7c3aed;">View Posts &rarr;</button>' +
+                
                 '</div>';
         }).join('');
     }
