@@ -1177,20 +1177,33 @@
     // ==========================================
     // FIREBASE CONFIGURATION - applybro1
     // ==========================================
-    const firebaseConfig = {
-        apiKey: "AIzaSyDjj7c7ew71PVLmrG6Ot1ttgLkp4xQIc_U",
-        authDomain: "applybro1.firebaseapp.com",
-        projectId: "applybro1",
-        storageBucket: "applybro1.firebasestorage.app",
-        messagingSenderId: "96808372763",
-        appId: "1:96808372763:web:f2612b262afdfc8f9b86be",
-        measurementId: "G-J5GGXK944G"
-    };
+// ==========================================
+// FIREBASE CONFIGURATION - applybro1
+// ==========================================
+const firebaseConfig = {
+    apiKey: "AIzaSyDjj7c7ew71PVLmrG6Ot1ttgLkp4xQIc_U",
+    authDomain: "applybro1.firebaseapp.com",
+    projectId: "applybro1",
+    storageBucket: "applybro1.firebasestorage.app",
+    messagingSenderId: "96808372763",
+    appId: "1:96808372763:web:f2612b262afdfc8f9b86be",
+    measurementId: "G-J5GGXK944G"
+};
 
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-    const db = firebase.firestore();
-
+// NAMED APP USE KARO - duplicate app error nahi aayega
+let app;
+try {
+    app = firebase.initializeApp(firebaseConfig, 'admin-panel');
+} catch (e) {
+    if (e.code === 'app/duplicate-app') {
+        app = firebase.app('admin-panel');
+    } else {
+        console.error('Firebase init error:', e);
+        throw e;
+    }
+}
+const auth = firebase.auth(app);
+const db = firebase.firestore(app);
     // ==========================================
     // GLOBAL STATE
     // ==========================================
