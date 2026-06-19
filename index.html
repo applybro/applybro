@@ -1092,6 +1092,32 @@
             return div.innerHTML;
         }
 
+        // ===== View More Buttons Auto Show =====
+document.addEventListener('DOMContentLoaded', () => {
+
+    if(document.querySelectorAll('#live-update-content .job-item').length > 10){
+        document.getElementById('loadMoreJobsContainer')?.classList.remove('hidden');
+    }
+
+    if(document.querySelectorAll('#latest-jobs-content .job-item').length > 10){
+        document.getElementById('loadMoreScholarshipContainer')?.classList.remove('hidden');
+    }
+
+    if(document.querySelectorAll('#yojana-content .job-item').length > 10){
+        document.getElementById('loadMoreYojanaContainer')?.classList.remove('hidden');
+    }
+
+    if(document.querySelectorAll('#admit-cards-content a').length > 10){
+        document.getElementById('loadMoreAdmitCardContainer')?.classList.remove('hidden');
+    }
+
+    if(document.querySelectorAll('#results-content a').length > 10){
+        document.getElementById('loadMoreResultContainer')?.classList.remove('hidden');
+    }
+
+});
+// ===== End View More Buttons =====
+        
         // Load posts when page loads
         document.addEventListener('DOMContentLoaded', loadDynamicPosts);
     </script>
