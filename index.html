@@ -77,9 +77,9 @@
         .view-more-btn:active { transform: translateY(0); }
         .post-hidden { display: none !important; }
     </style>
-<base target="_blank">
+<base href="/" target="_self">
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-<base target="_blank">
+<base href="/" target="_self">
 </head>
 <body class="bg-[#F8FAFC] dark:bg-[#0f172a] text-[#111827] dark:text-slate-200 antialiased dark-transition">
 
@@ -784,9 +784,21 @@
             appId: "1:220342045448:web:1b0845de0003d8a802fabd"
         };
 
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
+        let app;
+try {
+    app = firebase.initializeApp(firebaseConfig, 'admin-panel');
+} catch (e) {
+    if (e.code === 'app/duplicate-app') {
+        app = firebase.app('admin-panel');
+    } else {
+        throw e;
+    }
+}
+const auth = firebase.auth(app);
+const db = firebase.firestore(app);
 
+
+        
         // Store original static content as fallback
         const fallbackContent = {
             liveUpdate: document.getElementById('live-update-content').innerHTML,
