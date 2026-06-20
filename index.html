@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apply Bro — Latest Government Jobs, Results & Admit Cards 2026</title>
-    <meta name="description" content="India's most trusted Sarkari Naukri portal. Find latest government jobs, results, admit cards, and yojana updates.">
+    <title>ApplyBro Admin Panel</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -31,921 +31,1628 @@
     <style>
         body { font-family: 'Inter', sans-serif; }
         h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', 'Inter', sans-serif; }
-        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #c4b5fd; border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: #8b5cf6; }
         .dark ::-webkit-scrollbar-thumb { background: #4c1d95; }
-        .dark ::-webkit-scrollbar-thumb:hover { background: #6d28d9; }
         .nav-glass { background: rgba(46, 16, 101, 0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
-        .nav-glass.scrolled { background: rgba(46, 16, 101, 0.98); box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
-        .nav-link { position: relative; transition: color 0.3s ease; }
-        .nav-link::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 50%; transform: translateX(-50%); background: linear-gradient(90deg, #a78bfa, #c4b5fd); transition: width 0.3s cubic-bezier(0.4,0,0.2,1); border-radius: 2px; }
-        .nav-link:hover::after { width: 80%; }
-        .nav-link:hover { color: #ddd6fe; }
-        @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
-        .search-float { animation: float 4s ease-in-out infinite; }
-        .card-premium { transition: all 0.4s cubic-bezier(0.4,0,0.2,1); border: 1px solid rgba(229,231,235,0.6); }
-        .card-premium:hover { transform: translateY(-6px) scale(1.01); box-shadow: 0 20px 40px -12px rgba(91,33,182,0.15), 0 0 0 1px rgba(139,92,246,0.1); border-color: rgba(139,92,246,0.3); }
-        .dark .card-premium { border-color: rgba(75,85,99,0.4); }
-        .dark .card-premium:hover { border-color: rgba(139,92,246,0.4); box-shadow: 0 20px 40px -12px rgba(91,33,182,0.25), 0 0 0 1px rgba(139,92,246,0.15); }
-        .icon-gradient { background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%); }
-        .dark .icon-gradient { background: linear-gradient(135deg, rgba(124,58,237,0.2) 0%, rgba(139,92,246,0.15) 100%); }
-        .card-premium:hover .icon-gradient { background: linear-gradient(135deg, #ddd6fe 0%, #c4b5fd 100%); transform: scale(1.1) rotate(3deg); }
-        .dark .card-premium:hover .icon-gradient { background: linear-gradient(135deg, rgba(124,58,237,0.3) 0%, rgba(139,92,246,0.25) 100%); }
-        .card-premium:hover .icon-gradient svg { transform: scale(1.1); }
-        .job-item { transition: all 0.25s cubic-bezier(0.4,0,0.2,1); border-left: 3px solid transparent; }
-        .job-item:hover { background: linear-gradient(90deg, rgba(139,92,246,0.04) 0%, transparent 100%); border-left-color: #8b5cf6; padding-left: 1.25rem; }
-        .dark .job-item:hover { background: linear-gradient(90deg, rgba(139,92,246,0.08) 0%, transparent 100%); border-left-color: #a78bfa; }
-        .section-header { background: linear-gradient(135deg, #5b21b6 0%, #7c3aed 100%); }
-        .section-header-alt { background: linear-gradient(135deg, #059669 0%, #10b981 100%); }
-        .section-header-amber { background: linear-gradient(135deg, #d97706 0%, #f59e0b 100%); }
-        .btn-glow { transition: all 0.3s ease; position: relative; overflow: hidden; }
-        .btn-glow::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: left 0.5s ease; }
-        .btn-glow:hover::before { left: 100%; }
-        .btn-glow:hover { box-shadow: 0 4px 15px rgba(124,58,237,0.4); transform: translateY(-1px); }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .fade-in-up { animation: fadeInUp 0.6s ease-out forwards; }
-        .delay-100 { animation-delay: 0.1s; opacity: 0; }
-        .delay-200 { animation-delay: 0.2s; opacity: 0; }
-        .delay-300 { animation-delay: 0.3s; opacity: 0; }
-        .reveal { opacity: 0; transform: translateY(20px); transition: all 0.6s cubic-bezier(0.4,0,0.2,1); }
-        .reveal.visible { opacity: 1; transform: translateY(0); }
-        .dark-transition { transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; }
-        .view-more-btn { transition: all 0.3s cubic-bezier(0.4,0,0.2,1); }
-        .view-more-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px -5px rgba(124,58,237,0.3); }
-        .view-more-btn:active { transform: translateY(0); }
-        .post-hidden { display: none !important; }
-    </style>
-<base href="/" target="_self">
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-<base href="/" target="_self">
-</head>
-<body class="bg-[#F8FAFC] dark:bg-[#0f172a] text-[#111827] dark:text-slate-200 antialiased dark-transition">
+        .editor-toolbar-btn { padding: 6px 12px; font-size: 11px; font-weight: 500; border-radius: 8px; border: 1px solid #e2e8f0; background: white; color: #475569; transition: all 0.2s; display: inline-flex; align-items: center; gap: 4px; cursor: pointer; }
+        .dark .editor-toolbar-btn { background: #1e293b; border-color: #334155; color: #94a3b8; }
+        .editor-toolbar-btn:hover { background: #f5f3ff; border-color: #c4b5fd; color: #7c3aed; }
+        .dark .editor-toolbar-btn:hover { background: rgba(124,58,237,0.1); border-color: #7c3aed; color: #a78bfa; }
+        .editor-toolbar-btn.active { background: #ede9fe; border-color: #8b5cf6; color: #6d28d9; }
+        .dark .editor-toolbar-btn.active { background: rgba(124,58,237,0.2); color: #a78bfa; }
+        .cms-card { background: white; border-radius: 16px; border: 1px solid rgba(226, 232, 240, 0.8); box-shadow: 0 1px 3px rgba(0,0,0,0.05); overflow: hidden; transition: all 0.3s; }
+        .dark .cms-card { background: #0f172a; border-color: rgba(51, 65, 85, 0.8); }
+        .cms-input { width: 100%; padding: 10px 16px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; font-size: 13px; color: #0f172a; transition: all 0.2s; outline: none; }
+        .dark .cms-input { background: rgba(30, 41, 59, 0.5); border-color: #334155; color: white; }
+        .cms-input:focus { border-color: #8b5cf6; box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15); }
+        .cms-input::placeholder { color: #94a3b8; }
+        .cms-btn { padding: 10px 20px; background: linear-gradient(135deg, #6d28d9, #7c3aed); color: white; font-size: 13px; font-weight: 600; border-radius: 12px; border: none; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3); }
+        .cms-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(124, 58, 237, 0.4); }
+        .cms-btn:active { transform: scale(0.98); }
+        .cms-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        .cms-btn-secondary { padding: 10px 20px; background: #f1f5f9; color: #475569; font-size: 13px; font-weight: 600; border-radius: 12px; border: 1px solid #e2e8f0; cursor: pointer; transition: all 0.2s; }
+        .dark .cms-btn-secondary { background: #1e293b; color: #94a3b8; border-color: #334155; }
+        .cms-btn-secondary:hover { background: #e2e8f0; color: #334155; }
+        .cms-btn-danger { padding: 8px 16px; background: linear-gradient(135deg, #dc2626, #ef4444); color: white; font-size: 12px; font-weight: 600; border-radius: 8px; border: none; cursor: pointer; transition: all 0.2s; }
+        .cms-btn-success { padding: 8px 16px; background: linear-gradient(135deg, #059669, #10b981); color: white; font-size: 12px; font-weight: 600; border-radius: 8px; border: none; cursor: pointer; transition: all 0.2s; }
+        .sidebar-link { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 12px; font-size: 13px; font-weight: 500; color: #64748b; transition: all 0.2s; border: none; background: none; width: 100%; text-align: left; cursor: pointer; }
+        .dark .sidebar-link { color: #94a3b8; }
+        .sidebar-link:hover { background: #f5f3ff; color: #7c3aed; }
+        .dark .sidebar-link:hover { background: rgba(124,58,237,0.1); color: #a78bfa; }
+        .sidebar-link.active { background: #ede9fe; color: #6d28d9; box-shadow: 0 1px 3px rgba(139,92,246,0.1); }
+        .dark .sidebar-link.active { background: rgba(124,58,237,0.15); color: #a78bfa; }
+        #editor { min-height: 400px; outline: none; line-height: 1.7; font-size: 14px; }
+        #editor:empty:before { content: attr(data-placeholder); color: #94a3b8; pointer-events: none; }
+        #editor h1 { font-size: 2em; font-weight: 700; margin: 0.5em 0; color: inherit; }
+        #editor h2 { font-size: 1.5em; font-weight: 600; margin: 0.5em 0; color: inherit; }
+        #editor h3 { font-size: 1.25em; font-weight: 600; margin: 0.5em 0; color: inherit; }
+        #editor h4 { font-size: 1.1em; font-weight: 600; margin: 0.5em 0; color: inherit; }
+        #editor p { margin: 0.5em 0; }
+        #editor ul { list-style-type: disc; padding-left: 1.5em; margin: 0.5em 0; }
+        #editor ol { list-style-type: decimal; padding-left: 1.5em; margin: 0.5em 0; }
+        #editor blockquote { border-left: 4px solid #8b5cf6; padding-left: 1em; margin: 1em 0; color: #64748b; font-style: italic; }
+        .dark #editor blockquote { color: #94a3b8; }
+        #editor pre { background: #1e293b; color: #e2e8f0; padding: 1em; border-radius: 12px; overflow-x: auto; font-family: monospace; font-size: 0.9em; }
+        #editor code { background: #f1f5f9; padding: 0.2em 0.4em; border-radius: 4px; font-family: monospace; font-size: 0.9em; }
+        .dark #editor code { background: #334155; }
+        #editor hr { border: none; border-top: 2px solid #e2e8f0; margin: 1.5em 0; }
+        .dark #editor hr { border-top-color: #475569; }
+        #editor .box-important { background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border: 1px solid #f59e0b; border-radius: 12px; padding: 1em 1.25em; margin: 1em 0; }
+        #editor .box-notice { background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); border: 1px solid #3b82f6; border-radius: 12px; padding: 1em 1.25em; margin: 1em 0; }
+        #editor .box-update { background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%); border: 1px solid #10b981; border-radius: 12px; padding: 1em 1.25em; margin: 1em 0; }
+        #editor .box-warning { background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%); border: 1px solid #ef4444; border-radius: 12px; padding: 1em 1.25em; margin: 1em 0; }
+        #editor .box-success { background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%); border: 1px solid #22c55e; border-radius: 12px; padding: 1em 1.25em; margin: 1em 0; }
+        #editor table { width: 100%; border-collapse: collapse; margin: 1em 0; border-radius: 8px; overflow: hidden; }
+        #editor table th { background: #7c3aed; color: white; padding: 10px 14px; text-align: left; font-weight: 600; }
+        #editor table td { padding: 10px 14px; border-bottom: 1px solid #e2e8f0; }
+        .dark #editor table td { border-bottom-color: #475569; }
+        #editor table tr:nth-child(even) { background: #f8fafc; }
+        .dark #editor table tr:nth-child(even) { background: #1e293b; }
+        #editor img { max-width: 100%; border-radius: 12px; margin: 1em 0; }
+        #editor .faq-item { border: 1px solid #e2e8f0; border-radius: 12px; margin: 0.75em 0; overflow: hidden; }
+        .dark #editor .faq-item { border-color: #475569; }
+        #editor .faq-question { background: #f8fafc; padding: 10px 14px; font-weight: 600; cursor: pointer; }
+        .dark #editor .faq-question { background: #1e293b; }
+        #editor .faq-answer { padding: 10px 14px; border-top: 1px solid #e2e8f0; }
+        .dark #editor .faq-answer { border-top-color: #475569; }
+        #editor .btn-apply { display: inline-block; background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%); color: white; padding: 10px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; margin: 0.5em 0; }
+        #editor .btn-download { display: inline-block; background: linear-gradient(135deg, #059669 0%, #10b981 100%); color: white; padding: 10px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; margin: 0.5em 0; }
+        #editor .btn-official { display: inline-block; background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%); color: white; padding: 10px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; margin: 0.5em 0; }
+        #editor .btn-primary { display: inline-block; background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%); color: white; padding: 10px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; margin: 0.5em 0; }
+        #editor .btn-secondary { display: inline-block; background: #f1f5f9; color: #475569; padding: 10px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; margin: 0.5em 0; border: 1px solid #e2e8f0; }
+        #editor .btn-notification { display: inline-block; background: linear-gradient(135deg, #ea580c 0%, #f97316 100%); color: white; padding: 10px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; margin: 0.5em 0; }
+        #editor .btn-registration { display: inline-block; background: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%); color: white; padding: 10px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; margin: 0.5em 0; }
+        #editor .btn-login { display: inline-block; background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%); color: white; padding: 10px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; margin: 0.5em 0; }
+        .preview-panel { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 20px; min-height: 400px; overflow-y: auto; }
+        .dark .preview-panel { background: #0f172a; border-color: #334155; }
+        .fade-in { animation: fadeIn 0.4s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .toast { position: fixed; bottom: 24px; right: 24px; padding: 14px 20px; border-radius: 14px; color: white; font-weight: 500; font-size: 13px; z-index: 9999; animation: slideIn 0.3s ease-out; box-shadow: 0 10px 40px rgba(0,0,0,0.2); }
+        @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        .status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+        .status-dot.active { background: #10b981; box-shadow: 0 0 0 3px rgba(16,185,129,0.2); }
+        .status-dot.draft { background: #f59e0b; box-shadow: 0 0 0 3px rgba(245,158,11,0.2); }
+        .green-dot { width: 8px; height: 8px; background: #22c55e; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 2px rgba(34,197,94,0.3); }
+        @media (max-width: 1024px) { .editor-layout { flex-direction: column; } .preview-panel { min-height: 300px; } }
+        .setup-check { display: flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 10px; margin-bottom: 8px; font-size: 13px; }
+        .setup-check.ok { background: #d1fae5; color: #065f46; }
+        .setup-check.warn { background: #fef3c7; color: #92400e; }
+        .setup-check.error { background: #fee2e2; color: #991b1b; }
 
-    <!-- Sticky Navbar -->
-    <nav id="navbar" class="nav-glass sticky top-0 z-50 border-b border-white/10 transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <a href="index.html" class="flex items-center gap-2.5 group">
-                    <div class="w-9 h-9 bg-gradient-to-br from-royal-400 to-royal-600 rounded-xl flex items-center justify-center shadow-lg shadow-royal-500/30 group-hover:shadow-royal-500/50 transition-shadow">
+        /* ===== LOGIN ANIMATIONS ===== */
+        @keyframes loginPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } }
+        .login-pulse { animation: loginPulse 2s ease-in-out infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .animate-spin-custom { animation: spin 1s linear infinite; }
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); } 20%, 40%, 60%, 80% { transform: translateX(5px); } }
+        .shake-error { animation: shake 0.5s ease-in-out; }
+        @keyframes glow { 0%, 100% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.3); } 50% { box-shadow: 0 0 40px rgba(139, 92, 246, 0.6); } }
+        .glow-effect { animation: glow 2s ease-in-out infinite; }
+        .login-error-shadow { box-shadow: 0 4px 20px rgba(239, 68, 68, 0.4), 0 0 0 1px rgba(239, 68, 68, 0.3); }
+    </style>
+<base target="_blank">
+</head>
+<body class="bg-gray-50 dark:bg-slate-950 text-gray-900 dark:text-slate-200">
+
+    <!-- ========== LOGIN SCREEN ========== -->
+    <div id="login-screen" class="fixed inset-0 z-50 flex items-center justify-center" style="background: linear-gradient(135deg, #1e1b4b 0%, #312e81 40%, #4c1d95 100%);">
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div class="absolute w-96 h-96 rounded-full opacity-10" style="background: radial-gradient(circle, #a78bfa, transparent); top: -10%; left: -10%;"></div>
+            <div class="absolute w-80 h-80 rounded-full opacity-10" style="background: radial-gradient(circle, #c4b5fd, transparent); bottom: -10%; right: -10%;"></div>
+        </div>
+        <div class="w-full max-w-md px-6 relative z-10">
+            <div class="glow-effect rounded-3xl p-8" style="background: rgba(255,255,255,0.06); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.12);">
+                <div class="text-center mb-8">
+                    <div class="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 login-pulse" style="background: linear-gradient(135deg, #8b5cf6, #a78bfa); box-shadow: 0 8px 32px rgba(139,92,246,0.4);">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                    </div>
+                    <h1 class="text-2xl font-bold text-white tracking-tight">Apply<span style="color:#c4b5fd;">Bro</span> Admin</h1>
+                    <p class="text-white/50 text-sm mt-1">CMS Dashboard</p>
+                </div>
+
+                <div id="login-error" class="hidden mb-5 p-4 rounded-xl text-sm text-center login-error-shadow" style="background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); color: #fecaca;">
+                    <i class="fas fa-exclamation-circle mr-2"></i><span id="login-error-text">Invalid credentials</span>
+                </div>
+
+                <form id="login-form" class="space-y-5" onsubmit="handleLogin(event)">
+                    <div>
+                        <label class="block text-sm font-medium text-white/70 mb-2">Email Address</label>
+                        <div class="relative">
+                            <i class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-white/30"></i>
+                            <input type="email" id="login-email" required 
+                                class="w-full pl-11 pr-4 py-3.5 rounded-xl text-white text-sm transition-all outline-none"
+                                style="background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15);"
+                                placeholder="admin@applybro.in">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-white/70 mb-2">Password</label>
+                        <div class="relative">
+                            <i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-white/30"></i>
+                            <input type="password" id="login-password" required 
+                                class="w-full pl-11 pr-4 py-3.5 rounded-xl text-white text-sm transition-all outline-none"
+                                style="background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15);"
+                                placeholder="Enter your password">
+                        </div>
+                    </div>
+                    <button type="submit" id="login-btn"
+                        class="w-full py-3.5 text-white font-semibold rounded-xl transition-all outline-none flex items-center justify-center gap-2"
+                        style="background: linear-gradient(135deg, #7c3aed, #6d28d9); box-shadow: 0 4px 20px rgba(124,58,237,0.4);">
+                        <span id="login-text">Sign In</span>
+                        <svg id="login-spinner" class="hidden animate-spin-custom h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                    </button>
+                </form>
+
+                <div class="mt-6 pt-4 border-t border-white/10 text-center">
+                    <p class="text-white/40 text-xs">Protected by Firebase Authentication</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== MAIN DASHBOARD ========== -->
+    <div id="dashboard" class="hidden min-h-screen flex flex-col lg:flex-row">
+
+        <!-- Sidebar -->
+        <aside id="sidebar" class="w-full lg:w-64 bg-white dark:bg-slate-900 border-b lg:border-b-0 lg:border-r border-slate-200 dark:border-slate-800 flex-shrink-0" style="min-height: 100vh;">
+            <div class="p-5 border-b border-slate-200 dark:border-slate-800">
+                <a href="#" class="flex items-center gap-2.5">
+                    <div style="width:36px; height:36px; background: linear-gradient(135deg, #8b5cf6, #6d28d9); border-radius: 10px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(124,58,237,0.3);">
                         <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
                     </div>
-                    <span class="text-xl font-display font-bold text-white tracking-tight">Apply<span class="text-royal-300">Bro</span></span>
+                    <span class="text-lg font-bold text-slate-900 dark:text-white">Apply<span style="color:#8b5cf6;">Bro</span></span>
                 </a>
-                <div class="hidden lg:flex items-center gap-6">
-                    <a href="index.html" class="nav-link text-sm font-medium text-white/90">Home</a>
-                    <a href="index.html#latest-jobs" class="nav-link text-sm font-medium text-white/90">Latest Jobs</a>
-                    <a href="index.html#admit-cards" class="nav-link text-sm font-medium text-white/90">Admit Cards</a>
-                    <a href="index.html#results" class="nav-link text-sm font-medium text-white/90">Results</a>
-                    <a href="index.html#yojana" class="nav-link text-sm font-medium text-white/90">Yojana</a>
-                    <a href="about.html" class="nav-link text-sm font-medium text-white/90">About</a>
-                    <a href="contact.html" class="nav-link text-sm font-medium text-white/90">Contact</a>
+            </div>
+
+            <nav class="p-3 space-y-1">
+                <button onclick="switchTab('editor')" id="tab-editor" class="sidebar-link active">
+                    <i class="fas fa-pen-nib" style="width:20px; text-align:center;"></i> New Article
+                </button>
+                <button onclick="switchTab('posts')" id="tab-posts" class="sidebar-link">
+                    <i class="fas fa-newspaper" style="width:20px; text-align:center;"></i> All Posts
+                    <span id="posts-count" class="ml-auto text-xs font-bold px-2 py-0.5 rounded-full" style="background:#ede9fe; color:#6d28d9;">0</span>
+                </button>
+                <button onclick="switchTab('categories')" id="tab-categories" class="sidebar-link">
+                    <i class="fas fa-folder-open" style="width:20px; text-align:center;"></i> Categories
+                </button>
+                <button onclick="switchTab('drafts')" id="tab-drafts" class="sidebar-link">
+                    <i class="fas fa-file-alt" style="width:20px; text-align:center;"></i> Drafts
+                    <span id="drafts-count" class="ml-auto text-xs font-bold px-2 py-0.5 rounded-full" style="background:#fef3c7; color:#92400e;">0</span>
+                </button>
+                <button onclick="switchTab('json')" id="tab-json" class="sidebar-link">
+                    <i class="fas fa-code" style="width:20px; text-align:center;"></i> JSON Output
+                </button>
+            </nav>
+
+            <div style="position: absolute; bottom: 0; width: 100%; padding: 16px; border-top: 1px solid #e2e8f0;" class="dark:border-slate-800">
+                <div class="flex items-center gap-3 mb-3">
+                    <div id="user-avatar" style="width:36px; height:36px; background: linear-gradient(135deg, #a78bfa, #7c3aed); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 14px; font-weight: bold;">A</div>
+                    <div style="flex:1; min-width:0;">
+                        <p class="text-sm font-medium text-slate-900 dark:text-white truncate" id="user-name">Admin</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 truncate" id="user-email">admin@applybro.in</p>
+                    </div>
+                </div>
+                <button onclick="logout()" class="w-full flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium rounded-xl transition-all border-none cursor-pointer"
+                    style="background:#f1f5f9; color:#64748b;">
+                    <i class="fas fa-sign-out-alt"></i> Sign Out
+                </button>
+            </div>
+        </aside>
+
+        <!-- Mobile Header -->
+        <div class="lg:hidden nav-glass sticky top-0 z-40 px-4 py-3 flex items-center justify-between">
+            <span class="text-lg font-bold text-white">Apply<span style="color:#c4b5fd;">Bro</span> Admin</span>
+            <button onclick="toggleMobileSidebar()" class="p-2 text-white/80 hover:text-white bg-transparent border-none cursor-pointer">
+                <i class="fas fa-bars text-lg"></i>
+            </button>
+        </div>
+
+        <!-- Main Content -->
+        <main class="flex-1 overflow-y-auto" style="min-height: 100vh;">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 py-6">
+
+                <!-- ====== EDITOR TAB ====== -->
+                <div id="panel-editor" class="fade-in">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                        <div>
+                            <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Create New Article</h2>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Write, format, and publish your content</p>
+                        </div>
+                        <div class="flex items-center gap-3 flex-wrap">
+                            <div id="autosave-status" class="flex items-center gap-1.5 text-xs text-slate-400">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Ready</span>
+                            </div>
+                            <button onclick="saveDraft()" class="cms-btn-secondary">
+                                <i class="fas fa-save mr-1.5"></i> Save Draft
+                            </button>
+                            <button onclick="openPublishModal()" class="cms-btn">
+                                <i class="fas fa-paper-plane mr-1.5"></i> Publish
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Title & Meta Section -->
+                    <div class="cms-card p-6 mb-6">
+                        <h3 class="text-sm font-semibold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+                            <i class="fas fa-heading" style="color:#8b5cf6;"></i> Article Details
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="md:col-span-2">
+                                <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Article Title <span style="color:#ef4444;">*</span></label>
+                                <input type="text" id="article-title" class="cms-input" placeholder="Enter article title..." oninput="generateSlug()">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Short Title</label>
+                                <input type="text" id="short-title" class="cms-input" placeholder="Short display title...">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Auto Slug</label>
+                                <input type="text" id="article-slug" class="cms-input" style="background:#f1f5f9;" placeholder="auto-generated-slug" readonly>
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Meta Title</label>
+                                <input type="text" id="meta-title" class="cms-input" placeholder="SEO Meta Title (50-60 chars)">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Meta Description</label>
+                                <textarea id="meta-description" rows="2" class="cms-input resize-none" placeholder="SEO Meta Description (150-160 chars)"></textarea>
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Meta Keywords</label>
+                                <input type="text" id="meta-keywords" class="cms-input" placeholder="keyword1, keyword2, keyword3...">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rich Text Editor -->
+                    <div class="cms-card mb-6">
+                        <!-- Toolbar -->
+                        <div class="border-b border-slate-200 dark:border-slate-800 p-3">
+                            <div class="flex flex-wrap gap-1.5 mb-2">
+                                <div class="flex items-center gap-1 rounded-lg p-1" style="background:#f8fafc;">
+                                    <button onclick="execCmd('formatBlock','H1')" class="editor-toolbar-btn" title="Heading 1"><i class="fas fa-heading" style="font-size:10px;"></i>1</button>
+                                    <button onclick="execCmd('formatBlock','H2')" class="editor-toolbar-btn" title="Heading 2"><i class="fas fa-heading" style="font-size:10px;"></i>2</button>
+                                    <button onclick="execCmd('formatBlock','H3')" class="editor-toolbar-btn" title="Heading 3"><i class="fas fa-heading" style="font-size:10px;"></i>3</button>
+                                    <button onclick="execCmd('formatBlock','H4')" class="editor-toolbar-btn" title="Heading 4"><i class="fas fa-heading" style="font-size:10px;"></i>4</button>
+                                    <button onclick="execCmd('formatBlock','P')" class="editor-toolbar-btn" title="Paragraph"><i class="fas fa-paragraph"></i></button>
+                                </div>
+
+                                <div class="flex items-center gap-1 rounded-lg p-1" style="background:#f8fafc;">
+                                    <button onclick="execCmd('bold')" class="editor-toolbar-btn" title="Bold"><i class="fas fa-bold"></i></button>
+                                    <button onclick="execCmd('italic')" class="editor-toolbar-btn" title="Italic"><i class="fas fa-italic"></i></button>
+                                    <button onclick="execCmd('underline')" class="editor-toolbar-btn" title="Underline"><i class="fas fa-underline"></i></button>
+                                </div>
+
+                                <div class="flex items-center gap-1 rounded-lg p-1" style="background:#f8fafc;">
+                                    <button onclick="pickColor('foreColor')" class="editor-toolbar-btn" title="Text Color"><i class="fas fa-font" style="color:#7c3aed;"></i></button>
+                                    <button onclick="pickColor('hiliteColor')" class="editor-toolbar-btn" title="Background Color"><i class="fas fa-highlighter"></i></button>
+                                </div>
+
+                                <div class="flex items-center gap-1 rounded-lg p-1" style="background:#f8fafc;">
+                                    <button onclick="execCmd('insertUnorderedList')" class="editor-toolbar-btn" title="Bullet List"><i class="fas fa-list-ul"></i></button>
+                                    <button onclick="execCmd('insertOrderedList')" class="editor-toolbar-btn" title="Number List"><i class="fas fa-list-ol"></i></button>
+                                </div>
+
+                                <div class="flex items-center gap-1 rounded-lg p-1" style="background:#f8fafc;">
+                                    <button onclick="execCmd('justifyLeft')" class="editor-toolbar-btn" title="Align Left"><i class="fas fa-align-left"></i></button>
+                                    <button onclick="execCmd('justifyCenter')" class="editor-toolbar-btn" title="Align Center"><i class="fas fa-align-center"></i></button>
+                                    <button onclick="execCmd('justifyRight')" class="editor-toolbar-btn" title="Align Right"><i class="fas fa-align-right"></i></button>
+                                </div>
+
+                                <div class="flex items-center gap-1 rounded-lg p-1" style="background:#f8fafc;">
+                                    <button onclick="execCmd('formatBlock','blockquote')" class="editor-toolbar-btn" title="Quote"><i class="fas fa-quote-left"></i></button>
+                                    <button onclick="insertCodeBlock()" class="editor-toolbar-btn" title="Code Block"><i class="fas fa-code"></i></button>
+                                    <button onclick="execCmd('insertHorizontalRule')" class="editor-toolbar-btn" title="Horizontal Line"><i class="fas fa-minus"></i></button>
+                                </div>
+                            </div>
+
+                            <!-- Box Generator -->
+                            <div class="flex flex-wrap gap-1.5 mt-2 pt-2 border-t border-slate-200 dark:border-slate-700/50">
+                                <span class="text-xs text-slate-500 dark:text-slate-400 self-center mr-1">Boxes:</span>
+                                <button onclick="insertBox('important')" class="px-2.5 py-1 text-[10px] font-bold rounded-lg border transition-all cursor-pointer" style="background:#fef3c7; color:#92400e; border-color:#fcd34d;">Important</button>
+                                <button onclick="insertBox('notice')" class="px-2.5 py-1 text-[10px] font-bold rounded-lg border transition-all cursor-pointer" style="background:#dbeafe; color:#1e40af; border-color:#93c5fd;">Notice</button>
+                                <button onclick="insertBox('update')" class="px-2.5 py-1 text-[10px] font-bold rounded-lg border transition-all cursor-pointer" style="background:#d1fae5; color:#065f46; border-color:#6ee7b7;">Update</button>
+                                <button onclick="insertBox('warning')" class="px-2.5 py-1 text-[10px] font-bold rounded-lg border transition-all cursor-pointer" style="background:#fee2e2; color:#991b1b; border-color:#fca5a5;">Warning</button>
+                                <button onclick="insertBox('success')" class="px-2.5 py-1 text-[10px] font-bold rounded-lg border transition-all cursor-pointer" style="background:#dcfce7; color:#166534; border-color:#86efac;">Success</button>
+                            </div>
+
+                            <!-- Quick Tools -->
+                            <div class="flex flex-wrap gap-1.5 mt-2 pt-2 border-t border-slate-200 dark:border-slate-700/50">
+                                <span class="text-xs text-slate-500 dark:text-slate-400 self-center mr-1">Tools:</span>
+                                <button onclick="openLinkModal()" class="editor-toolbar-btn" style="font-size:10px;"><i class="fas fa-link"></i> Link</button>
+                                <button onclick="openImageModal()" class="editor-toolbar-btn" style="font-size:10px;"><i class="fas fa-image"></i> Image</button>
+                                <button onclick="openTableModal()" class="editor-toolbar-btn" style="font-size:10px;"><i class="fas fa-table"></i> Table</button>
+                                <button onclick="openFaqModal()" class="editor-toolbar-btn" style="font-size:10px;"><i class="fas fa-question-circle"></i> FAQ</button>
+                                <button onclick="openButtonModal()" class="editor-toolbar-btn" style="font-size:10px;"><i class="fas fa-mouse-pointer"></i> Button</button>
+                                <button onclick="openDividerModal()" class="editor-toolbar-btn" style="font-size:10px;"><i class="fas fa-grip-lines"></i> Divider</button>
+                                <button onclick="undo()" class="editor-toolbar-btn" style="font-size:10px;"><i class="fas fa-undo"></i></button>
+                                <button onclick="redo()" class="editor-toolbar-btn" style="font-size:10px;"><i class="fas fa-redo"></i></button>
+                                <button onclick="clearEditor()" class="editor-toolbar-btn" style="font-size:10px; color:#ef4444;"><i class="fas fa-trash-alt"></i> Clear</button>
+                            </div>
+                        </div>
+
+                        <!-- Editor & Preview Layout -->
+                        <div class="editor-layout flex gap-0">
+                            <div class="flex-1 p-4">
+                                <div id="editor" contenteditable="true" data-placeholder="Start writing your article here..." 
+                                     class="w-full text-slate-800 dark:text-slate-200"
+                                     style="min-height: 400px; outline: none;"
+                                     oninput="updatePreview(); startAutoSave();"></div>
+                            </div>
+
+                            <!-- Live Preview Panel -->
+                            <div class="hidden xl:block" style="width: 45%; border-left: 1px solid #e2e8f0; padding: 16px; background: #f8fafc;">
+                                <div class="flex items-center justify-between mb-3">
+                                    <h4 class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Live Preview</h4>
+                                    <div class="flex gap-1">
+                                        <button onclick="togglePreviewMode('desktop')" class="p-1.5 rounded text-xs text-slate-500 hover:text-royal-600 bg-transparent border-none cursor-pointer" title="Desktop"><i class="fas fa-desktop"></i></button>
+                                        <button onclick="togglePreviewMode('mobile')" class="p-1.5 rounded text-xs text-slate-500 hover:text-royal-600 bg-transparent border-none cursor-pointer" title="Mobile"><i class="fas fa-mobile-alt"></i></button>
+                                    </div>
+                                </div>
+                                <div id="live-preview" class="preview-panel text-sm">
+                                    <p class="text-slate-400 text-center" style="padding: 80px 0;">Start typing to see live preview...</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- HTML Source Toggle -->
+                        <div class="border-t border-slate-200 dark:border-slate-800 p-3">
+                            <div class="flex items-center gap-3 mb-2">
+                                <button onclick="toggleHtmlSource()" id="html-toggle-btn" class="text-xs font-medium flex items-center gap-1.5 bg-transparent border-none cursor-pointer" style="color:#7c3aed;">
+                                    <i class="fas fa-code"></i> Show HTML Source
+                                </button>
+                                <button onclick="copyHtml()" class="text-xs text-slate-500 hover:text-slate-700 bg-transparent border-none cursor-pointer flex items-center gap-1">
+                                    <i class="fas fa-copy"></i> Copy
+                                </button>
+                            </div>
+                            <div id="html-source-panel" class="hidden">
+                                <textarea id="html-source" rows="8" class="w-full p-3 rounded-xl text-xs font-mono resize-y outline-none" style="background:#0f172a; color:#34d399;"
+                                    oninput="updateEditorFromSource()"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ====== POSTS TAB ====== -->
+                <div id="panel-posts" class="hidden fade-in">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                        <div>
+                            <h2 class="text-2xl font-bold text-slate-900 dark:text-white">All Posts</h2>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Manage your published articles</p>
+                        </div>
+                        <button onclick="switchTab('editor'); resetEditor();" class="cms-btn">
+                            <i class="fas fa-plus mr-1.5"></i> New Article
+                        </button>
+                    </div>
+
+                    <!-- Filters -->
+                    <div class="cms-card p-4 mb-6">
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <div class="relative flex-1">
+                                <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                                <input type="text" id="post-search" class="cms-input pl-10" placeholder="Search posts..." oninput="renderPostsList()">
+                            </div>
+                            <select id="post-filter-category" class="cms-input" style="min-width: 192px;" onchange="renderPostsList()">
+                                <option value="">All Categories</option>
+                                <option value="Live Sarkari Job">Live Sarkari Job</option>
+                                <option value="Live Scholarship">Live Scholarship</option>
+                                <option value="Sarkari Yojana">Sarkari Yojana</option>
+                                <option value="Admit Cards">Admit Cards</option>
+                                <option value="Latest Results">Latest Results</option>
+                            </select>
+                            <select id="post-filter-status" class="cms-input" style="min-width: 160px;" onchange="renderPostsList()">
+                                <option value="">All Status</option>
+                                <option value="published">Published</option>
+                                <option value="draft">Draft</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Posts Table -->
+                    <div class="cms-card overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b border-slate-200 dark:border-slate-800" style="background: rgba(248,250,252,0.5);">
+                                    <th class="text-left px-5 py-3.5 font-semibold text-slate-700 dark:text-slate-300">Title</th>
+                                    <th class="text-left px-5 py-3.5 font-semibold text-slate-700 dark:text-slate-300">Category</th>
+                                    <th class="text-left px-5 py-3.5 font-semibold text-slate-700 dark:text-slate-300">Date</th>
+                                    <th class="text-left px-5 py-3.5 font-semibold text-slate-700 dark:text-slate-300">Status</th>
+                                    <th class="text-right px-5 py-3.5 font-semibold text-slate-700 dark:text-slate-300">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="posts-table-body"></tbody>
+                        </table>
+                        <div id="posts-empty" class="hidden text-center" style="padding: 48px 0;">
+                            <div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3" style="background:#f1f5f9;">
+                                <i class="fas fa-inbox text-2xl text-slate-400"></i>
+                            </div>
+                            <p class="text-slate-500 dark:text-slate-400">No posts found</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ====== CATEGORIES TAB ====== -->
+                <div id="panel-categories" class="hidden fade-in">
+                    <div class="mb-6">
+                        <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Categories</h2>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Overview of all content categories</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="categories-grid"></div>
+                </div>
+
+                <!-- ====== DRAFTS TAB ====== -->
+                <div id="panel-drafts" class="hidden fade-in">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                        <div>
+                            <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Drafts</h2>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Saved drafts from local storage</p>
+                        </div>
+                    </div>
+                    <div class="cms-card overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b border-slate-200 dark:border-slate-800" style="background: rgba(248,250,252,0.5);">
+                                    <th class="text-left px-5 py-3.5 font-semibold text-slate-700 dark:text-slate-300">Title</th>
+                                    <th class="text-left px-5 py-3.5 font-semibold text-slate-700 dark:text-slate-300">Saved</th>
+                                    <th class="text-right px-5 py-3.5 font-semibold text-slate-700 dark:text-slate-300">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="drafts-table-body"></tbody>
+                        </table>
+                        <div id="drafts-empty" class="hidden text-center" style="padding: 48px 0;">
+                            <div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3" style="background:#f1f5f9;">
+                                <i class="fas fa-file-alt text-2xl text-slate-400"></i>
+                            </div>
+                            <p class="text-slate-500 dark:text-slate-400">No drafts saved</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ====== JSON OUTPUT TAB ====== -->
+                <div id="panel-json" class="hidden fade-in">
+                    <div class="mb-6">
+                        <h2 class="text-2xl font-bold text-slate-900 dark:text-white">JSON Output</h2>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Export your data for GitHub integration</p>
+                    </div>
+                    <div class="cms-card p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-sm font-semibold text-slate-900 dark:text-white">All Posts JSON</h3>
+                            <div class="flex gap-2">
+                                <button onclick="copyAllJson()" class="cms-btn-secondary" style="font-size:12px;">
+                                    <i class="fas fa-copy mr-1"></i> Copy JSON
+                                </button>
+                                <button onclick="downloadAllJson()" class="cms-btn" style="font-size:12px;">
+                                    <i class="fas fa-download mr-1"></i> Download
+                                </button>
+                            </div>
+                        </div>
+                        <pre id="json-output" class="w-full p-4 rounded-xl text-xs font-mono overflow-x-auto" style="background:#0f172a; color:#34d399; max-height: 600px; overflow-y: auto;"></pre>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- ========== PUBLISH MODAL ========== -->
+    <div id="publish-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4" style="background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);">
+        <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
+            <div class="p-6 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+                <h3 class="text-lg font-bold text-slate-900 dark:text-white">Publish Article</h3>
+                <button onclick="closePublishModal()" class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors bg-transparent border-none cursor-pointer">
+                    <i class="fas fa-times text-slate-500"></i>
+                </button>
+            </div>
+            <div class="p-6 space-y-4">
+                <div>
+                    <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Category <span style="color:#ef4444;">*</span></label>
+                    <select id="pub-category" class="cms-input">
+                        <option value="">Select Category</option>
+                        <option value="Live Sarkari Job">Live Sarkari Job</option>
+                        <option value="Live Scholarship">Live Scholarship</option>
+                        <option value="Sarkari Yojana">Sarkari Yojana</option>
+                        <option value="Admit Cards">Admit Cards</option>
+                        <option value="Latest Results">Latest Results</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Article URL <span style="color:#ef4444;">*</span></label>
+                    <input type="text" id="pub-url" class="cms-input" placeholder="https://applybro.in/sarkari-jobs/...">
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Featured Image URL</label>
+                    <input type="text" id="pub-image" class="cms-input" placeholder="https://...">
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Author</label>
+                    <input type="text" id="pub-author" class="cms-input" value="ApplyBro Admin">
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Status</label>
+                    <select id="pub-status" class="cms-input">
+                        <option value="published">Published</option>
+                        <option value="draft">Draft</option>
+                    </select>
+                </div>
+                <div class="rounded-xl p-4 space-y-2" style="background:#f8fafc;">
+                    <div class="flex justify-between text-xs">
+                        <span class="text-slate-500 dark:text-slate-400">Date:</span>
+                        <span class="font-medium text-slate-900 dark:text-white" id="pub-date-display">--</span>
+                    </div>
+                    <div class="flex justify-between text-xs">
+                        <span class="text-slate-500 dark:text-slate-400">Time:</span>
+                        <span class="font-medium text-slate-900 dark:text-white" id="pub-time-display">--</span>
+                    </div>
+                    <div class="flex justify-between text-xs">
+                        <span class="text-slate-500 dark:text-slate-400">Timestamp:</span>
+                        <span class="font-medium text-slate-900 dark:text-white font-mono" id="pub-timestamp-display">--</span>
+                    </div>
+                </div>
+            </div>
+            <div class="p-6 border-t border-slate-200 dark:border-slate-800 flex gap-3">
+                <button onclick="closePublishModal()" class="cms-btn-secondary flex-1">Cancel</button>
+                <button onclick="publishArticle()" id="publish-btn" class="cms-btn flex-1">
+                    <span id="publish-text"><i class="fas fa-paper-plane mr-1.5"></i> Publish Now</span>
+                    <span id="publish-spinner" class="hidden"><svg class="animate-spin h-5 w-5 mx-auto" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== LINK MODAL ========== -->
+    <div id="link-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4" style="background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);">
+        <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl w-full max-w-md">
+            <div class="p-5 border-b border-slate-200 dark:border-slate-800">
+                <h3 class="text-lg font-bold text-slate-900 dark:text-white">Insert Link</h3>
+            </div>
+            <div class="p-5 space-y-4">
+                <div>
+                    <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Link Text</label>
+                    <input type="text" id="link-text" class="cms-input" placeholder="Click here...">
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">URL</label>
+                    <input type="text" id="link-url" class="cms-input" placeholder="https://...">
                 </div>
                 <div class="flex items-center gap-2">
-                    <button onclick="toggleDarkMode()" class="p-2 rounded-lg text-white/70 hover:text-white hover:bg-white/10 transition-all" aria-label="Toggle dark mode">
-                        <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
-                        <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
-                    </button>
-                    <button onclick="toggleMobileMenu()" class="lg:hidden p-2 rounded-lg text-white/70 hover:text-white hover:bg-white/10 transition-all" aria-label="Menu">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
-                    </button>
+                    <input type="checkbox" id="link-newtab" class="w-4 h-4 rounded border-slate-300" style="accent-color:#7c3aed;">
+                    <label for="link-newtab" class="text-sm text-slate-600 dark:text-slate-400">Open in new tab</label>
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Style</label>
+                    <select id="link-style" class="cms-input">
+                        <option value="">Normal Link</option>
+                        <option value="btn-apply">Apply Now Button</option>
+                        <option value="btn-download">Download Button</option>
+                        <option value="btn-official">Official Website Button</option>
+                    </select>
                 </div>
             </div>
-        </div>
-        <div id="mobile-menu" class="hidden lg:hidden bg-royal-950/98 backdrop-blur-xl border-t border-white/10">
-            <div class="px-4 py-3 space-y-1">
-                <a href="index.html" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-white/90 hover:bg-white/10 transition-colors">Home</a>
-                <a href="index.html#latest-jobs" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-white/90 hover:bg-white/10 transition-colors">Latest Jobs</a>
-                <a href="index.html#admit-cards" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-white/90 hover:bg-white/10 transition-colors">Admit Cards</a>
-                <a href="index.html#results" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-white/90 hover:bg-white/10 transition-colors">Results</a>
-                <a href="index.html#yojana" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-white/90 hover:bg-white/10 transition-colors">Yojana</a>
-                <a href="about.html" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-white/90 hover:bg-white/10 transition-colors">About Us</a>
-                <a href="contact.html" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-white/90 hover:bg-white/10 transition-colors">Contact Us</a>
-                <a href="privacy.html" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-white/90 hover:bg-white/10 transition-colors">Privacy Policy</a>
-                <a href="disclaimer.html" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-white/90 hover:bg-white/10 transition-colors">Disclaimer</a>
+            <div class="p-5 border-t border-slate-200 dark:border-slate-800 flex gap-3">
+                <button onclick="closeLinkModal()" class="cms-btn-secondary flex-1">Cancel</button>
+                <button onclick="insertLink()" class="cms-btn flex-1">Insert</button>
             </div>
         </div>
-    </nav>
+    </div>
 
-    <!-- Search Section -->
-    <section class="bg-white dark:bg-slate-900 border-b border-slate-200/80 dark:border-slate-800/80 py-8">
-        <div class="max-w-2xl mx-auto px-4 sm:px-6">
-            <div class="search-float">
-                <div class="flex items-center gap-3 bg-white dark:bg-slate-800 rounded-2xl px-5 py-4 shadow-xl shadow-royal-500/5 border border-slate-200/80 dark:border-slate-700 focus-within:border-royal-400 focus-within:ring-4 focus-within:ring-royal-500/10 dark:focus-within:ring-royal-500/20 transition-all duration-300">
-                    <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-                    <input type="text" id="search-input" placeholder="Search latest jobs, admit cards, results..." class="bg-transparent flex-1 outline-none text-slate-900 dark:text-white placeholder-slate-400 text-sm font-medium">
-                    <button class="btn-glow px-6 py-2.5 bg-gradient-to-r from-royal-700 to-royal-600 hover:from-royal-800 hover:to-royal-700 text-white text-sm font-semibold rounded-xl transition-all shadow-lg shadow-royal-500/25">Search</button>
+    <!-- ========== IMAGE MODAL ========== -->
+    <div id="image-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4" style="background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);">
+        <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl w-full max-w-md">
+            <div class="p-5 border-b border-slate-200 dark:border-slate-800">
+                <h3 class="text-lg font-bold text-slate-900 dark:text-white">Insert Image</h3>
+            </div>
+            <div class="p-5 space-y-4">
+                <div>
+                    <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Image URL</label>
+                    <input type="text" id="img-url" class="cms-input" placeholder="https://...">
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Alt Text</label>
+                    <input type="text" id="img-alt" class="cms-input" placeholder="Description...">
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Caption</label>
+                    <input type="text" id="img-caption" class="cms-input" placeholder="Image caption...">
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Width (% or px)</label>
+                    <input type="text" id="img-width" class="cms-input" placeholder="100% or 500px">
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Category Boxes -->
-    <section class="py-10 bg-[#F8FAFC] dark:bg-[#0f172a]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-5">
-                <a href="#results" class="card-premium bg-white dark:bg-slate-900 rounded-2xl p-6 text-center group">
-                    <div class="icon-gradient w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4 transition-all duration-300">
-                        <svg class="w-7 h-7 text-royal-700 dark:text-royal-400 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                    </div>
-                    <h3 class="font-display font-semibold text-slate-900 dark:text-white mb-1">Results</h3>
-                    <p class="text-xs text-slate-500 dark:text-slate-400">Latest exam results</p>
-                </a>
-                <a href="#admit-cards" class="card-premium bg-white dark:bg-slate-900 rounded-2xl p-6 text-center group">
-                    <div class="icon-gradient w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4 transition-all duration-300">
-                        <svg class="w-7 h-7 text-royal-700 dark:text-royal-400 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"/></svg>
-                    </div>
-                    <h3 class="font-display font-semibold text-slate-900 dark:text-white mb-1">Admit Card</h3>
-                    <p class="text-xs text-slate-500 dark:text-slate-400">Download hall tickets</p>
-                </a>
-                <a href="#" class="card-premium bg-white dark:bg-slate-900 rounded-2xl p-6 text-center group">
-                    <div class="icon-gradient w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4 transition-all duration-300">
-                        <svg class="w-7 h-7 text-royal-700 dark:text-royal-400 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0124 12c0-3.866-3.582-7-8-7a8 8 0 00-8 8c0 1.892.402 3.013 1.172 4.065A4.001 4.001 0 0115 18a4 4 0 01-4 4h-1.528a4 4 0 01-3.117-1.5c-.293-.367-.5-.788-.5-1.255V14a2 2 0 012-2h1.382a2 2 0 001.789-1.106l.447-.894A2 2 0 0014.618 8h1.264a2 2 0 001.789-1.106l.447-.894A2 2 0 0018.382 4H19a2 2 0 012 2v7.255z"/></svg>
-                    </div>
-                    <h3 class="font-display font-semibold text-slate-900 dark:text-white mb-1">Career</h3>
-                    <p class="text-xs text-slate-500 dark:text-slate-400">Job opportunities</p>
-                </a>
-                <a href="#" class="card-premium bg-white dark:bg-slate-900 rounded-2xl p-6 text-center group">
-                    <div class="icon-gradient w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4 transition-all duration-300">
-                        <svg class="w-7 h-7 text-royal-700 dark:text-royal-400 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                    </div>
-                    <h3 class="font-display font-semibold text-slate-900 dark:text-white mb-1">Technology</h3>
-                    <p class="text-xs text-slate-500 dark:text-slate-400">Tech updates</p>
-                </a>
+            <div class="p-5 border-t border-slate-200 dark:border-slate-800 flex gap-3">
+                <button onclick="closeImageModal()" class="cms-btn-secondary flex-1">Cancel</button>
+                <button onclick="insertImage()" class="cms-btn flex-1">Insert</button>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- Main Content -->
-    <section class="py-8 bg-[#F8FAFC] dark:bg-[#0f172a]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-
-                <!-- Column 1: Live Update -->
-                <div class="reveal bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 overflow-hidden shadow-sm">
-                    <div class="section-header px-5 py-4 flex items-center gap-3">
-                        <div class="w-2 h-2 bg-red-400 rounded-full animate-pulse shadow-lg shadow-red-500/50"></div>
-                        <h2 class="font-display font-bold text-white text-sm uppercase tracking-wider">Live Sarkari Job </h2>
+    <!-- ========== TABLE MODAL ========== -->
+    <div id="table-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4" style="background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);">
+        <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl w-full max-w-md">
+            <div class="p-5 border-b border-slate-200 dark:border-slate-800">
+                <h3 class="text-lg font-bold text-slate-900 dark:text-white">Insert Table</h3>
+            </div>
+            <div class="p-5 space-y-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Rows</label>
+                        <input type="number" id="table-rows" class="cms-input" value="3" min="1" max="20">
                     </div>
-                    <div class="p-1" id="live-update-content">
-                        <a href="https://applybro.vercel.app/sarkari-jobs/NEW_Category_Gov_Job_Bihar%20Ration_Dealer_Vacancy_2026.html" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
-                            <div class="flex items-start gap-3">
-                                <span class="mt-1.5 w-2 h-2 bg-red-500 rounded-full flex-shrink-0 shadow-sm shadow-red-500/30"></span>
-                                <div>
-                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">Bihar Ration Dealer Vacancy 2026</p>
-                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">ration dealer bharty 2026</p>
-                                </div>
-                                <span class="px-2.5 py-1 bg-gradient-to-r from-red-500 to-red-600 text-white text-[10px] font-bold rounded-lg shadow-sm shadow-red-500/20 flex-shrink-0">New</span>
-                            </div>
-                        </a>
-                        <a href="https://applybro.vercel.app/sarkari-jobs/RRB_Technician_Recruitment_2026.html" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
-                            <div class="flex items-start gap-3">
-                                <span class="mt-1.5 w-2 h-2 bg-red-500 rounded-full flex-shrink-0 shadow-sm shadow-red-500/30"></span>
-                                <div>
-                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">RRB Technician Recruitment 2026: 6565 posts</p>
-                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">see Available Now</p>
-                                </div>
-                                <span class="px-2.5 py-1 bg-gradient-to-r from-red-500 to-red-600 text-white text-[10px] font-bold rounded-lg shadow-sm shadow-red-500/20 flex-shrink-0">New</span>
-                            </div>
-                        </a>
-                        <a href="https://applybro.vercel.app/sarkari-jobs/RRB_Technician_Recruitment_2026.html" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
-                            <div class="flex items-start gap-3">
-                                <span class="mt-1.5 w-2 h-2 bg-red-500 rounded-full flex-shrink-0 shadow-sm shadow-red-500/30"></span>
-                                <div>
-                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">RRB Technician Recruitment 2026: 6565 posts</p>
-                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">see Available Now</p>
-                                </div>                                                              
-                            </div>
-                        </a>
-                        <a href="https://applybro.vercel.app/sarkari-jobs/RRB_Technician_Recruitment_2026.html" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
-                            <div class="flex items-start gap-3">
-                                <span class="mt-1.5 w-2 h-2 bg-red-500 rounded-full flex-shrink-0 shadow-sm shadow-red-500/30"></span>
-                                <div>
-                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">RRB Technician Recruitment 2026: 6565 posts</p>
-                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">see Available Now</p>
-                                </div>                                                              
-                            </div>
-                        </a>
-                        <a href="#" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
-                            <div class="flex items-start gap-3">
-                                <span class="mt-1.5 w-2 h-2 bg-slate-300 dark:bg-slate-600 rounded-full flex-shrink-0"></span>
-                                <div>
-                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">CTET September 2026 Notification Out</p>
-                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Apply Online Started</p>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
-                            <div class="flex items-start gap-3">
-                                <span class="mt-1.5 w-2 h-2 bg-slate-300 dark:bg-slate-600 rounded-full flex-shrink-0"></span>
-                                <div>
-                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">IBPS PO 2026 Online Form</p>
-                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Last Date Extended</p>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
-                            <div class="flex items-start gap-3">
-                                <span class="mt-1.5 w-2 h-2 bg-slate-300 dark:bg-slate-600 rounded-full flex-shrink-0"></span>
-                                <div>
-                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">Bihar Police SI Admit Card</p>
-                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Released</p>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="job-item block px-4 py-3.5 last:border-0">
-                            <div class="flex items-start gap-3">
-                                <span class="mt-1.5 w-2 h-2 bg-slate-300 dark:bg-slate-600 rounded-full flex-shrink-0"></span>
-                                <div>
-                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">Indian Navy SSR Recruitment</p>
-                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Apply Online</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <!-- View More Button for Live Jobs -->
-                    <div id="view-more-live-jobs-container" class="hidden text-center py-3 border-t border-slate-100 dark:border-slate-800/80">
-                        <button id="view-more-live-jobs-btn" onclick="viewMoreSystem.showAll('live-update-content', 'view-more-live-jobs-container')" 
-                            class="view-more-btn px-6 py-2.5 bg-gradient-to-r from-royal-600 to-royal-700 hover:from-royal-700 hover:to-royal-800 text-white text-sm font-semibold rounded-xl shadow-lg shadow-royal-500/20 transition-all">
-                            View More
-                        </button>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Columns</label>
+                        <input type="number" id="table-cols" class="cms-input" value="3" min="1" max="10">
                     </div>
                 </div>
-
-                <!-- Column 2: Latest Jobs / Scholarship -->
-                <div class="reveal bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 overflow-hidden shadow-sm">
-                    <div class="section-header px-5 py-4 flex items-center gap-3">
-                        <div class="w-2 h-2 bg-red-400 rounded-full animate-pulse shadow-lg shadow-red-500/50"></div>
-                        <h2 class="font-display font-bold text-white text-sm uppercase tracking-wider">Live Scholarship </h2>
-                    </div>
-                    <div class="p-1" id="latest-jobs-content">
-                        <a href="https://applybro.vercel.app/sarkari-scholarship/Bihar_Labour_Card_Scholarship_2026.html" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
-                            <div class="flex items-start gap-3">
-                                <span class="mt-1.5 w-2 h-2 bg-red-500 rounded-full flex-shrink-0 shadow-sm shadow-red-500/30"></span>
-                                <div>
-                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">Bihar Labour Card Scholarship 2026</p>
-                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Scholarship 2026 ke bare me jarur dekhe</p>
-                                </div>
-                                <span class="px-2.5 py-1 bg-gradient-to-r from-red-500 to-red-600 text-white text-[10px] font-bold rounded-lg shadow-sm shadow-red-500/20 flex-shrink-0">New</span>
-                            </div>
-                        </a>
-                        <a href="https://applybro.vercel.app/sarkari-scholarship/Scholarship_2026.html" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
-                            <div class="flex items-start gap-3">
-                                <span class="mt-1.5 w-2 h-2 bg-red-500 rounded-full flex-shrink-0 shadow-sm shadow-red-500/30"></span>
-                                <div>
-                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">Bihar Board 10th Pass Scholarship 2026</p>
-                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Scholarship 2026 ke bare me jaldi dekhe</p>
-                                </div>
-                                <span class="px-2.5 py-1 bg-gradient-to-r from-red-500 to-red-600 text-white text-[10px] font-bold rounded-lg shadow-sm shadow-red-500/20 flex-shrink-0">New</span>
-                            </div>
-                        </a>
-                        <a href="https://applybro.vercel.app/sarkari-jobs/RRB_Technician_Recruitment_2026.html" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
-                            <div class="flex items-start gap-3">
-                                <span class="mt-1.5 w-2 h-2 bg-red-500 rounded-full flex-shrink-0 shadow-sm shadow-red-500/30"></span>
-                                <div>
-                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">RRB Technician Recruitment 2026: 6565 posts</p>
-                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">see Available Now</p>
-                                </div>                                                              
-                            </div>
-                        </a>
-                        <a href="https://applybro.vercel.app/sarkari-jobs/RRB_Technician_Recruitment_2026.html" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
-                            <div class="flex items-start gap-3">
-                                <span class="mt-1.5 w-2 h-2 bg-red-500 rounded-full flex-shrink-0 shadow-sm shadow-red-500/30"></span>
-                                <div>
-                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">RRB Technician Recruitment 2026: 6565 posts</p>
-                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">see Available Now</p>
-                                </div>                                                              
-                            </div>
-                        </a>
-                        <a href="#" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
-                            <div class="flex items-start justify-between gap-2">
-                                <div class="flex-1 min-w-0">
-                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">IBPS PO 2026</p>
-                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">4,500+ Vacancies</p>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
-                            <div class="flex items-start justify-between gap-2">
-                                <div class="flex-1 min-w-0">
-                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">UPSC CDS II 2026</p>
-                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">450 Vacancies</p>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
-                            <div class="flex items-start justify-between gap-2">
-                                <div class="flex-1 min-w-0">
-                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">Bihar Police SI 2026</p>
-                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">1,200+ Vacancies</p>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
-                            <div class="flex items-start justify-between gap-2">
-                                <div class="flex-1 min-w-0">
-                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">SSC CHSL 2026</p>
-                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">3,500+ Vacancies</p>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
-                            <div class="flex items-start justify-between gap-2">
-                                <div class="flex-1 min-w-0">
-                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">Indian Army Agniveer</p>
-                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">All India</p>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
-                            <div class="flex items-start justify-between gap-2">
-                                <div class="flex-1 min-w-0">
-                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">UPPSC PCS 2026</p>
-                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">250 Vacancies</p>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
-                            <div class="flex items-start justify-between gap-2">
-                                <div class="flex-1 min-w-0">
-                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">UPPSC PCS 2026</p>
-                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">250 Vacancies</p>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
-                            <div class="flex items-start justify-between gap-2">
-                                <div class="flex-1 min-w-0">
-                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">UPPSC PCS 2026</p>
-                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">250 Vacancies</p>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="job-item block px-4 py-3.5 last:border-0">
-                            <div class="flex items-start justify-between gap-2">
-                                <div class="flex-1 min-w-0">
-                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">UPPSC PCS 2026</p>
-                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">250 Vacancies</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <!-- View More Button for Scholarship -->
-                    <div id="view-more-scholarship-container" class="hidden text-center py-3 border-t border-slate-100 dark:border-slate-800/80">
-                        <button id="view-more-scholarship-btn" onclick="viewMoreSystem.showAll('latest-jobs-content', 'view-more-scholarship-container')" 
-                            class="view-more-btn px-6 py-2.5 bg-gradient-to-r from-royal-600 to-royal-700 hover:from-royal-700 hover:to-royal-800 text-white text-sm font-semibold rounded-xl shadow-lg shadow-royal-500/20 transition-all">
-                            View More
-                        </button>
-                    </div>
+                <div class="flex items-center gap-2">
+                    <input type="checkbox" id="table-header" class="w-4 h-4 rounded border-slate-300" style="accent-color:#7c3aed;" checked>
+                    <label for="table-header" class="text-sm text-slate-600 dark:text-slate-400">Include Header Row</label>
                 </div>
-
-                <!-- Column 3: Sarkari Yojana -->
-                <div class="reveal bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 overflow-hidden shadow-sm">
-                    <div class="section-header px-5 py-4 flex items-center gap-3">
-                        <div class="w-2 h-2 bg-red-400 rounded-full animate-pulse shadow-lg shadow-red-500/50"></div>
-                        <h2 class="font-display font-bold text-white text-sm uppercase tracking-wider">Sarkari Yojana</h2>
-                    </div>
-                    <div class="p-1" id="yojana-content">
-                        <a href="https://applybro.vercel.app/sarkari-yojna/Mukhyamantri_Udyami_Yojana_2026.html" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
-                            <div class="flex items-start gap-3">
-                                <span class="mt-1.5 w-2 h-2 bg-red-500 rounded-full flex-shrink-0 shadow-sm shadow-red-500/30"></span>
-                                <div>
-                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">Mukhyamantri Udyami Yojana 2026</p>
-                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">udyami details ek bar jarur dekhe</p>
-                                </div>
-                                <span class="px-2.5 py-1 bg-gradient-to-r from-red-500 to-red-600 text-white text-[10px] font-bold rounded-lg shadow-sm shadow-red-500/20 flex-shrink-0">New</span>
-                            </div>
-                        </a>
-                        <a href="https://applybro.vercel.app/sarkari-yojna/Bihar_Smart_PDS_Portal.html" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
-                            <div class="flex items-start gap-3">
-                                <span class="mt-1.5 w-2 h-2 bg-red-500 rounded-full flex-shrink-0 shadow-sm shadow-red-500/30"></span>
-                                <div>
-                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">Bihar Smart PDS Portal 2026</p>
-                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">new portal ke bare me jarur jane</p>
-                                </div>
-                                <span class="px-2.5 py-1 bg-gradient-to-r from-red-500 to-red-600 text-white text-[10px] font-bold rounded-lg shadow-sm shadow-red-500/20 flex-shrink-0">New</span>
-                            </div>
-                        </a>
-                        <a href="http://applybro.vercel.app/sarkari-yojna/voter_id_online.html" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
-                            <div class="flex items-start gap-3">
-                                <span class="mt-1.5 w-2 h-2 bg-red-500 rounded-full flex-shrink-0 shadow-sm shadow-red-500/30"></span>
-                                <div>
-                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">How to apply voter id card 2026</p>
-                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">tarika samjhe aasani se</p>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
-                            <div class="flex items-start gap-3">
-                                <span class="mt-1.5 w-2 h-2 bg-slate-300 dark:bg-slate-600 rounded-full flex-shrink-0"></span>
-                                <div>
-                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">PM Awas Yojana List</p>
-                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Check Beneficiary Status</p>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
-                            <div class="flex items-start gap-3">
-                                <span class="mt-1.5 w-2 h-2 bg-slate-300 dark:bg-slate-600 rounded-full flex-shrink-0"></span>
-                                <div>
-                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">Ladli Behna Yojana MP</p>
-                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Registration Open</p>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
-                            <div class="flex items-start gap-3">
-                                <span class="mt-1.5 w-2 h-2 bg-slate-300 dark:bg-slate-600 rounded-full flex-shrink-0"></span>
-                                <div>
-                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">Ration Card Apply Online</p>
-                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">New Application Form</p>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="job-item block px-4 py-3.5 last:border-0">
-                            <div class="flex items-start gap-3">
-                                <span class="mt-1.5 w-2 h-2 bg-slate-300 dark:bg-slate-600 rounded-full flex-shrink-0"></span>
-                                <div>
-                                    <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">E Shram Card Registration</p>
-                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Apply & Download</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <!-- View More Button for Yojana -->
-                    <div id="view-more-yojana-container" class="hidden text-center py-3 border-t border-slate-100 dark:border-slate-800/80">
-                        <button id="view-more-yojana-btn" onclick="viewMoreSystem.showAll('yojana-content', 'view-more-yojana-container')" 
-                            class="view-more-btn px-6 py-2.5 bg-gradient-to-r from-royal-600 to-royal-700 hover:from-royal-700 hover:to-royal-800 text-white text-sm font-semibold rounded-xl shadow-lg shadow-royal-500/20 transition-all">
-                            View More
-                        </button>
-                    </div>
+                <div class="flex items-center gap-2">
+                    <input type="checkbox" id="table-responsive" class="w-4 h-4 rounded border-slate-300" style="accent-color:#7c3aed;" checked>
+                    <label for="table-responsive" class="text-sm text-slate-600 dark:text-slate-400">Responsive (scroll on mobile)</label>
+                </div>
+                <div class="flex items-center gap-2">
+                    <input type="checkbox" id="table-border" class="w-4 h-4 rounded border-slate-300" style="accent-color:#7c3aed;" checked>
+                    <label for="table-border" class="text-sm text-slate-600 dark:text-slate-400">Show Borders</label>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Admit Cards & Results Row -->
-    <section class="py-8 bg-[#F8FAFC] dark:bg-[#0f172a]" id="admit-cards">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-
-                <!-- Admit Cards -->
-                <div class="reveal bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 overflow-hidden shadow-sm">
-                    <div class="section-header-alt px-5 py-4 flex items-center justify-between">
-                        <h2 class="font-display font-bold text-white text-sm uppercase tracking-wider">Admit Cards</h2>
-                        <a href="#" class="text-xs text-emerald-100 hover:text-white transition-colors font-medium">View All →</a>
-                    </div>
-                    <div class="p-4 space-y-2" id="admit-cards-content">
-                        <a href="#" class="flex items-center gap-4 p-4 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-all group border border-transparent hover:border-emerald-200 dark:hover:border-emerald-800/50">
-                            <div class="w-11 h-11 bg-gradient-to-br from-emerald-100 to-emerald-50 dark:from-emerald-900/30 dark:to-emerald-800/20 rounded-xl flex items-center justify-center flex-shrink-0 shadow-sm">
-                                <svg class="w-5 h-5 text-emerald-700 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"/></svg>
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <p class="text-sm font-semibold text-slate-900 dark:text-white truncate group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors">SSC CHSL 2026 Tier 1 Admit Card</p>
-                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Exam: 12-20 June 2026</p>
-                            </div>
-                            <span class="px-3 py-1.5 bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-700 hover:to-emerald-600 text-white text-xs font-semibold rounded-lg shadow-sm shadow-emerald-500/20 transition-all flex-shrink-0">Download</span>
-                        </a>
-                        <a href="#" class="flex items-center gap-4 p-4 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-all group border border-transparent hover:border-emerald-200 dark:hover:border-emerald-800/50">
-                            <div class="w-11 h-11 bg-gradient-to-br from-emerald-100 to-emerald-50 dark:from-emerald-900/30 dark:to-emerald-800/20 rounded-xl flex items-center justify-center flex-shrink-0 shadow-sm">
-                                <svg class="w-5 h-5 text-emerald-700 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"/></svg>
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <p class="text-sm font-semibold text-slate-900 dark:text-white truncate group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors">RRB NTPC CBT 2 Admit Card</p>
-                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Exam: 1-15 July 2026</p>
-                            </div>
-                            <span class="px-3 py-1.5 bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-700 hover:to-emerald-600 text-white text-xs font-semibold rounded-lg shadow-sm shadow-emerald-500/20 transition-all flex-shrink-0">Download</span>
-                        </a>
-                        <a href="#" class="flex items-center gap-4 p-4 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-all group border border-transparent hover:border-emerald-200 dark:hover:border-emerald-800/50">
-                            <div class="w-11 h-11 bg-gradient-to-br from-emerald-100 to-emerald-50 dark:from-emerald-900/30 dark:to-emerald-800/20 rounded-xl flex items-center justify-center flex-shrink-0 shadow-sm">
-                                <svg class="w-5 h-5 text-emerald-700 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"/></svg>
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <p class="text-sm font-semibold text-slate-900 dark:text-white truncate group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors">UPSC NDA II 2026 Admit Card</p>
-                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Exam: 6 September 2026</p>
-                            </div>
-                            <span class="px-3 py-1.5 bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-700 hover:to-emerald-600 text-white text-xs font-semibold rounded-lg shadow-sm shadow-emerald-500/20 transition-all flex-shrink-0">Download</span>
-                        </a>
-                    </div>
-                    <!-- View More Button for Admit Cards -->
-                    <div id="view-more-admit-container" class="hidden text-center py-3 border-t border-slate-100 dark:border-slate-800/80">
-                        <button id="view-more-admit-btn" onclick="viewMoreSystem.showAll('admit-cards-content', 'view-more-admit-container')" 
-                            class="view-more-btn px-6 py-2.5 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white text-sm font-semibold rounded-xl shadow-lg shadow-emerald-500/20 transition-all">
-                            View More
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Results -->
-                <div class="reveal bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 overflow-hidden shadow-sm delay-100" id="results">
-                    <div class="section-header-amber px-5 py-4 flex items-center justify-between">
-                        <h2 class="font-display font-bold text-white text-sm uppercase tracking-wider">Latest Results</h2>
-                        <a href="#" class="text-xs text-amber-100 hover:text-white transition-colors font-medium">View All →</a>
-                    </div>
-                    <div class="p-4 space-y-2" id="results-content">
-                        <a href="#" class="flex items-center gap-4 p-4 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-all group border border-transparent hover:border-amber-200 dark:hover:border-amber-800/50">
-                            <div class="w-11 h-11 bg-gradient-to-br from-amber-100 to-amber-50 dark:from-amber-900/30 dark:to-amber-800/20 rounded-xl flex items-center justify-center flex-shrink-0 shadow-sm">
-                                <svg class="w-5 h-5 text-amber-700 dark:text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <p class="text-sm font-semibold text-slate-900 dark:text-white truncate group-hover:text-amber-700 dark:group-hover:text-amber-400 transition-colors">UPSC CDS I 2026 Final Result</p>
-                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Declared: 10 May 2026</p>
-                            </div>
-                            <span class="px-3 py-1.5 bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-700 hover:to-amber-600 text-white text-xs font-semibold rounded-lg shadow-sm shadow-amber-500/20 transition-all flex-shrink-0">View</span>
-                        </a>
-                        <a href="#" class="flex items-center gap-4 p-4 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-all group border border-transparent hover:border-amber-200 dark:hover:border-amber-800/50">
-                            <div class="w-11 h-11 bg-gradient-to-br from-amber-100 to-amber-50 dark:from-amber-900/30 dark:to-amber-800/20 rounded-xl flex items-center justify-center flex-shrink-0 shadow-sm">
-                                <svg class="w-5 h-5 text-amber-700 dark:text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <p class="text-sm font-semibold text-slate-900 dark:text-white truncate group-hover:text-amber-700 dark:group-hover:text-amber-400 transition-colors">SSC MTS 2026 Final Result</p>
-                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Declared: 8 May 2026</p>
-                            </div>
-                            <span class="px-3 py-1.5 bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-700 hover:to-amber-600 text-white text-xs font-semibold rounded-lg shadow-sm shadow-amber-500/20 transition-all flex-shrink-0">View</span>
-                        </a>
-                        <a href="#" class="flex items-center gap-4 p-4 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-all group border border-transparent hover:border-amber-200 dark:hover:border-amber-800/50">
-                            <div class="w-11 h-11 bg-gradient-to-br from-amber-100 to-amber-50 dark:from-amber-900/30 dark:to-amber-800/20 rounded-xl flex items-center justify-center flex-shrink-0 shadow-sm">
-                                <svg class="w-5 h-5 text-amber-700 dark:text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <p class="text-sm font-semibold text-slate-900 dark:text-white truncate group-hover:text-amber-700 dark:group-hover:text-amber-400 transition-colors">IBPS Clerk 2025 Final Result</p>
-                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Declared: 5 May 2026</p>
-                            </div>
-                            <span class="px-3 py-1.5 bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-700 hover:to-amber-600 text-white text-xs font-semibold rounded-lg shadow-sm shadow-amber-500/20 transition-all flex-shrink-0">View</span>
-                        </a>
-                    </div>
-                    <!-- View More Button for Results -->
-                    <div id="view-more-results-container" class="hidden text-center py-3 border-t border-slate-100 dark:border-slate-800/80">
-                        <button id="view-more-results-btn" onclick="viewMoreSystem.showAll('results-content', 'view-more-results-container')" 
-                            class="view-more-btn px-6 py-2.5 bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white text-sm font-semibold rounded-xl shadow-lg shadow-amber-500/20 transition-all">
-                            View More
-                        </button>
-                    </div>
-                </div>
+            <div class="p-5 border-t border-slate-200 dark:border-slate-800 flex gap-3">
+                <button onclick="closeTableModal()" class="cms-btn-secondary flex-1">Cancel</button>
+                <button onclick="insertTable()" class="cms-btn flex-1">Insert</button>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- Footer -->
-    <footer class="bg-slate-900 dark:bg-[#020617] border-t border-slate-800/80 pt-12 pb-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
-                <div class="sm:col-span-2 lg:col-span-1">
-                    <a href="index.html" class="flex items-center gap-2.5 mb-4">
-                        <div class="w-9 h-9 bg-gradient-to-br from-royal-500 to-royal-700 rounded-xl flex items-center justify-center shadow-lg shadow-royal-500/30">
-                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+    <!-- ========== FAQ MODAL ========== -->
+    <div id="faq-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4" style="background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);">
+        <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl w-full max-w-lg">
+            <div class="p-5 border-b border-slate-200 dark:border-slate-800">
+                <h3 class="text-lg font-bold text-slate-900 dark:text-white">Insert FAQ</h3>
+            </div>
+            <div class="p-5 space-y-4">
+                <div id="faq-items">
+                    <div class="space-y-3 mb-4 p-4 rounded-xl" style="background:#f8fafc;">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Question</label>
+                            <input type="text" class="faq-question cms-input" placeholder="Enter question...">
                         </div>
-                        <span class="text-xl font-display font-bold text-white">Apply<span class="text-royal-400">Bro</span></span>
-                    </a>
-                    <p class="text-sm text-slate-400 leading-relaxed">India's trusted portal for Sarkari Naukri, Results, Admit Cards, and Yojana updates.</p>
-                </div>
-                <div>
-                    <h4 class="font-display font-semibold text-white text-sm mb-4">Quick Links</h4>
-                    <ul class="space-y-2.5">
-                        <li><a href="index.html" class="text-sm text-slate-400 hover:text-royal-400 transition-colors">Home</a></li>
-                        <li><a href="about.html" class="text-sm text-slate-400 hover:text-royal-400 transition-colors">About Us</a></li>
-                        <li><a href="contact.html" class="text-sm text-slate-400 hover:text-royal-400 transition-colors">Contact Us</a></li>
-                        <li><a href="privacy-policy.html" class="text-sm text-slate-400 hover:text-royal-400 transition-colors">Privacy Policy</a></li>
-                        <li><a href="disclaimer.html" class="text-sm text-slate-400 hover:text-royal-400 transition-colors">Disclaimer</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-display font-semibold text-white text-sm mb-4">Categories</h4>
-                    <ul class="space-y-2.5">
-                        <li><a href="index.html#latest-jobs" class="text-sm text-slate-400 hover:text-royal-400 transition-colors">Latest Jobs</a></li>
-                        <li><a href="index.html#admit-cards" class="text-sm text-slate-400 hover:text-royal-400 transition-colors">Admit Cards</a></li>
-                        <li><a href="index.html#results" class="text-sm text-slate-400 hover:text-royal-400 transition-colors">Results</a></li>
-                        <li><a href="index.html#yojana" class="text-sm text-slate-400 hover:text-royal-400 transition-colors">Sarkari Yojana</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-display font-semibold text-white text-sm mb-4">Connect With Us</h4>
-                    <div class="flex flex-wrap gap-3 mb-5">
-                        <a href="https://youtube.com/@ApplyBro" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-red-600 to-red-500 hover:from-red-700 hover:to-red-600 text-white text-sm font-semibold rounded-xl transition-all shadow-lg shadow-red-500/20">
-                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-                            YouTube
-                        </a>
-                        <a href="https://instagram.com/ApplyBro" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-white text-sm font-semibold rounded-xl transition-all shadow-lg shadow-pink-500/20">
-                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
-                            Instagram
-                        </a>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Answer</label>
+                            <textarea class="faq-answer cms-input resize-none" rows="2" placeholder="Enter answer..."></textarea>
+                        </div>
                     </div>
-                    <p class="text-xs text-slate-500">Made with ❤️ by <span class="text-royal-400 font-semibold">Apply Bro</span></p>
                 </div>
+                <button onclick="addFaqItem()" class="w-full py-2.5 border-2 border-dashed rounded-xl text-sm text-slate-500 transition-all bg-transparent cursor-pointer"
+                    style="border-color:#cbd5e1;">
+                    <i class="fas fa-plus mr-1"></i> Add Another FAQ
+                </button>
             </div>
-            <div class="border-t border-slate-800/80 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
-                <p class="text-sm text-slate-500">© 2026 Apply Bro. All rights reserved.</p>
-                <p class="text-xs text-slate-600 text-center sm:text-right max-w-md">Disclaimer: We are not affiliated with any government body. All links redirect to official websites only.</p>
+            <div class="p-5 border-t border-slate-200 dark:border-slate-800 flex gap-3">
+                <button onclick="closeFaqModal()" class="cms-btn-secondary flex-1">Cancel</button>
+                <button onclick="insertFaq()" class="cms-btn flex-1">Insert FAQs</button>
             </div>
         </div>
-    </footer>
+    </div>
 
-    <script>
-        // ==========================================
-        // DARK MODE, MOBILE MENU, NAVBAR (Existing)
-        // ==========================================
-        function toggleDarkMode() {
-            const html = document.documentElement;
-            if (html.classList.contains('dark')) {
-                html.classList.remove('dark');
-                localStorage.theme = 'light';
-            } else {
-                html.classList.add('dark');
-                localStorage.theme = 'dark';
-            }
-        }
+    <!-- ========== BUTTON MODAL ========== -->
+    <div id="button-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4" style="background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);">
+        <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl w-full max-w-md">
+            <div class="p-5 border-b border-slate-200 dark:border-slate-800">
+                <h3 class="text-lg font-bold text-slate-900 dark:text-white">Insert Button</h3>
+            </div>
+            <div class="p-5 space-y-4">
+                <div>
+                    <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Button Type</label>
+                    <select id="btn-type" class="cms-input">
+                        <option value="btn-apply">Apply Now</option>
+                        <option value="btn-download">Download</option>
+                        <option value="btn-official">Official Website</option>
+                        <option value="btn-primary">Primary Button</option>
+                        <option value="btn-secondary">Secondary Button</option>
+                        <option value="btn-notification">Notification</option>
+                        <option value="btn-registration">Registration</option>
+                        <option value="btn-login">Login</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Button Text</label>
+                    <input type="text" id="btn-text" class="cms-input" placeholder="Click Here">
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">URL</label>
+                    <input type="text" id="btn-url" class="cms-input" placeholder="https://...">
+                </div>
+                <div class="flex items-center gap-2">
+                    <input type="checkbox" id="btn-newtab" class="w-4 h-4 rounded border-slate-300" style="accent-color:#7c3aed;" checked>
+                    <label for="btn-newtab" class="text-sm text-slate-600 dark:text-slate-400">Open in new tab</label>
+                </div>
+            </div>
+            <div class="p-5 border-t border-slate-200 dark:border-slate-800 flex gap-3">
+                <button onclick="closeButtonModal()" class="cms-btn-secondary flex-1">Cancel</button>
+                <button onclick="insertButton()" class="cms-btn flex-1">Insert</button>
+            </div>
+        </div>
+    </div>
 
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-        }
+    <!-- ========== DIVIDER MODAL ========== -->
+    <div id="divider-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4" style="background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);">
+        <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl w-full max-w-sm">
+            <div class="p-5 border-b border-slate-200 dark:border-slate-800">
+                <h3 class="text-lg font-bold text-slate-900 dark:text-white">Insert Divider</h3>
+            </div>
+            <div class="p-5 space-y-3">
+                <button onclick="insertDivider('simple')" class="w-full p-4 border rounded-xl text-left transition-all bg-transparent cursor-pointer"
+                    style="border-color:#e2e8f0;">
+                    <div class="border-t-2 mb-2" style="border-color:#cbd5e1;"></div>
+                    <span class="text-sm font-medium text-slate-700 dark:text-slate-300">Simple Line</span>
+                </button>
+                <button onclick="insertDivider('double')" class="w-full p-4 border rounded-xl text-left transition-all bg-transparent cursor-pointer"
+                    style="border-color:#e2e8f0;">
+                    <div class="border-t-2 border-b-2 py-1 mb-2" style="border-color:#cbd5e1;"></div>
+                    <span class="text-sm font-medium text-slate-700 dark:text-slate-300">Double Line</span>
+                </button>
+                <button onclick="insertDivider('gradient')" class="w-full p-4 border rounded-xl text-left transition-all bg-transparent cursor-pointer"
+                    style="border-color:#e2e8f0;">
+                    <div class="h-0.5 rounded-full mb-2" style="background: linear-gradient(90deg, #7c3aed, #a78bfa, #c4b5fd);"></div>
+                    <span class="text-sm font-medium text-slate-700 dark:text-slate-300">Gradient Line</span>
+                </button>
+            </div>
+            <div class="p-5 border-t border-slate-200 dark:border-slate-800">
+                <button onclick="closeDividerModal()" class="cms-btn-secondary w-full">Cancel</button>
+            </div>
+        </div>
+    </div>
 
-        function toggleMobileMenu() {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
-        }
-
-        window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 20) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        document.getElementById('search-input').addEventListener('input', function(e) {
-            const query = e.target.value.toLowerCase();
-            document.querySelectorAll('.job-item').forEach(item => {
-                item.style.display = item.textContent.toLowerCase().includes(query) ? '' : 'none';
-            });
-        });
-
-        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-        // ==========================================
-        // VIEW MORE SYSTEM (NEW - Fully Working)
-        // ==========================================
-        const viewMoreSystem = {
-            // Configuration: how many posts to show initially
-            limit: 10,
-
-            // Get all post elements from a container
-            getPosts: function(containerId) {
-                const container = document.getElementById(containerId);
-                if (!container) return [];
-                // For job-item sections, use .job-item; for admit/results, use direct <a> children
-                const posts = container.querySelectorAll('.job-item');
-                if (posts.length > 0) return Array.from(posts);
-                // Fallback: direct <a> children (for admit cards & results)
-                return Array.from(container.children).filter(el => el.tagName === 'A');
-            },
-
-            // Initialize: hide posts beyond limit and show button if needed
-            init: function(containerId, buttonContainerId) {
-                const posts = this.getPosts(containerId);
-                const btnContainer = document.getElementById(buttonContainerId);
-
-                if (!posts.length || !btnContainer) return;
-
-                // Hide posts beyond the limit
-                posts.forEach((post, index) => {
-                    if (index >= this.limit) {
-                        post.classList.add('post-hidden');
-                    } else {
-                        post.classList.remove('post-hidden');
-                    }
-                });
-
-                // Show button only if there are more posts than the limit
-                if (posts.length > this.limit) {
-                    btnContainer.classList.remove('hidden');
-                } else {
-                    btnContainer.classList.add('hidden');
-                }
-            },
-
-            // Show all hidden posts and hide the button
-            showAll: function(containerId, buttonContainerId) {
-                const posts = this.getPosts(containerId);
-                const btnContainer = document.getElementById(buttonContainerId);
-
-                if (!posts.length || !btnContainer) return;
-
-                // Remove hidden class from all posts with animation
-                posts.forEach((post, index) => {
-                    if (index >= this.limit) {
-                        post.classList.remove('post-hidden');
-                        post.style.animation = 'fadeInUp 0.4s ease-out forwards';
-                        post.style.animationDelay = ((index - this.limit) * 0.05) + 's';
-                    }
-                });
-
-                // Hide the button container
-                btnContainer.classList.add('hidden');
-            },
-
-            // Re-initialize after dynamic content load (Firebase)
-            refresh: function(containerId, buttonContainerId) {
-                // Small delay to ensure DOM is updated
-                setTimeout(() => {
-                    this.init(containerId, buttonContainerId);
-                }, 100);
-            }
-        };
-
-        // ==========================================
-        // INITIALIZE VIEW MORE ON PAGE LOAD
-        // ==========================================
-        document.addEventListener('DOMContentLoaded', function() {
-            viewMoreSystem.init('live-update-content', 'view-more-live-jobs-container');
-            viewMoreSystem.init('latest-jobs-content', 'view-more-scholarship-container');
-            viewMoreSystem.init('yojana-content', 'view-more-yojana-container');
-            viewMoreSystem.init('admit-cards-content', 'view-more-admit-container');
-            viewMoreSystem.init('results-content', 'view-more-results-container');
-        });
-
-        // ==========================================
-        // FIREBASE DYNAMIC POSTS (Modified)
-        // ==========================================
-        const firebaseConfig = {
-            apiKey: "AIzaSyCVMpsG1ePU6SSsAxWSnj85ylYfndJby-g",
-            authDomain: "apply-bro.firebaseapp.com",
-            projectId: "apply-bro",
-            storageBucket: "apply-bro.firebasestorage.app",
-            messagingSenderId: "220342045448",
-            appId: "1:220342045448:web:1b0845de0003d8a802fabd"
-        };
-
-        let app;
-try {
-    app = firebase.initializeApp(firebaseConfig, 'admin-panel');
-} catch (e) {
-    if (e.code === 'app/duplicate-app') {
-        app = firebase.app('admin-panel');
-    } else {
-        throw e;
-    }
-}
-const auth = firebase.auth(app);
-const db = firebase.firestore(app);
-
-
-        
-        // Store original static content as fallback
-        const fallbackContent = {
-            liveUpdate: document.getElementById('live-update-content').innerHTML,
-            latestJobs: document.getElementById('latest-jobs-content').innerHTML,
-            yojana: document.getElementById('yojana-content').innerHTML,
-            admitCards: document.getElementById('admit-cards-content').innerHTML,
-            results: document.getElementById('results-content').innerHTML
-        };
-
-        async function loadDynamicPosts() {
-            try {
-                const snapshot = await db.collection('posts').orderBy('createdAt', 'desc').get();
-
-                if (snapshot.empty) {
-                    console.log('No posts found in database. Showing static content.');
-                    return;
-                }
-
-                const posts = { 'Live Update': [], 'Latest Jobs': [], 'Sarkari Yojana': [], 'Admit Cards': [], 'Results': [] };
-                snapshot.forEach(doc => {
-                    const post = doc.data();
-                    if (posts[post.category]) {
-                        posts[post.category].push(post);
-                    }
-                });
-
-                if (posts['Live Update'].length > 0) {
-                    document.getElementById('live-update-content').innerHTML = renderLiveUpdates(posts['Live Update']);
-                    viewMoreSystem.refresh('live-update-content', 'view-more-live-jobs-container');
-                }
-                if (posts['Latest Jobs'].length > 0) {
-                    document.getElementById('latest-jobs-content').innerHTML = renderLatestJobs(posts['Latest Jobs']);
-                    viewMoreSystem.refresh('latest-jobs-content', 'view-more-scholarship-container');
-                }
-                if (posts['Sarkari Yojana'].length > 0) {
-                    document.getElementById('yojana-content').innerHTML = renderYojana(posts['Sarkari Yojana']);
-                    viewMoreSystem.refresh('yojana-content', 'view-more-yojana-container');
-                }
-                if (posts['Admit Cards'].length > 0) {
-                    document.getElementById('admit-cards-content').innerHTML = renderAdmitCards(posts['Admit Cards']);
-                    viewMoreSystem.refresh('admit-cards-content', 'view-more-admit-container');
-                }
-                if (posts['Results'].length > 0) {
-                    document.getElementById('results-content').innerHTML = renderResults(posts['Results']);
-                    viewMoreSystem.refresh('results-content', 'view-more-results-container');
-                }
-
-                console.log('Dynamic posts loaded successfully!');
-
-            } catch (error) {
-                console.error('Error loading dynamic posts:', error);
-                console.log('Showing static fallback content.');
-            }
-        }
-
-        function renderLiveUpdates(posts) {
-            return posts.map(post => {
-                const dotClass = post.status === 'active' 
-                    ? 'bg-red-500 shadow-sm shadow-red-500/30' 
-                    : 'bg-slate-300 dark:bg-slate-600';
-                return '<a href="' + escapeHtml(post.link || '#') + '" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">' +
-                    '<div class="flex items-start gap-3">' +
-                        '<span class="mt-1.5 w-2 h-2 ' + dotClass + ' rounded-full flex-shrink-0"></span>' +
-                        '<div>' +
-                            '<p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">' + escapeHtml(post.title) + '</p>' +
-                            '<p class="text-xs text-slate-500 dark:text-slate-400 mt-1">' + escapeHtml(post.description || '') + '</p>' +
-                        '</div>' +
-                    '</div></a>';
-            }).join('');
-        }
-
-        function renderLatestJobs(posts) {
-            return posts.map(post => {
-                const badgeHtml = post.badge 
-                    ? '<span class="px-2.5 py-1 bg-gradient-to-r from-red-500 to-red-600 text-white text-[10px] font-bold rounded-lg shadow-sm shadow-red-500/20 flex-shrink-0">' + escapeHtml(post.badge) + '</span>' 
-                    : '';
-                return '<a href="' + escapeHtml(post.link || '#') + '" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">' +
-                    '<div class="flex items-start justify-between gap-2">' +
-                        '<div class="flex-1 min-w-0">' +
-                            '<p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">' + escapeHtml(post.title) + '</p>' +
-                            '<p class="text-xs text-slate-500 dark:text-slate-400 mt-1">' + escapeHtml(post.description || '') + '</p>' +
-                        '</div>' + badgeHtml +
-                    '</div></a>';
-            }).join('');
-        }
-
-        function renderYojana(posts) {
-            return posts.map(post => {
-                const dotClass = post.status === 'active'
-                    ? 'bg-emerald-500 shadow-sm shadow-emerald-500/30'
-                    : 'bg-slate-300 dark:bg-slate-600';
-                return '<a href="' + escapeHtml(post.link || '#') + '" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">' +
-                    '<div class="flex items-start gap-3">' +
-                        '<span class="mt-1.5 w-2 h-2 ' + dotClass + ' rounded-full flex-shrink-0"></span>' +
-                        '<div>' +
-                            '<p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">' + escapeHtml(post.title) + '</p>' +
-                            '<p class="text-xs text-slate-500 dark:text-slate-400 mt-1">' + escapeHtml(post.description || '') + '</p>' +
-                        '</div>' +
-                    '</div></a>';
-            }).join('');
-        }
-
-        function renderAdmitCards(posts) {
-            return posts.map(post => {
-                const extraInfo = post.extraInfo || post.description || '';
-                return '<a href="' + escapeHtml(post.link || '#') + '" class="flex items-center gap-4 p-4 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-all group border border-transparent hover:border-emerald-200 dark:hover:border-emerald-800/50">' +
-                    '<div class="w-11 h-11 bg-gradient-to-br from-emerald-100 to-emerald-50 dark:from-emerald-900/30 dark:to-emerald-800/20 rounded-xl flex items-center justify-center flex-shrink-0 shadow-sm">' +
-                        '<svg class="w-5 h-5 text-emerald-700 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"/></svg>' +
-                    '</div>' +
-                    '<div class="flex-1 min-w-0">' +
-                        '<p class="text-sm font-semibold text-slate-900 dark:text-white truncate group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors">' + escapeHtml(post.title) + '</p>' +
-                        '<p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">' + escapeHtml(extraInfo) + '</p>' +
-                    '</div>' +
-                    '<span class="px-3 py-1.5 bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-700 hover:to-emerald-600 text-white text-xs font-semibold rounded-lg shadow-sm shadow-emerald-500/20 transition-all flex-shrink-0">Download</span>' +
-                '</a>';
-            }).join('');
-        }
-
-        function renderResults(posts) {
-            return posts.map(post => {
-                const extraInfo = post.extraInfo || post.description || '';
-                return '<a href="' + escapeHtml(post.link || '#') + '" class="flex items-center gap-4 p-4 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-all group border border-transparent hover:border-amber-200 dark:hover:border-amber-800/50">' +
-                    '<div class="w-11 h-11 bg-gradient-to-br from-amber-100 to-amber-50 dark:from-amber-900/30 dark:to-amber-800/20 rounded-xl flex items-center justify-center flex-shrink-0 shadow-sm">' +
-                        '<svg class="w-5 h-5 text-amber-700 dark:text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>' +
-                    '</div>' +
-                    '<div class="flex-1 min-w-0">' +
-                        '<p class="text-sm font-semibold text-slate-900 dark:text-white truncate group-hover:text-amber-700 dark:group-hover:text-amber-400 transition-colors">' + escapeHtml(post.title) + '</p>' +
-                        '<p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">' + escapeHtml(extraInfo) + '</p>' +
-                    '</div>' +
-                    '<span class="px-3 py-1.5 bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-700 hover:to-amber-600 text-white text-xs font-semibold rounded-lg shadow-sm shadow-amber-500/20 transition-all flex-shrink-0">View</span>' +
-                '</a>';
-            }).join('');
-        }
-
-        function escapeHtml(text) {
-            if (!text) return '';
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        }
-
-        // Load posts when page loads
-        document.addEventListener('DOMContentLoaded', loadDynamicPosts);
-    </script>
-
+    <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 
+    <script>
+    // ==========================================
+    // FIREBASE CONFIGURATION - applybro1
+    // ==========================================
+    const firebaseConfig = {
+        apiKey: "AIzaSyDjj7c7ew71PVLmrG6Ot1ttgLkp4xQIc_U",
+        authDomain: "applybro1.firebaseapp.com",
+        projectId: "applybro1",
+        storageBucket: "applybro1.firebasestorage.app",
+        messagingSenderId: "96808372763",
+        appId: "1:96808372763:web:4ebb8eae6d6452e79b86be",
+        measurementId: "G-JD5G48SJRZ"
+    };
+
+    // Initialize Firebase - DEFAULT APP (no name)
+    let app;
+    try {
+        app = firebase.initializeApp(firebaseConfig);
+        console.log("Firebase initialized successfully");
+    } catch (e) {
+        if (e.code === 'app/duplicate-app') {
+            app = firebase.app();
+            console.log("Using existing Firebase app");
+        } else {
+            console.error('Firebase init error:', e);
+            throw e;
+        }
+    }
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    // ==========================================
+    // GLOBAL STATE
+    // ==========================================
+    let currentUser = null;
+    let allPosts = [];
+    let editingPostId = null;
+    let autoSaveTimer = null;
+    let autoSaveInterval = null;
+
+    const CATEGORIES = [
+        'Live Sarkari Job',
+        'Live Scholarship', 
+        'Sarkari Yojana',
+        'Admit Cards',
+        'Latest Results'
+    ];
+
+    // ==========================================
+    // LOGIN HANDLER - FIXED
+    // ==========================================
+    async function handleLogin(e) {
+        e.preventDefault();
+
+        const email = document.getElementById('login-email').value.trim();
+        const password = document.getElementById('login-password').value;
+        const btn = document.getElementById('login-btn');
+        const text = document.getElementById('login-text');
+        const spinner = document.getElementById('login-spinner');
+        const errorDiv = document.getElementById('login-error');
+        const errorText = document.getElementById('login-error-text');
+
+        // Hide any previous error
+        errorDiv.classList.add('hidden');
+        errorDiv.classList.remove('shake-error');
+
+        // Show loading state
+        btn.disabled = true;
+        text.textContent = 'Signing in...';
+        spinner.classList.remove('hidden');
+
+        try {
+            console.log("Attempting login with:", email);
+            const result = await auth.signInWithEmailAndPassword(email, password);
+            console.log("Login successful:", result.user.email);
+            // Auth state listener will handle the rest
+        } catch (err) {
+            console.error('Login error:', err);
+
+            // Reset button
+            btn.disabled = false;
+            text.textContent = 'Sign In';
+            spinner.classList.add('hidden');
+
+            // Show error with animation
+            let msg = err.message;
+            if (err.code === 'auth/user-not-found') msg = 'User not found. Create the user in Firebase Console first.';
+            if (err.code === 'auth/wrong-password') msg = 'Wrong password. Check your credentials.';
+            if (err.code === 'auth/invalid-email') msg = 'Invalid email format.';
+            if (err.code === 'auth/invalid-credential') msg = 'Invalid email/password. Check your credentials.';
+            if (err.code === 'auth/too-many-requests') msg = 'Too many failed attempts. Try again later.';
+            if (err.code === 'auth/network-request-failed') msg = 'Network error. Check your internet connection.';
+            if (err.code === 'auth/unauthorized-domain') msg = 'Domain not authorized. Add this domain to Firebase Auth settings.';
+
+            errorText.textContent = msg;
+            errorDiv.classList.remove('hidden');
+            errorDiv.classList.add('shake-error');
+
+            // Remove shake animation after it completes
+            setTimeout(() => {
+                errorDiv.classList.remove('shake-error');
+            }, 500);
+        }
+    }
+
+    // ==========================================
+    // AUTH STATE LISTENER
+    // ==========================================
+    auth.onAuthStateChanged(user => {
+        currentUser = user;
+        if (user) {
+            console.log("User logged in:", user.email);
+            document.getElementById('login-screen').classList.add('hidden');
+            document.getElementById('dashboard').classList.remove('hidden');
+            document.getElementById('user-name').textContent = user.displayName || 'Admin';
+            document.getElementById('user-email').textContent = user.email;
+            document.getElementById('user-avatar').textContent = (user.displayName || user.email || 'A').charAt(0).toUpperCase();
+            loadAllPosts();
+            loadDrafts();
+            updateCounts();
+        } else {
+            console.log("No user logged in");
+            document.getElementById('login-screen').classList.remove('hidden');
+            document.getElementById('dashboard').classList.add('hidden');
+
+            // Reset login button state
+            const btn = document.getElementById('login-btn');
+            const text = document.getElementById('login-text');
+            const spinner = document.getElementById('login-spinner');
+            if (btn) btn.disabled = false;
+            if (text) text.textContent = 'Sign In';
+            if (spinner) spinner.classList.add('hidden');
+        }
+    });
+
+    function logout() {
+        auth.signOut();
+    }
+
+    // ==========================================
+    // TAB SWITCHING
+    // ==========================================
+    function switchTab(tabName) {
+        document.querySelectorAll('[id^="panel-"]').forEach(p => p.classList.add('hidden'));
+        document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+        document.getElementById('panel-' + tabName).classList.remove('hidden');
+        document.getElementById('tab-' + tabName).classList.add('active');
+        if (tabName === 'posts') renderPostsList();
+        if (tabName === 'categories') renderCategories();
+        if (tabName === 'drafts') loadDrafts();
+        if (tabName === 'json') renderJsonOutput();
+        if (window.innerWidth < 1024) {
+            document.getElementById('sidebar').classList.add('hidden');
+        }
+    }
+
+    function toggleMobileSidebar() {
+        document.getElementById('sidebar').classList.toggle('hidden');
+    }
+
+    // ==========================================
+    // EDITOR FUNCTIONS
+    // ==========================================
+    function execCmd(command, value = null) {
+        document.execCommand(command, false, value);
+        document.getElementById('editor').focus();
+        updatePreview();
+    }
+
+    function pickColor(type) {
+        const colors = { foreColor: '#7c3aed', hiliteColor: '#ede9fe' };
+        const color = prompt('Enter color (hex):', colors[type]);
+        if (color) execCmd(type, color);
+    }
+
+    function insertCodeBlock() {
+        const code = prompt('Enter code:');
+        if (code) {
+            execCmd('insertHTML', '<pre><code>' + escapeHtml(code) + '</code></pre><p><br></p>');
+        }
+    }
+
+    function insertBox(type) {
+        const content = prompt('Enter box content:');
+        if (content) {
+            execCmd('insertHTML', '<div class="box-' + type + '"><strong>' + type.toUpperCase() + ':</strong> ' + escapeHtml(content) + '</div><p><br></p>');
+        }
+    }
+
+    function clearEditor() {
+        if (confirm('Clear all content?')) {
+            document.getElementById('editor').innerHTML = '';
+            document.getElementById('article-title').value = '';
+            document.getElementById('short-title').value = '';
+            document.getElementById('article-slug').value = '';
+            document.getElementById('meta-title').value = '';
+            document.getElementById('meta-description').value = '';
+            document.getElementById('meta-keywords').value = '';
+            updatePreview();
+        }
+    }
+
+    function undo() { execCmd('undo'); }
+    function redo() { execCmd('redo'); }
+
+    function generateSlug() {
+        const title = document.getElementById('article-title').value;
+        const slug = title.toLowerCase()
+            .replace(/[^a-z0-9\s-]/g, '')
+            .replace(/\s+/g, '-')
+            .replace(/-+/g, '-')
+            .substring(0, 80);
+        document.getElementById('article-slug').value = slug;
+    }
+
+    function updatePreview() {
+        const editor = document.getElementById('editor');
+        const preview = document.getElementById('live-preview');
+        const htmlSource = document.getElementById('html-source');
+        preview.innerHTML = editor.innerHTML || '<p style="color:#94a3b8; text-align:center; padding:80px 0;">Start typing to see live preview...</p>';
+        if (htmlSource) htmlSource.value = formatHtml(editor.innerHTML);
+    }
+
+    function toggleHtmlSource() {
+        const panel = document.getElementById('html-source-panel');
+        const btn = document.getElementById('html-toggle-btn');
+        if (panel.classList.contains('hidden')) {
+            panel.classList.remove('hidden');
+            btn.innerHTML = '<i class="fas fa-eye-slash"></i> Hide HTML Source';
+            document.getElementById('html-source').value = formatHtml(document.getElementById('editor').innerHTML);
+        } else {
+            panel.classList.add('hidden');
+            btn.innerHTML = '<i class="fas fa-code"></i> Show HTML Source';
+        }
+    }
+
+    function updateEditorFromSource() {
+        document.getElementById('editor').innerHTML = document.getElementById('html-source').value;
+        updatePreview();
+    }
+
+    function copyHtml() {
+        navigator.clipboard.writeText(formatHtml(document.getElementById('editor').innerHTML)).then(() => {
+            showToast('HTML copied!', 'success');
+        });
+    }
+
+    function formatHtml(html) {
+        if (!html) return '';
+        return html.replace(/></g, '>\n<');
+    }
+
+    function togglePreviewMode(mode) {
+        const preview = document.getElementById('live-preview');
+        preview.style.maxWidth = mode === 'mobile' ? '375px' : '100%';
+        preview.style.margin = mode === 'mobile' ? '0 auto' : '0';
+    }
+
+    function escapeHtml(text) {
+        if (!text) return '';
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
+    // ==========================================
+    // LINK MODAL
+    // ==========================================
+    function openLinkModal() { document.getElementById('link-modal').classList.remove('hidden'); }
+    function closeLinkModal() { document.getElementById('link-modal').classList.add('hidden'); }
+    function insertLink() {
+        const text = document.getElementById('link-text').value;
+        const url = document.getElementById('link-url').value;
+        const newTab = document.getElementById('link-newtab').checked;
+        const style = document.getElementById('link-style').value;
+        if (!url) { showToast('Please enter a URL', 'error'); return; }
+        let html;
+        if (style) {
+            html = '<a href="' + escapeHtml(url) + '"' + (newTab ? ' target="_blank"' : '') + ' class="' + style + '">' + escapeHtml(text || url) + '</a>';
+        } else {
+            html = '<a href="' + escapeHtml(url) + '"' + (newTab ? ' target="_blank"' : '') + ' style="color:#7c3aed; text-decoration:underline;">' + escapeHtml(text || url) + '</a>';
+        }
+        execCmd('insertHTML', html + '<p><br></p>');
+        closeLinkModal();
+        document.getElementById('link-text').value = '';
+        document.getElementById('link-url').value = '';
+    }
+
+    // ==========================================
+    // IMAGE MODAL
+    // ==========================================
+    function openImageModal() { document.getElementById('image-modal').classList.remove('hidden'); }
+    function closeImageModal() { document.getElementById('image-modal').classList.add('hidden'); }
+    function insertImage() {
+        const url = document.getElementById('img-url').value;
+        const alt = document.getElementById('img-alt').value;
+        const caption = document.getElementById('img-caption').value;
+        const width = document.getElementById('img-width').value;
+        if (!url) { showToast('Please enter an image URL', 'error'); return; }
+        let html = '<img src="' + escapeHtml(url) + '" alt="' + escapeHtml(alt) + '"' + (width ? ' style="width:' + width + ';"' : '') + '>';
+        if (caption) html += '<p style="text-align:center; color:#64748b; font-size:0.85em; margin-top:0.5em;">' + escapeHtml(caption) + '</p>';
+        html += '<p><br></p>';
+        execCmd('insertHTML', html);
+        closeImageModal();
+        document.getElementById('img-url').value = '';
+        document.getElementById('img-alt').value = '';
+        document.getElementById('img-caption').value = '';
+        document.getElementById('img-width').value = '';
+    }
+
+    // ==========================================
+    // TABLE MODAL
+    // ==========================================
+    function openTableModal() { document.getElementById('table-modal').classList.remove('hidden'); }
+    function closeTableModal() { document.getElementById('table-modal').classList.add('hidden'); }
+    function insertTable() {
+        const rows = parseInt(document.getElementById('table-rows').value) || 3;
+        const cols = parseInt(document.getElementById('table-cols').value) || 3;
+        const hasHeader = document.getElementById('table-header').checked;
+        const responsive = document.getElementById('table-responsive').checked;
+        let html = responsive ? '<div style="overflow-x:auto;">' : '';
+        html += '<table>';
+        if (hasHeader) {
+            html += '<thead><tr>';
+            for (let c = 0; c < cols; c++) html += '<th>Header ' + (c + 1) + '</th>';
+            html += '</tr></thead>';
+        }
+        html += '<tbody>';
+        for (let r = 0; r < rows; r++) {
+            html += '<tr>';
+            for (let c = 0; c < cols; c++) html += '<td>Cell ' + (r + 1) + '-' + (c + 1) + '</td>';
+            html += '</tr>';
+        }
+        html += '</tbody></table>';
+        if (responsive) html += '</div>';
+        html += '<p><br></p>';
+        execCmd('insertHTML', html);
+        closeTableModal();
+    }
+
+    // ==========================================
+    // FAQ MODAL
+    // ==========================================
+    function openFaqModal() { document.getElementById('faq-modal').classList.remove('hidden'); }
+    function closeFaqModal() { document.getElementById('faq-modal').classList.add('hidden'); }
+    function addFaqItem() {
+        const container = document.getElementById('faq-items');
+        const div = document.createElement('div');
+        div.className = 'space-y-3 mb-4 p-4 rounded-xl';
+        div.style.background = '#f8fafc';
+        div.innerHTML = '<div><label class="block text-xs font-medium text-slate-600 mb-1.5">Question</label><input type="text" class="faq-question cms-input" placeholder="Enter question..."></div><div><label class="block text-xs font-medium text-slate-600 mb-1.5">Answer</label><textarea class="faq-answer cms-input resize-none" rows="2" placeholder="Enter answer..."></textarea></div><button onclick="this.parentElement.remove()" class="text-xs text-red-500 hover:text-red-600 bg-transparent border-none cursor-pointer"><i class="fas fa-trash"></i> Remove</button>';
+        container.appendChild(div);
+    }
+    function insertFaq() {
+        const items = document.querySelectorAll('#faq-items > div');
+        let html = '';
+        items.forEach(item => {
+            const q = item.querySelector('.faq-question').value;
+            const a = item.querySelector('.faq-answer').value;
+            if (q && a) {
+                html += '<div class="faq-item"><div class="faq-question">Q: ' + escapeHtml(q) + '</div><div class="faq-answer">A: ' + escapeHtml(a) + '</div></div>';
+            }
+        });
+        if (html) {
+            execCmd('insertHTML', html + '<p><br></p>');
+            closeFaqModal();
+            document.getElementById('faq-items').innerHTML = '<div class="space-y-3 mb-4 p-4 rounded-xl" style="background:#f8fafc;"><div><label class="block text-xs font-medium text-slate-600 mb-1.5">Question</label><input type="text" class="faq-question cms-input" placeholder="Enter question..."></div><div><label class="block text-xs font-medium text-slate-600 mb-1.5">Answer</label><textarea class="faq-answer cms-input resize-none" rows="2" placeholder="Enter answer..."></textarea></div></div>';
+        } else {
+            showToast('Please fill in at least one FAQ', 'error');
+        }
+    }
+
+    // ==========================================
+    // BUTTON MODAL
+    // ==========================================
+    function openButtonModal() { document.getElementById('button-modal').classList.remove('hidden'); }
+    function closeButtonModal() { document.getElementById('button-modal').classList.add('hidden'); }
+    function insertButton() {
+        const type = document.getElementById('btn-type').value;
+        const text = document.getElementById('btn-text').value;
+        const url = document.getElementById('btn-url').value;
+        const newTab = document.getElementById('btn-newtab').checked;
+        if (!url) { showToast('Please enter a URL', 'error'); return; }
+        const defaults = { 'btn-apply': 'Apply Now', 'btn-download': 'Download', 'btn-official': 'Official Website', 'btn-primary': 'Click Here', 'btn-secondary': 'Learn More', 'btn-notification': 'View Notification', 'btn-registration': 'Register Now', 'btn-login': 'Login' };
+        const html = '<a href="' + escapeHtml(url) + '"' + (newTab ? ' target="_blank"' : '') + ' class="' + type + '">' + escapeHtml(text || defaults[type]) + '</a><p><br></p>';
+        execCmd('insertHTML', html);
+        closeButtonModal();
+        document.getElementById('btn-text').value = '';
+        document.getElementById('btn-url').value = '';
+    }
+
+    // ==========================================
+    // DIVIDER MODAL
+    // ==========================================
+    function openDividerModal() { document.getElementById('divider-modal').classList.remove('hidden'); }
+    function closeDividerModal() { document.getElementById('divider-modal').classList.add('hidden'); }
+    function insertDivider(type) {
+        let html;
+        if (type === 'simple') html = '<hr>';
+        else if (type === 'double') html = '<hr style="border-top:2px solid #e2e8f0; border-bottom:2px solid #e2e8f0; height:4px; background:transparent;">';
+        else html = '<div style="height:3px; background:linear-gradient(90deg, #7c3aed, #a78bfa, #c4b5fd); border-radius:2px; margin:1.5em 0;"></div>';
+        execCmd('insertHTML', html + '<p><br></p>');
+        closeDividerModal();
+    }
+
+    // ==========================================
+    // PUBLISH MODAL & ARTICLE PUBLISHING
+    // ==========================================
+    function openPublishModal() {
+        const title = document.getElementById('article-title').value;
+        if (!title) { showToast('Please enter an article title first', 'error'); return; }
+        const now = new Date();
+        document.getElementById('pub-date-display').textContent = now.toLocaleDateString('en-IN');
+        document.getElementById('pub-time-display').textContent = now.toLocaleTimeString('en-IN');
+        document.getElementById('pub-timestamp-display').textContent = now.getTime();
+        document.getElementById('publish-modal').classList.remove('hidden');
+    }
+
+    function closePublishModal() {
+        document.getElementById('publish-modal').classList.add('hidden');
+    }
+
+    async function publishArticle() {
+        const category = document.getElementById('pub-category').value;
+        const url = document.getElementById('pub-url').value;
+        const status = document.getElementById('pub-status').value;
+        if (!category) { showToast('Please select a category', 'error'); return; }
+        if (!url) { showToast('Please enter an article URL', 'error'); return; }
+
+        const btn = document.getElementById('publish-btn');
+        const text = document.getElementById('publish-text');
+        const spinner = document.getElementById('publish-spinner');
+        btn.disabled = true;
+        text.classList.add('hidden');
+        spinner.classList.remove('hidden');
+
+        try {
+            const now = new Date();
+            const postData = {
+                title: document.getElementById('article-title').value,
+                shortTitle: document.getElementById('short-title').value || document.getElementById('article-title').value,
+                slug: document.getElementById('article-slug').value,
+                metaTitle: document.getElementById('meta-title').value,
+                metaDescription: document.getElementById('meta-description').value,
+                metaKeywords: document.getElementById('meta-keywords').value,
+                content: document.getElementById('editor').innerHTML,
+                category: category,
+                url: url,
+                featuredImage: document.getElementById('pub-image').value || '',
+                author: document.getElementById('pub-author').value || 'ApplyBro Admin',
+                status: status,
+                date: now.toLocaleDateString('en-IN'),
+                time: now.toLocaleTimeString('en-IN'),
+                timestamp: now.getTime(),
+                createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+            };
+
+            if (editingPostId) {
+                await db.collection('posts').doc(editingPostId).update(postData);
+                showToast('Article updated successfully!', 'success');
+            } else {
+                await db.collection('posts').add(postData);
+                showToast('Article published successfully!', 'success');
+            }
+
+            closePublishModal();
+            resetEditor();
+            loadAllPosts();
+            switchTab('posts');
+        } catch (err) {
+            console.error(err);
+            showToast('Error: ' + err.message, 'error');
+        } finally {
+            btn.disabled = false;
+            text.classList.remove('hidden');
+            spinner.classList.add('hidden');
+        }
+    }
+
+    function resetEditor() {
+        document.getElementById('editor').innerHTML = '';
+        document.getElementById('article-title').value = '';
+        document.getElementById('short-title').value = '';
+        document.getElementById('article-slug').value = '';
+        document.getElementById('meta-title').value = '';
+        document.getElementById('meta-description').value = '';
+        document.getElementById('meta-keywords').value = '';
+        document.getElementById('pub-category').value = '';
+        document.getElementById('pub-url').value = '';
+        document.getElementById('pub-image').value = '';
+        document.getElementById('pub-author').value = 'ApplyBro Admin';
+        document.getElementById('pub-status').value = 'published';
+        editingPostId = null;
+        updatePreview();
+    }
+
+    // ==========================================
+    // AUTO SAVE
+    // ==========================================
+    function startAutoSave() {
+        const status = document.getElementById('autosave-status');
+        status.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Saving...</span>';
+        status.style.color = '#8b5cf6';
+        clearTimeout(autoSaveTimer);
+        autoSaveTimer = setTimeout(() => {
+            autoSaveToLocal();
+        }, 2000);
+    }
+
+    function autoSaveToLocal() {
+        const data = {
+            title: document.getElementById('article-title').value,
+            shortTitle: document.getElementById('short-title').value,
+            slug: document.getElementById('article-slug').value,
+            metaTitle: document.getElementById('meta-title').value,
+            metaDescription: document.getElementById('meta-description').value,
+            metaKeywords: document.getElementById('meta-keywords').value,
+            content: document.getElementById('editor').innerHTML,
+            savedAt: new Date().toISOString()
+        };
+        localStorage.setItem('applybro_autosave', JSON.stringify(data));
+        const status = document.getElementById('autosave-status');
+        status.innerHTML = '<i class="fas fa-check-circle"></i><span>Saved</span>';
+        status.style.color = '#10b981';
+        setTimeout(() => {
+            status.innerHTML = '<i class="fas fa-check-circle"></i><span>Ready</span>';
+            status.style.color = '';
+        }, 2000);
+    }
+
+    autoSaveInterval = setInterval(() => {
+        if (document.getElementById('article-title').value || document.getElementById('editor').innerHTML) {
+            autoSaveToLocal();
+        }
+    }, 30000);
+
+    window.addEventListener('load', () => {
+        const saved = localStorage.getItem('applybro_autosave');
+        if (saved) {
+            try {
+                const data = JSON.parse(saved);
+                if (data.title) document.getElementById('article-title').value = data.title;
+                if (data.shortTitle) document.getElementById('short-title').value = data.shortTitle;
+                if (data.slug) document.getElementById('article-slug').value = data.slug;
+                if (data.metaTitle) document.getElementById('meta-title').value = data.metaTitle;
+                if (data.metaDescription) document.getElementById('meta-description').value = data.metaDescription;
+                if (data.metaKeywords) document.getElementById('meta-keywords').value = data.metaKeywords;
+                if (data.content) document.getElementById('editor').innerHTML = data.content;
+                updatePreview();
+            } catch (e) { console.error('Auto-save load error', e); }
+        }
+    });
+
+    // ==========================================
+    // DRAFT SYSTEM
+    // ==========================================
+    function saveDraft() {
+        const title = document.getElementById('article-title').value || 'Untitled Draft';
+        const draft = {
+            id: 'draft_' + Date.now(),
+            title: title,
+            shortTitle: document.getElementById('short-title').value,
+            slug: document.getElementById('article-slug').value,
+            metaTitle: document.getElementById('meta-title').value,
+            metaDescription: document.getElementById('meta-description').value,
+            metaKeywords: document.getElementById('meta-keywords').value,
+            content: document.getElementById('editor').innerHTML,
+            savedAt: new Date().toISOString()
+        };
+        let drafts = JSON.parse(localStorage.getItem('applybro_drafts') || '[]');
+        drafts.unshift(draft);
+        localStorage.setItem('applybro_drafts', JSON.stringify(drafts));
+        showToast('Draft saved successfully!', 'success');
+        updateCounts();
+        if (document.getElementById('panel-drafts').classList.contains('hidden') === false) {
+            loadDrafts();
+        }
+    }
+
+    function loadDrafts() {
+        const drafts = JSON.parse(localStorage.getItem('applybro_drafts') || '[]');
+        const tbody = document.getElementById('drafts-table-body');
+        const empty = document.getElementById('drafts-empty');
+        if (drafts.length === 0) {
+            tbody.innerHTML = '';
+            empty.classList.remove('hidden');
+            return;
+        }
+        empty.classList.add('hidden');
+        tbody.innerHTML = drafts.map((draft, index) => {
+            const date = new Date(draft.savedAt).toLocaleString('en-IN');
+            return '<tr class="border-b border-slate-100 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">' +
+                '<td class="px-5 py-3.5"><p class="font-medium text-slate-900 dark:text-white">' + escapeHtml(draft.title) + '</p></td>' +
+                '<td class="px-5 py-3.5 text-slate-500 dark:text-slate-400">' + date + '</td>' +
+                '<td class="px-5 py-3.5 text-right">' +
+                '<button onclick="loadDraft(' + index + ')" class="cms-btn-success mr-2"><i class="fas fa-edit"></i> Load</button>' +
+                '<button onclick="deleteDraft(' + index + ')" class="cms-btn-danger"><i class="fas fa-trash"></i></button>' +
+                '</td></tr>';
+        }).join('');
+    }
+
+    function loadDraft(index) {
+        const drafts = JSON.parse(localStorage.getItem('applybro_drafts') || '[]');
+        const draft = drafts[index];
+        if (!draft) return;
+        document.getElementById('article-title').value = draft.title || '';
+        document.getElementById('short-title').value = draft.shortTitle || '';
+        document.getElementById('article-slug').value = draft.slug || '';
+        document.getElementById('meta-title').value = draft.metaTitle || '';
+        document.getElementById('meta-description').value = draft.metaDescription || '';
+        document.getElementById('meta-keywords').value = draft.metaKeywords || '';
+        document.getElementById('editor').innerHTML = draft.content || '';
+        updatePreview();
+        switchTab('editor');
+        showToast('Draft loaded!', 'success');
+    }
+
+    function deleteDraft(index) {
+        if (!confirm('Delete this draft?')) return;
+        let drafts = JSON.parse(localStorage.getItem('applybro_drafts') || '[]');
+        drafts.splice(index, 1);
+        localStorage.setItem('applybro_drafts', JSON.stringify(drafts));
+        loadDrafts();
+        updateCounts();
+        showToast('Draft deleted', 'success');
+    }
+
+    // ==========================================
+    // POSTS MANAGEMENT
+    // ==========================================
+    async function loadAllPosts() {
+        try {
+            const snapshot = await db.collection('posts').orderBy('timestamp', 'desc').get();
+            allPosts = [];
+            snapshot.forEach(doc => {
+                allPosts.push({ id: doc.id, ...doc.data() });
+            });
+            renderPostsList();
+            renderCategories();
+            renderJsonOutput();
+            updateCounts();
+        } catch (err) {
+            console.error('Error loading posts:', err);
+            showToast('Error loading posts', 'error');
+        }
+    }
+
+    function renderPostsList() {
+        const search = document.getElementById('post-search').value.toLowerCase();
+        const catFilter = document.getElementById('post-filter-category').value;
+        const statusFilter = document.getElementById('post-filter-status').value;
+
+        let filtered = allPosts.filter(p => {
+            if (search && !p.title.toLowerCase().includes(search)) return false;
+            if (catFilter && p.category !== catFilter) return false;
+            if (statusFilter && p.status !== statusFilter) return false;
+            return true;
+        });
+
+        const tbody = document.getElementById('posts-table-body');
+        const empty = document.getElementById('posts-empty');
+        if (filtered.length === 0) {
+            tbody.innerHTML = '';
+            empty.classList.remove('hidden');
+            return;
+        }
+        empty.classList.add('hidden');
+
+        tbody.innerHTML = filtered.map((post) => {
+            const statusBadge = post.status === 'published' 
+                ? '<span class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-semibold" style="background:#d1fae5; color:#065f46;"><span class="status-dot active"></span> Published</span>'
+                : '<span class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-semibold" style="background:#fef3c7; color:#92400e;"><span class="status-dot draft"></span> Draft</span>';
+
+            return '<tr class="border-b border-slate-100 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">' +
+                '<td class="px-5 py-3.5"><span class="font-medium text-slate-900 dark:text-white">' + escapeHtml(post.title) + '</span></td>' +
+                '<td class="px-5 py-3.5"><span class="px-2 py-1 rounded-lg text-xs font-medium" style="background:#ede9fe; color:#6d28d9;">' + escapeHtml(post.category) + '</span></td>' +
+                '<td class="px-5 py-3.5 text-slate-500 dark:text-slate-400">' + (post.date || '--') + '<br><span class="text-xs">' + (post.time || '') + '</span></td>' +
+                '<td class="px-5 py-3.5">' + statusBadge + '</td>' +
+                '<td class="px-5 py-3.5 text-right">' +
+                '<button onclick="editPost(\'' + post.id + '\')" class="cms-btn-success mr-1"><i class="fas fa-edit"></i></button>' +
+                '<button onclick="duplicatePost(\'' + post.id + '\')" class="cms-btn-secondary mr-1" style="padding:8px 12px; font-size:12px;"><i class="fas fa-copy"></i></button>' +
+                '<button onclick="deletePost(\'' + post.id + '\')" class="cms-btn-danger"><i class="fas fa-trash"></i></button>' +
+                '</td></tr>';
+        }).join('');
+    }
+
+    async function editPost(id) {
+        const post = allPosts.find(p => p.id === id);
+        if (!post) return;
+        editingPostId = id;
+        document.getElementById('article-title').value = post.title || '';
+        document.getElementById('short-title').value = post.shortTitle || '';
+        document.getElementById('article-slug').value = post.slug || '';
+        document.getElementById('meta-title').value = post.metaTitle || '';
+        document.getElementById('meta-description').value = post.metaDescription || '';
+        document.getElementById('meta-keywords').value = post.metaKeywords || '';
+        document.getElementById('editor').innerHTML = post.content || '';
+        document.getElementById('pub-category').value = post.category || '';
+        document.getElementById('pub-url').value = post.url || '';
+        document.getElementById('pub-image').value = post.featuredImage || '';
+        document.getElementById('pub-author').value = post.author || 'ApplyBro Admin';
+        document.getElementById('pub-status').value = post.status || 'published';
+        updatePreview();
+        switchTab('editor');
+        showToast('Post loaded for editing', 'success');
+    }
+
+    async function duplicatePost(id) {
+        const post = allPosts.find(p => p.id === id);
+        if (!post) return;
+        const now = new Date();
+        const newPost = { ...post, title: post.title + ' (Copy)', timestamp: now.getTime(), date: now.toLocaleDateString('en-IN'), time: now.toLocaleTimeString('en-IN'), createdAt: firebase.firestore.FieldValue.serverTimestamp(), updatedAt: firebase.firestore.FieldValue.serverTimestamp() };
+        delete newPost.id;
+        try {
+            await db.collection('posts').add(newPost);
+            showToast('Post duplicated!', 'success');
+            loadAllPosts();
+        } catch (err) {
+            showToast('Error duplicating post', 'error');
+        }
+    }
+
+    async function deletePost(id) {
+        if (!confirm('Are you sure you want to delete this post?')) return;
+        try {
+            await db.collection('posts').doc(id).delete();
+            showToast('Post deleted', 'success');
+            loadAllPosts();
+        } catch (err) {
+            showToast('Error deleting post', 'error');
+        }
+    }
+
+    // ==========================================
+    // CATEGORIES MANAGER
+    // ==========================================
+    function renderCategories() {
+        const grid = document.getElementById('categories-grid');
+        const stats = {};
+        CATEGORIES.forEach(cat => {
+            const catPosts = allPosts.filter(p => p.category === cat);
+            stats[cat] = { total: catPosts.length, latest: catPosts.length > 0 ? catPosts[0].date : 'Never' };
+        });
+
+        const icons = { 'Live Sarkari Job': 'fa-briefcase', 'Live Scholarship': 'fa-graduation-cap', 'Sarkari Yojana': 'fa-landmark', 'Admit Cards': 'fa-id-card', 'Latest Results': 'fa-trophy' };
+
+        grid.innerHTML = CATEGORIES.map(cat => {
+            const s = stats[cat];
+            return '<div class="cms-card p-6">' +
+                '<div class="flex items-center gap-4 mb-4">' +
+                '<div class="w-12 h-12 rounded-xl flex items-center justify-center text-white shadow-lg" style="background: linear-gradient(135deg, #8b5cf6, #6d28d9);">' +
+                '<i class="fas ' + icons[cat] + ' text-lg"></i></div>' +
+                '<div><h3 class="font-bold text-slate-900 dark:text-white">' + cat + '</h3>' +
+                '<p class="text-xs text-slate-500">' + s.total + ' posts</p></div></div>' +
+                '<div class="space-y-2">' +
+                '<div class="flex justify-between text-xs"><span class="text-slate-500">Total Posts</span>' +
+                '<span class="font-semibold text-slate-900 dark:text-white">' + s.total + '</span></div>' +
+                '<div class="flex justify-between text-xs"><span class="text-slate-500">Latest Update</span>' +
+                '<span class="font-semibold text-slate-900 dark:text-white">' + s.latest + '</span></div>' +
+                '</div>' +
+                '<button onclick="filterByCategory(\'' + cat.replace(/'/g, "\\'") + '\')" class="w-full mt-4 py-2 text-xs font-semibold rounded-lg transition-all border-none cursor-pointer" ' +
+                'style="background:#f5f3ff; color:#7c3aed;">View Posts &rarr;</button>' +
+                '</div>';
+        }).join('');
+    }
+
+    function filterByCategory(cat) {
+        document.getElementById('post-filter-category').value = cat;
+        switchTab('posts');
+        renderPostsList();
+    }
+
+    // ==========================================
+    // JSON OUTPUT
+    // ==========================================
+    function renderJsonOutput() {
+        const output = document.getElementById('json-output');
+        const jsonData = allPosts.map(p => ({
+            id: p.id, title: p.title, shortTitle: p.shortTitle, slug: p.slug,
+            metaTitle: p.metaTitle, metaDescription: p.metaDescription, metaKeywords: p.metaKeywords,
+            category: p.category, url: p.url, featuredImage: p.featuredImage,
+            author: p.author, date: p.date, time: p.time, timestamp: p.timestamp,
+            status: p.status, content: p.content
+        }));
+        output.textContent = JSON.stringify(jsonData, null, 2);
+    }
+
+    function copyAllJson() {
+        navigator.clipboard.writeText(document.getElementById('json-output').textContent).then(() => {
+            showToast('JSON copied to clipboard!', 'success');
+        });
+    }
+
+    function downloadAllJson() {
+        const text = document.getElementById('json-output').textContent;
+        const blob = new Blob([text], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'applybro_posts_' + new Date().toISOString().split('T')[0] + '.json';
+        a.click();
+        URL.revokeObjectURL(url);
+        showToast('JSON downloaded!', 'success');
+    }
+
+    // ==========================================
+    // UTILITIES
+    // ==========================================
+    function showToast(message, type) {
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.style.background = type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#8b5cf6';
+        toast.innerHTML = '<i class="fas ' + (type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle') + ' mr-2"></i>' + message;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
+    }
+
+    function updateCounts() {
+        document.getElementById('posts-count').textContent = allPosts.length;
+        const drafts = JSON.parse(localStorage.getItem('applybro_drafts') || '[]');
+        document.getElementById('drafts-count').textContent = drafts.length;
+    }
+
+    // Close modals on backdrop click
+    document.querySelectorAll('[id$="-modal"]').forEach(modal => {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) modal.classList.add('hidden');
+        });
+    });
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+        if (e.ctrlKey && e.key === 's') {
+            e.preventDefault();
+            saveDraft();
+        }
+    });
+    </script>
 </body>
 </html>
