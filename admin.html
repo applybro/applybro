@@ -1297,7 +1297,7 @@ const db = firebase.firestore(app);
             if (err.code === 'auth/user-not-found') msg = 'User not found. Create the user in Firebase Console first.';
             if (err.code === 'auth/wrong-password') msg = 'Wrong password. Check your credentials.';
             if (err.code === 'auth/invalid-email') msg = 'Invalid email format.';
-            if (err.code === 'auth/invalid-credential') msg = 'Invalid credentials. User may not exist or password is wrong.';
+            if (err.code === 'auth/invalid-credential') msg = 'Invalid email/password. If correct, disable "Email Enumeration Protection" in Firebase Console.';
             if (err.code === 'auth/too-many-requests') msg = 'Too many failed attempts. Try again later.';
             if (err.code === 'auth/network-request-failed') msg = 'Network error. Check your internet connection.';
             if (err.code === 'auth/unauthorized-domain') msg = 'Domain not authorized. Add "applybro.in" to Firebase Auth settings.';
