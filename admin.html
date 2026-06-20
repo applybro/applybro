@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ApplyBro Admin Panel — CMS Dashboard</title>
+    <title>ApplyBro Admin Panel</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -31,203 +31,41 @@
     <style>
         body { font-family: 'Inter', sans-serif; }
         h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', 'Inter', sans-serif; }
-
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #c4b5fd; border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: #8b5cf6; }
         .dark ::-webkit-scrollbar-thumb { background: #4c1d95; }
-
-        .nav-glass {
-            background: rgba(46, 16, 101, 0.95);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-        }
-
-        .editor-toolbar-btn {
-            padding: 6px 12px;
-            font-size: 11px;
-            font-weight: 500;
-            border-radius: 8px;
-            border: 1px solid #e2e8f0;
-            background: white;
-            color: #475569;
-            transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            cursor: pointer;
-        }
-        .dark .editor-toolbar-btn {
-            background: #1e293b;
-            border-color: #334155;
-            color: #94a3b8;
-        }
-        .editor-toolbar-btn:hover {
-            background: #f5f3ff;
-            border-color: #c4b5fd;
-            color: #7c3aed;
-        }
-        .dark .editor-toolbar-btn:hover {
-            background: rgba(124,58,237,0.1);
-            border-color: #7c3aed;
-            color: #a78bfa;
-        }
-        .editor-toolbar-btn.active {
-            background: #ede9fe;
-            border-color: #8b5cf6;
-            color: #6d28d9;
-        }
-        .dark .editor-toolbar-btn.active {
-            background: rgba(124,58,237,0.2);
-            color: #a78bfa;
-        }
-
-        .cms-card {
-            background: white;
-            border-radius: 16px;
-            border: 1px solid rgba(226, 232, 240, 0.8);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            overflow: hidden;
-            transition: all 0.3s;
-        }
-        .dark .cms-card {
-            background: #0f172a;
-            border-color: rgba(51, 65, 85, 0.8);
-        }
-
-        .cms-input {
-            width: 100%;
-            padding: 10px 16px;
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            font-size: 13px;
-            color: #0f172a;
-            transition: all 0.2s;
-            outline: none;
-        }
-        .dark .cms-input {
-            background: rgba(30, 41, 59, 0.5);
-            border-color: #334155;
-            color: white;
-        }
-        .cms-input:focus {
-            border-color: #8b5cf6;
-            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
-        }
+        .nav-glass { background: rgba(46, 16, 101, 0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+        .editor-toolbar-btn { padding: 6px 12px; font-size: 11px; font-weight: 500; border-radius: 8px; border: 1px solid #e2e8f0; background: white; color: #475569; transition: all 0.2s; display: inline-flex; align-items: center; gap: 4px; cursor: pointer; }
+        .dark .editor-toolbar-btn { background: #1e293b; border-color: #334155; color: #94a3b8; }
+        .editor-toolbar-btn:hover { background: #f5f3ff; border-color: #c4b5fd; color: #7c3aed; }
+        .dark .editor-toolbar-btn:hover { background: rgba(124,58,237,0.1); border-color: #7c3aed; color: #a78bfa; }
+        .editor-toolbar-btn.active { background: #ede9fe; border-color: #8b5cf6; color: #6d28d9; }
+        .dark .editor-toolbar-btn.active { background: rgba(124,58,237,0.2); color: #a78bfa; }
+        .cms-card { background: white; border-radius: 16px; border: 1px solid rgba(226, 232, 240, 0.8); box-shadow: 0 1px 3px rgba(0,0,0,0.05); overflow: hidden; transition: all 0.3s; }
+        .dark .cms-card { background: #0f172a; border-color: rgba(51, 65, 85, 0.8); }
+        .cms-input { width: 100%; padding: 10px 16px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; font-size: 13px; color: #0f172a; transition: all 0.2s; outline: none; }
+        .dark .cms-input { background: rgba(30, 41, 59, 0.5); border-color: #334155; color: white; }
+        .cms-input:focus { border-color: #8b5cf6; box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15); }
         .cms-input::placeholder { color: #94a3b8; }
-
-        .cms-btn {
-            padding: 10px 20px;
-            background: linear-gradient(135deg, #6d28d9, #7c3aed);
-            color: white;
-            font-size: 13px;
-            font-weight: 600;
-            border-radius: 12px;
-            border: none;
-            cursor: pointer;
-            transition: all 0.2s;
-            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
-        }
-        .cms-btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(124, 58, 237, 0.4);
-        }
+        .cms-btn { padding: 10px 20px; background: linear-gradient(135deg, #6d28d9, #7c3aed); color: white; font-size: 13px; font-weight: 600; border-radius: 12px; border: none; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3); }
+        .cms-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(124, 58, 237, 0.4); }
         .cms-btn:active { transform: scale(0.98); }
         .cms-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-
-        .cms-btn-secondary {
-            padding: 10px 20px;
-            background: #f1f5f9;
-            color: #475569;
-            font-size: 13px;
-            font-weight: 600;
-            border-radius: 12px;
-            border: 1px solid #e2e8f0;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .dark .cms-btn-secondary {
-            background: #1e293b;
-            color: #94a3b8;
-            border-color: #334155;
-        }
-        .cms-btn-secondary:hover {
-            background: #e2e8f0;
-            color: #334155;
-        }
-
-        .cms-btn-danger {
-            padding: 8px 16px;
-            background: linear-gradient(135deg, #dc2626, #ef4444);
-            color: white;
-            font-size: 12px;
-            font-weight: 600;
-            border-radius: 8px;
-            border: none;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .cms-btn-success {
-            padding: 8px 16px;
-            background: linear-gradient(135deg, #059669, #10b981);
-            color: white;
-            font-size: 12px;
-            font-weight: 600;
-            border-radius: 8px;
-            border: none;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .sidebar-link {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
-            border-radius: 12px;
-            font-size: 13px;
-            font-weight: 500;
-            color: #64748b;
-            transition: all 0.2s;
-            border: none;
-            background: none;
-            width: 100%;
-            text-align: left;
-            cursor: pointer;
-        }
+        .cms-btn-secondary { padding: 10px 20px; background: #f1f5f9; color: #475569; font-size: 13px; font-weight: 600; border-radius: 12px; border: 1px solid #e2e8f0; cursor: pointer; transition: all 0.2s; }
+        .dark .cms-btn-secondary { background: #1e293b; color: #94a3b8; border-color: #334155; }
+        .cms-btn-secondary:hover { background: #e2e8f0; color: #334155; }
+        .cms-btn-danger { padding: 8px 16px; background: linear-gradient(135deg, #dc2626, #ef4444); color: white; font-size: 12px; font-weight: 600; border-radius: 8px; border: none; cursor: pointer; transition: all 0.2s; }
+        .cms-btn-success { padding: 8px 16px; background: linear-gradient(135deg, #059669, #10b981); color: white; font-size: 12px; font-weight: 600; border-radius: 8px; border: none; cursor: pointer; transition: all 0.2s; }
+        .sidebar-link { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 12px; font-size: 13px; font-weight: 500; color: #64748b; transition: all 0.2s; border: none; background: none; width: 100%; text-align: left; cursor: pointer; }
         .dark .sidebar-link { color: #94a3b8; }
-        .sidebar-link:hover {
-            background: #f5f3ff;
-            color: #7c3aed;
-        }
-        .dark .sidebar-link:hover {
-            background: rgba(124,58,237,0.1);
-            color: #a78bfa;
-        }
-        .sidebar-link.active {
-            background: #ede9fe;
-            color: #6d28d9;
-            box-shadow: 0 1px 3px rgba(139,92,246,0.1);
-        }
-        .dark .sidebar-link.active {
-            background: rgba(124,58,237,0.15);
-            color: #a78bfa;
-        }
-
-        #editor {
-            min-height: 400px;
-            outline: none;
-            line-height: 1.7;
-            font-size: 14px;
-        }
-        #editor:empty:before {
-            content: attr(data-placeholder);
-            color: #94a3b8;
-            pointer-events: none;
-        }
+        .sidebar-link:hover { background: #f5f3ff; color: #7c3aed; }
+        .dark .sidebar-link:hover { background: rgba(124,58,237,0.1); color: #a78bfa; }
+        .sidebar-link.active { background: #ede9fe; color: #6d28d9; box-shadow: 0 1px 3px rgba(139,92,246,0.1); }
+        .dark .sidebar-link.active { background: rgba(124,58,237,0.15); color: #a78bfa; }
+        #editor { min-height: 400px; outline: none; line-height: 1.7; font-size: 14px; }
+        #editor:empty:before { content: attr(data-placeholder); color: #94a3b8; pointer-events: none; }
         #editor h1 { font-size: 2em; font-weight: 700; margin: 0.5em 0; color: inherit; }
         #editor h2 { font-size: 1.5em; font-weight: 600; margin: 0.5em 0; color: inherit; }
         #editor h3 { font-size: 1.25em; font-weight: 600; margin: 0.5em 0; color: inherit; }
@@ -235,318 +73,125 @@
         #editor p { margin: 0.5em 0; }
         #editor ul { list-style-type: disc; padding-left: 1.5em; margin: 0.5em 0; }
         #editor ol { list-style-type: decimal; padding-left: 1.5em; margin: 0.5em 0; }
-        #editor blockquote { 
-            border-left: 4px solid #8b5cf6; 
-            padding-left: 1em; 
-            margin: 1em 0; 
-            color: #64748b;
-            font-style: italic;
-        }
+        #editor blockquote { border-left: 4px solid #8b5cf6; padding-left: 1em; margin: 1em 0; color: #64748b; font-style: italic; }
         .dark #editor blockquote { color: #94a3b8; }
-        #editor pre {
-            background: #1e293b;
-            color: #e2e8f0;
-            padding: 1em;
-            border-radius: 12px;
-            overflow-x: auto;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.9em;
-        }
-        #editor code {
-            background: #f1f5f9;
-            padding: 0.2em 0.4em;
-            border-radius: 4px;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.9em;
-        }
+        #editor pre { background: #1e293b; color: #e2e8f0; padding: 1em; border-radius: 12px; overflow-x: auto; font-family: monospace; font-size: 0.9em; }
+        #editor code { background: #f1f5f9; padding: 0.2em 0.4em; border-radius: 4px; font-family: monospace; font-size: 0.9em; }
         .dark #editor code { background: #334155; }
         #editor hr { border: none; border-top: 2px solid #e2e8f0; margin: 1.5em 0; }
         .dark #editor hr { border-top-color: #475569; }
-
-        #editor .box-important {
-            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-            border: 1px solid #f59e0b;
-            border-radius: 12px;
-            padding: 1em 1.25em;
-            margin: 1em 0;
-        }
-        #editor .box-notice {
-            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
-            border: 1px solid #3b82f6;
-            border-radius: 12px;
-            padding: 1em 1.25em;
-            margin: 1em 0;
-        }
-        #editor .box-update {
-            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
-            border: 1px solid #10b981;
-            border-radius: 12px;
-            padding: 1em 1.25em;
-            margin: 1em 0;
-        }
-        #editor .box-warning {
-            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
-            border: 1px solid #ef4444;
-            border-radius: 12px;
-            padding: 1em 1.25em;
-            margin: 1em 0;
-        }
-        #editor .box-success {
-            background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
-            border: 1px solid #22c55e;
-            border-radius: 12px;
-            padding: 1em 1.25em;
-            margin: 1em 0;
-        }
-
-        #editor table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1em 0;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        #editor table th {
-            background: #7c3aed;
-            color: white;
-            padding: 10px 14px;
-            text-align: left;
-            font-weight: 600;
-        }
-        #editor table td {
-            padding: 10px 14px;
-            border-bottom: 1px solid #e2e8f0;
-        }
+        #editor .box-important { background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border: 1px solid #f59e0b; border-radius: 12px; padding: 1em 1.25em; margin: 1em 0; }
+        #editor .box-notice { background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); border: 1px solid #3b82f6; border-radius: 12px; padding: 1em 1.25em; margin: 1em 0; }
+        #editor .box-update { background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%); border: 1px solid #10b981; border-radius: 12px; padding: 1em 1.25em; margin: 1em 0; }
+        #editor .box-warning { background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%); border: 1px solid #ef4444; border-radius: 12px; padding: 1em 1.25em; margin: 1em 0; }
+        #editor .box-success { background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%); border: 1px solid #22c55e; border-radius: 12px; padding: 1em 1.25em; margin: 1em 0; }
+        #editor table { width: 100%; border-collapse: collapse; margin: 1em 0; border-radius: 8px; overflow: hidden; }
+        #editor table th { background: #7c3aed; color: white; padding: 10px 14px; text-align: left; font-weight: 600; }
+        #editor table td { padding: 10px 14px; border-bottom: 1px solid #e2e8f0; }
         .dark #editor table td { border-bottom-color: #475569; }
         #editor table tr:nth-child(even) { background: #f8fafc; }
         .dark #editor table tr:nth-child(even) { background: #1e293b; }
-
-        #editor img {
-            max-width: 100%;
-            border-radius: 12px;
-            margin: 1em 0;
-        }
-
-        #editor .faq-item {
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            margin: 0.75em 0;
-            overflow: hidden;
-        }
+        #editor img { max-width: 100%; border-radius: 12px; margin: 1em 0; }
+        #editor .faq-item { border: 1px solid #e2e8f0; border-radius: 12px; margin: 0.75em 0; overflow: hidden; }
         .dark #editor .faq-item { border-color: #475569; }
-        #editor .faq-question {
-            background: #f8fafc;
-            padding: 10px 14px;
-            font-weight: 600;
-            cursor: pointer;
-        }
+        #editor .faq-question { background: #f8fafc; padding: 10px 14px; font-weight: 600; cursor: pointer; }
         .dark #editor .faq-question { background: #1e293b; }
-        #editor .faq-answer {
-            padding: 10px 14px;
-            border-top: 1px solid #e2e8f0;
-        }
+        #editor .faq-answer { padding: 10px 14px; border-top: 1px solid #e2e8f0; }
         .dark #editor .faq-answer { border-top-color: #475569; }
-
-        #editor .btn-apply {
-            display: inline-block;
-            background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
-            color: white;
-            padding: 10px 24px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            margin: 0.5em 0;
-        }
-        #editor .btn-download {
-            display: inline-block;
-            background: linear-gradient(135deg, #059669 0%, #10b981 100%);
-            color: white;
-            padding: 10px 24px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            margin: 0.5em 0;
-        }
-        #editor .btn-official {
-            display: inline-block;
-            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
-            color: white;
-            padding: 10px 24px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            margin: 0.5em 0;
-        }
-        #editor .btn-primary {
-            display: inline-block;
-            background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
-            color: white;
-            padding: 10px 24px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            margin: 0.5em 0;
-        }
-        #editor .btn-secondary {
-            display: inline-block;
-            background: #f1f5f9;
-            color: #475569;
-            padding: 10px 24px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            margin: 0.5em 0;
-            border: 1px solid #e2e8f0;
-        }
-        #editor .btn-notification {
-            display: inline-block;
-            background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
-            color: white;
-            padding: 10px 24px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            margin: 0.5em 0;
-        }
-        #editor .btn-registration {
-            display: inline-block;
-            background: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%);
-            color: white;
-            padding: 10px 24px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            margin: 0.5em 0;
-        }
-        #editor .btn-login {
-            display: inline-block;
-            background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
-            color: white;
-            padding: 10px 24px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            margin: 0.5em 0;
-        }
-
-        .preview-panel {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 16px;
-            padding: 20px;
-            min-height: 400px;
-            overflow-y: auto;
-        }
-        .dark .preview-panel {
-            background: #0f172a;
-            border-color: #334155;
-        }
-
+        #editor .btn-apply { display: inline-block; background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%); color: white; padding: 10px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; margin: 0.5em 0; }
+        #editor .btn-download { display: inline-block; background: linear-gradient(135deg, #059669 0%, #10b981 100%); color: white; padding: 10px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; margin: 0.5em 0; }
+        #editor .btn-official { display: inline-block; background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%); color: white; padding: 10px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; margin: 0.5em 0; }
+        #editor .btn-primary { display: inline-block; background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%); color: white; padding: 10px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; margin: 0.5em 0; }
+        #editor .btn-secondary { display: inline-block; background: #f1f5f9; color: #475569; padding: 10px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; margin: 0.5em 0; border: 1px solid #e2e8f0; }
+        #editor .btn-notification { display: inline-block; background: linear-gradient(135deg, #ea580c 0%, #f97316 100%); color: white; padding: 10px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; margin: 0.5em 0; }
+        #editor .btn-registration { display: inline-block; background: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%); color: white; padding: 10px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; margin: 0.5em 0; }
+        #editor .btn-login { display: inline-block; background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%); color: white; padding: 10px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; margin: 0.5em 0; }
+        .preview-panel { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 20px; min-height: 400px; overflow-y: auto; }
+        .dark .preview-panel { background: #0f172a; border-color: #334155; }
         .fade-in { animation: fadeIn 0.4s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        .toast {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            padding: 14px 20px;
-            border-radius: 14px;
-            color: white;
-            font-weight: 500;
-            font-size: 13px;
-            z-index: 9999;
-            animation: slideIn 0.3s ease-out;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-        }
+        .toast { position: fixed; bottom: 24px; right: 24px; padding: 14px 20px; border-radius: 14px; color: white; font-weight: 500; font-size: 13px; z-index: 9999; animation: slideIn 0.3s ease-out; box-shadow: 0 10px 40px rgba(0,0,0,0.2); }
         @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-
         .status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
         .status-dot.active { background: #10b981; box-shadow: 0 0 0 3px rgba(16,185,129,0.2); }
         .status-dot.draft { background: #f59e0b; box-shadow: 0 0 0 3px rgba(245,158,11,0.2); }
-
         .green-dot { width: 8px; height: 8px; background: #22c55e; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 2px rgba(34,197,94,0.3); }
-
-        @media (max-width: 1024px) {
-            .editor-layout { flex-direction: column; }
-            .preview-panel { min-height: 300px; }
-        }
-
-        .setup-check {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 14px;
-            border-radius: 10px;
-            margin-bottom: 8px;
-            font-size: 13px;
-        }
+        @media (max-width: 1024px) { .editor-layout { flex-direction: column; } .preview-panel { min-height: 300px; } }
+        .setup-check { display: flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 10px; margin-bottom: 8px; font-size: 13px; }
         .setup-check.ok { background: #d1fae5; color: #065f46; }
         .setup-check.warn { background: #fef3c7; color: #92400e; }
         .setup-check.error { background: #fee2e2; color: #991b1b; }
+
+        /* ===== LOGIN ANIMATIONS ===== */
+        @keyframes loginPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } }
+        .login-pulse { animation: loginPulse 2s ease-in-out infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .animate-spin-custom { animation: spin 1s linear infinite; }
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); } 20%, 40%, 60%, 80% { transform: translateX(5px); } }
+        .shake-error { animation: shake 0.5s ease-in-out; }
+        @keyframes glow { 0%, 100% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.3); } 50% { box-shadow: 0 0 40px rgba(139, 92, 246, 0.6); } }
+        .glow-effect { animation: glow 2s ease-in-out infinite; }
+        .login-error-shadow { box-shadow: 0 4px 20px rgba(239, 68, 68, 0.4), 0 0 0 1px rgba(239, 68, 68, 0.3); }
     </style>
 <base target="_blank">
 </head>
 <body class="bg-gray-50 dark:bg-slate-950 text-gray-900 dark:text-slate-200">
 
     <!-- ========== LOGIN SCREEN ========== -->
-    <div id="login-screen" class="fixed inset-0 z-50 flex items-center justify-center" style="background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #5b21b6 100%);">
-        <div class="w-full max-w-md px-6">
-            <div style="background: rgba(255,255,255,0.08); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.15); border-radius: 24px; padding: 40px; box-shadow: 0 25px 50px rgba(0,0,0,0.3);">
-                <div class="text-center mb-6">
-                    <div style="width:64px; height:64px; background: linear-gradient(135deg, #a78bfa, #7c3aed); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; box-shadow: 0 8px 30px rgba(124,58,237,0.4);">
+    <div id="login-screen" class="fixed inset-0 z-50 flex items-center justify-center" style="background: linear-gradient(135deg, #1e1b4b 0%, #312e81 40%, #4c1d95 100%);">
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div class="absolute w-96 h-96 rounded-full opacity-10" style="background: radial-gradient(circle, #a78bfa, transparent); top: -10%; left: -10%;"></div>
+            <div class="absolute w-80 h-80 rounded-full opacity-10" style="background: radial-gradient(circle, #c4b5fd, transparent); bottom: -10%; right: -10%;"></div>
+        </div>
+        <div class="w-full max-w-md px-6 relative z-10">
+            <div class="glow-effect rounded-3xl p-8" style="background: rgba(255,255,255,0.06); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.12);">
+                <div class="text-center mb-8">
+                    <div class="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 login-pulse" style="background: linear-gradient(135deg, #8b5cf6, #a78bfa); box-shadow: 0 8px 32px rgba(139,92,246,0.4);">
                         <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
                     </div>
-                    <h1 class="text-2xl font-bold text-white">Apply<span style="color:#c4b5fd;">Bro</span> Admin</h1>
-                    <p class="text-white/60 text-sm mt-1">CMS Dashboard</p>
+                    <h1 class="text-2xl font-bold text-white tracking-tight">Apply<span style="color:#c4b5fd;">Bro</span> Admin</h1>
+                    <p class="text-white/50 text-sm mt-1">CMS Dashboard</p>
                 </div>
 
-                <!-- Setup Checklist -->
-                <div id="setup-checks" class="mb-4 hidden">
-                    <div class="text-white/80 text-xs font-semibold mb-2 uppercase tracking-wider">Setup Checklist</div>
-                    <div id="setup-list"></div>
+                <div id="login-error" class="hidden mb-5 p-4 rounded-xl text-sm text-center login-error-shadow" style="background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); color: #fecaca;">
+                    <i class="fas fa-exclamation-circle mr-2"></i><span id="login-error-text">Invalid credentials</span>
                 </div>
-                <!-- Login Error -->
-                <div id="login-error" class="hidden mb-4 p-3 rounded-xl text-sm text-center" style="background: rgba(239,68,68,0.2); border: 1px solid rgba(239,68,68,0.3); color: #fecaca;"></div>
 
-                <!-- YE FORM HAI - YAHAN CHANGE KARO -->
-                <form id="login-form" class="space-y-4" target="_self">
-                    
-                    <!-- Email Field -->
+                <form id="login-form" class="space-y-5" onsubmit="handleLogin(event)">
                     <div>
-                        <label class="block text-sm font-medium text-white/80 mb-1.5">Email Address</label>
-                        <input type="email" id="login-email" required 
-                            class="w-full px-4 py-3 rounded-xl text-white placeholder-white/40 transition-all outline-none"
-                            style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2);"
-                            placeholder="applybroofficial@gmail.com">
+                        <label class="block text-sm font-medium text-white/70 mb-2">Email Address</label>
+                        <div class="relative">
+                            <i class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-white/30"></i>
+                            <input type="email" id="login-email" required 
+                                class="w-full pl-11 pr-4 py-3.5 rounded-xl text-white text-sm transition-all outline-none"
+                                style="background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15);"
+                                placeholder="admin@applybro.in">
+                        </div>
                     </div>
-                    
-                    <!-- Password Field -->
                     <div>
-                        <label class="block text-sm font-medium text-white/80 mb-1.5">Password</label>
-                        <input type="password" id="login-password" required 
-                            class="w-full px-4 py-3 rounded-xl text-white placeholder-white/40 transition-all outline-none"
-                            style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2);"
-                            placeholder="••••••••">
+                        <label class="block text-sm font-medium text-white/70 mb-2">Password</label>
+                        <div class="relative">
+                            <i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-white/30"></i>
+                            <input type="password" id="login-password" required 
+                                class="w-full pl-11 pr-4 py-3.5 rounded-xl text-white text-sm transition-all outline-none"
+                                style="background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15);"
+                                placeholder="Enter your password">
+                        </div>
                     </div>
-                    
-                    <!-- Submit Button -->
                     <button type="submit" id="login-btn"
-                        class="w-full py-3 text-white font-semibold rounded-xl transition-all outline-none"
-                        style="background: linear-gradient(135deg, #8b5cf6, #7c3aed); box-shadow: 0 4px 20px rgba(124,58,237,0.4);">
+                        class="w-full py-3.5 text-white font-semibold rounded-xl transition-all outline-none flex items-center justify-center gap-2"
+                        style="background: linear-gradient(135deg, #7c3aed, #6d28d9); box-shadow: 0 4px 20px rgba(124,58,237,0.4);">
                         <span id="login-text">Sign In</span>
-                        ...
+                        <svg id="login-spinner" class="hidden animate-spin-custom h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
                     </button>
-                    
                 </form>
 
-                <div class="mt-4 p-3 rounded-xl" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);">
-                    <p class="text-white/50 text-xs text-center">Having trouble? Check the browser console (F12) for error details.</p>
-                    <button onclick="showSetupHelp()" class="w-full mt-2 text-xs text-royal-300 hover:text-white transition-colors bg-transparent border-none cursor-pointer">
-                        <i class="fas fa-wrench mr-1"></i> Show Setup Help
-                    </button>
+                <div class="mt-6 pt-4 border-t border-white/10 text-center">
+                    <p class="text-white/40 text-xs">Protected by Firebase Authentication</p>
                 </div>
-
-                <p class="text-center text-white/40 text-xs mt-4">Protected by Firebase Authentication</p>
             </div>
         </div>
     </div>
@@ -590,7 +235,7 @@
                     <div id="user-avatar" style="width:36px; height:36px; background: linear-gradient(135deg, #a78bfa, #7c3aed); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 14px; font-weight: bold;">A</div>
                     <div style="flex:1; min-width:0;">
                         <p class="text-sm font-medium text-slate-900 dark:text-white truncate" id="user-name">Admin</p>
-                        <p class="text-xs text-slate-500 dark:text-slate-400 truncate" id="user-email">applybroofficial@gmail.com</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 truncate" id="user-email">admin@applybro.in</p>
                     </div>
                 </div>
                 <button onclick="logout()" class="w-full flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium rounded-xl transition-all border-none cursor-pointer"
@@ -839,7 +484,6 @@
                         <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Categories</h2>
                         <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Overview of all content categories</p>
                     </div>
-
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="categories-grid"></div>
                 </div>
 
@@ -851,7 +495,6 @@
                             <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Saved drafts from local storage</p>
                         </div>
                     </div>
-
                     <div class="cms-card overflow-x-auto">
                         <table class="w-full text-sm">
                             <thead>
@@ -878,7 +521,6 @@
                         <h2 class="text-2xl font-bold text-slate-900 dark:text-white">JSON Output</h2>
                         <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Export your data for GitHub integration</p>
                     </div>
-
                     <div class="cms-card p-6">
                         <div class="flex items-center justify-between mb-4">
                             <h3 class="text-sm font-semibold text-slate-900 dark:text-white">All Posts JSON</h3>
@@ -1177,34 +819,33 @@
     // ==========================================
     // FIREBASE CONFIGURATION - applybro1
     // ==========================================
-// ==========================================
-// ==========================================
-// FIREBASE CONFIGURATION - applybro1
-// ==========================================
-const firebaseConfig = {
-    apiKey: "AIzaSyDjj7c7ew71PVLmrG6Ot1ttgLkp4xQIc_U",
-    authDomain: "applybro1.firebaseapp.com",
-    projectId: "applybro1",
-    storageBucket: "applybro1.firebasestorage.app",
-    messagingSenderId: "96808372763",
-    appId: "1:96808372763:web:4ebb8eae6d6452e79b86be",        // ✅ CORRECT
-    measurementId: "G-JD5G48SJRZ"                               // ✅ CORRECT
-};
+    const firebaseConfig = {
+        apiKey: "AIzaSyDjj7c7ew71PVLmrG6Ot1ttgLkp4xQIc_U",
+        authDomain: "applybro1.firebaseapp.com",
+        projectId: "applybro1",
+        storageBucket: "applybro1.firebasestorage.app",
+        messagingSenderId: "96808372763",
+        appId: "1:96808372763:web:4ebb8eae6d6452e79b86be",
+        measurementId: "G-JD5G48SJRZ"
+    };
 
-// Initialize Firebase - DEFAULT APP (no name)
-let app;
-try {
-    app = firebase.initializeApp(firebaseConfig);  // ✅ Default app
-} catch (e) {
-    if (e.code === 'app/duplicate-app') {
-        app = firebase.app();
-    } else {
-        console.error('Firebase init error:', e);
-        throw e;
+    // Initialize Firebase - DEFAULT APP (no name)
+    let app;
+    try {
+        app = firebase.initializeApp(firebaseConfig);
+        console.log("Firebase initialized successfully");
+    } catch (e) {
+        if (e.code === 'app/duplicate-app') {
+            app = firebase.app();
+            console.log("Using existing Firebase app");
+        } else {
+            console.error('Firebase init error:', e);
+            throw e;
+        }
     }
-}
-const auth = firebase.auth();            // ✅ No app parameter
-const db = firebase.firestore();          // ✅ No app parameter
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
     // ==========================================
     // GLOBAL STATE
     // ==========================================
@@ -1223,45 +864,69 @@ const db = firebase.firestore();          // ✅ No app parameter
     ];
 
     // ==========================================
-    // SETUP HELP & DIAGNOSTICS
+    // LOGIN HANDLER - FIXED
     // ==========================================
-    function showSetupHelp() {
-        const checks = document.getElementById('setup-checks');
-        const list = document.getElementById('setup-list');
-        checks.classList.remove('hidden');
+    async function handleLogin(e) {
+        e.preventDefault();
 
-        list.innerHTML = '';
+        const email = document.getElementById('login-email').value.trim();
+        const password = document.getElementById('login-password').value;
+        const btn = document.getElementById('login-btn');
+        const text = document.getElementById('login-text');
+        const spinner = document.getElementById('login-spinner');
+        const errorDiv = document.getElementById('login-error');
+        const errorText = document.getElementById('login-error-text');
 
-        // Check 1: Firebase initialized
+        // Hide any previous error
+        errorDiv.classList.add('hidden');
+        errorDiv.classList.remove('shake-error');
+
+        // Show loading state
+        btn.disabled = true;
+        text.textContent = 'Signing in...';
+        spinner.classList.remove('hidden');
+
         try {
-            firebase.app();
-            list.innerHTML += '<div class="setup-check ok"><i class="fas fa-check-circle"></i> Firebase SDK loaded</div>';
-        } catch(e) {
-            list.innerHTML += '<div class="setup-check error"><i class="fas fa-times-circle"></i> Firebase SDK NOT loaded</div>';
+            console.log("Attempting login with:", email);
+            const result = await auth.signInWithEmailAndPassword(email, password);
+            console.log("Login successful:", result.user.email);
+            // Auth state listener will handle the rest
+        } catch (err) {
+            console.error('Login error:', err);
+
+            // Reset button
+            btn.disabled = false;
+            text.textContent = 'Sign In';
+            spinner.classList.add('hidden');
+
+            // Show error with animation
+            let msg = err.message;
+            if (err.code === 'auth/user-not-found') msg = 'User not found. Create the user in Firebase Console first.';
+            if (err.code === 'auth/wrong-password') msg = 'Wrong password. Check your credentials.';
+            if (err.code === 'auth/invalid-email') msg = 'Invalid email format.';
+            if (err.code === 'auth/invalid-credential') msg = 'Invalid email/password. Check your credentials.';
+            if (err.code === 'auth/too-many-requests') msg = 'Too many failed attempts. Try again later.';
+            if (err.code === 'auth/network-request-failed') msg = 'Network error. Check your internet connection.';
+            if (err.code === 'auth/unauthorized-domain') msg = 'Domain not authorized. Add this domain to Firebase Auth settings.';
+
+            errorText.textContent = msg;
+            errorDiv.classList.remove('hidden');
+            errorDiv.classList.add('shake-error');
+
+            // Remove shake animation after it completes
+            setTimeout(() => {
+                errorDiv.classList.remove('shake-error');
+            }, 500);
         }
-
-        // Check 2: Auth enabled
-        list.innerHTML += '<div class="setup-check warn"><i class="fas fa-exclamation-triangle"></i> <strong>Step 1:</strong> Go to Firebase Console > Authentication > Sign-in method > Enable "Email/Password"</div>';
-
-        // Check 3: Domain authorized
-        list.innerHTML += '<div class="setup-check warn"><i class="fas fa-exclamation-triangle"></i> <strong>Step 2:</strong> Go to Firebase Console > Authentication > Settings > Authorized domains > Add "applybro.in"</div>';
-
-        // Check 4: Firestore rules
-        list.innerHTML += '<div class="setup-check warn"><i class="fas fa-exclamation-triangle"></i> <strong>Step 3:</strong> Go to Firebase Console > Firestore Database > Rules > Set rules to allow auth writes</div>';
-
-        // Check 5: User exists
-        list.innerHTML += '<div class="setup-check warn"><i class="fas fa-exclamation-triangle"></i> <strong>Step 4:</strong> Create a user with email: applybroofficial@gmail.com in Firebase Console > Authentication > Users</div>';
-
-        // Current domain
-        list.innerHTML += '<div class="setup-check ok"><i class="fas fa-info-circle"></i> Current domain: ' + window.location.hostname + '</div>';
     }
 
     // ==========================================
-    // AUTHENTICATION
+    // AUTH STATE LISTENER
     // ==========================================
     auth.onAuthStateChanged(user => {
         currentUser = user;
         if (user) {
+            console.log("User logged in:", user.email);
             document.getElementById('login-screen').classList.add('hidden');
             document.getElementById('dashboard').classList.remove('hidden');
             document.getElementById('user-name').textContent = user.displayName || 'Admin';
@@ -1271,43 +936,17 @@ const db = firebase.firestore();          // ✅ No app parameter
             loadDrafts();
             updateCounts();
         } else {
+            console.log("No user logged in");
             document.getElementById('login-screen').classList.remove('hidden');
             document.getElementById('dashboard').classList.add('hidden');
-        }
-    });
 
-    document.getElementById('login-form').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const email = document.getElementById('login-email').value;
-        const password = document.getElementById('login-password').value;
-        const btn = document.getElementById('login-btn');
-        const text = document.getElementById('login-text');
-        const spinner = document.getElementById('login-spinner');
-        const error = document.getElementById('login-error');
-
-        btn.disabled = true;
-        text.classList.add('hidden');
-        spinner.classList.remove('hidden');
-        error.classList.add('hidden');
-
-        try {
-            await auth.signInWithEmailAndPassword(email, password);
-        } catch (err) {
-            console.error('Login error:', err);
-            let msg = err.message;
-            if (err.code === 'auth/user-not-found') msg = 'User not found. Create the user in Firebase Console first.';
-            if (err.code === 'auth/wrong-password') msg = 'Wrong password. Check your credentials.';
-            if (err.code === 'auth/invalid-email') msg = 'Invalid email format.';
-            if (err.code === 'auth/invalid-credential') msg = 'Invalid email/password. If correct, disable "Email Enumeration Protection" in Firebase Console.';
-            if (err.code === 'auth/too-many-requests') msg = 'Too many failed attempts. Try again later.';
-            if (err.code === 'auth/network-request-failed') msg = 'Network error. Check your internet connection.';
-            if (err.code === 'auth/unauthorized-domain') msg = 'Domain not authorized. Add "applybro.in" to Firebase Auth settings.';
-            error.textContent = msg;
-            error.classList.remove('hidden');
-        } finally {
-            btn.disabled = false;
-            text.classList.remove('hidden');
-            spinner.classList.add('hidden');
+            // Reset login button state
+            const btn = document.getElementById('login-btn');
+            const text = document.getElementById('login-text');
+            const spinner = document.getElementById('login-spinner');
+            if (btn) btn.disabled = false;
+            if (text) text.textContent = 'Sign In';
+            if (spinner) spinner.classList.add('hidden');
         }
     });
 
@@ -1435,6 +1074,7 @@ const db = firebase.firestore();          // ✅ No app parameter
     }
 
     function escapeHtml(text) {
+        if (!text) return '';
         const div = document.createElement('div');
         div.textContent = text;
         return div.innerHTML;
@@ -1844,29 +1484,20 @@ const db = firebase.firestore();          // ✅ No app parameter
         }
         empty.classList.add('hidden');
 
-        const catGroups = {};
-        filtered.forEach(p => {
-            if (!catGroups[p.category]) catGroups[p.category] = [];
-            catGroups[p.category].push(p);
-        });
-
-        tbody.innerHTML = filtered.map((post, index) => {
-            const catIndex = catGroups[post.category].indexOf(post);
-            const isNew = catIndex < 3;
-            const dot = isNew ? '<span class="green-dot mr-2"></span>' : '<span class="mr-2" style="width:8px; display:inline-block;"></span>';
+        tbody.innerHTML = filtered.map((post) => {
             const statusBadge = post.status === 'published' 
                 ? '<span class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-semibold" style="background:#d1fae5; color:#065f46;"><span class="status-dot active"></span> Published</span>'
                 : '<span class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-semibold" style="background:#fef3c7; color:#92400e;"><span class="status-dot draft"></span> Draft</span>';
 
             return '<tr class="border-b border-slate-100 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">' +
-                '<td class="px-5 py-3.5">' + dot + '<span class="font-medium text-slate-900 dark:text-white">' + escapeHtml(post.title) + '</span></td>' +
+                '<td class="px-5 py-3.5"><span class="font-medium text-slate-900 dark:text-white">' + escapeHtml(post.title) + '</span></td>' +
                 '<td class="px-5 py-3.5"><span class="px-2 py-1 rounded-lg text-xs font-medium" style="background:#ede9fe; color:#6d28d9;">' + escapeHtml(post.category) + '</span></td>' +
                 '<td class="px-5 py-3.5 text-slate-500 dark:text-slate-400">' + (post.date || '--') + '<br><span class="text-xs">' + (post.time || '') + '</span></td>' +
                 '<td class="px-5 py-3.5">' + statusBadge + '</td>' +
                 '<td class="px-5 py-3.5 text-right">' +
                 '<button onclick="editPost(\'' + post.id + '\')" class="cms-btn-success mr-1"><i class="fas fa-edit"></i></button>' +
-'<button onclick="duplicatePost(\'' + post.id + '\')" class="cms-btn-secondary mr-1" style="padding:8px 12px; font-size:12px;"><i class="fas fa-copy"></i></button>' +
-'<button onclick="deletePost(\'' + post.id + '\')" class="cms-btn-danger"><i class="fas fa-trash"></i></button>' +
+                '<button onclick="duplicatePost(\'' + post.id + '\')" class="cms-btn-secondary mr-1" style="padding:8px 12px; font-size:12px;"><i class="fas fa-copy"></i></button>' +
+                '<button onclick="deletePost(\'' + post.id + '\')" class="cms-btn-danger"><i class="fas fa-trash"></i></button>' +
                 '</td></tr>';
         }).join('');
     }
@@ -1945,11 +1576,8 @@ const db = firebase.firestore();          // ✅ No app parameter
                 '<div class="flex justify-between text-xs"><span class="text-slate-500">Latest Update</span>' +
                 '<span class="font-semibold text-slate-900 dark:text-white">' + s.latest + '</span></div>' +
                 '</div>' +
-                
-                // 👇 YAHAN CHANGE KARO - YE LINE DHUNDHO
                 '<button onclick="filterByCategory(\'' + cat.replace(/'/g, "\\'") + '\')" class="w-full mt-4 py-2 text-xs font-semibold rounded-lg transition-all border-none cursor-pointer" ' +
                 'style="background:#f5f3ff; color:#7c3aed;">View Posts &rarr;</button>' +
-                
                 '</div>';
         }).join('');
     }
