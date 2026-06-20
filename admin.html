@@ -1187,14 +1187,14 @@ const firebaseConfig = {
     projectId: "applybro1",
     storageBucket: "applybro1.firebasestorage.app",
     messagingSenderId: "96808372763",
-    appId: "1:96808372763:web:f2612b262afdfc8f9b86be", 
-     measurementId: "G-J5GGXK944G"  
+    appId: "1:96808372763:web:4ebb8eae6d6452e79b86be",        // ✅ CORRECT
+    measurementId: "G-JD5G48SJRZ"                               // ✅ CORRECT
 };
 
 // Initialize Firebase - DEFAULT APP (no name)
 let app;
 try {
-    app = firebase.initializeApp(firebaseConfig);
+    app = firebase.initializeApp(firebaseConfig);  // ✅ Default app
 } catch (e) {
     if (e.code === 'app/duplicate-app') {
         app = firebase.app();
@@ -1203,8 +1203,8 @@ try {
         throw e;
     }
 }
-const auth = firebase.auth();
-const db = firebase.firestore();
+const auth = firebase.auth();            // ✅ No app parameter
+const db = firebase.firestore();          // ✅ No app parameter
     // ==========================================
     // GLOBAL STATE
     // ==========================================
