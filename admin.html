@@ -215,6 +215,9 @@
                 <button onclick="switchTab('quickpost')" id="tab-quickpost" class="sidebar-link">
                     <i class="fas fa-bolt" style="width:20px; text-align:center;"></i> Quick Post
                 </button>
+                <button onclick="switchTab('fullarticle')" id="tab-fullarticle" class="sidebar-link">
+                    <i class="fas fa-file-alt" style="width:20px; text-align:center;"></i> Full Article
+                </button>
                 <button onclick="switchTab('editor')" id="tab-editor" class="sidebar-link active">
                     <i class="fas fa-pen-nib" style="width:20px; text-align:center;"></i> New Article
                 </button>
@@ -261,7 +264,197 @@
         <main class="flex-1 overflow-y-auto" style="min-height: 100vh;">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 py-6">
 
-                <!-- ====== EDITOR TAB ====== -->
+                <!-- ====== FULL ARTICLE TAB ====== -->
+                <div id="panel-fullarticle" class="hidden fade-in">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                        <div>
+                            <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Full Article Editor</h2>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Write complete articles with all options</p>
+                        </div>
+                        <div class="flex items-center gap-3 flex-wrap">
+                            <div id="full-autosave-status" class="flex items-center gap-1.5 text-xs text-slate-400">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Ready</span>
+                            </div>
+                            <button onclick="saveFullDraft()" class="cms-btn-secondary">
+                                <i class="fas fa-save mr-1.5"></i> Save Draft
+                            </button>
+                            <button onclick="openFullPublishModal()" class="cms-btn">
+                                <i class="fas fa-paper-plane mr-1.5"></i> Publish
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Full Article Form -->
+                    <div class="cms-card p-6 mb-6">
+                        <h3 class="text-sm font-semibold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+                            <i class="fas fa-info-circle" style="color:#8b5cf6;"></i> Article Information
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="md:col-span-2">
+                                <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Article Title <span style="color:#ef4444;">*</span></label>
+                                <input type="text" id="full-title" class="cms-input" placeholder="Enter article title..." oninput="generateFullSlug()">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Short Title</label>
+                                <input type="text" id="full-short-title" class="cms-input" placeholder="Short display title...">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Auto Slug</label>
+                                <input type="text" id="full-slug" class="cms-input" style="background:#f1f5f9;" placeholder="auto-generated-slug" readonly>
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Category <span style="color:#ef4444;">*</span></label>
+                                <select id="full-category" class="cms-input">
+                                    <option value="">Select Category</option>
+                                    <option value="Live Sarkari Job">Live Sarkari Job</option>
+                                    <option value="Live Scholarship">Live Scholarship</option>
+                                    <option value="Sarkari Yojana">Sarkari Yojana</option>
+                                    <option value="Admit Cards">Admit Cards</option>
+                                    <option value="Latest Results">Latest Results</option>
+                                </select>
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Featured Image URL</label>
+                                <input type="text" id="full-image" class="cms-input" placeholder="https://...">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Meta Title (SEO)</label>
+                                <input type="text" id="full-meta-title" class="cms-input" placeholder="SEO Meta Title (50-60 chars)">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Meta Description (SEO)</label>
+                                <textarea id="full-meta-description" rows="2" class="cms-input resize-none" placeholder="SEO Meta Description (150-160 chars)"></textarea>
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Meta Keywords</label>
+                                <input type="text" id="full-meta-keywords" class="cms-input" placeholder="keyword1, keyword2, keyword3...">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Author</label>
+                                <input type="text" id="full-author" class="cms-input" value="ApplyBro Admin">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Article URL (Optional)</label>
+                                <input type="text" id="full-url" class="cms-input" placeholder="https://applybro.in/...">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Full Rich Text Editor -->
+                    <div class="cms-card mb-6">
+                        <!-- Toolbar -->
+                        <div class="border-b border-slate-200 dark:border-slate-800 p-3">
+                            <div class="flex flex-wrap gap-1.5 mb-2">
+                                <div class="flex items-center gap-1 rounded-lg p-1" style="background:#f8fafc;">
+                                    <button onclick="execFullCmd('formatBlock','H1')" class="editor-toolbar-btn" title="Heading 1"><i class="fas fa-heading" style="font-size:10px;"></i>1</button>
+                                    <button onclick="execFullCmd('formatBlock','H2')" class="editor-toolbar-btn" title="Heading 2"><i class="fas fa-heading" style="font-size:10px;"></i>2</button>
+                                    <button onclick="execFullCmd('formatBlock','H3')" class="editor-toolbar-btn" title="Heading 3"><i class="fas fa-heading" style="font-size:10px;"></i>3</button>
+                                    <button onclick="execFullCmd('formatBlock','H4')" class="editor-toolbar-btn" title="Heading 4"><i class="fas fa-heading" style="font-size:10px;"></i>4</button>
+                                    <button onclick="execFullCmd('formatBlock','P')" class="editor-toolbar-btn" title="Paragraph"><i class="fas fa-paragraph"></i></button>
+                                </div>
+
+                                <div class="flex items-center gap-1 rounded-lg p-1" style="background:#f8fafc;">
+                                    <button onclick="execFullCmd('bold')" class="editor-toolbar-btn" title="Bold"><i class="fas fa-bold"></i></button>
+                                    <button onclick="execFullCmd('italic')" class="editor-toolbar-btn" title="Italic"><i class="fas fa-italic"></i></button>
+                                    <button onclick="execFullCmd('underline')" class="editor-toolbar-btn" title="Underline"><i class="fas fa-underline"></i></button>
+                                    <button onclick="execFullCmd('strikeThrough')" class="editor-toolbar-btn" title="Strikethrough"><i class="fas fa-strikethrough"></i></button>
+                                </div>
+
+                                <div class="flex items-center gap-1 rounded-lg p-1" style="background:#f8fafc;">
+                                    <button onclick="pickFullColor('foreColor')" class="editor-toolbar-btn" title="Text Color"><i class="fas fa-font" style="color:#7c3aed;"></i></button>
+                                    <button onclick="pickFullColor('hiliteColor')" class="editor-toolbar-btn" title="Background Color"><i class="fas fa-highlighter"></i></button>
+                                </div>
+
+                                <div class="flex items-center gap-1 rounded-lg p-1" style="background:#f8fafc;">
+                                    <button onclick="execFullCmd('insertUnorderedList')" class="editor-toolbar-btn" title="Bullet List"><i class="fas fa-list-ul"></i></button>
+                                    <button onclick="execFullCmd('insertOrderedList')" class="editor-toolbar-btn" title="Number List"><i class="fas fa-list-ol"></i></button>
+                                </div>
+
+                                <div class="flex items-center gap-1 rounded-lg p-1" style="background:#f8fafc;">
+                                    <button onclick="execFullCmd('justifyLeft')" class="editor-toolbar-btn" title="Align Left"><i class="fas fa-align-left"></i></button>
+                                    <button onclick="execFullCmd('justifyCenter')" class="editor-toolbar-btn" title="Align Center"><i class="fas fa-align-center"></i></button>
+                                    <button onclick="execFullCmd('justifyRight')" class="editor-toolbar-btn" title="Align Right"><i class="fas fa-align-right"></i></button>
+                                    <button onclick="execFullCmd('justifyFull')" class="editor-toolbar-btn" title="Justify"><i class="fas fa-align-justify"></i></button>
+                                </div>
+
+                                <div class="flex items-center gap-1 rounded-lg p-1" style="background:#f8fafc;">
+                                    <button onclick="execFullCmd('formatBlock','blockquote')" class="editor-toolbar-btn" title="Quote"><i class="fas fa-quote-left"></i></button>
+                                    <button onclick="insertFullCodeBlock()" class="editor-toolbar-btn" title="Code Block"><i class="fas fa-code"></i></button>
+                                    <button onclick="execFullCmd('insertHorizontalRule')" class="editor-toolbar-btn" title="Horizontal Line"><i class="fas fa-minus"></i></button>
+                                    <button onclick="execFullCmd('removeFormat')" class="editor-toolbar-btn" title="Clear Formatting"><i class="fas fa-eraser"></i></button>
+                                </div>
+                            </div>
+
+                            <!-- Box Generator -->
+                            <div class="flex flex-wrap gap-1.5 mt-2 pt-2 border-t border-slate-200 dark:border-slate-700/50">
+                                <span class="text-xs text-slate-500 dark:text-slate-400 self-center mr-1">Boxes:</span>
+                                <button onclick="insertFullBox('important')" class="px-2.5 py-1 text-[10px] font-bold rounded-lg border transition-all cursor-pointer" style="background:#fef3c7; color:#92400e; border-color:#fcd34d;">Important</button>
+                                <button onclick="insertFullBox('notice')" class="px-2.5 py-1 text-[10px] font-bold rounded-lg border transition-all cursor-pointer" style="background:#dbeafe; color:#1e40af; border-color:#93c5fd;">Notice</button>
+                                <button onclick="insertFullBox('update')" class="px-2.5 py-1 text-[10px] font-bold rounded-lg border transition-all cursor-pointer" style="background:#d1fae5; color:#065f46; border-color:#6ee7b7;">Update</button>
+                                <button onclick="insertFullBox('warning')" class="px-2.5 py-1 text-[10px] font-bold rounded-lg border transition-all cursor-pointer" style="background:#fee2e2; color:#991b1b; border-color:#fca5a5;">Warning</button>
+                                <button onclick="insertFullBox('success')" class="px-2.5 py-1 text-[10px] font-bold rounded-lg border transition-all cursor-pointer" style="background:#dcfce7; color:#166534; border-color:#86efac;">Success</button>
+                            </div>
+
+                            <!-- Quick Tools -->
+                            <div class="flex flex-wrap gap-1.5 mt-2 pt-2 border-t border-slate-200 dark:border-slate-700/50">
+                                <span class="text-xs text-slate-500 dark:text-slate-400 self-center mr-1">Tools:</span>
+                                <button onclick="openFullLinkModal()" class="editor-toolbar-btn" style="font-size:10px;"><i class="fas fa-link"></i> Link</button>
+                                <button onclick="openFullImageModal()" class="editor-toolbar-btn" style="font-size:10px;"><i class="fas fa-image"></i> Image</button>
+                                <button onclick="openFullTableModal()" class="editor-toolbar-btn" style="font-size:10px;"><i class="fas fa-table"></i> Table</button>
+                                <button onclick="openFullFaqModal()" class="editor-toolbar-btn" style="font-size:10px;"><i class="fas fa-question-circle"></i> FAQ</button>
+                                <button onclick="openFullButtonModal()" class="editor-toolbar-btn" style="font-size:10px;"><i class="fas fa-mouse-pointer"></i> Button</button>
+                                <button onclick="openFullDividerModal()" class="editor-toolbar-btn" style="font-size:10px;"><i class="fas fa-grip-lines"></i> Divider</button>
+                                <button onclick="openFullEmbedModal()" class="editor-toolbar-btn" style="font-size:10px;"><i class="fas fa-code"></i> Embed</button>
+                                <button onclick="fullUndo()" class="editor-toolbar-btn" style="font-size:10px;"><i class="fas fa-undo"></i></button>
+                                <button onclick="fullRedo()" class="editor-toolbar-btn" style="font-size:10px;"><i class="fas fa-redo"></i></button>
+                                <button onclick="clearFullEditor()" class="editor-toolbar-btn" style="font-size:10px; color:#ef4444;"><i class="fas fa-trash-alt"></i> Clear</button>
+                            </div>
+                        </div>
+
+                        <!-- Editor & Preview Layout -->
+                        <div class="editor-layout flex gap-0">
+                            <div class="flex-1 p-4">
+                                <div id="full-editor" contenteditable="true" data-placeholder="Start writing your full article here..." 
+                                     class="w-full text-slate-800 dark:text-slate-200"
+                                     style="min-height: 500px; outline: none; line-height: 1.7; font-size: 14px;"
+                                     oninput="updateFullPreview(); startFullAutoSave();"></div>
+                            </div>
+
+                            <!-- Live Preview Panel -->
+                            <div class="hidden xl:block" style="width: 45%; border-left: 1px solid #e2e8f0; padding: 16px; background: #f8fafc;">
+                                <div class="flex items-center justify-between mb-3">
+                                    <h4 class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Live Preview</h4>
+                                    <div class="flex gap-1">
+                                        <button onclick="toggleFullPreviewMode('desktop')" class="p-1.5 rounded text-xs text-slate-500 hover:text-royal-600 bg-transparent border-none cursor-pointer" title="Desktop"><i class="fas fa-desktop"></i></button>
+                                        <button onclick="toggleFullPreviewMode('mobile')" class="p-1.5 rounded text-xs text-slate-500 hover:text-royal-600 bg-transparent border-none cursor-pointer" title="Mobile"><i class="fas fa-mobile-alt"></i></button>
+                                    </div>
+                                </div>
+                                <div id="full-live-preview" class="preview-panel text-sm">
+                                    <p class="text-slate-400 text-center" style="padding: 80px 0;">Start typing to see live preview...</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- HTML Source Toggle -->
+                        <div class="border-t border-slate-200 dark:border-slate-800 p-3">
+                            <div class="flex items-center gap-3 mb-2">
+                                <button onclick="toggleFullHtmlSource()" id="full-html-toggle-btn" class="text-xs font-medium flex items-center gap-1.5 bg-transparent border-none cursor-pointer" style="color:#7c3aed;">
+                                    <i class="fas fa-code"></i> Show HTML Source
+                                </button>
+                                <button onclick="copyFullHtml()" class="text-xs text-slate-500 hover:text-slate-700 bg-transparent border-none cursor-pointer flex items-center gap-1">
+                                    <i class="fas fa-copy"></i> Copy
+                                </button>
+                            </div>
+                            <div id="full-html-source-panel" class="hidden">
+                                <textarea id="full-html-source" rows="8" class="w-full p-3 rounded-xl text-xs font-mono resize-y outline-none" style="background:#0f172a; color:#34d399;"
+                                    oninput="updateFullEditorFromSource()"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ====== EDITOR TAB ====== --><!-- ====== EDITOR TAB ====== -->
                 <div id="panel-editor" class="fade-in">
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
                         <div>
@@ -1041,6 +1234,7 @@
         if (tabName === 'drafts') loadDrafts();
         if (tabName === 'json') renderJsonOutput();
         if (tabName === 'quickpost') updateQuickPreview();
+        if (tabName === 'fullarticle') updateFullPreview();
         if (window.innerWidth < 1024) {
             document.getElementById('sidebar').classList.add('hidden');
         }
@@ -1564,16 +1758,19 @@
                 ? '<span class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-semibold" style="background:#d1fae5; color:#065f46;"><span class="status-dot active"></span> Published</span>'
                 : '<span class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-semibold" style="background:#fef3c7; color:#92400e;"><span class="status-dot draft"></span> Draft</span>';
 
-            const quickBadge = post.isQuickPost 
-                ? '<span class="ml-2 px-1.5 py-0.5 rounded text-[10px] font-bold" style="background:#dbeafe; color:#1e40af;"><i class="fas fa-external-link-alt mr-1"></i>LINK</span>' 
-                : '';
+            let typeBadge = '';
+            if (post.isQuickPost) {
+                typeBadge = '<span class="ml-2 px-1.5 py-0.5 rounded text-[10px] font-bold" style="background:#dbeafe; color:#1e40af;"><i class="fas fa-external-link-alt mr-1"></i>LINK</span>';
+            } else if (post.isFullArticle) {
+                typeBadge = '<span class="ml-2 px-1.5 py-0.5 rounded text-[10px] font-bold" style="background:#d1fae5; color:#065f46;"><i class="fas fa-file-alt mr-1"></i>FULL</span>';
+            }
 
             const viewBtn = post.isQuickPost && post.articleLink
                 ? '<a href="' + escapeHtml(post.articleLink) + '" target="_blank" class="cms-btn-secondary mr-1" style="padding:8px 12px; font-size:12px; text-decoration:none; display:inline-block;"><i class="fas fa-eye"></i></a>'
                 : '<button onclick="editPost(\'' + post.id + '\')" class="cms-btn-success mr-1"><i class="fas fa-edit"></i></button>';
 
             return '<tr class="border-b border-slate-100 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">' +
-                '<td class="px-5 py-3.5"><span class="font-medium text-slate-900 dark:text-white">' + escapeHtml(post.title) + '</span>' + quickBadge + '</td>' +
+                '<td class="px-5 py-3.5"><span class="font-medium text-slate-900 dark:text-white">' + escapeHtml(post.title) + '</span>' + typeBadge + '</td>' +
                 '<td class="px-5 py-3.5"><span class="px-2 py-1 rounded-lg text-xs font-medium" style="background:#ede9fe; color:#6d28d9;">' + escapeHtml(post.category) + '</span></td>' +
                 '<td class="px-5 py-3.5 text-slate-500 dark:text-slate-400">' + (post.date || '--') + '<br><span class="text-xs">' + (post.time || '') + '</span></td>' +
                 '<td class="px-5 py-3.5">' + statusBadge + '</td>' +
@@ -1683,7 +1880,8 @@
             author: p.author, date: p.date, time: p.time, timestamp: p.timestamp,
             status: p.status, content: p.content,
             isQuickPost: p.isQuickPost || false,
-            articleLink: p.articleLink || ''
+            articleLink: p.articleLink || '',
+            isFullArticle: p.isFullArticle || false
         }));
         output.textContent = JSON.stringify(jsonData, null, 2);
     }
@@ -1871,6 +2069,515 @@
         }
     }
 
+
+    // ==========================================
+    // FULL ARTICLE EDITOR FUNCTIONS
+    // ==========================================
+    function execFullCmd(command, value = null) {
+        document.execCommand(command, false, value);
+        document.getElementById('full-editor').focus();
+        updateFullPreview();
+    }
+
+    function pickFullColor(type) {
+        const colors = { foreColor: '#7c3aed', hiliteColor: '#ede9fe' };
+        const color = prompt('Enter color (hex):', colors[type]);
+        if (color) execFullCmd(type, color);
+    }
+
+    function insertFullCodeBlock() {
+        const code = prompt('Enter code:');
+        if (code) {
+            execFullCmd('insertHTML', '<pre><code>' + escapeHtml(code) + '</code></pre><p><br></p>');
+        }
+    }
+
+    function insertFullBox(type) {
+        const content = prompt('Enter box content:');
+        if (content) {
+            execFullCmd('insertHTML', '<div class="box-' + type + '"><strong>' + type.toUpperCase() + ':</strong> ' + escapeHtml(content) + '</div><p><br></p>');
+        }
+    }
+
+    function clearFullEditor() {
+        if (confirm('Clear all content?')) {
+            document.getElementById('full-editor').innerHTML = '';
+            document.getElementById('full-title').value = '';
+            document.getElementById('full-short-title').value = '';
+            document.getElementById('full-slug').value = '';
+            document.getElementById('full-meta-title').value = '';
+            document.getElementById('full-meta-description').value = '';
+            document.getElementById('full-meta-keywords').value = '';
+            document.getElementById('full-category').value = '';
+            document.getElementById('full-image').value = '';
+            document.getElementById('full-url').value = '';
+            document.getElementById('full-author').value = 'ApplyBro Admin';
+            updateFullPreview();
+        }
+    }
+
+    function fullUndo() { execFullCmd('undo'); }
+    function fullRedo() { execFullCmd('redo'); }
+
+    function generateFullSlug() {
+        const title = document.getElementById('full-title').value;
+        const slug = title.toLowerCase()
+            .replace(/[^a-z0-9\s-]/g, '')
+            .replace(/\s+/g, '-')
+            .replace(/-+/g, '-')
+            .substring(0, 80);
+        document.getElementById('full-slug').value = slug;
+    }
+
+    function updateFullPreview() {
+        const editor = document.getElementById('full-editor');
+        const preview = document.getElementById('full-live-preview');
+        const htmlSource = document.getElementById('full-html-source');
+        preview.innerHTML = editor.innerHTML || '<p style="color:#94a3b8; text-align:center; padding:80px 0;">Start typing to see live preview...</p>';
+        if (htmlSource) htmlSource.value = formatFullHtml(editor.innerHTML);
+    }
+
+    function toggleFullHtmlSource() {
+        const panel = document.getElementById('full-html-source-panel');
+        const btn = document.getElementById('full-html-toggle-btn');
+        if (panel.classList.contains('hidden')) {
+            panel.classList.remove('hidden');
+            btn.innerHTML = '<i class="fas fa-eye-slash"></i> Hide HTML Source';
+            document.getElementById('full-html-source').value = formatFullHtml(document.getElementById('full-editor').innerHTML);
+        } else {
+            panel.classList.add('hidden');
+            btn.innerHTML = '<i class="fas fa-code"></i> Show HTML Source';
+        }
+    }
+
+    function updateFullEditorFromSource() {
+        document.getElementById('full-editor').innerHTML = document.getElementById('full-html-source').value;
+        updateFullPreview();
+    }
+
+    function copyFullHtml() {
+        navigator.clipboard.writeText(formatFullHtml(document.getElementById('full-editor').innerHTML)).then(() => {
+            showToast('HTML copied!', 'success');
+        });
+    }
+
+    function formatFullHtml(html) {
+        if (!html) return '';
+        return html.replace(/></g, '>\n<');
+    }
+
+    function toggleFullPreviewMode(mode) {
+        const preview = document.getElementById('full-live-preview');
+        preview.style.maxWidth = mode === 'mobile' ? '375px' : '100%';
+        preview.style.margin = mode === 'mobile' ? '0 auto' : '0';
+    }
+
+    // ==========================================
+    // FULL ARTICLE LINK MODAL
+    // ==========================================
+    function openFullLinkModal() { document.getElementById('full-link-modal').classList.remove('hidden'); }
+    function closeFullLinkModal() { document.getElementById('full-link-modal').classList.add('hidden'); }
+    function insertFullLink() {
+        const text = document.getElementById('full-link-text').value;
+        const url = document.getElementById('full-link-url').value;
+        const newTab = document.getElementById('full-link-newtab').checked;
+        const style = document.getElementById('full-link-style').value;
+        if (!url) { showToast('Please enter a URL', 'error'); return; }
+        let html;
+        if (style) {
+            html = '<a href="' + escapeHtml(url) + '"' + (newTab ? ' target="_blank"' : '') + ' class="' + style + '">' + escapeHtml(text || url) + '</a>';
+        } else {
+            html = '<a href="' + escapeHtml(url) + '"' + (newTab ? ' target="_blank"' : '') + ' style="color:#7c3aed; text-decoration:underline;">' + escapeHtml(text || url) + '</a>';
+        }
+        execFullCmd('insertHTML', html + '<p><br></p>');
+        closeFullLinkModal();
+        document.getElementById('full-link-text').value = '';
+        document.getElementById('full-link-url').value = '';
+    }
+
+    // ==========================================
+    // FULL ARTICLE IMAGE MODAL
+    // ==========================================
+    function openFullImageModal() { document.getElementById('full-image-modal').classList.remove('hidden'); }
+    function closeFullImageModal() { document.getElementById('full-image-modal').classList.add('hidden'); }
+    function insertFullImage() {
+        const url = document.getElementById('full-img-url').value;
+        const alt = document.getElementById('full-img-alt').value;
+        const caption = document.getElementById('full-img-caption').value;
+        const width = document.getElementById('full-img-width').value;
+        if (!url) { showToast('Please enter an image URL', 'error'); return; }
+        let html = '<img src="' + escapeHtml(url) + '" alt="' + escapeHtml(alt) + '"' + (width ? ' style="width:' + width + ';"' : '') + '>';
+        if (caption) html += '<p style="text-align:center; color:#64748b; font-size:0.85em; margin-top:0.5em;">' + escapeHtml(caption) + '</p>';
+        html += '<p><br></p>';
+        execFullCmd('insertHTML', html);
+        closeFullImageModal();
+        document.getElementById('full-img-url').value = '';
+        document.getElementById('full-img-alt').value = '';
+        document.getElementById('full-img-caption').value = '';
+        document.getElementById('full-img-width').value = '';
+    }
+
+    // ==========================================
+    // FULL ARTICLE TABLE MODAL
+    // ==========================================
+    function openFullTableModal() { document.getElementById('full-table-modal').classList.remove('hidden'); }
+    function closeFullTableModal() { document.getElementById('full-table-modal').classList.add('hidden'); }
+    function insertFullTable() {
+        const rows = parseInt(document.getElementById('full-table-rows').value) || 3;
+        const cols = parseInt(document.getElementById('full-table-cols').value) || 3;
+        const hasHeader = document.getElementById('full-table-header').checked;
+        const responsive = document.getElementById('full-table-responsive').checked;
+        let html = responsive ? '<div style="overflow-x:auto;">' : '';
+        html += '<table>';
+        if (hasHeader) {
+            html += '<thead><tr>';
+            for (let c = 0; c < cols; c++) html += '<th>Header ' + (c + 1) + '</th>';
+            html += '</tr></thead>';
+        }
+        html += '<tbody>';
+        for (let r = 0; r < rows; r++) {
+            html += '<tr>';
+            for (let c = 0; c < cols; c++) html += '<td>Cell ' + (r + 1) + '-' + (c + 1) + '</td>';
+            html += '</tr>';
+        }
+        html += '</tbody></table>';
+        if (responsive) html += '</div>';
+        html += '<p><br></p>';
+        execFullCmd('insertHTML', html);
+        closeFullTableModal();
+    }
+
+    // ==========================================
+    // FULL ARTICLE FAQ MODAL
+    // ==========================================
+    function openFullFaqModal() { document.getElementById('full-faq-modal').classList.remove('hidden'); }
+    function closeFullFaqModal() { document.getElementById('full-faq-modal').classList.add('hidden'); }
+    function addFullFaqItem() {
+        const container = document.getElementById('full-faq-items');
+        const div = document.createElement('div');
+        div.className = 'space-y-3 mb-4 p-4 rounded-xl';
+        div.style.background = '#f8fafc';
+        div.innerHTML = '<div><label class="block text-xs font-medium text-slate-600 mb-1.5">Question</label><input type="text" class="full-faq-question cms-input" placeholder="Enter question..."></div><div><label class="block text-xs font-medium text-slate-600 mb-1.5">Answer</label><textarea class="full-faq-answer cms-input resize-none" rows="2" placeholder="Enter answer..."></textarea></div><button onclick="this.parentElement.remove()" class="text-xs text-red-500 hover:text-red-600 bg-transparent border-none cursor-pointer"><i class="fas fa-trash"></i> Remove</button>';
+        container.appendChild(div);
+    }
+    function insertFullFaq() {
+        const items = document.querySelectorAll('#full-faq-items > div');
+        let html = '';
+        items.forEach(item => {
+            const q = item.querySelector('.full-faq-question').value;
+            const a = item.querySelector('.full-faq-answer').value;
+            if (q && a) {
+                html += '<div class="faq-item"><div class="faq-question">Q: ' + escapeHtml(q) + '</div><div class="faq-answer">A: ' + escapeHtml(a) + '</div></div>';
+            }
+        });
+        if (html) {
+            execFullCmd('insertHTML', html + '<p><br></p>');
+            closeFullFaqModal();
+            document.getElementById('full-faq-items').innerHTML = '<div class="space-y-3 mb-4 p-4 rounded-xl" style="background:#f8fafc;"><div><label class="block text-xs font-medium text-slate-600 mb-1.5">Question</label><input type="text" class="full-faq-question cms-input" placeholder="Enter question..."></div><div><label class="block text-xs font-medium text-slate-600 mb-1.5">Answer</label><textarea class="full-faq-answer cms-input resize-none" rows="2" placeholder="Enter answer..."></textarea></div></div>';
+        } else {
+            showToast('Please fill in at least one FAQ', 'error');
+        }
+    }
+
+    // ==========================================
+    // FULL ARTICLE BUTTON MODAL
+    // ==========================================
+    function openFullButtonModal() { document.getElementById('full-button-modal').classList.remove('hidden'); }
+    function closeFullButtonModal() { document.getElementById('full-button-modal').classList.add('hidden'); }
+    function insertFullButton() {
+        const type = document.getElementById('full-btn-type').value;
+        const text = document.getElementById('full-btn-text').value;
+        const url = document.getElementById('full-btn-url').value;
+        const newTab = document.getElementById('full-btn-newtab').checked;
+        if (!url) { showToast('Please enter a URL', 'error'); return; }
+        const defaults = { 'btn-apply': 'Apply Now', 'btn-download': 'Download', 'btn-official': 'Official Website', 'btn-primary': 'Click Here', 'btn-secondary': 'Learn More', 'btn-notification': 'View Notification', 'btn-registration': 'Register Now', 'btn-login': 'Login' };
+        const html = '<a href="' + escapeHtml(url) + '"' + (newTab ? ' target="_blank"' : '') + ' class="' + type + '">' + escapeHtml(text || defaults[type]) + '</a><p><br></p>';
+        execFullCmd('insertHTML', html);
+        closeFullButtonModal();
+        document.getElementById('full-btn-text').value = '';
+        document.getElementById('full-btn-url').value = '';
+    }
+
+    // ==========================================
+    // FULL ARTICLE DIVIDER MODAL
+    // ==========================================
+    function openFullDividerModal() { document.getElementById('full-divider-modal').classList.remove('hidden'); }
+    function closeFullDividerModal() { document.getElementById('full-divider-modal').classList.add('hidden'); }
+    function insertFullDivider(type) {
+        let html;
+        if (type === 'simple') html = '<hr>';
+        else if (type === 'double') html = '<hr style="border-top:2px solid #e2e8f0; border-bottom:2px solid #e2e8f0; height:4px; background:transparent;">';
+        else html = '<div style="height:3px; background:linear-gradient(90deg, #7c3aed, #a78bfa, #c4b5fd); border-radius:2px; margin:1.5em 0;"></div>';
+        execFullCmd('insertHTML', html + '<p><br></p>');
+        closeFullDividerModal();
+    }
+
+    // ==========================================
+    // FULL ARTICLE EMBED MODAL (YouTube, PDF, etc)
+    // ==========================================
+    function openFullEmbedModal() { document.getElementById('full-embed-modal').classList.remove('hidden'); }
+    function closeFullEmbedModal() { document.getElementById('full-embed-modal').classList.add('hidden'); }
+    function insertFullEmbed() {
+        const type = document.getElementById('full-embed-type').value;
+        const url = document.getElementById('full-embed-url').value;
+        if (!url) { showToast('Please enter a URL', 'error'); return; }
+        let html = '';
+        if (type === 'youtube') {
+            const videoId = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\s]+)/);
+            if (videoId) {
+                html = '<div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px; margin:1em 0;"><iframe src="https://www.youtube.com/embed/' + videoId[1] + '" style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;" allowfullscreen></iframe></div><p><br></p>';
+            } else {
+                showToast('Invalid YouTube URL', 'error'); return;
+            }
+        } else if (type === 'pdf') {
+            html = '<iframe src="' + escapeHtml(url) + '" style="width:100%; height:500px; border-radius:12px; border:1px solid #e2e8f0; margin:1em 0;"></iframe><p><br></p>';
+        } else if (type === 'website') {
+            html = '<iframe src="' + escapeHtml(url) + '" style="width:100%; height:400px; border-radius:12px; border:1px solid #e2e8f0; margin:1em 0;"></iframe><p><br></p>';
+        }
+        execFullCmd('insertHTML', html);
+        closeFullEmbedModal();
+        document.getElementById('full-embed-url').value = '';
+    }
+
+    // ==========================================
+    // FULL ARTICLE PUBLISH MODAL
+    // ==========================================
+    function openFullPublishModal() {
+        const title = document.getElementById('full-title').value;
+        const category = document.getElementById('full-category').value;
+        if (!title) { showToast('Please enter article title first', 'error'); return; }
+        if (!category) { showToast('Please select a category', 'error'); return; }
+        const now = new Date();
+        document.getElementById('full-pub-date-display').textContent = now.toLocaleDateString('en-IN');
+        document.getElementById('full-pub-time-display').textContent = now.toLocaleTimeString('en-IN');
+        document.getElementById('full-pub-timestamp-display').textContent = now.getTime();
+        document.getElementById('full-publish-modal').classList.remove('hidden');
+    }
+
+    function closeFullPublishModal() {
+        document.getElementById('full-publish-modal').classList.add('hidden');
+    }
+
+    async function publishFullArticle() {
+        const status = document.getElementById('full-pub-status').value;
+        const btn = document.getElementById('full-publish-btn');
+        const text = document.getElementById('full-publish-text');
+        const spinner = document.getElementById('full-publish-spinner');
+        btn.disabled = true;
+        text.classList.add('hidden');
+        spinner.classList.remove('hidden');
+
+        try {
+            const now = new Date();
+            const postData = {
+                title: document.getElementById('full-title').value,
+                shortTitle: document.getElementById('full-short-title').value || document.getElementById('full-title').value,
+                slug: document.getElementById('full-slug').value,
+                metaTitle: document.getElementById('full-meta-title').value,
+                metaDescription: document.getElementById('full-meta-description').value,
+                metaKeywords: document.getElementById('full-meta-keywords').value,
+                content: document.getElementById('full-editor').innerHTML,
+                category: document.getElementById('full-category').value,
+                url: document.getElementById('full-url').value || '',
+                featuredImage: document.getElementById('full-image').value || '',
+                author: document.getElementById('full-author').value || 'ApplyBro Admin',
+                status: status,
+                date: now.toLocaleDateString('en-IN'),
+                time: now.toLocaleTimeString('en-IN'),
+                timestamp: now.getTime(),
+                createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+                isFullArticle: true
+            };
+
+            if (editingPostId) {
+                await db.collection('posts').doc(editingPostId).update(postData);
+                showToast('Article updated successfully!', 'success');
+            } else {
+                await db.collection('posts').add(postData);
+                showToast('Article published successfully!', 'success');
+            }
+
+            closeFullPublishModal();
+            resetFullEditor();
+            loadAllPosts();
+            switchTab('posts');
+        } catch (err) {
+            console.error(err);
+            showToast('Error: ' + err.message, 'error');
+        } finally {
+            btn.disabled = false;
+            text.classList.remove('hidden');
+            spinner.classList.add('hidden');
+        }
+    }
+
+    function resetFullEditor() {
+        document.getElementById('full-editor').innerHTML = '';
+        document.getElementById('full-title').value = '';
+        document.getElementById('full-short-title').value = '';
+        document.getElementById('full-slug').value = '';
+        document.getElementById('full-meta-title').value = '';
+        document.getElementById('full-meta-description').value = '';
+        document.getElementById('full-meta-keywords').value = '';
+        document.getElementById('full-category').value = '';
+        document.getElementById('full-image').value = '';
+        document.getElementById('full-url').value = '';
+        document.getElementById('full-author').value = 'ApplyBro Admin';
+        editingPostId = null;
+        updateFullPreview();
+    }
+
+    // ==========================================
+    // FULL ARTICLE AUTO SAVE
+    // ==========================================
+    let fullAutoSaveTimer = null;
+    let fullAutoSaveInterval = null;
+
+    function startFullAutoSave() {
+        const status = document.getElementById('full-autosave-status');
+        status.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Saving...</span>';
+        status.style.color = '#8b5cf6';
+        clearTimeout(fullAutoSaveTimer);
+        fullAutoSaveTimer = setTimeout(() => {
+            autoSaveFullToLocal();
+        }, 2000);
+    }
+
+    function autoSaveFullToLocal() {
+        const data = {
+            title: document.getElementById('full-title').value,
+            shortTitle: document.getElementById('full-short-title').value,
+            slug: document.getElementById('full-slug').value,
+            metaTitle: document.getElementById('full-meta-title').value,
+            metaDescription: document.getElementById('full-meta-description').value,
+            metaKeywords: document.getElementById('full-meta-keywords').value,
+            category: document.getElementById('full-category').value,
+            image: document.getElementById('full-image').value,
+            url: document.getElementById('full-url').value,
+            author: document.getElementById('full-author').value,
+            content: document.getElementById('full-editor').innerHTML,
+            savedAt: new Date().toISOString()
+        };
+        localStorage.setItem('applybro_full_autosave', JSON.stringify(data));
+        const status = document.getElementById('full-autosave-status');
+        status.innerHTML = '<i class="fas fa-check-circle"></i><span>Saved</span>';
+        status.style.color = '#10b981';
+        setTimeout(() => {
+            status.innerHTML = '<i class="fas fa-check-circle"></i><span>Ready</span>';
+            status.style.color = '';
+        }, 2000);
+    }
+
+    fullAutoSaveInterval = setInterval(() => {
+        if (document.getElementById('full-title').value || document.getElementById('full-editor').innerHTML) {
+            autoSaveFullToLocal();
+        }
+    }, 30000);
+
+    // Load full article autosave on page load
+    window.addEventListener('load', () => {
+        const saved = localStorage.getItem('applybro_full_autosave');
+        if (saved) {
+            try {
+                const data = JSON.parse(saved);
+                if (data.title) document.getElementById('full-title').value = data.title;
+                if (data.shortTitle) document.getElementById('full-short-title').value = data.shortTitle;
+                if (data.slug) document.getElementById('full-slug').value = data.slug;
+                if (data.metaTitle) document.getElementById('full-meta-title').value = data.metaTitle;
+                if (data.metaDescription) document.getElementById('full-meta-description').value = data.metaDescription;
+                if (data.metaKeywords) document.getElementById('full-meta-keywords').value = data.metaKeywords;
+                if (data.category) document.getElementById('full-category').value = data.category;
+                if (data.image) document.getElementById('full-image').value = data.image;
+                if (data.url) document.getElementById('full-url').value = data.url;
+                if (data.author) document.getElementById('full-author').value = data.author;
+                if (data.content) document.getElementById('full-editor').innerHTML = data.content;
+                updateFullPreview();
+            } catch (e) { console.error('Full auto-save load error', e); }
+        }
+    });
+
+    // ==========================================
+    // FULL ARTICLE DRAFT SYSTEM
+    // ==========================================
+    function saveFullDraft() {
+        const title = document.getElementById('full-title').value || 'Untitled Draft';
+        const draft = {
+            id: 'full_draft_' + Date.now(),
+            title: title,
+            shortTitle: document.getElementById('full-short-title').value,
+            slug: document.getElementById('full-slug').value,
+            metaTitle: document.getElementById('full-meta-title').value,
+            metaDescription: document.getElementById('full-meta-description').value,
+            metaKeywords: document.getElementById('full-meta-keywords').value,
+            category: document.getElementById('full-category').value,
+            image: document.getElementById('full-image').value,
+            url: document.getElementById('full-url').value,
+            author: document.getElementById('full-author').value,
+            content: document.getElementById('full-editor').innerHTML,
+            savedAt: new Date().toISOString()
+        };
+        let drafts = JSON.parse(localStorage.getItem('applybro_full_drafts') || '[]');
+        drafts.unshift(draft);
+        localStorage.setItem('applybro_full_drafts', JSON.stringify(drafts));
+        showToast('Full article draft saved!', 'success');
+        updateCounts();
+    }
+
+    function loadFullDrafts() {
+        const drafts = JSON.parse(localStorage.getItem('applybro_full_drafts') || '[]');
+        const tbody = document.getElementById('drafts-table-body');
+        const empty = document.getElementById('drafts-empty');
+        const allDrafts = [...drafts];
+        if (allDrafts.length === 0) {
+            tbody.innerHTML = '';
+            empty.classList.remove('hidden');
+            return;
+        }
+        empty.classList.add('hidden');
+        tbody.innerHTML = allDrafts.map((draft, index) => {
+            const date = new Date(draft.savedAt).toLocaleString('en-IN');
+            const type = draft.id.startsWith('full_') ? '<span class="ml-2 px-1.5 py-0.5 rounded text-[10px] font-bold" style="background:#dbeafe; color:#1e40af;">FULL</span>' : '';
+            return '<tr class="border-b border-slate-100 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">' +
+                '<td class="px-5 py-3.5"><p class="font-medium text-slate-900 dark:text-white">' + escapeHtml(draft.title) + '</p>' + type + '</td>' +
+                '<td class="px-5 py-3.5 text-slate-500 dark:text-slate-400">' + date + '</td>' +
+                '<td class="px-5 py-3.5 text-right">' +
+                '<button onclick="loadFullDraft(' + index + ')" class="cms-btn-success mr-2"><i class="fas fa-edit"></i> Load</button>' +
+                '<button onclick="deleteFullDraft(' + index + ')" class="cms-btn-danger"><i class="fas fa-trash"></i></button>' +
+                '</td></tr>';
+        }).join('');
+    }
+
+    function loadFullDraft(index) {
+        const drafts = JSON.parse(localStorage.getItem('applybro_full_drafts') || '[]');
+        const draft = drafts[index];
+        if (!draft) return;
+        document.getElementById('full-title').value = draft.title || '';
+        document.getElementById('full-short-title').value = draft.shortTitle || '';
+        document.getElementById('full-slug').value = draft.slug || '';
+        document.getElementById('full-meta-title').value = draft.metaTitle || '';
+        document.getElementById('full-meta-description').value = draft.metaDescription || '';
+        document.getElementById('full-meta-keywords').value = draft.metaKeywords || '';
+        document.getElementById('full-category').value = draft.category || '';
+        document.getElementById('full-image').value = draft.image || '';
+        document.getElementById('full-url').value = draft.url || '';
+        document.getElementById('full-author').value = draft.author || 'ApplyBro Admin';
+        document.getElementById('full-editor').innerHTML = draft.content || '';
+        updateFullPreview();
+        switchTab('fullarticle');
+        showToast('Full article draft loaded!', 'success');
+    }
+
+    function deleteFullDraft(index) {
+        if (!confirm('Delete this draft?')) return;
+        let drafts = JSON.parse(localStorage.getItem('applybro_full_drafts') || '[]');
+        drafts.splice(index, 1);
+        localStorage.setItem('applybro_full_drafts', JSON.stringify(drafts));
+        loadFullDrafts();
+        updateCounts();
+        showToast('Draft deleted', 'success');
+    }
+
     // Close modals on backdrop click
     document.querySelectorAll('[id$="-modal"]').forEach(modal => {
         modal.addEventListener('click', (e) => {
@@ -1886,5 +2593,283 @@
         }
     });
     </script>
+
+    <!-- ========== FULL ARTICLE PUBLISH MODAL ========== -->
+    <div id="full-publish-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4" style="background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);">
+        <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
+            <div class="p-6 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+                <h3 class="text-lg font-bold text-slate-900 dark:text-white">Publish Full Article</h3>
+                <button onclick="closeFullPublishModal()" class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors bg-transparent border-none cursor-pointer">
+                    <i class="fas fa-times text-slate-500"></i>
+                </button>
+            </div>
+            <div class="p-6 space-y-4">
+                <div class="rounded-xl p-4 space-y-2" style="background:#f8fafc;">
+                    <div class="flex justify-between text-xs">
+                        <span class="text-slate-500 dark:text-slate-400">Title:</span>
+                        <span class="font-medium text-slate-900 dark:text-white truncate" style="max-width: 300px;" id="full-pub-title-display">--</span>
+                    </div>
+                    <div class="flex justify-between text-xs">
+                        <span class="text-slate-500 dark:text-slate-400">Category:</span>
+                        <span class="font-medium text-slate-900 dark:text-white" id="full-pub-category-display">--</span>
+                    </div>
+                    <div class="flex justify-between text-xs">
+                        <span class="text-slate-500 dark:text-slate-400">Date:</span>
+                        <span class="font-medium text-slate-900 dark:text-white" id="full-pub-date-display">--</span>
+                    </div>
+                    <div class="flex justify-between text-xs">
+                        <span class="text-slate-500 dark:text-slate-400">Time:</span>
+                        <span class="font-medium text-slate-900 dark:text-white" id="full-pub-time-display">--</span>
+                    </div>
+                    <div class="flex justify-between text-xs">
+                        <span class="text-slate-500 dark:text-slate-400">Timestamp:</span>
+                        <span class="font-medium text-slate-900 dark:text-white font-mono" id="full-pub-timestamp-display">--</span>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Status</label>
+                    <select id="full-pub-status" class="cms-input">
+                        <option value="published">Published</option>
+                        <option value="draft">Draft</option>
+                    </select>
+                </div>
+            </div>
+            <div class="p-6 border-t border-slate-200 dark:border-slate-800 flex gap-3">
+                <button onclick="closeFullPublishModal()" class="cms-btn-secondary flex-1">Cancel</button>
+                <button onclick="publishFullArticle()" id="full-publish-btn" class="cms-btn flex-1">
+                    <span id="full-publish-text"><i class="fas fa-paper-plane mr-1.5"></i> Publish Now</span>
+                    <span id="full-publish-spinner" class="hidden"><svg class="animate-spin h-5 w-5 mx-auto" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== FULL ARTICLE LINK MODAL ========== -->
+    <div id="full-link-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4" style="background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);">
+        <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl w-full max-w-md">
+            <div class="p-5 border-b border-slate-200 dark:border-slate-800">
+                <h3 class="text-lg font-bold text-slate-900 dark:text-white">Insert Link</h3>
+            </div>
+            <div class="p-5 space-y-4">
+                <div>
+                    <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Link Text</label>
+                    <input type="text" id="full-link-text" class="cms-input" placeholder="Click here...">
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">URL</label>
+                    <input type="text" id="full-link-url" class="cms-input" placeholder="https://...">
+                </div>
+                <div class="flex items-center gap-2">
+                    <input type="checkbox" id="full-link-newtab" class="w-4 h-4 rounded border-slate-300" style="accent-color:#7c3aed;" checked>
+                    <label for="full-link-newtab" class="text-sm text-slate-600 dark:text-slate-400">Open in new tab</label>
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Style</label>
+                    <select id="full-link-style" class="cms-input">
+                        <option value="">Normal Link</option>
+                        <option value="btn-apply">Apply Now Button</option>
+                        <option value="btn-download">Download Button</option>
+                        <option value="btn-official">Official Website Button</option>
+                    </select>
+                </div>
+            </div>
+            <div class="p-5 border-t border-slate-200 dark:border-slate-800 flex gap-3">
+                <button onclick="closeFullLinkModal()" class="cms-btn-secondary flex-1">Cancel</button>
+                <button onclick="insertFullLink()" class="cms-btn flex-1">Insert</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== FULL ARTICLE IMAGE MODAL ========== -->
+    <div id="full-image-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4" style="background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);">
+        <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl w-full max-w-md">
+            <div class="p-5 border-b border-slate-200 dark:border-slate-800">
+                <h3 class="text-lg font-bold text-slate-900 dark:text-white">Insert Image</h3>
+            </div>
+            <div class="p-5 space-y-4">
+                <div>
+                    <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Image URL</label>
+                    <input type="text" id="full-img-url" class="cms-input" placeholder="https://...">
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Alt Text</label>
+                    <input type="text" id="full-img-alt" class="cms-input" placeholder="Description...">
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Caption</label>
+                    <input type="text" id="full-img-caption" class="cms-input" placeholder="Image caption...">
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Width (% or px)</label>
+                    <input type="text" id="full-img-width" class="cms-input" placeholder="100% or 500px">
+                </div>
+            </div>
+            <div class="p-5 border-t border-slate-200 dark:border-slate-800 flex gap-3">
+                <button onclick="closeFullImageModal()" class="cms-btn-secondary flex-1">Cancel</button>
+                <button onclick="insertFullImage()" class="cms-btn flex-1">Insert</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== FULL ARTICLE TABLE MODAL ========== -->
+    <div id="full-table-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4" style="background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);">
+        <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl w-full max-w-md">
+            <div class="p-5 border-b border-slate-200 dark:border-slate-800">
+                <h3 class="text-lg font-bold text-slate-900 dark:text-white">Insert Table</h3>
+            </div>
+            <div class="p-5 space-y-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Rows</label>
+                        <input type="number" id="full-table-rows" class="cms-input" value="3" min="1" max="20">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Columns</label>
+                        <input type="number" id="full-table-cols" class="cms-input" value="3" min="1" max="10">
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <input type="checkbox" id="full-table-header" class="w-4 h-4 rounded border-slate-300" style="accent-color:#7c3aed;" checked>
+                    <label for="full-table-header" class="text-sm text-slate-600 dark:text-slate-400">Include Header Row</label>
+                </div>
+                <div class="flex items-center gap-2">
+                    <input type="checkbox" id="full-table-responsive" class="w-4 h-4 rounded border-slate-300" style="accent-color:#7c3aed;" checked>
+                    <label for="full-table-responsive" class="text-sm text-slate-600 dark:text-slate-400">Responsive (scroll on mobile)</label>
+                </div>
+            </div>
+            <div class="p-5 border-t border-slate-200 dark:border-slate-800 flex gap-3">
+                <button onclick="closeFullTableModal()" class="cms-btn-secondary flex-1">Cancel</button>
+                <button onclick="insertFullTable()" class="cms-btn flex-1">Insert</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== FULL ARTICLE FAQ MODAL ========== -->
+    <div id="full-faq-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4" style="background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);">
+        <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl w-full max-w-lg">
+            <div class="p-5 border-b border-slate-200 dark:border-slate-800">
+                <h3 class="text-lg font-bold text-slate-900 dark:text-white">Insert FAQ</h3>
+            </div>
+            <div class="p-5 space-y-4">
+                <div id="full-faq-items">
+                    <div class="space-y-3 mb-4 p-4 rounded-xl" style="background:#f8fafc;">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Question</label>
+                            <input type="text" class="full-faq-question cms-input" placeholder="Enter question...">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Answer</label>
+                            <textarea class="full-faq-answer cms-input resize-none" rows="2" placeholder="Enter answer..."></textarea>
+                        </div>
+                    </div>
+                </div>
+                <button onclick="addFullFaqItem()" class="w-full py-2.5 border-2 border-dashed rounded-xl text-sm text-slate-500 transition-all bg-transparent cursor-pointer"
+                    style="border-color:#cbd5e1;">
+                    <i class="fas fa-plus mr-1"></i> Add Another FAQ
+                </button>
+            </div>
+            <div class="p-5 border-t border-slate-200 dark:border-slate-800 flex gap-3">
+                <button onclick="closeFullFaqModal()" class="cms-btn-secondary flex-1">Cancel</button>
+                <button onclick="insertFullFaq()" class="cms-btn flex-1">Insert FAQs</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== FULL ARTICLE BUTTON MODAL ========== -->
+    <div id="full-button-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4" style="background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);">
+        <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl w-full max-w-md">
+            <div class="p-5 border-b border-slate-200 dark:border-slate-800">
+                <h3 class="text-lg font-bold text-slate-900 dark:text-white">Insert Button</h3>
+            </div>
+            <div class="p-5 space-y-4">
+                <div>
+                    <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Button Type</label>
+                    <select id="full-btn-type" class="cms-input">
+                        <option value="btn-apply">Apply Now</option>
+                        <option value="btn-download">Download</option>
+                        <option value="btn-official">Official Website</option>
+                        <option value="btn-primary">Primary Button</option>
+                        <option value="btn-secondary">Secondary Button</option>
+                        <option value="btn-notification">Notification</option>
+                        <option value="btn-registration">Registration</option>
+                        <option value="btn-login">Login</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Button Text</label>
+                    <input type="text" id="full-btn-text" class="cms-input" placeholder="Click Here">
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">URL</label>
+                    <input type="text" id="full-btn-url" class="cms-input" placeholder="https://...">
+                </div>
+                <div class="flex items-center gap-2">
+                    <input type="checkbox" id="full-btn-newtab" class="w-4 h-4 rounded border-slate-300" style="accent-color:#7c3aed;" checked>
+                    <label for="full-btn-newtab" class="text-sm text-slate-600 dark:text-slate-400">Open in new tab</label>
+                </div>
+            </div>
+            <div class="p-5 border-t border-slate-200 dark:border-slate-800 flex gap-3">
+                <button onclick="closeFullButtonModal()" class="cms-btn-secondary flex-1">Cancel</button>
+                <button onclick="insertFullButton()" class="cms-btn flex-1">Insert</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== FULL ARTICLE DIVIDER MODAL ========== -->
+    <div id="full-divider-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4" style="background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);">
+        <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl w-full max-w-sm">
+            <div class="p-5 border-b border-slate-200 dark:border-slate-800">
+                <h3 class="text-lg font-bold text-slate-900 dark:text-white">Insert Divider</h3>
+            </div>
+            <div class="p-5 space-y-3">
+                <button onclick="insertFullDivider('simple')" class="w-full p-4 border rounded-xl text-left transition-all bg-transparent cursor-pointer"
+                    style="border-color:#e2e8f0;">
+                    <div class="border-t-2 mb-2" style="border-color:#cbd5e1;"></div>
+                    <span class="text-sm font-medium text-slate-700 dark:text-slate-300">Simple Line</span>
+                </button>
+                <button onclick="insertFullDivider('double')" class="w-full p-4 border rounded-xl text-left transition-all bg-transparent cursor-pointer"
+                    style="border-color:#e2e8f0;">
+                    <div class="border-t-2 border-b-2 py-1 mb-2" style="border-color:#cbd5e1;"></div>
+                    <span class="text-sm font-medium text-slate-700 dark:text-slate-300">Double Line</span>
+                </button>
+                <button onclick="insertFullDivider('gradient')" class="w-full p-4 border rounded-xl text-left transition-all bg-transparent cursor-pointer"
+                    style="border-color:#e2e8f0;">
+                    <div class="h-0.5 rounded-full mb-2" style="background: linear-gradient(90deg, #7c3aed, #a78bfa, #c4b5fd);"></div>
+                    <span class="text-sm font-medium text-slate-700 dark:text-slate-300">Gradient Line</span>
+                </button>
+            </div>
+            <div class="p-5 border-t border-slate-200 dark:border-slate-800">
+                <button onclick="closeFullDividerModal()" class="cms-btn-secondary w-full">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== FULL ARTICLE EMBED MODAL ========== -->
+    <div id="full-embed-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4" style="background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);">
+        <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl w-full max-w-md">
+            <div class="p-5 border-b border-slate-200 dark:border-slate-800">
+                <h3 class="text-lg font-bold text-slate-900 dark:text-white">Embed Content</h3>
+            </div>
+            <div class="p-5 space-y-4">
+                <div>
+                    <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">Embed Type</label>
+                    <select id="full-embed-type" class="cms-input">
+                        <option value="youtube">YouTube Video</option>
+                        <option value="pdf">PDF Document</option>
+                        <option value="website">Website (iframe)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">URL</label>
+                    <input type="text" id="full-embed-url" class="cms-input" placeholder="https://...">
+                </div>
+            </div>
+            <div class="p-5 border-t border-slate-200 dark:border-slate-800 flex gap-3">
+                <button onclick="closeFullEmbedModal()" class="cms-btn-secondary flex-1">Cancel</button>
+                <button onclick="insertFullEmbed()" class="cms-btn flex-1">Embed</button>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
