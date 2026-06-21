@@ -3,7 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ApplyBro Admin Panel</title>
+    <title>ApplyBro Admin Panel - Manage Sarkari Jobs, Scholarships & Yojana</title>
+    <meta name="description" content="ApplyBro Admin Panel - Manage and publish Sarkari Jobs, Live Scholarships, Sarkari Yojana, Admit Cards, and Latest Results. Fast and easy content management system.">
+    <meta name="keywords" content="ApplyBro, Admin Panel, Sarkari Job, Scholarship, Sarkari Yojana, Admit Card, Result, Government Job, CMS">
+    <meta name="author" content="ApplyBro">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="canonical" href="https://www.applybro.in/admin.html">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.applybro.in/admin.html">
+    <meta property="og:title" content="ApplyBro Admin Panel">
+    <meta property="og:description" content="Manage and publish Sarkari Jobs, Scholarships, and Government Schemes">
+    <meta property="og:image" content="https://www.applybro.in/og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.applybro.in/admin.html">
+    <meta property="twitter:title" content="ApplyBro Admin Panel">
+    <meta property="twitter:description" content="Manage and publish Sarkari Jobs, Scholarships, and Government Schemes">
+    <meta property="twitter:image" content="https://www.applybro.in/og-image.jpg">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon.ico">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -112,6 +134,28 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .toast { position: fixed; bottom: 24px; right: 24px; padding: 14px 20px; border-radius: 14px; color: white; font-weight: 500; font-size: 13px; z-index: 9999; animation: slideIn 0.3s ease-out; box-shadow: 0 10px 40px rgba(0,0,0,0.2); }
         @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        /* ===== SIDEBAR LAYOUT FIX ===== */
+        #sidebar {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+        #sidebar > nav {
+            flex: 1;
+            overflow-y: auto;
+            min-height: 0;
+        }
+        #sidebar > div:last-child {
+            flex-shrink: 0;
+        }
+        @media (max-width: 1024px) {
+            #sidebar {
+                height: auto;
+                max-height: 80vh;
+            }
+        }
+
         .status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
         .status-dot.active { background: #10b981; box-shadow: 0 0 0 3px rgba(16,185,129,0.2); }
         .status-dot.draft { background: #f59e0b; box-shadow: 0 0 0 3px rgba(245,158,11,0.2); }
@@ -121,6 +165,42 @@
         .setup-check.ok { background: #d1fae5; color: #065f46; }
         .setup-check.warn { background: #fef3c7; color: #92400e; }
         .setup-check.error { background: #fee2e2; color: #991b1b; }
+
+        /* ===== SIDEBAR LAYOUT FIX - SIGN OUT OVERLAP ===== */
+        #sidebar {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+        #sidebar .p-5:first-child {
+            flex-shrink: 0;
+        }
+        #sidebar nav {
+            flex: 1;
+            overflow-y: auto;
+            min-height: 0;
+        }
+        #sidebar > div:last-of-type {
+            flex-shrink: 0;
+            background: white;
+            border-top: 1px solid #e2e8f0;
+        }
+        .dark #sidebar > div:last-of-type {
+            background: #0f172a;
+            border-top-color: #334155;
+        }
+        @media (max-width: 1024px) {
+            #sidebar {
+                height: auto;
+                max-height: 90vh;
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 50;
+                width: 280px;
+            }
+        }
 
         /* ===== LOGIN ANIMATIONS ===== */
         @keyframes loginPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } }
@@ -150,7 +230,7 @@
                     <div class="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 login-pulse" style="background: linear-gradient(135deg, #8b5cf6, #a78bfa); box-shadow: 0 8px 32px rgba(139,92,246,0.4);">
                         <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
                     </div>
-                    <h1 class="text-2xl font-bold text-white tracking-tight">Welcome<span style="color:#FFFF00;">&nbsp;Prity ji</span> </h1>
+                    <h1 class="text-2xl font-bold text-white tracking-tight">Apply<span style="color:#c4b5fd;">Bro</span> Admin</h1>
                     <p class="text-white/50 text-sm mt-1">CMS Dashboard</p>
                 </div>
 
@@ -201,7 +281,7 @@
     <div id="dashboard" class="hidden min-h-screen flex flex-col lg:flex-row">
 
         <!-- Sidebar -->
-        <aside id="sidebar" class="w-full lg:w-64 bg-white dark:bg-slate-900 border-b lg:border-b-0 lg:border-r border-slate-200 dark:border-slate-800 flex-shrink-0" style="min-height: 100vh;">
+        <aside id="sidebar" class="w-full lg:w-64 bg-white dark:bg-slate-900 border-b lg:border-b-0 lg:border-r border-slate-200 dark:border-slate-800 flex-shrink-0 flex flex-col" style="height: 100vh; overflow: hidden;">
             <div class="p-5 border-b border-slate-200 dark:border-slate-800">
                 <a href="#" class="flex items-center gap-2.5">
                     <div style="width:36px; height:36px; background: linear-gradient(135deg, #8b5cf6, #6d28d9); border-radius: 10px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(124,58,237,0.3);">
@@ -211,7 +291,7 @@
                 </a>
             </div>
 
-            <nav class="p-3 space-y-1">
+            <nav class="p-3 space-y-1 flex-1 overflow-y-auto" style="min-height: 0;">
                 <button onclick="switchTab('quickpost')" id="tab-quickpost" class="sidebar-link">
                     <i class="fas fa-bolt" style="width:20px; text-align:center;"></i> Quick Post
                 </button>
@@ -235,9 +315,12 @@
                 <button onclick="switchTab('json')" id="tab-json" class="sidebar-link">
                     <i class="fas fa-code" style="width:20px; text-align:center;"></i> JSON Output
                 </button>
+                <button onclick="switchTab('seo')" id="tab-seo" class="sidebar-link">
+                    <i class="fas fa-search" style="width:20px; text-align:center;"></i> SEO Guide
+                </button>
             </nav>
 
-            <div style="position: absolute; bottom: 0; width: 100%; padding: 16px; border-top: 1px solid #e2e8f0;" class="dark:border-slate-800">
+            <div class="p-4 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex-shrink-0" style="margin-top: auto;">
                 <div class="flex items-center gap-3 mb-3">
                     <div id="user-avatar" style="width:36px; height:36px; background: linear-gradient(135deg, #a78bfa, #7c3aed); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 14px; font-weight: bold;">A</div>
                     <div style="flex:1; min-width:0;">
@@ -782,7 +865,149 @@
                     </div>
                 </div>
 
-                <!-- ====== JSON OUTPUT TAB ====== -->
+                <!-- ====== SEO GUIDE TAB ====== -->
+                <div id="panel-seo" class="hidden fade-in">
+                    <div class="mb-6">
+                        <h2 class="text-2xl font-bold text-slate-900 dark:text-white">SEO Guide - Google Mein Rank Karne Ke Liye</h2>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Step-by-step instructions to get your website on Google</p>
+                    </div>
+
+                    <!-- Step 1 -->
+                    <div class="cms-card p-6 mb-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-xl flex items-center justify-center text-white font-bold" style="background: linear-gradient(135deg, #8b5cf6, #6d28d9);">1</div>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white">Google Search Console Mein Add Karein</h3>
+                        </div>
+                        <div class="space-y-3 text-sm text-slate-600 dark:text-slate-400">
+                            <p><i class="fas fa-check-circle text-green-500 mr-2"></i><a href="https://search.google.com/search-console" target="_blank" class="text-purple-600 hover:underline">search.google.com/search-console</a> pe jayein</p>
+                            <p><i class="fas fa-check-circle text-green-500 mr-2"></i>"Start now" pe click karein aur Google account se sign in karein</p>
+                            <p><i class="fas fa-check-circle text-green-500 mr-2"></i><strong>Domain</strong> option chunein aur <code class="bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">applybro.in</code> enter karein</p>
+                            <p><i class="fas fa-check-circle text-green-500 mr-2"></i>Google ek <strong>TXT record</strong> dega - usse copy karein</p>
+                            <p><i class="fas fa-check-circle text-green-500 mr-2"></i>Apne domain provider (GoDaddy/Namecheap) ke DNS mein TXT record add karein</p>
+                            <p><i class="fas fa-check-circle text-green-500 mr-2"></i>"Verify" pe click karein</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="cms-card p-6 mb-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-xl flex items-center justify-center text-white font-bold" style="background: linear-gradient(135deg, #8b5cf6, #6d28d9);">2</div>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white">Sitemap.xml Banayein</h3>
+                        </div>
+                        <p class="text-sm text-slate-600 dark:text-slate-400 mb-3">Root folder mein <code class="bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">sitemap.xml</code> file banayein:</p>
+                        <pre class="w-full p-4 rounded-xl text-xs font-mono overflow-x-auto mb-4" style="background:#0f172a; color:#34d399;">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"&gt;
+  &lt;url&gt;
+    &lt;loc&gt;https://www.applybro.in/&lt;/loc&gt;
+    &lt;lastmod&gt;2026-06-20&lt;/lastmod&gt;
+    &lt;changefreq&gt;daily&lt;/changefreq&gt;
+    &lt;priority&gt;1.0&lt;/priority&gt;
+  &lt;/url&gt;
+  &lt;url&gt;
+    &lt;loc&gt;https://www.applybro.in/sarkari-jobs&lt;/loc&gt;
+    &lt;lastmod&gt;2026-06-20&lt;/lastmod&gt;
+    &lt;changefreq&gt;daily&lt;/changefreq&gt;
+    &lt;priority&gt;0.9&lt;/priority&gt;
+  &lt;/url&gt;
+&lt;/urlset&gt;</pre>
+                        <div class="flex gap-2">
+                            <button onclick="copySitemap()" class="cms-btn-secondary text-xs"><i class="fas fa-copy mr-1"></i> Copy Sitemap Code</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="cms-card p-6 mb-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-xl flex items-center justify-center text-white font-bold" style="background: linear-gradient(135deg, #8b5cf6, #6d28d9);">3</div>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white">Robots.txt Banayein</h3>
+                        </div>
+                        <p class="text-sm text-slate-600 dark:text-slate-400 mb-3">Root folder mein <code class="bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">robots.txt</code> file banayein:</p>
+                        <pre class="w-full p-4 rounded-xl text-xs font-mono overflow-x-auto mb-4" style="background:#0f172a; color:#34d399;">User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /private
+
+Sitemap: https://www.applybro.in/sitemap.xml</pre>
+                        <div class="flex gap-2">
+                            <button onclick="copyRobots()" class="cms-btn-secondary text-xs"><i class="fas fa-copy mr-1"></i> Copy Robots.txt Code</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="cms-card p-6 mb-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-xl flex items-center justify-center text-white font-bold" style="background: linear-gradient(135deg, #8b5cf6, #6d28d9);">4</div>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white">Sitemap Google Ko Submit Karein</h3>
+                        </div>
+                        <div class="space-y-3 text-sm text-slate-600 dark:text-slate-400">
+                            <p><i class="fas fa-check-circle text-green-500 mr-2"></i>Google Search Console mein "Sitemaps" pe jayein</p>
+                            <p><i class="fas fa-check-circle text-green-500 mr-2"></i><code class="bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">sitemap.xml</code> enter karein</p>
+                            <p><i class="fas fa-check-circle text-green-500 mr-2"></i>"Submit" pe click karein</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 5 -->
+                    <div class="cms-card p-6 mb-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-xl flex items-center justify-center text-white font-bold" style="background: linear-gradient(135deg, #8b5cf6, #6d28d9);">5</div>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white">URL Inspection & Indexing Request</h3>
+                        </div>
+                        <div class="space-y-3 text-sm text-slate-600 dark:text-slate-400">
+                            <p><i class="fas fa-check-circle text-green-500 mr-2"></i>GSC mein "URL Inspection" pe jayein</p>
+                            <p><i class="fas fa-check-circle text-green-500 mr-2"></i>Homepage URL daalein: <code class="bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">https://www.applybro.in/</code></p>
+                            <p><i class="fas fa-check-circle text-green-500 mr-2"></i>"Request Indexing" pe click karein</p>
+                        </div>
+                    </div>
+
+                    <!-- SEO Tips -->
+                    <div class="cms-card p-6 mb-6" style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border: 1px solid #f59e0b;">
+                        <h3 class="text-lg font-bold text-amber-900 mb-3"><i class="fas fa-lightbulb mr-2"></i>Important SEO Tips</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-amber-800">
+                            <div class="flex items-start gap-2">
+                                <i class="fas fa-star mt-1"></i>
+                                <span>Har article mein <strong>unique title</strong> aur <strong>meta description</strong> lagayein</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <i class="fas fa-star mt-1"></i>
+                                <span>Content <strong>regularly update</strong> karein - daily best hai</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <i class="fas fa-star mt-1"></i>
+                                <span>Images mein <strong>alt text</strong> zaroor lagayein</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <i class="fas fa-star mt-1"></i>
+                                <span>Website speed fast rakhein - <strong>mobile friendly</strong> hona chahiye</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <i class="fas fa-star mt-1"></i>
+                                <span>Social media pe <strong>share karein</strong> - backlinks banayein</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <i class="fas fa-star mt-1"></i>
+                                <span>Keyword research karein - <strong>"Sarkari Job 2026"</strong> jaise</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="cms-card p-6">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Quick Actions</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                            <a href="https://search.google.com/search-console" target="_blank" class="cms-btn text-center" style="text-decoration: none;">
+                                <i class="fas fa-external-link-alt mr-2"></i>Google Search Console
+                            </a>
+                            <a href="https://pagespeed.web.dev/" target="_blank" class="cms-btn-secondary text-center" style="text-decoration: none;">
+                                <i class="fas fa-tachometer-alt mr-2"></i>PageSpeed Insights
+                            </a>
+                            <a href="https://www.xml-sitemaps.com/" target="_blank" class="cms-btn-secondary text-center" style="text-decoration: none;">
+                                <i class="fas fa-sitemap mr-2"></i>Sitemap Generator
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+<!-- ====== JSON OUTPUT TAB ====== -->
                 <div id="panel-json" class="hidden fade-in">
                     <div class="mb-6">
                         <h2 class="text-2xl font-bold text-slate-900 dark:text-white">JSON Output</h2>
@@ -1235,6 +1460,7 @@
         if (tabName === 'json') renderJsonOutput();
         if (tabName === 'quickpost') updateQuickPreview();
         if (tabName === 'fullarticle') updateFullPreview();
+        if (tabName === 'seo') { /* SEO Guide loaded */ }
         if (window.innerWidth < 1024) {
             document.getElementById('sidebar').classList.add('hidden');
         }
@@ -2592,6 +2818,36 @@
             saveDraft();
         }
     });
+
+    // SEO Guide Copy Functions
+    function copySitemap() {
+        const code = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://www.applybro.in/</loc>
+    <lastmod>2026-06-20</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.applybro.in/sarkari-jobs</loc>
+    <lastmod>2026-06-20</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+</urlset>`;
+        navigator.clipboard.writeText(code).then(() => showToast('Sitemap code copied!', 'success'));
+    }
+
+    function copyRobots() {
+        const code = `User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /private
+
+Sitemap: https://www.applybro.in/sitemap.xml`;
+        navigator.clipboard.writeText(code).then(() => showToast('Robots.txt code copied!', 'success'));
+    }
     </script>
 
     <!-- ========== FULL ARTICLE PUBLISH MODAL ========== -->
