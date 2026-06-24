@@ -272,6 +272,16 @@
                     </button>
                 </form>
 
+                                </form>
+
+                <!-- Forgot Password -->
+                <div class="mt-4 text-center">
+                    <a href="#" onclick="showForgotPassword(); return false;" 
+                       class="text-sm text-white/60 hover:text-white/90 transition-colors underline underline-offset-2">
+                        Forgot Password?
+                    </a>
+                </div>
+
                 <div class="mt-6 pt-4 border-t border-white/10 text-center">
                     <p class="text-white/40 text-xs">Protected by Firebase Authentication</p>
                 </div>
@@ -1446,6 +1456,58 @@ Sitemap: https://www.applybro.in/sitemap.xml</pre>
 
     function logout() {
         auth.signOut();
+    }
+
+            function logout() {
+        auth.signOut();
+    }
+
+    // ==========================================
+    // FORGOT PASSWORD
+    // ==========================================
+    function showForgotPassword() {
+        const email = document.getElementById('login-email').value.trim();
+        
+        if (!email) {
+            const userEmail = prompt('Enter your email address to reset password:');
+            if (userEmail) {
+                sendPasswordReset(userEmail);
+            }
+        } else {
+            if (confirm('Send password reset email to: ' + email + '?')) {
+                sendPasswordReset(email);
+            }
+        }
+    }
+
+    async function sendPasswordReset(email) {
+        const errorDiv = document.getElementById('login-error');
+        const errorText = document.getElementById('login-error-text');
+
+        try {
+            await auth.sendPasswordResetEmail(email);
+            
+            errorText.textContent = 'Password reset email sent! Check your inbox.';
+            errorDiv.style.background = 'rgba(16, 185, 129, 0.15)';
+            errorDiv.style.borderColor = 'rgba(16, 185, 129, 0.3)';
+            errorDiv.style.color = '#a7f3d0';
+            errorDiv.classList.remove('hidden');
+            
+            setTimeout(() => {
+                errorDiv.classList.add('hidden');
+            }, 5000);
+            
+        } catch (err) {
+            let msg = err.message;
+            if (err.code === 'auth/user-not-found') msg = 'No account found with this email.';
+            if (err.code === 'auth/invalid-email') msg = 'Invalid email format.';
+            
+            errorText.textContent = msg;
+            errorDiv.style.background = 'rgba(239, 68, 68, 0.15)';
+            errorDiv.style.borderColor = 'rgba(239, 68, 68, 0.3)';
+            errorDiv.style.color = '#fecaca';
+            errorDiv.classList.remove('hidden');
+        }
     }
 
     // ==========================================
