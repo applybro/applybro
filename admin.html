@@ -2313,7 +2313,9 @@ Sitemap: https://www.applybro.in/sitemap.xml</pre>
         showToast('Form reset!', 'success');
     }
 
-    async function publishQuickPost() {
+        async function publishQuickPost() {
+        console.log("=== QUICK POST STARTED ===");
+        
         const title = document.getElementById('quick-title').value.trim();
         const category = document.getElementById('quick-category').value;
         const link = document.getElementById('quick-link').value.trim();
@@ -2321,17 +2323,33 @@ Sitemap: https://www.applybro.in/sitemap.xml</pre>
         const author = document.getElementById('quick-author').value.trim() || 'ApplyBro Admin';
         const image = document.getElementById('quick-image').value.trim();
 
-        // Validation
-        if (!title) { showToast('Please enter article title', 'error'); return; }
-        if (!category) { showToast('Please select a category', 'error'); return; }
-        if (!link) { showToast('Please enter article link', 'error'); return; }
+        console.log("Title:", title, "Category:", category, "Link:", link);
 
-        // Validate URL
+        // Validation
+        if (!title) { 
+            console.error("Validation failed: No title");
+            showToast('Please enter article title', 'error'); 
+            return; 
+        }
+        if (!category) { 
+            console.error("Validation failed: No category");
+            showToast('Please select a category', 'error'); 
+            return; 
+        }
+        if (!link) { 
+            console.error("Validation failed: No link");
+            showToast('Please enter article link', 'error'); 
+            return; 
+        }
+
+        // URL fix - auto add https if missing
         let validUrl = link;
         if (!link.startsWith('http://') && !link.startsWith('https://')) {
             validUrl = 'https://' + link;
         }
+        console.log("Final URL:", validUrl);
 
+        // Button loading state
         const btn = document.getElementById('quick-publish-btn');
         const text = document.getElementById('quick-publish-text');
         const spinner = document.getElementById('quick-publish-spinner');
@@ -2340,6 +2358,12 @@ Sitemap: https://www.applybro.in/sitemap.xml</pre>
         spinner.classList.remove('hidden');
 
         try {
+            console.log("Checking Firebase auth...");
+            if (!auth.currentUser) {
+                throw new Error("User not logged in! Please login first.");
+            }
+            console.log("User is logged in:", auth.currentUser.email);
+
             const now = new Date();
             const slug = title.toLowerCase()
                 .replace(/[^a-z0-9\s-]/g, '')
@@ -2369,28 +2393,37 @@ Sitemap: https://www.applybro.in/sitemap.xml</pre>
                 articleLink: validUrl
             };
 
-            await db.collection('posts').add(postData);
+            console.log("Sending data to Firestore...", postData);
+            
+            const docRef = await db.collection('posts').add(postData);
+            console.log("SUCCESS! Post ID:", docRef.id);
+            
             showToast('Article published successfully!', 'success');
-
-            // Reset form
             resetQuickPost();
-
-            // Refresh posts list
-            loadAllPosts();
-
-            // Switch to posts tab
+            await loadAllPosts();
             switchTab('posts');
 
         } catch (err) {
-            console.error('Quick post error:', err);
-            showToast('Error: ' + err.message, 'error');
+            console.error('=== QUICK POST ERROR ===');
+            console.error('Error Code:', err.code);
+            console.error('Error Message:', err.message);
+            console.error('Full Error:', err);
+            
+            let msg = err.message;
+            if (err.code === 'permission-denied') msg = 'Firebase permission denied! Check Firestore Rules.';
+            if (err.code === 'unauthenticated') msg = 'Please login first!';
+            if (err.code === 'not-found') msg = 'Database path not found.';
+            if (err.code === 'unavailable') msg = 'Network error. Check internet.';
+            if (!auth.currentUser) msg = 'You are not logged in!';
+            
+            showToast('Error: ' + msg, 'error');
         } finally {
             btn.disabled = false;
             text.classList.remove('hidden');
             spinner.classList.add('hidden');
+            console.log("=== QUICK POST ENDED ===");
         }
     }
-
 
     // ==========================================
     // FULL ARTICLE EDITOR FUNCTIONS
