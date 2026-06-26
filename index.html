@@ -870,15 +870,13 @@
 };
 
         let app;
-try {
-    app = firebase.initializeApp(firebaseConfig, 'admin-panel');
-} catch (e) {
-    if (e.code === 'app/duplicate-app') {
-        app = firebase.app('admin-panel');
-    } else {
-        throw e;
-    }
+if (!firebase.apps.length) {
+    app = firebase.initializeApp(firebaseConfig);
+} else {
+    app = firebase.app();
 }
+const auth = firebase.auth();
+const db = firebase.firestore();
 const auth = firebase.auth(app);
 const db = firebase.firestore(app);
 
@@ -1120,33 +1118,7 @@ const firebaseConfig = {
     measurementId: "G-JD5G48SJRZ"
 };
 
-// Initialize
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
 
-// Posts fetch karo aur dikhayo
-async function loadHomePosts() {
-    try {
-        console.log("Loading posts...");
-        const snapshot = await db.collection('posts')
-            .orderBy('timestamp', 'desc')
-            .limit(20)
-            .get();
-        
-        const posts = [];
-        snapshot.forEach(doc => {
-            posts.push({ id: doc.id, ...doc.data() });
-        });
-        
-        console.log("Posts found:", posts.length);
-        displayPosts(posts);
-        
-    } catch (err) {
-        console.error("Error:", err);
-        document.getElementById('posts-container').innerHTML = 
-            '<p style="color:red">Error loading posts: ' + err.message + '</p>';
-    }
-}
 
 // Posts HTML mein dikhayo
 function displayPosts(posts) {
