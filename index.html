@@ -1031,5 +1031,247 @@ const db = firebase.firestore(app);
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 
+        <script>
+// Firebase config (SAME as admin.html)
+const firebaseConfig = {
+    apiKey: "AIzaSyDjj7c7ew71PVLmrG6Ot1ttgLkp4xQIc_U",
+    authDomain: "applybro1.firebaseapp.com",
+    projectId: "applybro1",
+    storageBucket: "applybro1.firebasestorage.app",
+    messagingSenderId: "96808372763",
+    appId: "1:96808372763:web:4ebb8eae6d6452e79b86be",
+    measurementId: "G-JD5G48SJRZ"
+};
+
+// Initialize
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+// Posts fetch karo aur dikhayo
+async function loadHomePosts() {
+    try {
+        console.log("Loading posts...");
+        const snapshot = await db.collection('posts')
+            .orderBy('timestamp', 'desc')
+            .limit(20)
+            .get();
+        
+        const posts = [];
+        snapshot.forEach(doc => {
+            posts.push({ id: doc.id, ...doc.data() });
+        });
+        
+        console.log("Posts found:", posts.length);
+        displayPosts(posts);
+        
+    } catch (err) {
+        console.error("Error:", err);
+        document.getElementById('posts-container').innerHTML = 
+            '<p style="color:red">Error loading posts: ' + err.message + '</p>';
+    }
+}
+
+// Posts HTML mein dikhayo
+function displayPosts(posts) {
+    const container = document.getElementById('posts-container');
+    
+    if (!posts.length) {
+        container.innerHTML = '<p>No posts found. Admin panel se post karo.</p>';
+        return;
+    }
+    
+    container.innerHTML = posts.map(post => {
+        // Category ke hisaab se color
+        const colors = {
+            'Live Sarkari Job': '#8b5cf6',
+            'Live Scholarship': '#10b981',
+            'Sarkari Yojana': '#f59e0b',
+            'Admit Cards': '#3b82f6',
+            'Latest Results': '#ef4444'
+        };
+        const color = colors[post.category] || '#8b5cf6';
+        
+        return `
+        <div style="border:1px solid #e2e8f0; border-radius:12px; padding:16px; margin-bottom:12px; background:white;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <span style="background:${color}; color:white; padding:4px 12px; border-radius:20px; font-size:12px; font-weight:600;">
+                    ${post.category || 'General'}
+                </span>
+                <span style="color:#94a3b8; font-size:12px;">${post.date || ''}</span>
+            </div>
+            <h3 style="margin:0 0 8px 0; font-size:18px; color:#1e293b;">${post.title}</h3>
+            ${post.shortTitle ? `<p style="color:#64748b; margin:0 0 12px 0;">${post.shortTitle}</p>` : ''}
+            <a href="${post.url || post.articleLink || '#'}" 
+               style="display:inline-block; background:linear-gradient(135deg,#7c3aed,#6d28d9); color:white; padding:8px 16px; border-radius:8px; text-decoration:none; font-weight:600;">
+                Read More →
+            </a>
+        </div>`;
+    }).join('');
+}
+
+// Page load pe call karo
+window.addEventListener('DOMContentLoaded', loadHomePosts);
+</script><script>
+// Firebase config (SAME as admin.html)
+const firebaseConfig = {
+    apiKey: "AIzaSyDjj7c7ew71PVLmrG6Ot1ttgLkp4xQIc_U",
+    authDomain: "applybro1.firebaseapp.com",
+    projectId: "applybro1",
+    storageBucket: "applybro1.firebasestorage.app",
+    messagingSenderId: "96808372763",
+    appId: "1:96808372763:web:4ebb8eae6d6452e79b86be",
+    measurementId: "G-JD5G48SJRZ"
+};
+
+// Initialize
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+// Posts fetch karo aur dikhayo
+async function loadHomePosts() {
+    try {
+        console.log("Loading posts...");
+        const snapshot = await db.collection('posts')
+            .orderBy('timestamp', 'desc')
+            .limit(20)
+            .get();
+        
+        const posts = [];
+        snapshot.forEach(doc => {
+            posts.push({ id: doc.id, ...doc.data() });
+        });
+        
+        console.log("Posts found:", posts.length);
+        displayPosts(posts);
+        
+    } catch (err) {
+        console.error("Error:", err);
+        document.getElementById('posts-container').innerHTML = 
+            '<p style="color:red">Error loading posts: ' + err.message + '</p>';
+    }
+}
+
+// Posts HTML mein dikhayo
+function displayPosts(posts) {
+    const container = document.getElementById('posts-container');
+    
+    if (!posts.length) {
+        container.innerHTML = '<p>No posts found. Admin panel se post karo.</p>';
+        return;
+    }
+    
+    container.innerHTML = posts.map(post => {
+        // Category ke hisaab se color
+        const colors = {
+            'Live Sarkari Job': '#8b5cf6',
+            'Live Scholarship': '#10b981',
+            'Sarkari Yojana': '#f59e0b',
+            'Admit Cards': '#3b82f6',
+            'Latest Results': '#ef4444'
+        };
+        const color = colors[post.category] || '#8b5cf6';
+        
+        return `
+        <div style="border:1px solid #e2e8f0; border-radius:12px; padding:16px; margin-bottom:12px; background:white;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <span style="background:${color}; color:white; padding:4px 12px; border-radius:20px; font-size:12px; font-weight:600;">
+                    ${post.category || 'General'}
+                </span>
+                <span style="color:#94a3b8; font-size:12px;">${post.date || ''}</span>
+            </div>
+            <h3 style="margin:0 0 8px 0; font-size:18px; color:#1e293b;">${post.title}</h3>
+            ${post.shortTitle ? `<p style="color:#64748b; margin:0 0 12px 0;">${post.shortTitle}</p>` : ''}
+            <a href="${post.url || post.articleLink || '#'}" 
+               style="display:inline-block; background:linear-gradient(135deg,#7c3aed,#6d28d9); color:white; padding:8px 16px; border-radius:8px; text-decoration:none; font-weight:600;">
+                Read More →
+            </a>
+        </div>`;
+    }).join('');
+}
+
+// Page load pe call karo
+window.addEventListener('DOMContentLoaded', loadHomePosts);
+</script><script>
+// Firebase config (SAME as admin.html)
+const firebaseConfig = {
+    apiKey: "AIzaSyDjj7c7ew71PVLmrG6Ot1ttgLkp4xQIc_U",
+    authDomain: "applybro1.firebaseapp.com",
+    projectId: "applybro1",
+    storageBucket: "applybro1.firebasestorage.app",
+    messagingSenderId: "96808372763",
+    appId: "1:96808372763:web:4ebb8eae6d6452e79b86be",
+    measurementId: "G-JD5G48SJRZ"
+};
+
+// Initialize
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+// Posts fetch karo aur dikhayo
+async function loadHomePosts() {
+    try {
+        console.log("Loading posts...");
+        const snapshot = await db.collection('posts')
+            .orderBy('timestamp', 'desc')
+            .limit(20)
+            .get();
+        
+        const posts = [];
+        snapshot.forEach(doc => {
+            posts.push({ id: doc.id, ...doc.data() });
+        });
+        
+        console.log("Posts found:", posts.length);
+        displayPosts(posts);
+        
+    } catch (err) {
+        console.error("Error:", err);
+        document.getElementById('posts-container').innerHTML = 
+            '<p style="color:red">Error loading posts: ' + err.message + '</p>';
+    }
+}
+
+// Posts HTML mein dikhayo
+function displayPosts(posts) {
+    const container = document.getElementById('posts-container');
+    
+    if (!posts.length) {
+        container.innerHTML = '<p>No posts found. Admin panel se post karo.</p>';
+        return;
+    }
+    
+    container.innerHTML = posts.map(post => {
+        // Category ke hisaab se color
+        const colors = {
+            'Live Sarkari Job': '#8b5cf6',
+            'Live Scholarship': '#10b981',
+            'Sarkari Yojana': '#f59e0b',
+            'Admit Cards': '#3b82f6',
+            'Latest Results': '#ef4444'
+        };
+        const color = colors[post.category] || '#8b5cf6';
+        
+        return `
+        <div style="border:1px solid #e2e8f0; border-radius:12px; padding:16px; margin-bottom:12px; background:white;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <span style="background:${color}; color:white; padding:4px 12px; border-radius:20px; font-size:12px; font-weight:600;">
+                    ${post.category || 'General'}
+                </span>
+                <span style="color:#94a3b8; font-size:12px;">${post.date || ''}</span>
+            </div>
+            <h3 style="margin:0 0 8px 0; font-size:18px; color:#1e293b;">${post.title}</h3>
+            ${post.shortTitle ? `<p style="color:#64748b; margin:0 0 12px 0;">${post.shortTitle}</p>` : ''}
+            <a href="${post.url || post.articleLink || '#'}" 
+               style="display:inline-block; background:linear-gradient(135deg,#7c3aed,#6d28d9); color:white; padding:8px 16px; border-radius:8px; text-decoration:none; font-weight:600;">
+                Read More →
+            </a>
+        </div>`;
+    }).join('');
+}
+
+// Page load pe call karo
+window.addEventListener('DOMContentLoaded', loadHomePosts);
+</script>
+
 </body>
 </html>
