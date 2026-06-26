@@ -892,7 +892,7 @@ const db = firebase.firestore();
     try {
         console.log('Loading posts from applybro1...');
         const snapshot = await db.collection('posts')
-            .orderBy('timestamp', 'desc')
+            .orderBy('createdAt', 'desc')
             .limit(50)
             .get();
 
