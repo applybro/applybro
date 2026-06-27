@@ -922,39 +922,54 @@ const db = firebase.firestore();
             }
         });
 
-        // Live Sarkari Job - Column 1 mein dalo
+        // ==========================================
+        // MAIN FIX: APPEND Firebase posts to TOP (not replace)
+        // Pehle Firebase posts (latest), phir manual posts (older)
+        // ==========================================
+
+        // Live Sarkari Job - Firebase posts UPAR add karo, manual posts NICHE rahenge
         if (postsByCategory['Live Sarkari Job'].length > 0) {
-            document.getElementById('live-update-content').innerHTML = 
-                renderLivePosts(postsByCategory['Live Sarkari Job']);
+            const container = document.getElementById('live-update-content');
+            const existingHtml = container.innerHTML;
+            const firebaseHtml = renderLivePosts(postsByCategory['Live Sarkari Job']);
+            container.innerHTML = firebaseHtml + existingHtml;
         }
 
-        // Live Scholarship - Column 2 mein dalo
+        // Live Scholarship - Firebase posts UPAR add karo
         if (postsByCategory['Live Scholarship'].length > 0) {
-            document.getElementById('latest-jobs-content').innerHTML = 
-                renderLivePosts(postsByCategory['Live Scholarship']);
+            const container = document.getElementById('latest-jobs-content');
+            const existingHtml = container.innerHTML;
+            const firebaseHtml = renderLivePosts(postsByCategory['Live Scholarship']);
+            container.innerHTML = firebaseHtml + existingHtml;
         }
 
-        // Sarkari Yojana - Column 3 mein dalo
+        // Sarkari Yojana - Firebase posts UPAR add karo
         if (postsByCategory['Sarkari Yojana'].length > 0) {
-            document.getElementById('yojana-content').innerHTML = 
-                renderLivePosts(postsByCategory['Sarkari Yojana']);
+            const container = document.getElementById('yojana-content');
+            const existingHtml = container.innerHTML;
+            const firebaseHtml = renderLivePosts(postsByCategory['Sarkari Yojana']);
+            container.innerHTML = firebaseHtml + existingHtml;
         }
 
-        // Admit Cards
+        // Admit Cards - Firebase posts UPAR add karo
         if (postsByCategory['Admit Cards'].length > 0) {
-            document.getElementById('admit-cards-content').innerHTML = 
-                renderCardPosts(postsByCategory['Admit Cards'], 'emerald');
+            const container = document.getElementById('admit-cards-content');
+            const existingHtml = container.innerHTML;
+            const firebaseHtml = renderCardPosts(postsByCategory['Admit Cards'], 'emerald');
+            container.innerHTML = firebaseHtml + existingHtml;
         }
 
-        // Latest Results
+        // Latest Results - Firebase posts UPAR add karo
         if (postsByCategory['Latest Results'].length > 0) {
-            document.getElementById('results-content').innerHTML = 
-                renderCardPosts(postsByCategory['Latest Results'], 'amber');
+            const container = document.getElementById('results-content');
+            const existingHtml = container.innerHTML;
+            const firebaseHtml = renderCardPosts(postsByCategory['Latest Results'], 'amber');
+            container.innerHTML = firebaseHtml + existingHtml;
         }
 
-        console.log('Posts displayed successfully!');
+        console.log('Posts displayed successfully! Firebase + Manual both showing.');
 
-        // View More buttons refresh karo dynamic content ke baad
+        // View More buttons refresh karo
         setTimeout(() => {
             viewMoreSystem.refresh('live-update-content', 'view-more-live-jobs-container');
             viewMoreSystem.refresh('latest-jobs-content', 'view-more-scholarship-container');
@@ -965,12 +980,9 @@ const db = firebase.firestore();
 
     } catch (error) {
         console.error('Error loading posts:', error.code, error.message);
-        // Agar error aaye toh static content restore karo
         console.log('Keeping static content due to error');
     }
-}
-
-// Live posts ka HTML banayo (3 columns wala style)
+}// Live posts ka HTML banayo (3 columns wala style)
 function renderLivePosts(posts) {
     return posts.map(post => {
         return `<a href="${escapeHtml(post.url || post.articleLink || '#')}" class="job-item block px-4 py-3.5 border-b border-slate-100 dark:border-slate-800/80 last:border-0">
@@ -978,7 +990,6 @@ function renderLivePosts(posts) {
                 <span class="mt-1.5 w-2 h-2 bg-red-500 rounded-full flex-shrink-0 shadow-sm shadow-red-500/30"></span>
                 <div class="flex-1 min-w-0">
                     <p class="text-sm font-medium text-slate-900 dark:text-white hover:text-royal-700 dark:hover:text-royal-400 transition-colors">${escapeHtml(post.title)}</p>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">${escapeHtml(post.shortTitle || post.metaDescription || '')}</p>
                 </div>
                 <span class="px-2.5 py-1 bg-gradient-to-r from-red-500 to-red-600 text-white text-[10px] font-bold rounded-lg shadow-sm shadow-red-500/20 flex-shrink-0">New</span>
             </div>
