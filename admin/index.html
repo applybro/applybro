@@ -1406,8 +1406,8 @@ Sitemap: https://www.applybro.in/sitemap.xml</pre>
 
             // Show error with animation
             let msg = err.message;
-            if (err.code === 'auth/user-not-found') msg = 'तुम Admin नहीं हो बालक अगर हो तो सही ईमेल और पासवर्ड डालो कल्याण तो तुम्हारा .';
-            if (err.code === 'auth/wrong-password') msg = 'Wrong password. Check your credentials.';
+            if (err.code === 'auth/user-not-found') msg = 'तुम Admin नहीं हो बालक अगर हो तो दोनों सही डालो ठीक है ईमेल और पासवर्ड कल्याण हो तुम्हारा .';
+            if (err.code === 'auth/wrong-password') msg = 'क्या कर रहे हो पासवर्ड गलत है बालक .';
             if (err.code === 'auth/invalid-email') msg = 'Invalid email format.';
             if (err.code === 'auth/invalid-credential') msg = 'Invalid email/password. Check your credentials.';
             if (err.code === 'auth/too-many-requests') msg = 'Too many failed attempts. Try again later.';
